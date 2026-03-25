@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://automatyn.github.io/openclaw/sitemap.xml
+Sitemap: https://automatyn.github.io/sitemap.xml
