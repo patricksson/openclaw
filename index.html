@@ -234,6 +234,15 @@
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
 
+        /* Staggered hero entrance */
+        .hero-enter { opacity: 0; transform: translateY(20px); animation: heroIn 0.7s ease forwards; }
+        .hero-enter-1 { animation-delay: 0.1s; }
+        .hero-enter-2 { animation-delay: 0.25s; }
+        .hero-enter-3 { animation-delay: 0.4s; }
+        .hero-enter-4 { animation-delay: 0.55s; }
+        .hero-enter-5 { animation-delay: 0.7s; }
+        @keyframes heroIn { to { opacity: 1; transform: translateY(0); } }
+
         /* Subtle grain texture overlay */
         body::after {
             content: '';
@@ -349,7 +358,9 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
-                    <span class="flex items-center gap-2"><img src="/logo-icon.png" alt="Automatyn" class="h-8 w-auto rounded" style="filter: brightness(1.2);"><span class="text-xl font-extrabold tracking-tight text-white">Automatyn</span></span>
+                    <a href="/" class="flex items-center gap-0 no-underline">
+                        <span class="text-xl font-extrabold tracking-tight text-white" style="font-family: 'Cabinet Grotesk', sans-serif !important; letter-spacing: -0.03em;">auto</span><span class="text-xl font-extrabold tracking-tight text-cyan-400" style="font-family: 'Cabinet Grotesk', sans-serif !important; letter-spacing: -0.03em;">matyn</span>
+                    </a>
                 </div>
                 <div class="hidden md:flex items-center gap-6">
                     <a href="#pricing" class="text-gray-400 hover:text-white transition text-sm font-medium">Pricing</a>
@@ -387,21 +398,21 @@
         <div class="max-w-7xl mx-auto relative z-10">
             <!-- Top: Headline + Sub -->
             <div class="text-center max-w-3xl mx-auto mb-12 pt-8">
-                <div class="inline-flex items-center gap-2 bg-cyan-950/40 border border-cyan-800/30 px-4 py-2 rounded-full mb-6">
+                <div class="hero-enter hero-enter-1 inline-flex items-center gap-2 bg-cyan-950/40 border border-cyan-800/30 px-4 py-2 rounded-full mb-6">
                     <span class="w-2 h-2 bg-emerald-400 rounded-full pulse"></span>
                     <span class="text-sm font-medium text-cyan-300">OpenClaw — 247K+ GitHub Stars</span>
                 </div>
 
-                <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-[1.08] tracking-tight">
+                <h1 class="hero-enter hero-enter-2 text-4xl md:text-6xl font-extrabold text-white mb-6 leading-[1.08] tracking-tight">
                     Stop answering messages.<br>
                     <span class="gradient-text-glow">Your AI agent will.</span>
                 </h1>
 
-                <p class="text-lg md:text-xl text-gray-400 mb-8 leading-relaxed">
+                <p class="hero-enter hero-enter-3 text-lg md:text-xl text-gray-400 mb-8 leading-relaxed">
                     We set up OpenClaw on your infrastructure in 2-4 hours. Customer support, lead follow-up, scheduling — handled 24/7 across WhatsApp, Telegram, Discord & Slack.
                 </p>
 
-                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-4">
+                <div class="hero-enter hero-enter-4 flex flex-col sm:flex-row gap-4 justify-center mb-4">
                     <a href="#contact" class="cta-primary text-white px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 text-lg">
                         Book Free 15-Min Call
                     </a>
@@ -414,7 +425,7 @@
                     <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span> Same-day setup</span>
                     <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span> 14-day money-back</span>
                     <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span> Self-hosted & private</span>
-                    <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span> From $400</span>
+                    <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span> No coding required</span>
                 </div>
             </div>
 
@@ -431,8 +442,8 @@
                         <div class="text-sm text-gray-500">Setup time</div>
                     </div>
                     <div class="text-right">
-                        <div class="text-2xl font-bold text-emerald-400">$400</div>
-                        <div class="text-sm text-gray-500">Starting price</div>
+                        <div class="text-2xl font-bold text-white">0</div>
+                        <div class="text-sm text-gray-500">Coding required</div>
                     </div>
                 </div>
 
@@ -442,8 +453,8 @@
                         <!-- Glow effect behind phone -->
                         <div class="absolute inset-0 bg-gradient-to-b from-cyan-500/10 to-emerald-500/5 rounded-3xl blur-3xl scale-110"></div>
                         <div class="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-cyan-900/20" style="background: #0b141a;">
-                            <!-- WhatsApp Header -->
-                            <div class="flex items-center gap-3 px-4 py-3" style="background: #1f2c34;">
+                            <!-- Platform Header -->
+                            <div id="platform-header" class="flex items-center gap-3 px-4 py-3" style="background: #1f2c34;">
                                 <div class="flex items-center gap-3 flex-1">
                                     <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-600 to-green-400 flex items-center justify-center text-white font-bold text-sm" id="wa-avatar">M</div>
                                     <div>
@@ -462,12 +473,18 @@
                             <!-- Input Bar -->
                             <div class="flex items-center gap-2 px-3 py-2" style="background: #1f2c34;">
                                 <div class="flex-1 rounded-full px-4 py-2 text-sm text-gray-400" style="background: #2a3942;">Type a message...</div>
-                                <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center">
+                                <div id="platform-send" class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center">
                                     <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
                                 </div>
                             </div>
                         </div>
-                        <p class="text-center text-gray-500 text-sm mt-4">Watch your AI agent handle real business conversations</p>
+                        <!-- Platform indicator -->
+                        <div class="flex justify-center gap-3 mt-4" id="platform-dots">
+                            <span class="platform-dot active" data-idx="0" style="width:8px;height:8px;border-radius:50%;background:#25D366;opacity:1;transition:all 0.3s;cursor:pointer;" title="WhatsApp"></span>
+                            <span class="platform-dot" data-idx="1" style="width:8px;height:8px;border-radius:50%;background:#0088cc;opacity:0.3;transition:all 0.3s;cursor:pointer;" title="Telegram"></span>
+                            <span class="platform-dot" data-idx="2" style="width:8px;height:8px;border-radius:50%;background:#5865F2;opacity:0.3;transition:all 0.3s;cursor:pointer;" title="Discord"></span>
+                        </div>
+                        <p class="text-center text-gray-500 text-sm mt-2" id="platform-label">WhatsApp</p>
                     </div>
                 </div>
 
@@ -680,13 +697,13 @@
             animation: waFadeIn 0.3s ease forwards;
         }
         .wa-msg-in {
-            background: #1f2c34;
+            background: var(--msg-in-bg, #1f2c34);
             color: #e9edef;
             border-top-left-radius: 0;
             margin-right: auto;
         }
         .wa-msg-out {
-            background: #005c4b;
+            background: var(--msg-out-bg, #005c4b);
             color: #e9edef;
             border-top-right-radius: 0;
             margin-left: auto;
@@ -733,9 +750,30 @@
     (function() {
         const chat = document.getElementById('wa-chat');
         const status = document.getElementById('wa-status');
+        const platforms = [
+            { name: 'WhatsApp', color: '#25D366', headerBg: '#1f2c34', chatBg: '#060d11', inputBg: '#2a3942', sendBg: '#25D366', statusColor: '#25D366' },
+            { name: 'Telegram', color: '#0088cc', headerBg: '#1c2733', chatBg: '#0e1621', inputBg: '#242f3d', sendBg: '#0088cc', statusColor: '#0088cc' },
+            { name: 'Discord', color: '#5865F2', headerBg: '#2b2d31', chatBg: '#313338', inputBg: '#383a40', sendBg: '#5865F2', statusColor: '#23a559' },
+        ];
+
+        function applyPlatformTheme(pIdx) {
+            var p = platforms[pIdx];
+            document.getElementById('platform-header').style.background = p.headerBg;
+            document.getElementById('wa-chat').style.background = p.chatBg;
+            document.getElementById('platform-send').style.background = p.sendBg;
+            document.getElementById('wa-status').style.color = p.statusColor;
+            document.getElementById('platform-label').textContent = p.name;
+            document.querySelectorAll('.platform-dot').forEach(function(dot, i) {
+                dot.style.opacity = i === pIdx ? '1' : '0.3';
+            });
+            // Update message bubble colors for platform
+            document.documentElement.style.setProperty('--msg-in-bg', p.headerBg);
+            document.documentElement.style.setProperty('--msg-out-bg', pIdx === 2 ? '#5865F2' : pIdx === 1 ? '#2b5278' : '#005c4b');
+        }
+
         const scenarios = [
             {
-                name: "Mike's E-Commerce Store", avatar: 'M', color: 'from-cyan-500 to-cyan-400',
+                name: "Mike's E-Commerce Store", avatar: 'M', color: 'from-green-600 to-green-400', platform: 0,
                 messages: [
                     { type: 'out', text: 'Hey, a customer just left a 1-star review on our store. Can you handle it?', time: '8:15 AM' },
                     { type: 'in', text: 'On it. I found the review — it\'s about a late delivery on order #4821. I\'ve checked the tracking: it was stuck at the Memphis hub for 3 days. Here\'s what I\'ve done:\n\n✅ Drafted a public response apologising and offering 15% off\n✅ Sent the customer a private email with a replacement shipping label\n✅ Flagged the carrier issue in your logistics sheet', time: '8:15 AM' },
@@ -746,7 +784,7 @@
                 ]
             },
             {
-                name: 'Sarah — Real Estate Agent', avatar: 'S', color: 'from-green-500 to-emerald-400',
+                name: 'Sarah — Real Estate Agent', avatar: 'S', color: 'from-sky-500 to-blue-400', platform: 1,
                 messages: [
                     { type: 'out', text: 'I got 12 new leads from the open house. Can you follow up with all of them?', time: '9:30 PM' },
                     { type: 'in', text: 'I\'ve pulled the 12 contacts from your sign-in sheet. Here\'s what I\'m doing for each:\n\n1. Personalised follow-up email mentioning the property they viewed\n2. Text message with your calendar link\n3. Adding them to your CRM with lead score based on their enquiry notes\n\nFirst batch of emails going out in 10 minutes.', time: '9:30 PM' },
@@ -757,7 +795,7 @@
                 ]
             },
             {
-                name: 'CoachLaunch — Online Course', avatar: 'C', color: 'from-orange-500 to-yellow-400',
+                name: 'CoachLaunch Community', avatar: 'C', color: 'from-indigo-500 to-purple-400', platform: 2,
                 messages: [
                     { type: 'out', text: 'What did our competitors post this week? I need content ideas', time: '7:45 AM' },
                     { type: 'in', text: 'I monitored 5 competitor accounts overnight. Here\'s the breakdown:\n\n📈 Top performer: @DigitalCoachPro posted a carousel "7 AI Tools That Replace a VA" — 2.4K likes, 380 saves\n\n🔥 Trending topic: "AI side income" is surging — 3 competitors posted about it\n\n💡 Gap I found: Nobody is talking about setup costs vs. DIY time. That\'s your angle.', time: '7:46 AM' },
@@ -779,6 +817,7 @@
             document.getElementById('wa-avatar').textContent = s.avatar;
             document.getElementById('wa-avatar').className = 'w-10 h-10 rounded-full bg-gradient-to-br ' + s.color + ' flex items-center justify-center text-white font-bold text-sm';
             conversation = s.messages;
+            applyPlatformTheme(s.platform);
         }
         setScenario(0);
 
@@ -1227,7 +1266,7 @@
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 <div>
                     <div class="mb-4">
-                        <span class="text-xl font-extrabold tracking-tight text-white" style="font-family: 'Inter', sans-serif !important;"><span class="gradient-text">Auto</span>matyn</span>
+                        <span class="text-xl font-extrabold tracking-tight" style="font-family: 'Cabinet Grotesk', sans-serif !important; letter-spacing: -0.03em;"><span class="text-white">auto</span><span class="text-cyan-400">matyn</span></span>
                     </div>
                     <p class="text-gray-500 text-sm">Professional automation setup services.</p>
                 </div>
