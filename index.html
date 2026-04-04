@@ -408,9 +408,9 @@
                     <!-- WhatsApp Header -->
                     <div class="flex items-center gap-3 px-4 py-3" style="background: #1f2c34;">
                         <div class="flex items-center gap-3 flex-1">
-                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold text-sm">A</div>
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-600 to-green-400 flex items-center justify-center text-white font-bold text-sm" id="wa-avatar">B</div>
                             <div>
-                                <div class="text-white text-sm font-semibold">Automatyn AI Agent</div>
+                                <div class="text-white text-sm font-semibold" id="wa-name">Bella's Beauty Studio</div>
                                 <div class="text-green-400 text-xs" id="wa-status">online</div>
                             </div>
                         </div>
@@ -435,7 +435,7 @@
 
                 <!-- CTA below phone -->
                 <div class="text-center mt-8">
-                    <p class="text-gray-400 text-sm mb-4">This is what your customers experience — instant, intelligent responses 24/7.</p>
+                    <p class="text-gray-400 text-sm mb-4">This is what your customers experience — instant, intelligent responses 24/7. Your business, your brand, running on autopilot.</p>
                     <a href="#contact" class="inline-flex items-center px-8 py-4 rounded-xl font-semibold bg-gradient-to-r from-green-600 to-green-500 text-white hover:opacity-90 transition shadow-lg" style="color: #ffffff !important; text-decoration: none;">
                         Get This Running for Your Business →
                     </a>
@@ -510,20 +510,55 @@
     (function() {
         const chat = document.getElementById('wa-chat');
         const status = document.getElementById('wa-status');
-        const conversation = [
-            { type: 'out', text: 'Hi, I saw your ad. How does the AI bot thing work?', time: '10:31 AM' },
-            { type: 'in', text: 'Hey! Great question. We set up an AI agent that handles your customer messages automatically — on WhatsApp, Telegram, Discord, or Slack. It answers questions, books appointments, and follows up with leads. All running 24/7.', time: '10:31 AM' },
-            { type: 'out', text: 'How long does it take to set up?', time: '10:32 AM' },
-            { type: 'in', text: 'Most setups are done same day — usually within 2-4 hours. We handle everything. You just tell us what platforms you need and what your business does. No coding on your end.', time: '10:32 AM' },
-            { type: 'out', text: 'What if it gives wrong answers to my customers?', time: '10:33 AM' },
-            { type: 'in', text: 'We train it specifically on your business — your products, your FAQ, your tone. Plus you get a 14-day money-back guarantee. If it\'s not working for you, full refund, no questions asked.', time: '10:33 AM' },
-            { type: 'out', text: 'OK that sounds good. What\'s the price?', time: '10:34 AM' },
-            { type: 'in', text: 'Starts at $400 for a single-platform setup. Want me to book you a free 15-minute call so we can figure out exactly what you need? Zero pressure.', time: '10:34 AM' },
-            { type: 'out', text: 'Yeah let\'s do it 👍', time: '10:34 AM' },
-            { type: 'in', text: 'Done! I\'ve sent you a calendar link. Pick any time that works. Talk soon! 🚀', time: '10:34 AM' },
+        const scenarios = [
+            {
+                name: "Bella's Beauty Studio", avatar: 'B', color: 'from-pink-500 to-rose-400',
+                messages: [
+                    { type: 'out', text: 'Hi, do you have any openings for a haircut tomorrow?', time: '2:14 PM' },
+                    { type: 'in', text: 'Hi there! 💇‍♀️ Yes, we have slots available tomorrow. I can book you in at 10:30 AM, 1:00 PM, or 3:30 PM. Which works best for you?', time: '2:14 PM' },
+                    { type: 'out', text: '1pm works. How much for a cut and colour?', time: '2:15 PM' },
+                    { type: 'in', text: 'A cut and colour starts at $85. Your stylist will confirm the exact price based on hair length at your appointment. Shall I book you in for 1:00 PM tomorrow?', time: '2:15 PM' },
+                    { type: 'out', text: 'Yes please!', time: '2:15 PM' },
+                    { type: 'in', text: 'Done! ✅ You\'re booked for tomorrow at 1:00 PM with Sarah. You\'ll get a reminder 2 hours before. See you then!', time: '2:16 PM' },
+                ]
+            },
+            {
+                name: 'Urban Eats Restaurant', avatar: 'U', color: 'from-orange-500 to-amber-400',
+                messages: [
+                    { type: 'out', text: 'Hey, can I make a reservation for 4 people tonight?', time: '5:42 PM' },
+                    { type: 'in', text: 'Hi! 🍽️ We\'d love to have you tonight. We have tables available at 7:00 PM, 7:30 PM, and 8:15 PM. Any preference?', time: '5:42 PM' },
+                    { type: 'out', text: '7:30 please. Also do you have vegan options?', time: '5:43 PM' },
+                    { type: 'in', text: 'Absolutely! We have 6 vegan dishes including our popular mushroom risotto and the black bean burger. I\'ll note the dietary preference on your reservation.', time: '5:43 PM' },
+                    { type: 'out', text: 'Perfect, book it under James', time: '5:44 PM' },
+                    { type: 'in', text: 'All set! ✅ Table for 4, tonight at 7:30 PM under James. Vegan options flagged for your server. See you tonight! 🙌', time: '5:44 PM' },
+                ]
+            },
+            {
+                name: 'ProFit Personal Training', avatar: 'P', color: 'from-blue-500 to-cyan-400',
+                messages: [
+                    { type: 'out', text: 'Hi I\'m interested in personal training. What packages do you offer?', time: '9:07 AM' },
+                    { type: 'in', text: 'Hey! 💪 Great to hear! We offer 3 packages:\n\n• Starter: 8 sessions/month — $320\n• Pro: 12 sessions/month — $450\n• Elite: Unlimited — $600\n\nAll include a free fitness assessment. What are your goals?', time: '9:07 AM' },
+                    { type: 'out', text: 'I want to lose weight. Probably the starter pack to begin with', time: '9:08 AM' },
+                    { type: 'in', text: 'Starter is a great choice for getting going. Want to book your free assessment this week? We have openings Wednesday 10 AM or Thursday 6 PM.', time: '9:08 AM' },
+                    { type: 'out', text: 'Thursday 6pm works', time: '9:09 AM' },
+                    { type: 'in', text: 'Booked! ✅ Thursday at 6 PM with Coach Mike. Wear comfortable clothes and bring water. You\'re going to crush it! 🔥', time: '9:09 AM' },
+                ]
+            }
         ];
 
+        let scenarioIndex = 0;
         let i = 0;
+        let conversation = scenarios[0].messages;
+
+        function setScenario(idx) {
+            var s = scenarios[idx];
+            document.getElementById('wa-name').textContent = s.name;
+            document.getElementById('wa-avatar').textContent = s.avatar;
+            document.getElementById('wa-avatar').className = 'w-10 h-10 rounded-full bg-gradient-to-br ' + s.color + ' flex items-center justify-center text-white font-bold text-sm';
+            conversation = s.messages;
+        }
+        setScenario(0);
+
         let observer = new IntersectionObserver(function(entries) {
             if (entries[0].isIntersecting && i === 0) {
                 observer.disconnect();
@@ -535,7 +570,7 @@
         function addMessage(msg) {
             const div = document.createElement('div');
             div.className = 'wa-msg ' + (msg.type === 'in' ? 'wa-msg-in' : 'wa-msg-out');
-            div.innerHTML = msg.text + '<div class="wa-time">' + msg.time + (msg.type === 'out' ? ' <span class="wa-check">✓✓</span>' : '') + '</div>';
+            div.innerHTML = msg.text.replace(/\n/g, '<br>') + '<div class="wa-time">' + msg.time + (msg.type === 'out' ? ' <span class="wa-check">✓✓</span>' : '') + '</div>';
             chat.appendChild(div);
             chat.scrollTop = chat.scrollHeight;
         }
@@ -561,8 +596,10 @@
                 setTimeout(function() {
                     chat.innerHTML = '';
                     i = 0;
+                    scenarioIndex = (scenarioIndex + 1) % scenarios.length;
+                    setScenario(scenarioIndex);
                     playConversation();
-                }, 5000);
+                }, 4000);
                 return;
             }
             const msg = conversation[i];
