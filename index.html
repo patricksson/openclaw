@@ -393,6 +393,196 @@
         </div>
     </div>
 
+    <!-- Live WhatsApp Demo -->
+    <section id="demo" class="py-20 px-4 bg-gradient-to-b from-black to-gray-950">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10">
+                <span class="inline-block px-4 py-1.5 bg-green-900/30 text-green-400 rounded-full text-sm font-medium mb-4">See It In Action</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4" style="font-family: 'Satoshi', sans-serif;">This Is What Your Business Gets</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Watch a real AI agent handle customer inquiries on WhatsApp — automatically, 24/7, while you sleep.</p>
+            </div>
+
+            <div class="max-w-sm mx-auto">
+                <!-- WhatsApp Phone Frame -->
+                <div class="rounded-3xl overflow-hidden border border-gray-700/50 shadow-2xl shadow-green-900/20" style="background: #0b141a;">
+                    <!-- WhatsApp Header -->
+                    <div class="flex items-center gap-3 px-4 py-3" style="background: #1f2c34;">
+                        <div class="flex items-center gap-3 flex-1">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold text-sm">A</div>
+                            <div>
+                                <div class="text-white text-sm font-semibold">Automatyn AI Agent</div>
+                                <div class="text-green-400 text-xs" id="wa-status">online</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 text-gray-400">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- Chat Area -->
+                    <div class="px-3 py-4 space-y-3 min-h-[420px]" id="wa-chat" style="background: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22><rect width=%2260%22 height=%2260%22 fill=%22%23060d11%22/><path d=%22M30 10 L35 15 L30 20 L25 15Z%22 fill=%22%230a1519%22 opacity=%220.5%22/></svg>') repeat;">
+                    </div>
+
+                    <!-- Input Bar -->
+                    <div class="flex items-center gap-2 px-3 py-2" style="background: #1f2c34;">
+                        <div class="flex-1 rounded-full px-4 py-2 text-sm text-gray-400" style="background: #2a3942;">Type a message...</div>
+                        <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA below phone -->
+                <div class="text-center mt-8">
+                    <p class="text-gray-400 text-sm mb-4">This is what your customers experience — instant, intelligent responses 24/7.</p>
+                    <a href="#contact" class="inline-flex items-center px-8 py-4 rounded-xl font-semibold bg-gradient-to-r from-green-600 to-green-500 text-white hover:opacity-90 transition shadow-lg" style="color: #ffffff !important; text-decoration: none;">
+                        Get This Running for Your Business →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* WhatsApp Demo Animations */
+        .wa-msg {
+            max-width: 85%;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.4;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: waFadeIn 0.3s ease forwards;
+        }
+        .wa-msg-in {
+            background: #1f2c34;
+            color: #e9edef;
+            border-top-left-radius: 0;
+            margin-right: auto;
+        }
+        .wa-msg-out {
+            background: #005c4b;
+            color: #e9edef;
+            border-top-right-radius: 0;
+            margin-left: auto;
+        }
+        .wa-msg .wa-time {
+            font-size: 11px;
+            color: rgba(255,255,255,0.45);
+            text-align: right;
+            margin-top: 4px;
+        }
+        .wa-msg .wa-check {
+            color: #53bdeb;
+            font-size: 11px;
+        }
+        .wa-typing {
+            display: flex;
+            gap: 4px;
+            padding: 12px 16px;
+            background: #1f2c34;
+            border-radius: 8px;
+            border-top-left-radius: 0;
+            max-width: 80px;
+            margin-right: auto;
+        }
+        .wa-typing span {
+            width: 8px;
+            height: 8px;
+            background: #8696a0;
+            border-radius: 50%;
+            animation: waTyping 1.4s infinite;
+        }
+        .wa-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .wa-typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes waTyping {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+            30% { transform: translateY(-4px); opacity: 1; }
+        }
+        @keyframes waFadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+
+    <script>
+    (function() {
+        const chat = document.getElementById('wa-chat');
+        const status = document.getElementById('wa-status');
+        const conversation = [
+            { type: 'out', text: 'Hi, I saw your ad. How does the AI bot thing work?', time: '10:31 AM' },
+            { type: 'in', text: 'Hey! Great question. We set up an AI agent that handles your customer messages automatically — on WhatsApp, Telegram, Discord, or Slack. It answers questions, books appointments, and follows up with leads. All running 24/7.', time: '10:31 AM' },
+            { type: 'out', text: 'How long does it take to set up?', time: '10:32 AM' },
+            { type: 'in', text: 'Most setups are done same day — usually within 2-4 hours. We handle everything. You just tell us what platforms you need and what your business does. No coding on your end.', time: '10:32 AM' },
+            { type: 'out', text: 'What if it gives wrong answers to my customers?', time: '10:33 AM' },
+            { type: 'in', text: 'We train it specifically on your business — your products, your FAQ, your tone. Plus you get a 14-day money-back guarantee. If it\'s not working for you, full refund, no questions asked.', time: '10:33 AM' },
+            { type: 'out', text: 'OK that sounds good. What\'s the price?', time: '10:34 AM' },
+            { type: 'in', text: 'Starts at $400 for a single-platform setup. Want me to book you a free 15-minute call so we can figure out exactly what you need? Zero pressure.', time: '10:34 AM' },
+            { type: 'out', text: 'Yeah let\'s do it 👍', time: '10:34 AM' },
+            { type: 'in', text: 'Done! I\'ve sent you a calendar link. Pick any time that works. Talk soon! 🚀', time: '10:34 AM' },
+        ];
+
+        let i = 0;
+        let observer = new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting && i === 0) {
+                observer.disconnect();
+                playConversation();
+            }
+        }, { threshold: 0.3 });
+        observer.observe(chat);
+
+        function addMessage(msg) {
+            const div = document.createElement('div');
+            div.className = 'wa-msg ' + (msg.type === 'in' ? 'wa-msg-in' : 'wa-msg-out');
+            div.innerHTML = msg.text + '<div class="wa-time">' + msg.time + (msg.type === 'out' ? ' <span class="wa-check">✓✓</span>' : '') + '</div>';
+            chat.appendChild(div);
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+        function showTyping() {
+            const div = document.createElement('div');
+            div.className = 'wa-typing';
+            div.id = 'wa-typing-indicator';
+            div.innerHTML = '<span></span><span></span><span></span>';
+            chat.appendChild(div);
+            chat.scrollTop = chat.scrollHeight;
+            status.textContent = 'typing...';
+        }
+
+        function hideTyping() {
+            const el = document.getElementById('wa-typing-indicator');
+            if (el) el.remove();
+            status.textContent = 'online';
+        }
+
+        function playConversation() {
+            if (i >= conversation.length) {
+                setTimeout(function() {
+                    chat.innerHTML = '';
+                    i = 0;
+                    playConversation();
+                }, 5000);
+                return;
+            }
+            const msg = conversation[i];
+            if (msg.type === 'in') {
+                showTyping();
+                setTimeout(function() {
+                    hideTyping();
+                    addMessage(msg);
+                    i++;
+                    setTimeout(playConversation, 1200);
+                }, 1500 + Math.random() * 1000);
+            } else {
+                addMessage(msg);
+                i++;
+                setTimeout(playConversation, 1800);
+            }
+        }
+    })();
+    </script>
+
     <!-- FEATURED CASE STUDY: Natalia -->
     <section id="case-study" class="py-20 px-4 bg-black relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-blue-900/20 pointer-events-none"></div>
