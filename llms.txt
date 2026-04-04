@@ -1,0 +1,28 @@
+# Automatyn
+
+> Professional OpenClaw AI agent setup service for small businesses. We install, configure, and deploy AI automation bots on Telegram, Discord, Slack, and WhatsApp in 2-4 hours. Starting at $400 with a 14-day money-back guarantee.
+
+## About
+Automatyn is a done-for-you AI automation setup service. We handle the full OpenClaw installation for non-technical business owners who want AI agents running their customer support, lead follow-up, scheduling, and operations 24/7.
+
+## Services
+- OpenClaw installation and configuration: $400-$1,500
+- Same-day setup (2-4 hours typical)
+- Platforms: Telegram, Discord, Slack, WhatsApp, Signal
+- Includes: server setup, bot configuration, security hardening, skills setup, live walkthrough
+- 14-day money-back guarantee on all plans
+
+## Pricing
+- Starter Package: $400 — Single platform, core features
+- Pro Package: $800 — Two platforms, advanced skills, priority support
+- Business Package: $1,500 — All platforms, custom integrations, 30-day support
+
+## Key Pages
+- [Home](https://automatyn.github.io/)
+- [Blog: What is OpenClaw and Why Every Business Needs It](https://automatyn.github.io/blog/what-is-openclaw-why-every-business-needs-it-2026.html)
+- [Blog: 5 Ways to Make Passive Income with AI Agents](https://automatyn.github.io/blog/passive-income-ai-agents-2026.html)
+
+## Contact
+- Free 15-minute consultation available
+- Email: support@automatyn.com
+- Book a call: https://automatyn.github.io/#contact
