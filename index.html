@@ -512,36 +512,36 @@
         const status = document.getElementById('wa-status');
         const scenarios = [
             {
-                name: "Bella's Beauty Studio", avatar: 'B', color: 'from-pink-500 to-rose-400',
+                name: "Mike's E-Commerce Store", avatar: 'M', color: 'from-purple-500 to-blue-400',
                 messages: [
-                    { type: 'out', text: 'Hi, do you have any openings for a haircut tomorrow?', time: '2:14 PM' },
-                    { type: 'in', text: 'Hi there! 💇‍♀️ Yes, we have slots available tomorrow. I can book you in at 10:30 AM, 1:00 PM, or 3:30 PM. Which works best for you?', time: '2:14 PM' },
-                    { type: 'out', text: '1pm works. How much for a cut and colour?', time: '2:15 PM' },
-                    { type: 'in', text: 'A cut and colour starts at $85. Your stylist will confirm the exact price based on hair length at your appointment. Shall I book you in for 1:00 PM tomorrow?', time: '2:15 PM' },
-                    { type: 'out', text: 'Yes please!', time: '2:15 PM' },
-                    { type: 'in', text: 'Done! ✅ You\'re booked for tomorrow at 1:00 PM with Sarah. You\'ll get a reminder 2 hours before. See you then!', time: '2:16 PM' },
+                    { type: 'out', text: 'Hey, a customer just left a 1-star review on our store. Can you handle it?', time: '8:15 AM' },
+                    { type: 'in', text: 'On it. I found the review — it\'s about a late delivery on order #4821. I\'ve checked the tracking: it was stuck at the Memphis hub for 3 days. Here\'s what I\'ve done:\n\n✅ Drafted a public response apologising and offering 15% off\n✅ Sent the customer a private email with a replacement shipping label\n✅ Flagged the carrier issue in your logistics sheet', time: '8:15 AM' },
+                    { type: 'out', text: 'Wow that was fast. Did you update the spreadsheet too?', time: '8:16 AM' },
+                    { type: 'in', text: 'Yes — row 48 in your Carrier Issues tracker is updated with the delay details, date, and resolution status. I also noticed 2 other orders from the same batch are delayed. Want me to proactively reach out to those customers before they complain?', time: '8:16 AM' },
+                    { type: 'out', text: 'Yes do it', time: '8:17 AM' },
+                    { type: 'in', text: 'Done ✅ Both customers messaged with an apology + 10% discount code. I\'ll monitor their tracking and update you if anything else stalls. 📦', time: '8:17 AM' },
                 ]
             },
             {
-                name: 'Urban Eats Restaurant', avatar: 'U', color: 'from-orange-500 to-amber-400',
+                name: 'Sarah — Real Estate Agent', avatar: 'S', color: 'from-green-500 to-emerald-400',
                 messages: [
-                    { type: 'out', text: 'Hey, can I make a reservation for 4 people tonight?', time: '5:42 PM' },
-                    { type: 'in', text: 'Hi! 🍽️ We\'d love to have you tonight. We have tables available at 7:00 PM, 7:30 PM, and 8:15 PM. Any preference?', time: '5:42 PM' },
-                    { type: 'out', text: '7:30 please. Also do you have vegan options?', time: '5:43 PM' },
-                    { type: 'in', text: 'Absolutely! We have 6 vegan dishes including our popular mushroom risotto and the black bean burger. I\'ll note the dietary preference on your reservation.', time: '5:43 PM' },
-                    { type: 'out', text: 'Perfect, book it under James', time: '5:44 PM' },
-                    { type: 'in', text: 'All set! ✅ Table for 4, tonight at 7:30 PM under James. Vegan options flagged for your server. See you tonight! 🙌', time: '5:44 PM' },
+                    { type: 'out', text: 'I got 12 new leads from the open house. Can you follow up with all of them?', time: '9:30 PM' },
+                    { type: 'in', text: 'I\'ve pulled the 12 contacts from your sign-in sheet. Here\'s what I\'m doing for each:\n\n1. Personalised follow-up email mentioning the property they viewed\n2. Text message with your calendar link\n3. Adding them to your CRM with lead score based on their enquiry notes\n\nFirst batch of emails going out in 10 minutes.', time: '9:30 PM' },
+                    { type: 'out', text: 'Can you also check which ones are pre-approved?', time: '9:31 PM' },
+                    { type: 'in', text: 'Cross-referenced with your mortgage partner\'s list. 4 of the 12 are pre-approved buyers:\n\n• James K — pre-approved $450K\n• Diana R — pre-approved $380K\n• Tom & Lisa W — pre-approved $520K\n• Marcus J — pre-approved $290K\n\nI\'ve flagged these 4 as high-priority in your CRM and moved them to the top of your call list for tomorrow morning.', time: '9:32 PM' },
+                    { type: 'out', text: 'This is incredible', time: '9:32 PM' },
+                    { type: 'in', text: 'Just doing my job 24/7 😉 I\'ll send you a summary report at 8 AM tomorrow with open rates and any replies. Sleep well! 🏡', time: '9:33 PM' },
                 ]
             },
             {
-                name: 'ProFit Personal Training', avatar: 'P', color: 'from-blue-500 to-cyan-400',
+                name: 'CoachLaunch — Online Course', avatar: 'C', color: 'from-orange-500 to-yellow-400',
                 messages: [
-                    { type: 'out', text: 'Hi I\'m interested in personal training. What packages do you offer?', time: '9:07 AM' },
-                    { type: 'in', text: 'Hey! 💪 Great to hear! We offer 3 packages:\n\n• Starter: 8 sessions/month — $320\n• Pro: 12 sessions/month — $450\n• Elite: Unlimited — $600\n\nAll include a free fitness assessment. What are your goals?', time: '9:07 AM' },
-                    { type: 'out', text: 'I want to lose weight. Probably the starter pack to begin with', time: '9:08 AM' },
-                    { type: 'in', text: 'Starter is a great choice for getting going. Want to book your free assessment this week? We have openings Wednesday 10 AM or Thursday 6 PM.', time: '9:08 AM' },
-                    { type: 'out', text: 'Thursday 6pm works', time: '9:09 AM' },
-                    { type: 'in', text: 'Booked! ✅ Thursday at 6 PM with Coach Mike. Wear comfortable clothes and bring water. You\'re going to crush it! 🔥', time: '9:09 AM' },
+                    { type: 'out', text: 'What did our competitors post this week? I need content ideas', time: '7:45 AM' },
+                    { type: 'in', text: 'I monitored 5 competitor accounts overnight. Here\'s the breakdown:\n\n📈 Top performer: @DigitalCoachPro posted a carousel "7 AI Tools That Replace a VA" — 2.4K likes, 380 saves\n\n🔥 Trending topic: "AI side income" is surging — 3 competitors posted about it\n\n💡 Gap I found: Nobody is talking about setup costs vs. DIY time. That\'s your angle.', time: '7:46 AM' },
+                    { type: 'out', text: 'Write me 3 post ideas based on that', time: '7:46 AM' },
+                    { type: 'in', text: 'Here are 3 ready-to-use hooks:\n\n1. "I spent $400 on AI setup and saved 15 hours/week. Here\'s the math."\n2. "Your competitor is using AI agents while you\'re still answering DMs manually"\n3. "The real cost of NOT automating your business in 2026"\n\nWant me to draft the full captions and generate carousel slides for any of these?', time: '7:47 AM' },
+                    { type: 'out', text: 'Do all 3. Schedule them for this week', time: '7:47 AM' },
+                    { type: 'in', text: 'On it ✅ I\'ll have all 3 drafted with captions, hashtags, and posting times optimised for your audience peak hours. You\'ll get them for review in 30 minutes. 🚀', time: '7:48 AM' },
                 ]
             }
         ];
