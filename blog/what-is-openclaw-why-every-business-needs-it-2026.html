@@ -17,8 +17,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400;500;700;800&display=swap" rel="stylesheet">
 
     <!-- JSON-LD: Article -->
     <script type="application/ld+json">
@@ -116,12 +116,12 @@
     </script>
 
     <style>
-        * { font-family: 'Inter', sans-serif; }
-        body { background: #0a0a0a; color: #e0e0e0; }
-        h1, h2, h3, h4 { font-family: 'Satoshi', 'Inter', sans-serif; color: #ffffff; }
+        * { font-family: 'DM Sans', sans-serif; }
+        body { background: #030303; color: #e0e0e0; }
+        h1, h2, h3, h4 { font-family: 'Cabinet Grotesk', 'DM Sans', sans-serif; color: #ffffff; }
 
         .gradient-text {
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            background: linear-gradient(135deg, #ffffff 0%, #22d3ee 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -134,7 +134,7 @@
             margin-top: 3rem;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(139, 92, 246, 0.3);
+            border-bottom: 2px solid rgba(34, 211, 238, 0.3);
         }
 
         article p {
@@ -158,17 +158,17 @@
         article strong { color: #ffffff; }
 
         article a {
-            color: #8b5cf6;
+            color: #22d3ee;
             text-decoration: underline;
             text-underline-offset: 3px;
         }
-        article a:hover { color: #a78bfa; }
+        article a:hover { color: #67e8f9; }
 
         article img {
             width: 100%;
             border-radius: 12px;
             margin: 2rem 0;
-            border: 1px solid rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(34, 211, 238, 0.2);
         }
 
         .hero-img {
@@ -176,13 +176,13 @@
             max-height: 450px;
             object-fit: cover;
             border-radius: 16px;
-            border: 1px solid rgba(139, 92, 246, 0.3);
+            border: 1px solid rgba(34, 211, 238, 0.3);
         }
 
         /* Quick answer box */
         .quick-answer {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
-            border: 1px solid rgba(168, 85, 247, 0.3);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(34, 211, 238, 0.1) 100%);
+            border: 1px solid rgba(34, 211, 238, 0.3);
             border-radius: 12px;
             padding: 1.5rem;
             margin: 1.5rem 0 2rem;
@@ -192,8 +192,8 @@
 
         /* Inline CTA */
         .inline-cta {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
-            border: 1px solid rgba(168, 85, 247, 0.3);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(34, 211, 238, 0.1) 100%);
+            border: 1px solid rgba(34, 211, 238, 0.3);
             border-radius: 12px;
             padding: 2rem;
             margin: 2.5rem 0;
@@ -208,22 +208,22 @@
             font-size: 0.95rem;
         }
         .comparison-table th {
-            background: rgba(139, 92, 246, 0.15);
+            background: rgba(34, 211, 238, 0.15);
             color: #ffffff;
             padding: 12px 16px;
             text-align: left;
-            border-bottom: 2px solid rgba(139, 92, 246, 0.3);
+            border-bottom: 2px solid rgba(34, 211, 238, 0.3);
         }
         .comparison-table td {
             padding: 10px 16px;
             border-bottom: 1px solid rgba(255,255,255,0.06);
             color: #c0c0c0;
         }
-        .comparison-table tr:hover td { background: rgba(139, 92, 246, 0.05); }
+        .comparison-table tr:hover td { background: rgba(34, 211, 238, 0.05); }
 
         /* FAQ */
         .faq-item {
-            border: 1px solid rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(34, 211, 238, 0.2);
             border-radius: 10px;
             margin-bottom: 0.75rem;
             overflow: hidden;
@@ -236,9 +236,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(139, 92, 246, 0.05);
+            background: rgba(34, 211, 238, 0.05);
         }
-        .faq-q:hover { background: rgba(139, 92, 246, 0.1); }
+        .faq-q:hover { background: rgba(34, 211, 238, 0.1); }
         .faq-a {
             max-height: 0;
             overflow: hidden;
@@ -258,13 +258,13 @@
 <body>
 
     <!-- Nav -->
-    <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-md z-50 border-b border-purple-900/30">
+    <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-md z-50 border-b border-white/5">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="/" class="text-xl font-extrabold text-white" style="font-family: 'Inter', sans-serif;"><span class="gradient-text">Auto</span>matyn</a>
+            <a href="/" class="no-underline"><span style="font-family: 'Cabinet Grotesk', sans-serif; letter-spacing: -0.04em;" class="text-2xl font-extrabold text-white">Automatyn<span style="color: #22d3ee;">.</span></span></a>
             <div class="flex items-center gap-4">
                 <a href="/#blog" class="text-gray-400 hover:text-white transition text-sm">Blog</a>
                 <a href="/#pricing" class="text-gray-400 hover:text-white transition text-sm">Pricing</a>
-                <a href="/#contact" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition" style="color: #ffffff !important; text-decoration: none;">Book Free Call</a>
+                <a href="/#contact" class="text-white px-4 py-2 rounded-lg text-sm font-medium" style="background: linear-gradient(135deg, #059669, #10b981); text-decoration: none;">Book Free Call</a>
             </div>
         </div>
     </nav>
@@ -272,9 +272,9 @@
     <!-- Breadcrumb -->
     <div class="pt-20 pb-4 px-4 max-w-3xl mx-auto">
         <div class="text-sm text-gray-500">
-            <a href="/" class="hover:text-purple-400 transition">Home</a>
+            <a href="/" class="hover:text-cyan-400 transition">Home</a>
             <span class="mx-2">›</span>
-            <a href="/#blog" class="hover:text-purple-400 transition">Blog</a>
+            <a href="/#blog" class="hover:text-cyan-400 transition">Blog</a>
             <span class="mx-2">›</span>
             <span class="text-gray-400">What is OpenClaw?</span>
         </div>
@@ -283,10 +283,10 @@
     <!-- Hero -->
     <header class="px-4 pb-8 max-w-3xl mx-auto">
         <div class="flex items-center gap-3 mb-4">
-            <span class="px-3 py-1 bg-purple-900/30 text-purple-400 rounded-full text-xs font-medium">AI Automation</span>
+            <span class="px-3 py-1 rounded-full text-xs font-medium" style="background: rgba(34,211,238,0.1); color: #22d3ee; border: 1px solid rgba(34,211,238,0.2);">AI Automation</span>
             <span class="text-gray-500 text-sm">April 4, 2026 · 9 min read</span>
         </div>
-        <h1 class="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-6" style="font-family: 'Satoshi', sans-serif;">What is OpenClaw and Why Every Business Needs It in 2026</h1>
+        <h1 class="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-6" style="font-family: 'Cabinet Grotesk', 'DM Sans', sans-serif;">What is OpenClaw and Why Every Business Needs It in 2026</h1>
         <p class="text-xl text-gray-400 leading-relaxed">OpenClaw is an open-source AI agent that connects to your messaging apps and runs your business tasks on autopilot. Here's what it does, why it matters, and whether it's right for you.</p>
     </header>
 
@@ -297,7 +297,7 @@
 
         <!-- Quick Answer Box -->
         <div class="quick-answer">
-            <p><strong style="color: #a78bfa;">Quick answer:</strong> OpenClaw is a free AI agent you install on your own machine. It connects to WhatsApp, Telegram, Discord, and Slack — then handles customer messages, follows up with leads, researches competitors, generates content, and runs workflows. All automatically. All 24/7. All without a monthly SaaS subscription.</p>
+            <p><strong style="color: #67e8f9;">Quick answer:</strong> OpenClaw is a free AI agent you install on your own machine. It connects to WhatsApp, Telegram, Discord, and Slack — then handles customer messages, follows up with leads, researches competitors, generates content, and runs workflows. All automatically. All 24/7. All without a monthly SaaS subscription.</p>
         </div>
 
         <h2 id="what-is-openclaw">What Exactly Is OpenClaw? (The Non-Technical Explanation)</h2>
@@ -344,7 +344,7 @@
         <div class="inline-cta">
             <p class="text-white font-semibold text-lg mb-2" style="color: #ffffff;">Want to see this running for your business?</p>
             <p class="text-zinc-300 text-sm mb-4">We set up OpenClaw for businesses in 2-4 hours. Same-day deployment. 14-day money-back guarantee.</p>
-            <a href="https://automatyn.co/#contact" class="inline-flex items-center px-6 py-3 rounded-lg text-sm font-semibold bg-gradient-to-r from-blue-500 to-purple-500 hover:opacity-90 transition-opacity" style="color: #ffffff !important; text-decoration: none;">
+            <a href="https://automatyn.co/#contact" class="inline-flex items-center px-6 py-3 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity" style="background: linear-gradient(135deg, #059669, #10b981); color: #ffffff !important; text-decoration: none;">
                 Book Your Free 15-Min Consultation &rarr;
             </a>
         </div>
@@ -436,7 +436,7 @@
         <div class="inline-cta">
             <p class="text-white font-semibold text-lg mb-2" style="color: #ffffff;">Not sure if OpenClaw is right for your business?</p>
             <p class="text-zinc-300 text-sm mb-4">Jump on a free 15-minute call. We'll assess your needs and tell you honestly whether it's a good fit. Zero pressure. Zero pitch.</p>
-            <a href="https://automatyn.co/#contact" class="inline-flex items-center px-6 py-3 rounded-lg text-sm font-semibold bg-gradient-to-r from-blue-500 to-purple-500 hover:opacity-90 transition-opacity" style="color: #ffffff !important; text-decoration: none;">
+            <a href="https://automatyn.co/#contact" class="inline-flex items-center px-6 py-3 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity" style="background: linear-gradient(135deg, #059669, #10b981); color: #ffffff !important; text-decoration: none;">
                 Claim Your Free Strategy Call &rarr;
             </a>
         </div>
@@ -570,9 +570,9 @@
         </div>
 
         <!-- Related Reading -->
-        <div class="mt-12 pt-8 border-t border-purple-900/30">
+        <div class="mt-12 pt-8 border-t border-white/5">
             <h3 class="text-lg font-bold text-white mb-3">Related Reading</h3>
-            <a href="/blog/passive-income-ai-agents-2026.html" class="flex items-center gap-3 p-4 rounded-xl bg-gray-900/50 border border-purple-900/20 hover:border-purple-500/40 transition-all">
+            <a href="/blog/passive-income-ai-agents-2026.html" class="flex items-center gap-3 p-4 rounded-xl bg-gray-900/50 border border-white/5 hover:border-cyan-500/40 transition-all">
                 <div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
                     <img src="/blog/images/hero.jpg" alt="Passive income with AI agents" class="w-full h-full object-cover" style="margin: 0; border: 0; border-radius: 0;">
                 </div>
@@ -584,18 +584,18 @@
         </div>
 
         <!-- Final CTA -->
-        <div class="mt-12 text-center p-8 rounded-2xl bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-purple-500/30">
+        <div class="mt-12 text-center p-8 rounded-2xl border" style="background: linear-gradient(135deg, rgba(5,150,105,0.1), rgba(16,185,129,0.1)); border-color: rgba(16,185,129,0.3)">
             <h3 class="text-2xl font-extrabold text-white mb-4" style="border: none; margin-top: 0;">Ready to Put AI to Work for Your Business?</h3>
             <p class="text-gray-300 max-w-xl mx-auto mb-6">If you're spending hours on tasks that should be automated, OpenClaw is ready to do that work. We handle the entire setup — configured for your platforms, trained on your business, running the same day. Starts at $400 with a 14-day money-back guarantee.</p>
-            <a href="https://automatyn.co/#contact" class="inline-flex items-center px-8 py-4 rounded-xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 transition shadow-lg text-lg" style="color: #ffffff !important; text-decoration: none;">
+            <a href="https://automatyn.co/#contact" class="inline-flex items-center px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition shadow-lg text-lg" style="background: linear-gradient(135deg, #059669, #10b981); color: #ffffff !important; text-decoration: none;">
                 Book Your Free 15-Minute Call &rarr;
             </a>
             <p class="text-gray-500 text-xs mt-4">No commitment required. We'll tell you honestly if OpenClaw is the right fit.</p>
         </div>
 
         <!-- Author -->
-        <div class="mt-8 pt-6 border-t border-purple-900/30 flex items-center gap-4">
-            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold">A</div>
+        <div class="mt-8 pt-6 border-t border-white/5 flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold" style="background: linear-gradient(135deg, #059669, #10b981);">A</div>
             <div>
                 <p class="text-white font-semibold text-sm" style="margin: 0;">Automatyn</p>
                 <p class="text-gray-500 text-xs" style="margin: 2px 0 0; font-size: 0.75rem;">Professional OpenClaw setup service. We install, configure, and deploy AI agents for businesses. <a href="https://automatyn.co/">Learn more →</a></p>
@@ -605,9 +605,19 @@
     </article>
 
     <!-- Footer -->
-    <footer class="bg-black border-t border-purple-900/30 text-gray-500 text-center py-8 px-4">
-        <p class="text-sm">&copy; 2026 Automatyn. All rights reserved.</p>
-        <p class="text-xs mt-2"><a href="/" class="hover:text-white transition">Home</a> · <a href="/#blog" class="hover:text-white transition">Blog</a> · <a href="/#pricing" class="hover:text-white transition">Pricing</a> · <a href="/#contact" class="hover:text-white transition">Contact</a></p>
+    <footer class="bg-black border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-4 py-10">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <a href="/" class="no-underline"><span style="font-family: 'Cabinet Grotesk', sans-serif; letter-spacing: -0.04em;" class="text-xl font-extrabold text-white">Automatyn<span style="color: #22d3ee;">.</span></span></a>
+                <div class="flex items-center gap-6 text-sm text-zinc-500">
+                    <a href="/" class="hover:text-white transition-colors">Home</a>
+                    <a href="/#blog" class="hover:text-white transition-colors">Blog</a>
+                    <a href="/#pricing" class="hover:text-white transition-colors">Pricing</a>
+                    <a href="/#contact" class="hover:text-white transition-colors">Contact</a>
+                </div>
+            </div>
+            <p class="text-zinc-600 text-xs text-center mt-6">&copy; 2026 Automatyn. All rights reserved.</p>
+        </div>
     </footer>
 
 </body>
