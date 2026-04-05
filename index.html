@@ -1398,7 +1398,7 @@
 
         // Calendly popup
         document.getElementById('calendly-btn').addEventListener('click', function() {
-            Calendly.initPopupWidget({url: 'https://calendly.com/patricksson/15min'});
+            Calendly.initPopupWidget({url: 'https://calendly.com/patricksson/30min'});
         });
 
         // AI Chat Widget with email capture and human escalation
@@ -1543,7 +1543,7 @@
             const humanKeywords = ['human', 'talk to someone', 'speak to human', 'agent', 'person', 'representative', 'real person'];
             if (humanKeywords.some(kw => lowerInput.includes(kw))) {
                 setTimeout(() => {
-                    Calendly.initPopupWidget({url: 'https://calendly.com/patricksson/15min'});
+                    Calendly.initPopupWidget({url: 'https://calendly.com/patricksson/30min'});
                 }, 500);
                 return "I'd be happy to connect you with a human expert! I'm opening the booking calendar where you can schedule a free 15-minute consultation call. 📅\n\nAlternatively, you can email us at support@automatyn.co for a response within 24 hours.";
             }
@@ -1552,7 +1552,7 @@
             const bookingKeywords = ['book', 'consultation', 'schedule', 'call', 'appointment', 'meeting'];
             if (bookingKeywords.some(kw => lowerInput.includes(kw))) {
                 setTimeout(() => {
-                    Calendly.initPopupWidget({url: 'https://calendly.com/patricksson/15min'});
+                    Calendly.initPopupWidget({url: 'https://calendly.com/patricksson/30min'});
                 }, 500);
                 return "I'll open the booking calendar for you! Pick a time that works best for your schedule. 📅";
             }
