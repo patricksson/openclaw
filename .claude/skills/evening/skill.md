@@ -60,7 +60,19 @@ Skip: ads, crypto, pure memes, tweets <100 chars, tweets older than 2 hours, any
 - Sound human, not like a bot
 - Space replies 5-10 minutes apart (use time.sleep(300) to time.sleep(600), vary randomly)
 
-**HOW TO POST:**
+**HOW TO POST (with auto-fix on errors):**
+
+Before ANY Playwright work, run a Chrome health check:
+```
+ps aux | grep chrome | grep 18800
+```
+If Chrome is NOT running, restart it:
+```
+/usr/bin/google-chrome-stable --remote-debugging-port=18800 --user-data-dir=/home/marketingpatpat/.openclaw/browser/openclaw/user-data --no-first-run --no-default-browser-check --disable-sync --disable-background-networking --disable-component-update --disable-features=Translate,MediaRouter --disable-session-crashed-bubble --hide-crash-restore-bubble --password-store=basic --disable-dev-shm-usage --disable-blink-features=AutomationControlled --ozone-platform=x11 about:blank &
+```
+Wait 5 seconds, then proceed.
+
+For EACH reply:
 1. Connect to Chrome via CDP: `p.chromium.connect_over_cdp("http://127.0.0.1:18800")`
 2. Navigate to tweet URL
 3. Grant clipboard: CDP `Browser.grantPermissions` with `clipboardReadWrite`
@@ -68,6 +80,15 @@ Skip: ads, crypto, pure memes, tweets <100 chars, tweets older than 2 hours, any
 5. Paste via clipboard + Ctrl+V
 6. Click `[data-testid="tweetButtonInline"]` to post
 7. Append to reply-log.md
+
+**ERROR RECOVERY:**
+- CDP connection fails → restart Chrome, wait 5s, retry once
+- Reply box not found → try `[role="textbox"][contenteditable="true"]`, or click `[data-testid="reply"]` first
+- Post button not found → try `button` with text "Reply" or "Post"
+- Clipboard fails → fall back to `page.keyboard.type(reply_text)`
+- Page timeout → skip tweet, move to next
+- Any unhandled exception → catch, log, skip to next tweet
+- 3 consecutive failures → stop reply batch, report error, continue other steps
 
 ## Step 2: Full Daily Stats + Monetization Tracking
 

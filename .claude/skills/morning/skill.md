@@ -134,7 +134,19 @@ Skip: ads, crypto, pure memes with no hook, tweets with <100 chars (low engageme
 - Must sound human, not like a bot
 - Space replies 5-10 minutes apart (use time.sleep(300) to time.sleep(600) between Playwright posts, vary randomly so it doesn't look bot-like)
 
-**HOW TO POST:**
+**HOW TO POST (with auto-fix on errors):**
+
+Before ANY Playwright work, run a Chrome health check:
+```
+ps aux | grep chrome | grep 18800
+```
+If Chrome is NOT running on port 18800, restart it:
+```
+/usr/bin/google-chrome-stable --remote-debugging-port=18800 --user-data-dir=/home/marketingpatpat/.openclaw/browser/openclaw/user-data --no-first-run --no-default-browser-check --disable-sync --disable-background-networking --disable-component-update --disable-features=Translate,MediaRouter --disable-session-crashed-bubble --hide-crash-restore-bubble --password-store=basic --disable-dev-shm-usage --disable-blink-features=AutomationControlled --ozone-platform=x11 about:blank &
+```
+Wait 5 seconds, then proceed.
+
+For EACH reply attempt:
 1. Connect to Chrome via CDP: `p.chromium.connect_over_cdp("http://127.0.0.1:18800")`
 2. Navigate to tweet URL
 3. Grant clipboard: CDP `Browser.grantPermissions` with `clipboardReadWrite`
@@ -142,6 +154,15 @@ Skip: ads, crypto, pure memes with no hook, tweets with <100 chars (low engageme
 5. Paste via clipboard + Ctrl+V
 6. Click `[data-testid="tweetButtonInline"]` to post
 7. Append to reply-log.md
+
+**ERROR RECOVERY (apply to every Playwright step):**
+- If CDP connection fails → restart Chrome (command above), wait 5s, retry once
+- If reply box not found (`tweetTextarea_0` missing) → X may have changed the selector. Try alternative: `[role="textbox"][contenteditable="true"]`. If still fails, try clicking `[data-testid="reply"]` button first to open the reply modal, then look for the textbox again
+- If post button not found (`tweetButtonInline` missing) → try `button` elements with text "Reply" or "Post"
+- If clipboard paste fails (permission denied) → fall back to `page.keyboard.type(reply_text)` (slower but no clipboard needed)
+- If page.goto times out → skip this tweet, move to next one, log "timeout on [url]"
+- If any step throws an unhandled exception → catch it, log the error, skip to next tweet. NEVER let one failed reply crash the entire batch
+- After 3 consecutive failures → stop the reply batch, report "Playwright errors, Chrome may need manual restart", continue with remaining non-Playwright steps (stats, logging, etc.)
 
 ## Step 7: VIRAL SHOT — 1 Tweet Engineered for 50K+ Impressions
 
