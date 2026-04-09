@@ -55,7 +55,7 @@ Filter for tweets relevant to Automatyn's mission:
 - "Who's building X" or "drop your link" threads
 - Hot takes about work culture, 9-5, entrepreneurship
 
-Skip: ads, crypto, pure memes, tweets <100 chars, tweets older than 48 hours, anyone already replied to today.
+Skip: ads, crypto, pure memes, tweets <100 chars, tweets older than 2 hours, anyone already replied to today. FRESHNESS IS CRITICAL — prioritize tweets under 1 hour old. Sort by newest first.
 
 **REPLY STYLE:**
 - MAXIMUM CONTROVERSY optimised for reach, views, followers, and conversions

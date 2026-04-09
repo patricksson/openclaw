@@ -122,7 +122,7 @@ Filter feed tweets for relevance to Automatyn's mission. Reply-worthy tweets are
 - "Who's building X" or "drop your link" threads
 - Hot takes about work culture, 9-5, entrepreneurship
 
-Skip: ads, crypto, pure memes with no hook, tweets with <100 chars (low engagement potential), tweets older than 48 hours.
+Skip: ads, crypto, pure memes with no hook, tweets with <100 chars (low engagement potential), tweets older than 2 hours. FRESHNESS IS CRITICAL — 80% of reply impressions happen in the first 30 minutes. Prioritize tweets under 1 hour old. Sort by newest first.
 
 **REPLY STYLE:**
 - Maximum controversy optimised for views, followers, conversions
