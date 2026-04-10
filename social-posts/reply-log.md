@@ -36,3 +36,10 @@ Format: `- [DATE] | @handle | status_url | first 60 chars of reply`
 - 2026-04-10 | @aryanlabde | https://x.com/aryanlabde/status/2042483773389095300 | [A-CONV] What happens to your workflow when either of them ch
 - 2026-04-10 | @Mayhem4Markets | https://x.com/Mayhem4Markets/status/2042455530816618578 | [A-CONV] Are you seeing this in the API or the consumer produ
 - 2026-04-10 | @felixgrows | https://x.com/felixgrows/status/2042508439834828908 | [A-CONV] Serious question. When that one person leaves, how l
+- 2026-04-10 | @farzyness | https://x.com/farzyness/status/2042598762502136285 | [A-CONV] Been setting up agent stacks for small businesses fo
+- 2026-04-10 | @steipete | https://x.com/steipete/status/2042615534567457102 | [A-CONV] This is why the configuration layer matters more tha
+- 2026-04-10 | @trikcode | https://x.com/trikcode/status/2042561701095121087 | [A-CONV] The real question nobody is asking: what happens to
+- 2026-04-10 | @svpino | https://x.com/svpino/status/2042578500050391490 | [A-CONV] This is the question that keeps small business owner
+- 2026-04-10 | @zerohedge | https://x.com/zerohedge/status/2042591620609020402 | [A-CONV] The company that figures out how to let small busine
+- 2026-04-10 | @ionleu | https://x.com/ionleu/status/2042564081748427158 | [FRIDAY-LINK] We set up AI agents for small businesses. One t
+- 2026-04-10 | @shiri_shh | https://x.com/shiri_shh/status/2042549685735567598 | [A-CONV] Serious question. When every company makes their own
