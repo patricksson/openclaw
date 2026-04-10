@@ -43,3 +43,10 @@ Format: `- [DATE] | @handle | status_url | first 60 chars of reply`
 - 2026-04-10 | @zerohedge | https://x.com/zerohedge/status/2042591620609020402 | [A-CONV] The company that figures out how to let small busine
 - 2026-04-10 | @ionleu | https://x.com/ionleu/status/2042564081748427158 | [FRIDAY-LINK] We set up AI agents for small businesses. One t
 - 2026-04-10 | @shiri_shh | https://x.com/shiri_shh/status/2042549685735567598 | [A-CONV] Serious question. When every company makes their own
+- 2026-04-10 | @KevinNaughtonJr | https://x.com/KevinNaughtonJr/status/2042685657705759201 | [A-CONV] Real talk. If the LLM vanishes and you can't ship, y
+- 2026-04-10 | @Layton_Gott | https://x.com/Layton_Gott/status/2042691603723358473 | [A-CONV] This is going to set the tone for every AI regulatio
+- 2026-04-10 | @bindureddy | https://x.com/bindureddy/status/2042661070461075948 | [A-CONV] Honest question. How many small businesses are picki
+- 2026-04-10 | @WatcherGuru | https://x.com/WatcherGuru/status/2042673806234226969 | [A-CONV] The AI backlash isn't slowing down. Every week the a
+- 2026-04-10 | @alexwtlf | https://x.com/alexwtlf/status/2042649083416871374 | [A-CONV] Or you're letting it loop on the same error 47 times
+- 2026-04-10 | @ShanuMathew93 | https://x.com/ShanuMathew93/status/2042645545970213202 | [A-CONV] Are you testing via API or the consumer product? I'v
+- 2026-04-10 | @getipisolutions | https://x.com/getipisolutions/status/2042709443159199920 | [A-CONV] This is the number one reason AI agent deployments f

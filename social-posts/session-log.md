@@ -2,6 +2,20 @@
 
 Each command writes its results here after completing. The next command reads the most recent entry as a recap.
 
+### /evening — 2026-04-10 21:40 UTC
+- Replies: 7 posted [A-CONV] (@KevinNaughtonJr, @Layton_Gott, @bindureddy, @WatcherGuru, @alexwtlf, @ShanuMathew93, @getipisolutions)
+- Key reply: @WatcherGuru Molotov at Altman's house (breaking news, high-view potential)
+- Key reply: @Layton_Gott Florida investigating OpenAI (regulation angle, fresh 1h old)
+- Key reply: @KevinNaughtonJr LLM dependency hot take (19K+ followers)
+- Trending: West Ham, Lebanon, TOTP (sports/politics heavy, no clean AI bridge)
+- TikTok stats: 11 videos, 2,515 total views (+553 from morning), 25 likes (+6)
+- X stats: 110 followers, 448 tweets
+- Blog today: "AI Agent vs Virtual Assistant" published
+- Friday link: already posted in afternoon (@ionleu thread)
+- Standalone Friday link tweet: scheduled 20:00 UTC (should have fired)
+- Total replies today: 23 (9 morning + 7 afternoon + 7 evening)
+- Monetization: 110/500 followers, impressions TBD from analytics
+
 ### /afternoon — 2026-04-10 15:10 UTC
 - Content Machine trigger: was disabled (auto-disabled after 14:00 run), re-enabled
 - Replies: 7 posted [A-CONV] (@farzyness, @steipete, @trikcode, @svpino, @zerohedge, @ionleu, @shiri_shh)
