@@ -123,19 +123,25 @@ PRIORITY TARGETS (these drive 500x more impressions than original tweets):
 
 Also search X for trending keywords: "remote work", "quit my job", "side hustle", "passive income", "making money online", "AI jobs". These trending topics get massive reach.
 
-PRIORITY: big accounts (50K+ followers) with fresh tweets (under 1 hour). One reply on a 100K follower account's viral tweet about jobs = more impressions than 100 original tweets.
+PROVEN VIRAL FORMULA (from Apr 6 — one reply got 10K impressions):
+A tweet by @deborah_oa asking "WHERE ARE YOU GUYS FINDING REMOTE JOBS???" got 1.3M views. Pat replied "I'd get my AI agents to find them for me daily" — 10 words, 10K impressions. Someone asked "how?" and Pat pitched his service.
 
-Skip: ads, crypto, pure memes with no hook, tweets with <100 chars (low engagement potential), tweets older than 2 hours. FRESHNESS IS CRITICAL — 80% of reply impressions happen in the first 30 minutes. Prioritize tweets under 1 hour old. Sort by newest first.
+HOW TO FIND THESE TWEETS:
+1. Search X for viral MAINSTREAM tweets (not tech): "remote jobs", "how do you make money", "side hustle", "I need a job", "work from home", "how to earn", "passive income"
+2. Filter for tweets with 100K+ views (check the view count). Skip anything under 50K views.
+3. Also check @elonmusk, @sama, @OpenAI, @AnthropicAI latest posts — millions of views each
 
-**REPLY STYLE:**
-- Maximum controversy optimised for views, followers, conversions
-- Contrarian: challenge what people believe
-- MUST be optimised for Automatyn's mission: every reply should position Pat as the person who knows how AI agents actually work for small businesses. The reader should think "this guy knows his stuff, let me check his profile"
-- Bridge to AI agent setup expertise where natural. Examples of bridges: "the setup file matters more than the model", "most bots fail because nobody wrote the rules", "the configuration is the product", "90 minutes of thinking beats 90 days of coding"
-- Do NOT pitch Automatyn directly in replies. Let the profile do the selling. The reply builds authority and curiosity.
-- Under 200 chars per reply
-- Must sound human, not like a bot
-- Space replies 5-10 minutes apart (use time.sleep(300) to time.sleep(600) between Playwright posts, vary randomly so it doesn't look bot-like)
+Skip: ads, crypto, tweets under 50K views (not worth it at our follower count), tweets older than 2 hours.
+
+**REPLY STYLE — SHORT AND PUNCHY (this is critical):**
+- 10-15 WORDS MAX. The viral reply was "I'd get my AI agents to find them for me daily". That's it. 10 words.
+- Do NOT write 200 char conversation-starters. Do NOT over-engineer. Do NOT be clever.
+- Be USEFUL. Answer the person's actual question/pain with "I'd use AI agents to do X"
+- Formula: "I'd get my AI agent to [do the thing they're struggling with]"
+- Examples: "I'd get my AI agent to find them for me daily", "My AI agent handles that at 3am", "I automated that. Takes 90 minutes to set up.", "Built an AI agent for exactly this. It runs 24/7."
+- Let people ask "how?" — then you follow up with the pitch
+- Do NOT pitch Automatyn in the first reply. Wait for them to ask.
+- Space replies 5-10 minutes apart
 
 **HOW TO POST (with auto-fix on errors):**
 

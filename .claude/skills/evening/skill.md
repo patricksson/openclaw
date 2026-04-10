@@ -49,19 +49,22 @@ PRIORITY TARGETS (replies drive 500x more impressions than original tweets):
 
 Also search X for: "remote work", "quit my job", "side hustle", "passive income", "making money online", "AI jobs".
 
-PRIORITY: big accounts (50K+ followers) with fresh tweets (under 1 hour).
+PROVEN VIRAL FORMULA: Pat replied "I'd get my AI agents to find them for me daily" (10 words) on a 1.3M view tweet about remote jobs. Got 10K impressions. Someone asked "how?" and he pitched.
 
-Skip: ads, crypto, pure memes, tweets <100 chars, tweets older than 2 hours, anyone already replied to today. FRESHNESS IS CRITICAL — prioritize tweets under 1 hour old. Sort by newest first.
+HOW TO FIND THESE TWEETS:
+1. Search X for viral MAINSTREAM tweets: "remote jobs", "how do you make money", "side hustle", "I need a job", "work from home", "passive income"
+2. Filter for 100K+ views. Skip under 50K.
+3. Also check @elonmusk, @sama, @OpenAI, @AnthropicAI latest posts
 
-**REPLY STYLE:**
-- MAXIMUM CONTROVERSY optimised for reach, views, followers, and conversions
-- Contrarian: challenge what people believe
-- MUST be optimised for Automatyn's mission: position Pat as the person who knows how AI agents actually work for small businesses
-- Bridge to AI agent expertise where natural
-- Do NOT pitch Automatyn directly. Let the profile do the selling.
-- Under 200 chars per reply
-- Sound human, not like a bot
-- Space replies 5-10 minutes apart (use time.sleep(300) to time.sleep(600), vary randomly)
+Skip: ads, crypto, tweets under 50K views, tweets older than 2 hours, anyone already replied to today.
+
+**REPLY STYLE — SHORT AND PUNCHY:**
+- 10-15 WORDS MAX. Not 200 chars. Not conversation-starters. Just raw and useful.
+- Formula: "I'd get my AI agent to [do the thing they're struggling with]"
+- Examples: "I'd get my AI agent to find them for me daily", "My AI agent handles that at 3am", "I automated that. Takes 90 minutes to set up."
+- Let people ask "how?" then follow up with the pitch
+- Do NOT pitch Automatyn in the first reply
+- Space replies 5-10 minutes apart
 
 **HOW TO POST (with auto-fix on errors):**
 
