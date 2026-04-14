@@ -1,138 +1,98 @@
 ---
 name: afternoon
-description: Midday engagement run — reply to 7 tweets, check triggers, light content check
+description: Midday run — generate TikTok carousels, check triggers, post content, check stats
 user_invocable: true
 ---
 
 # Afternoon Routine
 
-Midday engagement and monitoring run. Do NOT ask for permission. Execute everything and report.
+Midday content production and monitoring. Do NOT ask for permission. Execute everything and report.
 
 ## Step 0: Recap of Last /morning
 
-Read `/home/marketingpatpat/openclaw/social-posts/session-log.md` and find the most recent `/morning` entry. Print a brief recap:
-```
-RECAP FROM LAST /morning:
-  [summary: triggers checked, content posted, TikTok carousel, replies count, viral shot, tweet]
-```
-If no morning entry exists, skip and note "No previous morning session found."
+Read `/home/marketingpatpat/openclaw/social-posts/session-log.md` and find the most recent `/morning` entry. Print a brief recap.
 
 ## Step 1: Check Content Machine Trigger
 
 The Content Machine trigger fires at 14:00 UTC daily. Use RemoteTrigger tool (load via ToolSearch) to check trigger `trig_01VCuzhEoftowx3adqtibsP5`:
 - Is it still enabled?
-- Did it fire? Check git log for new commits in `/social-posts/` since this morning
+- Did it fire? Check git log for new commits since this morning
 - If it auto-disabled, re-enable it immediately
 
-## Step 2: Scan Trending Topics + Reply to 7 Tweets
+## Step 2: Check X Account Status
 
-**TRENDING SCAN (do this BEFORE writing any replies):**
-Connect to Chrome browser via Playwright CDP on port 18800. Visit these 3 URLs and extract trending topics:
-1. https://x.com/explore/tabs/trending
-2. https://x.com/explore/tabs/news
-3. https://x.com/explore/tabs/for_you
-
-Extract top 20 trending topics. Use relevant ones as piggyback hooks in replies where there's a natural bridge to AI agents / automation / small business.
-
-**REPLY SCAN:**
-Navigate to https://x.com/home. Scroll through the feed and extract tweets.
-
-**DEDUP SYSTEM (CRITICAL):**
-Before writing ANY reply, read the reply log at `/home/marketingpatpat/openclaw/social-posts/reply-log.md`.
-- Do NOT reply to any tweet URL already in the log
-- Do NOT reply to any user you've already replied to in the last 24 hours
-- Do NOT reply to your own tweets (@patrickssons)
-- Do NOT reply to ads/promoted tweets
-- After posting each reply, IMMEDIATELY append to the log file
-- Format: `- [DATE] | @handle | status_url | first 60 chars of your reply`
-
-**REPLY SELECTION (pick 7):**
-
-PRIORITY TARGETS (replies drive 500x more impressions than original tweets):
-- TIER 1 (HIGHEST PRIORITY): Viral tweets about remote jobs, quitting 9-5, making money, side income, "I quit my job", work from home, passive income, freelancing. One reply on a trending jobs tweet got 11K impressions on Apr 6.
-- TIER 2: AI agents, chatbots, automation, AI replacing jobs, AI industry news
-- TIER 3: Small business struggles, indie hacking
-- TIER 4: "Who's building X" or "drop your link" threads
-
-Also search X for: "remote work", "quit my job", "side hustle", "passive income", "making money online", "AI jobs".
-
-PROVEN VIRAL FORMULA: Pat replied "I'd get my AI agents to find them for me daily" (10 words) on a 1.3M view tweet about remote jobs. Got 10K impressions. Someone asked "how?" and he pitched.
-
-HOW TO FIND THESE TWEETS:
-1. Search X for viral MAINSTREAM tweets: "remote jobs", "how do you make money", "side hustle", "I need a job", "work from home", "passive income"
-2. Filter for 100K+ views. Skip under 50K.
-3. Also check @elonmusk, @sama, @OpenAI, @AnthropicAI latest posts
-
-Skip: ads, crypto, tweets under 50K views, tweets older than 2 hours, anyone already replied to today.
-
-**REPLY STYLE — SHORT AND PUNCHY:**
-- 10-15 WORDS MAX. Not 200 chars. Not conversation-starters. Just raw and useful.
-- Formula: "I'd get my AI agent to [do the thing they're struggling with]"
-- Examples: "I'd get my AI agent to find them for me daily", "My AI agent handles that at 3am", "I automated that. Takes 90 minutes to set up."
-- Let people ask "how?" then follow up with the pitch
-- Do NOT pitch Automatyn in the first reply
-- Space replies 5-10 minutes apart
-
-**HOW TO POST (with auto-fix on errors):**
-
-Before ANY Playwright work, run a Chrome health check:
 ```
-ps aux | grep chrome | grep 18800
+curl -s "https://api.fxtwitter.com/patrickssons"
 ```
-If Chrome is NOT running, restart it:
-```
-/usr/bin/google-chrome-stable --remote-debugging-port=18800 --user-data-dir=/home/marketingpatpat/.openclaw/browser/openclaw/user-data --no-first-run --no-default-browser-check --disable-sync --disable-background-networking --disable-component-update --disable-features=Translate,MediaRouter --disable-session-crashed-bubble --hide-crash-restore-bubble --password-store=basic --disable-dev-shm-usage --disable-blink-features=AutomationControlled --ozone-platform=x11 about:blank &
-```
-Wait 5 seconds, then proceed.
+If 404, still suspended. Skip X steps. If user data returned, account is back.
 
-For EACH reply:
-1. Connect to Chrome via CDP: `p.chromium.connect_over_cdp("http://127.0.0.1:18800")`
-2. Navigate to tweet URL
-3. **CRITICAL SAFETY CHECK: After page loads, verify `page.url` still contains `/status/`. If URL contains `/compose/` or redirected away, SKIP immediately. Do NOT type anything.**
-4. Grant clipboard: CDP `Browser.grantPermissions` with `clipboardReadWrite`
-5. Click reply box using ONLY `[data-testid="tweetTextarea_0"]`. No generic fallbacks.
-6. Paste via clipboard + Ctrl+V
-7. Click `[data-testid="tweetButtonInline"]` to post. No generic fallbacks.
-8. Append to reply-log.md
+**IF X IS BACK:** Use X API v2 for posting. NEVER use Playwright. Set up API credentials if not done.
 
-**NEVER type into a compose box. NEVER post a new tweet when trying to reply.**
+## Step 3: Generate TikTok Carousels (2-3 per session)
 
-**ERROR RECOVERY:**
-- CDP connection fails → restart Chrome, wait 5s, retry once
-- Reply box not found → try `[role="textbox"][contenteditable="true"]`, or click `[data-testid="reply"]` first
-- Post button not found → try `button` with text "Reply" or "Post"
-- Clipboard fails → fall back to `page.keyboard.type(reply_text)`
-- Page timeout → skip tweet, move to next
-- Any unhandled exception → catch, log, skip to next tweet
-- 3 consecutive failures → stop reply batch, report error, continue other steps
+**USE LARRY-BRAIN FRAMEWORK** from /home/marketingpatpat/.openclaw/workspace/skills/larry-marketing/references/slide-structure.md
 
-## Step 3: Quick Stats Check
+**Check TikTok trending hashtags first:**
+Visit https://ads.tiktok.com/business/creativecenter/inspiration/popular/hashtag/pc/en via Playwright (read-only).
 
-Run yt-dlp to pull @realnataliana TikTok stats:
+**Hook selection — Tier 1 (Person + Conflict) performs best:**
+- Family hooks get highest views (Mum: 806, Dad: 801, Boss: 652)
+- Use a different conflict character than morning session
+- Clickbait POV title: "POV: Your therapist sees your income", "POV: Your neighbour finds out"
+
+**For each carousel:**
+1. Write hook using larry-brain Tier 1 formula
+2. Generate 6 FACELESS images using Gemini API:
+   - Key: AIzaSyAmPorlpwgAun4Ublvz0yUq4orDCqVTlQ0
+   - Model: gemini-3-pro-image-preview
+   - ALL faceless (behind, hands, overhead, over shoulder)
+   - Dark moody aesthetic matching existing TikTok videos
+3. Burn text overlays using burn_text.py at /home/marketingpatpat/openclaw-full/tiktok-marketing/generated/2026-04-08/burn_text.py
+4. Upload to Postiz and create TikTok post (content_posting_method:"UPLOAD")
+5. Caption: max 5 hashtags. Clickbait POV title.
+
+Postiz credentials:
+- Token: 3991893608a82e890e652dc586fbf227e46d37647533419980e05d3681e7fa26
+- TikTok integration: cmmzd0apq03pmp30yh70b3uti
+
+## Step 4: Check TikTok Stats
+
 ```
 yt-dlp --flat-playlist --dump-json "https://www.tiktok.com/@realnataliana"
 ```
-Report any changes since morning (new views, new likes, new followers).
+Report views, likes, top performers. Compare with morning stats.
 
-## Step 4: Report
+## Step 5: Post LinkedIn (if not posted in morning)
+
+Post 1 LinkedIn update via Postiz if morning didn't post one.
+- LinkedIn integration: cmnmbgu9r04w4so0ygvvi0ere
+
+## Step 6: Check TikTok DMs
+
+Remind Pat to check TikTok DMs for potential leads. If someone asks "is this real?" or "how does this work?", reply as Natalia (happy customer), not as the founder:
+- "Yeah! I got mine set up by this guy who does it for small businesses. Want me to send you his details?"
+
+## Step 7: Report
 
 ```
 AFTERNOON REPORT — [DATE]
-==========================
-Content Machine trigger: [status]
-Replies posted: [count + handles]
-TikTok delta: [any view/like/follower changes]
-Next actions: [run /evening later today]
+===========================
+X STATUS: [suspended/reinstated]
+TRIGGERS: Content Machine [status]
+TIKTOK: [videos, views, likes]
+  New carousels: [hooks pushed]
+  Top performer: [title + views]
+  DMs: [any new leads?]
+LINKEDIN: [posted/skipped]
 ```
 
-## Step 5: Write Session Log
+## Step 8: Write Session Log
 
-Append to `/home/marketingpatpat/openclaw/social-posts/session-log.md`:
-```
-### /afternoon — [DATE] [TIME UTC]
-- Content Machine trigger: [fired / failed / re-enabled]
-- Replies: [count] to [@handle1, @handle2, ...]
-- TikTok delta: [any changes]
-- Trending topics used: [list]
-```
-Then `git add social-posts/ && git commit -m "log: /afternoon session" && git push origin main`
+Append to `/home/marketingpatpat/openclaw/social-posts/session-log.md` and commit/push.
+
+## Content Rules (MUST follow everywhere)
+- NEVER use em dashes
+- NEVER use banned words (leverage, unlock, seamless, etc.)
+- No fake prices. Real: $400 / $800 / $1500 + $150/mo
+- NEVER use Playwright to post/reply/like on any platform with an API
+- Sound human and professional, not AI-generated

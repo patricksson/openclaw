@@ -1,215 +1,96 @@
 ---
 name: evening
-description: End-of-day run — final replies, daily stats, prep tomorrow's carousel, daily summary
+description: End-of-day run — TikTok carousels, daily stats, prep for tomorrow
 user_invocable: true
 ---
 
 # Evening Routine
 
-End-of-day wrap-up. Final engagement, stats, and prep for tomorrow. Do NOT ask for permission. Execute everything and report.
+End-of-day wrap-up. Final content, stats, and prep for tomorrow. Do NOT ask for permission. Execute everything and report.
 
 ## Step 0: Recap of Last /afternoon
 
-Read `/home/marketingpatpat/openclaw/social-posts/session-log.md` and find the most recent `/afternoon` entry. Print a brief recap:
-```
-RECAP FROM LAST /afternoon:
-  [summary: trigger status, replies count, TikTok delta, trending topics]
-```
-If no afternoon entry exists, skip and note "No previous afternoon session found."
+Read `/home/marketingpatpat/openclaw/social-posts/session-log.md` and find the most recent `/afternoon` entry. Print a brief recap.
 
-## Step 1: Scan Trending Topics + Reply to 7 Tweets
-
-**TRENDING SCAN (do this BEFORE writing any replies):**
-Connect to Chrome browser via Playwright CDP on port 18800. Visit these 3 URLs and extract trending topics:
-1. https://x.com/explore/tabs/trending
-2. https://x.com/explore/tabs/news
-3. https://x.com/explore/tabs/for_you
-
-Extract top 20 trending topics. Use relevant ones as piggyback hooks in replies where there's a natural bridge to AI agents / automation / small business.
-
-**REPLY SCAN:**
-Navigate to https://x.com/home. Scroll through the feed and extract tweets.
-
-**DEDUP SYSTEM (CRITICAL):**
-Before writing ANY reply, read the reply log at `/home/marketingpatpat/openclaw/social-posts/reply-log.md`.
-- Do NOT reply to any tweet URL already in the log
-- Do NOT reply to any user you've already replied to in the last 24 hours
-- Do NOT reply to your own tweets (@patrickssons)
-- Do NOT reply to ads/promoted tweets
-- After posting each reply, IMMEDIATELY append to the log file
-- Format: `- [DATE] | @handle | status_url | first 60 chars of your reply`
-
-**REPLY SELECTION (pick 7):**
-
-PRIORITY TARGETS (replies drive 500x more impressions than original tweets):
-- TIER 1 (HIGHEST PRIORITY): Viral tweets about remote jobs, quitting 9-5, making money, side income, "I quit my job", work from home, passive income, freelancing. One reply on a trending jobs tweet got 11K impressions on Apr 6.
-- TIER 2: AI agents, chatbots, automation, AI replacing jobs, AI industry news
-- TIER 3: Small business struggles, indie hacking
-- TIER 4: "Who's building X" or "drop your link" threads
-
-Also search X for: "remote work", "quit my job", "side hustle", "passive income", "making money online", "AI jobs".
-
-PROVEN VIRAL FORMULA: Pat replied "I'd get my AI agents to find them for me daily" (10 words) on a 1.3M view tweet about remote jobs. Got 10K impressions. Someone asked "how?" and he pitched.
-
-HOW TO FIND THESE TWEETS:
-1. Search X for viral MAINSTREAM tweets: "remote jobs", "how do you make money", "side hustle", "I need a job", "work from home", "passive income"
-2. Filter for 100K+ views. Skip under 50K.
-3. Also check @elonmusk, @sama, @OpenAI, @AnthropicAI latest posts
-
-Skip: ads, crypto, tweets under 50K views, tweets older than 2 hours, anyone already replied to today.
-
-**REPLY STYLE — SHORT AND PUNCHY:**
-- 10-15 WORDS MAX. Not 200 chars. Not conversation-starters. Just raw and useful.
-- Formula: "I'd get my AI agent to [do the thing they're struggling with]"
-- Examples: "I'd get my AI agent to find them for me daily", "My AI agent handles that at 3am", "I automated that. Takes 90 minutes to set up."
-- Let people ask "how?" then follow up with the pitch
-- Do NOT pitch Automatyn in the first reply
-- Space replies 5-10 minutes apart
-
-**HOW TO POST (with auto-fix on errors):**
-
-Before ANY Playwright work, run a Chrome health check:
-```
-ps aux | grep chrome | grep 18800
-```
-If Chrome is NOT running, restart it:
-```
-/usr/bin/google-chrome-stable --remote-debugging-port=18800 --user-data-dir=/home/marketingpatpat/.openclaw/browser/openclaw/user-data --no-first-run --no-default-browser-check --disable-sync --disable-background-networking --disable-component-update --disable-features=Translate,MediaRouter --disable-session-crashed-bubble --hide-crash-restore-bubble --password-store=basic --disable-dev-shm-usage --disable-blink-features=AutomationControlled --ozone-platform=x11 about:blank &
-```
-Wait 5 seconds, then proceed.
-
-For EACH reply:
-1. Connect to Chrome via CDP: `p.chromium.connect_over_cdp("http://127.0.0.1:18800")`
-2. Navigate to tweet URL
-3. **CRITICAL SAFETY CHECK: After page loads, verify `page.url` still contains `/status/`. If URL contains `/compose/` or redirected away, SKIP immediately. Do NOT type anything.**
-4. Grant clipboard: CDP `Browser.grantPermissions` with `clipboardReadWrite`
-5. Click reply box using ONLY `[data-testid="tweetTextarea_0"]`. No generic fallbacks.
-6. Paste via clipboard + Ctrl+V
-7. Click `[data-testid="tweetButtonInline"]` to post. No generic fallbacks.
-8. Append to reply-log.md
-
-**NEVER type into a compose box. NEVER post a new tweet when trying to reply.**
-
-**ERROR RECOVERY:**
-- CDP connection fails → restart Chrome, wait 5s, retry once
-- Reply box not found → try `[role="textbox"][contenteditable="true"]`, or click `[data-testid="reply"]` first
-- Post button not found → try `button` with text "Reply" or "Post"
-- Clipboard fails → fall back to `page.keyboard.type(reply_text)`
-- Page timeout → skip tweet, move to next
-- Any unhandled exception → catch, log, skip to next tweet
-- 3 consecutive failures → stop reply batch, report error, continue other steps
-
-## Step 2: Full Daily Stats + Monetization Tracking
-
-**X MONETIZATION PROGRESS (CRITICAL — check every evening):**
-Connect to Chrome via Playwright CDP. Navigate to https://x.com/i/account_analytics
-1. Click "3M" button to see 3-month view
-2. Screenshot and read the total impression count
-3. Also check follower count via fxtwitter: `curl -s "https://api.fxtwitter.com/patrickssons"`
-4. Report progress toward:
-   - 500 Premium followers (target)
-   - 5,000,000 impressions in 3 months (target)
-   - Daily impression rate vs required ~62,000/day
-   - Days remaining in current 3-month window
-   - Projected date to hit 5M at current rate (be honest, even if it's far away)
-
-**TikTok:**
-Run yt-dlp --flat-playlist --dump-json "https://www.tiktok.com/@realnataliana"
-Report: total videos, followers, total likes, per-video view counts.
-
-**X/Twitter:**
-Check Postiz API for all posts from today:
-```
-GET /public/v1/posts?startDate=[today]T00:00:00Z&endDate=[tomorrow]T00:00:00Z&display=week
-```
-Report: how many tweets posted, states (PUBLISHED/ERROR/QUEUE), any failures.
-
-**Blog:**
-Check git log for any new blog commits today. Report which posts went live.
-
-## Step 3: Prep Tomorrow's TikTok Carousel
-
-1. Read NEXT_HOOKS.md at `/home/marketingpatpat/.openclaw/workspace/tiktok-marketing/NEXT_HOOKS.md`
-2. Identify the next ungenerated hook
-3. Generate 6 images using gemini-3-pro-image-preview (fallback chain: gemini-3.1-flash-image-preview → imagen-4.0-ultra-generate-001 → Pollinations.ai)
-   - Key: AIzaSyAClRSDCnpG4eH-roWwpAIHeXRmk26CeG8
-   - Prompt prefix: "Shot on iPhone 15 Pro, candid unedited lifestyle photo, dim natural lighting, raw low-light iPhone photography, vertical 9:16 portrait orientation, deep cinematic shadows, moody atmosphere, no text in the image."
-4. Burn text overlays using burn_text.py (Roboto-Bold, subtle shadow, 47% from top)
-5. Upload to Postiz and push to TikTok inbox (type:"now", content_posting_method:"UPLOAD")
-6. Copy finals to gdrive for Pat to review in the morning
-7. Mark hook as GENERATED in NEXT_HOOKS.md
-
-This way Pat wakes up with a carousel already in TikTok inbox, ready to review and publish.
-
-## Step 4: Check All Triggers for Tomorrow
-
-Use RemoteTrigger tool to verify all 3 triggers are enabled:
-- Content Machine (trig_01VCuzhEoftowx3adqtibsP5)
-- Medium Writer (trig_017H6LMFdyyefNV1yRZSAZNE)
-- Blog Writer (trig_011HGMzRh9h2WENFjK5SGNfh)
-
-Re-enable any that auto-disabled. Report next fire times.
-
-## Step 5: Commit and Push Daily Logs
+## Step 1: Check X Account Status
 
 ```
-git add social-posts/
-git commit -m "content: daily log [DATE]"
-git push origin main
+curl -s "https://api.fxtwitter.com/patrickssons"
 ```
+Report if still suspended or reinstated.
 
-## Step 6: Daily Summary Report
+## Step 2: Generate TikTok Carousels (1-2 per session)
+
+**USE LARRY-BRAIN FRAMEWORK.** Same rules as morning/afternoon:
+- Tier 1 Person + Conflict hook
+- Different character than earlier sessions today
+- Clickbait POV title
+- 6 faceless images, dark moody aesthetic
+- Max 5 hashtags
+- Gemini API key: AIzaSyAmPorlpwgAun4Ublvz0yUq4orDCqVTlQ0
+- Burn text, upload to Postiz, push to TikTok inbox
+
+## Step 3: Full TikTok Analytics
+
+Run yt-dlp for @realnataliana stats. Report:
+- Total videos, views, likes
+- Per-video performance sorted by views
+- Growth since morning (views gained today)
+- Which hooks performed best today
+- Any videos trending or gaining momentum
+
+## Step 4: Daily Summary Stats
 
 ```
 DAILY SUMMARY — [DATE]
 ========================
-CONTENT PRODUCED:
-  Blog posts: [count + titles]
-  Tweets: [count standalone + count replies = total]
-  LinkedIn: [count]
-  Dev.to: [count]
-  TikTok carousels: [count generated + count posted]
-  Medium drafts: [count]
+X STATUS: [suspended/reinstated]
 
-ENGAGEMENT:
-  Total replies posted today: [count from reply-log.md for today]
-  TikTok followers: [current] (delta: [+/-])
-  TikTok total views: [current] (delta: [+/-])
+TIKTOK:
+  Total videos: [count]
+  Total views: [number] (+[today's growth])
+  Total likes: [number]
+  Top 3 today: [titles + views]
+  Carousels pushed today: [count]
 
-TRIGGERS:
-  Content Machine: [status, next fire]
-  Medium Writer: [status, next fire]
-  Blog Writer: [status, next fire]
+BLOG:
+  Total posts: [count]
+  Published today: [titles]
+  Scheduled: [upcoming]
 
-TOMORROW PREP:
-  TikTok carousel: [which hook, status]
-  Triggers: [all enabled Y/N]
+MEDIUM: [published count]
+DEV.TO: [article count, total views]
+LINKEDIN: [posted today?]
 
-MONETIZATION PROGRESS:
-  Followers: [current] / 500 Premium target
-  3M impressions: [current] / 5,000,000 target
-  Daily avg impressions: [current] / 62,000 needed
-  Projected milestone date: [at current rate]
-  Top performing tweet today: [which one + impression count if visible]
-
-PRIORITY REMINDER:
-  Two parallel goals:
-  1. Get a paying client (DMs + calls booked via automatyn.co)
-  2. Hit X monetization (500 Premium followers + 5M impressions)
-  Every reply, tweet, and viral shot serves both goals.
+TRIGGERS: [all 3 status]
 ```
+
+## Step 5: Check All Triggers for Tomorrow
+
+Check all 3 triggers. Re-enable any that auto-disabled. Report next fire times.
+
+## Step 6: Prep Tomorrow's Content
+
+- Note which TikTok hook characters haven't been used yet
+- Check if any blog posts are scheduled to publish tomorrow
+- Check if Medium 2/day limit has reset
 
 ## Step 7: Write Session Log
 
 Append to `/home/marketingpatpat/openclaw/social-posts/session-log.md`:
 ```
 ### /evening — [DATE] [TIME UTC]
-- Replies: [count] to [@handle1, @handle2, ...]
-- TikTok stats: [followers, total views, total likes]
-- X stats: [followers, 3M impressions estimate]
-- Tomorrow's carousel: [which hook, status]
-- Triggers: [all 3 status + next fire times]
-- Total replies today: [sum from all 3 sessions via reply-log.md]
-- Monetization: [followers]/500, [impressions]/5M
+- X status: [suspended/reinstated]
+- TikTok: [carousels generated, total stats]
+- Blog: [published today]
+- Triggers: [status]
+- Tomorrow prep: [notes]
 ```
 Then `git add social-posts/ && git commit -m "log: /evening session" && git push origin main`
+
+## Content Rules (MUST follow everywhere)
+- NEVER use em dashes
+- NEVER use banned words
+- No fake prices. Real: $400 / $800 / $1500 + $150/mo
+- NEVER use Playwright to post/reply/like on any platform with an API
+- Sound human and professional, not AI-generated
