@@ -196,7 +196,7 @@
                 <h3 class="text-lg font-bold mb-1">Free</h3>
                 <p class="text-zinc-500 text-sm mb-4">Try it out</p>
                 <div class="mb-6">
-                    <span class="text-4xl font-bold">$0</span>
+                    <span class="text-4xl font-bold" id="price-free">$0</span>
                     <span class="text-zinc-500">/month</span>
                 </div>
                 <div class="space-y-3 mb-8">
@@ -217,7 +217,7 @@
                 </div>
                 <p class="text-zinc-500 text-sm mb-4">Growing businesses</p>
                 <div class="mb-6">
-                    <span class="text-4xl font-bold">$39</span>
+                    <span class="text-4xl font-bold" id="price-starter">$39</span>
                     <span class="text-zinc-500">/month</span>
                 </div>
                 <div class="space-y-3 mb-8">
@@ -236,7 +236,7 @@
                 <h3 class="text-lg font-bold mb-1">Pro</h3>
                 <p class="text-zinc-500 text-sm mb-4">High volume</p>
                 <div class="mb-6">
-                    <span class="text-4xl font-bold">$99</span>
+                    <span class="text-4xl font-bold" id="price-pro">$99</span>
                     <span class="text-zinc-500">/month</span>
                 </div>
                 <div class="space-y-3 mb-8">
@@ -321,5 +321,50 @@
         </div>
         <p class="mt-4">Need a custom setup instead? <a href="https://automatyn.co/#pricing" style="color:#22d3ee;">Talk to us</a></p>
     </footer>
+    <script>
+    // Geo-based pricing
+    (async function() {
+        try {
+            const res = await fetch('https://ipapi.co/json/', { timeout: 3000 });
+            if (!res.ok) return;
+            const geo = await res.json();
+            const country = (geo.country_code || '').toUpperCase();
+
+            // Pricing by region
+            const regions = {
+                // UK
+                GB: { symbol: '£', starter: 29, pro: 79 },
+                // Europe
+                DE: { symbol: '€', starter: 34, pro: 89 },
+                FR: { symbol: '€', starter: 34, pro: 89 },
+                ES: { symbol: '€', starter: 34, pro: 89 },
+                IT: { symbol: '€', starter: 34, pro: 89 },
+                NL: { symbol: '€', starter: 34, pro: 89 },
+                BE: { symbol: '€', starter: 34, pro: 89 },
+                AT: { symbol: '€', starter: 34, pro: 89 },
+                PT: { symbol: '€', starter: 34, pro: 89 },
+                IE: { symbol: '€', starter: 34, pro: 89 },
+                SE: { symbol: '€', starter: 34, pro: 89 },
+                DK: { symbol: '€', starter: 34, pro: 89 },
+                FI: { symbol: '€', starter: 34, pro: 89 },
+                NO: { symbol: '€', starter: 34, pro: 89 },
+                PL: { symbol: '€', starter: 34, pro: 89 },
+                CH: { symbol: '€', starter: 34, pro: 89 },
+                // Australia & New Zealand
+                AU: { symbol: 'A$', starter: 59, pro: 149 },
+                NZ: { symbol: 'NZ$', starter: 59, pro: 149 },
+            };
+
+            const region = regions[country];
+            if (!region) return; // US and rest of world stay at USD
+
+            document.getElementById('price-free').textContent = region.symbol + '0';
+            document.getElementById('price-starter').textContent = region.symbol + region.starter;
+            document.getElementById('price-pro').textContent = region.symbol + region.pro;
+        } catch (e) {
+            // Silently fail, keep USD as default
+        }
+    })();
+    </script>
 </body>
 </html>
