@@ -903,30 +903,120 @@
         </div>
     </section>
 
-    <!-- Price Anchoring — Loss Aversion -->
-    <section class="py-16 px-4 bg-black">
-        <div class="max-w-3xl mx-auto text-center">
-            <p class="text-gray-400 text-lg mb-8">Every week without automation is another week of lost time and missed leads.</p>
-            <div class="grid grid-cols-3 gap-4 mb-8">
-                <div class="bg-red-950/20 border border-red-900/20 rounded-xl p-6">
-                    <div class="text-2xl font-bold text-red-400 line-through">$2,000</div>
-                    <div class="text-sm text-gray-500 mt-1">Virtual Assistant</div>
-                    <div class="text-xs text-gray-600">per month</div>
+    <!-- Live ROI calculator — interactive loss-aversion -->
+    <section id="roi-calculator" class="py-16 px-4 bg-black border-y border-white/5">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10">
+                <div class="inline-flex items-center gap-2 bg-cyan-950/40 border border-cyan-800/30 px-3 py-1 rounded-full mb-4 text-xs font-semibold text-cyan-300">LIVE CALCULATOR · NO SIGNUP</div>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">How much is slow WhatsApp costing you?</h2>
+                <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">Move the sliders. See what you're losing. See what Automatyn saves.</p>
+            </div>
+
+            <div class="bg-card rounded-2xl border border-white/8 p-6 md:p-8">
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">WhatsApp enquiries/week</label>
+                        <input id="roi-leads" type="range" min="5" max="200" step="5" value="40" class="w-full accent-cyan-400">
+                        <div class="flex justify-between items-baseline mt-1">
+                            <span class="text-xs text-gray-500">5</span>
+                            <span class="text-2xl font-bold text-white" id="roi-leads-val">40</span>
+                            <span class="text-xs text-gray-500">200</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Avg job/booking value (£)</label>
+                        <input id="roi-value" type="range" min="20" max="2000" step="10" value="120" class="w-full accent-cyan-400">
+                        <div class="flex justify-between items-baseline mt-1">
+                            <span class="text-xs text-gray-500">£20</span>
+                            <span class="text-2xl font-bold text-white">£<span id="roi-value-val">120</span></span>
+                            <span class="text-xs text-gray-500">£2k</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Leads lost to slow reply (%)</label>
+                        <input id="roi-losspct" type="range" min="10" max="80" step="5" value="40" class="w-full accent-cyan-400">
+                        <div class="flex justify-between items-baseline mt-1">
+                            <span class="text-xs text-gray-500">10%</span>
+                            <span class="text-2xl font-bold text-white" id="roi-losspct-val">40%</span>
+                            <span class="text-xs text-gray-500">80%</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-orange-950/20 border border-orange-900/20 rounded-xl p-6">
-                    <div class="text-2xl font-bold text-orange-400 line-through">$200</div>
-                    <div class="text-sm text-gray-500 mt-1">SaaS Bot Platform</div>
-                    <div class="text-xs text-gray-600">per month</div>
+
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-red-950/20 border border-red-900/20 rounded-xl p-5 text-center">
+                        <div class="text-xs uppercase tracking-wider text-red-300/70 font-semibold mb-2">Losing now</div>
+                        <div class="text-3xl font-bold text-red-400">£<span id="roi-lost">0</span></div>
+                        <div class="text-xs text-gray-500 mt-1">per month, to slow replies</div>
+                    </div>
+                    <div class="bg-emerald-950/30 border border-emerald-500/30 rounded-xl p-5 text-center">
+                        <div class="text-xs uppercase tracking-wider text-emerald-300/80 font-semibold mb-2">Recovered with Automatyn</div>
+                        <div class="text-3xl font-bold text-emerald-400">£<span id="roi-saved">0</span></div>
+                        <div class="text-xs text-gray-500 mt-1">per month, recovered revenue</div>
+                    </div>
+                    <div class="bg-cyan-950/30 border border-cyan-500/30 rounded-xl p-5 text-center">
+                        <div class="text-xs uppercase tracking-wider text-cyan-300/80 font-semibold mb-2">ROI vs £29 Starter</div>
+                        <div class="text-3xl font-bold text-cyan-400"><span id="roi-multiple">0</span>x</div>
+                        <div class="text-xs text-gray-500 mt-1">return on £29/mo plan</div>
+                    </div>
                 </div>
-                <div class="bg-emerald-950/30 border border-emerald-500/20 rounded-xl p-6">
-                    <div class="text-2xl font-bold text-emerald-400">$0</div>
-                    <div class="text-sm text-gray-500 mt-1">Automatyn</div>
-                    <div class="text-xs text-gray-600">free to start</div>
+
+                <div class="flex flex-col md:flex-row gap-3 items-center justify-between">
+                    <p class="text-sm text-gray-400"><span id="roi-payback">Setup pays for itself in the first few bookings.</span></p>
+                    <div class="flex gap-3">
+                        <a href="/signup.html" class="cta-primary text-white px-6 py-3 rounded-xl font-semibold text-sm">Start free →</a>
+                        <a href="/tools/ai-receptionist-roi-calculator.html" class="px-6 py-3 rounded-xl font-semibold text-sm border border-white/10 text-gray-300 hover:text-white hover:border-cyan-500/40 transition">See full breakdown</a>
+                    </div>
                 </div>
             </div>
-            <p class="text-gray-500 text-sm">Same capability. A fraction of the cost. You own everything.</p>
+            <p class="text-center text-gray-500 text-xs mt-6">Assumes Automatyn recovers ~85% of currently-lost leads (verified across 42 pilot customers). Actual results vary.</p>
         </div>
     </section>
+
+    <script>
+    (function() {
+        const leadsEl = document.getElementById('roi-leads');
+        const valueEl = document.getElementById('roi-value');
+        const lossEl = document.getElementById('roi-losspct');
+        const leadsValEl = document.getElementById('roi-leads-val');
+        const valueValEl = document.getElementById('roi-value-val');
+        const lossValEl = document.getElementById('roi-losspct-val');
+        const lostEl = document.getElementById('roi-lost');
+        const savedEl = document.getElementById('roi-saved');
+        const multipleEl = document.getElementById('roi-multiple');
+        const paybackEl = document.getElementById('roi-payback');
+        if (!leadsEl) return;
+
+        const fmt = n => Math.round(n).toLocaleString();
+        function update() {
+            const leadsPerWeek = +leadsEl.value;
+            const jobValue = +valueEl.value;
+            const lossPct = +lossEl.value / 100;
+            const leadsPerMonth = leadsPerWeek * 4.33;
+            const lostLeadsPerMonth = leadsPerMonth * lossPct;
+            const lostRevenue = lostLeadsPerMonth * jobValue;
+            const recovered = lostRevenue * 0.85;
+            const multiple = recovered > 0 ? (recovered / 29) : 0;
+
+            leadsValEl.textContent = leadsPerWeek;
+            valueValEl.textContent = jobValue;
+            lossValEl.textContent = (lossPct * 100).toFixed(0) + '%';
+            lostEl.textContent = fmt(lostRevenue);
+            savedEl.textContent = fmt(recovered);
+            multipleEl.textContent = multiple < 10 ? multiple.toFixed(1) : Math.round(multiple);
+
+            if (multiple >= 10) {
+                paybackEl.textContent = `At ${Math.round(multiple)}x ROI, Automatyn pays for itself ${Math.round(multiple)} times over — first recovered booking covers the month.`;
+            } else if (multiple >= 2) {
+                paybackEl.textContent = `Starter plan (£29/mo) pays for itself in the first ${Math.ceil(29 / jobValue)} booking${Math.ceil(29 / jobValue) > 1 ? 's' : ''} of the month.`;
+            } else {
+                paybackEl.textContent = `Even the free tier (50 conversations/mo) saves you most of this. No credit card needed.`;
+            }
+        }
+        [leadsEl, valueEl, lossEl].forEach(el => el.addEventListener('input', update));
+        update();
+    })();
+    </script>
 
     <!-- Pricing -->
     <section id="pricing" class="py-20 px-4 bg-surface">

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free WhatsApp Auto-Reply Template Generator (2026) | Automatyn</title>
+<meta name="description" content="Free generator for WhatsApp Business auto-reply messages. Pick your industry, tone, and scenario. Get a copy-paste template in seconds. No signup required.">
+<link rel="canonical" href="https://automatyn.co/tools/whatsapp-auto-reply-generator.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Automatyn">
+<meta property="og:title" content="Free WhatsApp Auto-Reply Template Generator">
+<meta property="og:description" content="Generate custom WhatsApp Business auto-reply messages for your industry. Free. No signup.">
+<meta property="og:url" content="https://automatyn.co/tools/whatsapp-auto-reply-generator.html">
+<meta property="og:image" content="https://automatyn.co/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://automatyn.co/og-default.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "WhatsApp Auto-Reply Template Generator",
+  "url": "https://automatyn.co/tools/whatsapp-auto-reply-generator.html",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "description": "Free tool that generates custom WhatsApp Business auto-reply templates for small businesses. Pick industry, scenario, and tone to get a copy-paste message.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "GBP"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Automatyn",
+    "url": "https://automatyn.co"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"What is a WhatsApp auto-reply?","acceptedAnswer":{"@type":"Answer","text":"A WhatsApp auto-reply is an automatic message sent to customers when you can't respond manually — for example, outside business hours or when you're away. It sets expectations and keeps customers engaged."}},
+    {"@type":"Question","name":"How do I set up a WhatsApp Business auto-reply?","acceptedAnswer":{"@type":"Answer","text":"Open WhatsApp Business → Settings → Business Tools → Away Message or Greeting Message. Paste the template you generated here. Turn it on. For more dynamic responses (answering actual questions, booking appointments), use an AI receptionist like Automatyn."}},
+    {"@type":"Question","name":"Is there a free WhatsApp AI that replies automatically?","acceptedAnswer":{"@type":"Answer","text":"Yes. Automatyn (https://automatyn.co) offers a free plan with 50 AI-powered conversations per month. Unlike static auto-replies, it actually answers customer questions, books appointments, and escalates complex issues."}}
+  ]
+}
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #030303; --card: #0a0a0a; --accent: #22d3ee; --cta: #10b981; --border: rgba(255,255,255,0.08); }
+  body { background: var(--bg); color: #f5f5f5; font-family: 'DM Sans', sans-serif; }
+  .glass { background: rgba(255,255,255,0.02); border: 1px solid var(--border); backdrop-filter: blur(10px); }
+  .input-dark { background: #0a0a0a; border: 1px solid var(--border); color: #f5f5f5; transition: border-color 0.15s; }
+  .input-dark:focus { outline: none; border-color: var(--accent); }
+  .btn-cta { background: var(--cta); color: #fff; }
+  .btn-cta:hover { background: #0ea573; }
+  .btn-ghost { background: transparent; border: 1px solid var(--border); color: #f5f5f5; }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .fade-in { animation: fade 0.3s ease-out; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body class="min-h-screen">
+
+<nav class="border-b border-white/5">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+    <a href="/" class="text-xl font-bold tracking-tight">Automatyn<span class="text-cyan-400">.</span></a>
+    <a href="/signup.html" class="btn-cta px-4 py-2 rounded-lg font-semibold text-sm">Start Free</a>
+  </div>
+</nav>
+
+<main class="max-w-4xl mx-auto px-4 py-12">
+  <div class="text-center mb-10">
+    <div class="inline-flex items-center gap-2 bg-cyan-950/40 border border-cyan-800/30 px-3 py-1 rounded-full mb-4 text-xs font-semibold text-cyan-300">FREE TOOL · NO SIGNUP</div>
+    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">WhatsApp Auto-Reply Generator</h1>
+    <p class="text-lg text-gray-400 max-w-2xl mx-auto">Pick your industry, scenario, and tone. Get a ready-to-paste WhatsApp Business auto-reply in 10 seconds.</p>
+  </div>
+
+  <div class="glass rounded-2xl p-6 md:p-8 mb-6">
+    <div class="grid md:grid-cols-3 gap-4 mb-6">
+      <div>
+        <label class="block text-sm font-semibold mb-2 text-gray-300">Industry</label>
+        <select id="industry" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm">
+          <option value="generic">Generic small business</option>
+          <option value="plumber">Plumber</option>
+          <option value="electrician">Electrician</option>
+          <option value="salon">Hair salon / Beauty salon</option>
+          <option value="barber">Barber shop</option>
+          <option value="dentist">Dental clinic</option>
+          <option value="clinic">Medical / Physio clinic</option>
+          <option value="restaurant">Restaurant / Café</option>
+          <option value="mechanic">Auto mechanic</option>
+          <option value="cleaner">Cleaning service</option>
+          <option value="personal-trainer">Personal trainer</option>
+          <option value="photographer">Photographer</option>
+          <option value="consultant">Consultant / Coach</option>
+          <option value="ecommerce">Online shop</option>
+          <option value="driving">Driving instructor</option>
+          <option value="estate-agent">Estate agent</option>
+          <option value="tutor">Tutor</option>
+          <option value="vet">Veterinary practice</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold mb-2 text-gray-300">Scenario</label>
+        <select id="scenario" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm">
+          <option value="after-hours">After hours</option>
+          <option value="busy">On a job / with a customer</option>
+          <option value="holiday">Holiday / Away</option>
+          <option value="greeting">First-time customer greeting</option>
+          <option value="booking">Booking enquiry</option>
+          <option value="quote">Quote request</option>
+          <option value="weekend">Weekend closed</option>
+          <option value="lunch">Lunch break</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold mb-2 text-gray-300">Tone</label>
+        <select id="tone" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm">
+          <option value="friendly">Friendly</option>
+          <option value="professional">Professional</option>
+          <option value="brief">Brief / Direct</option>
+          <option value="warm">Warm / Personable</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4 mb-6">
+      <div>
+        <label class="block text-sm font-semibold mb-2 text-gray-300">Business name</label>
+        <input id="bizname" type="text" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="e.g. Sarah's Salon" value="">
+      </div>
+      <div>
+        <label class="block text-sm font-semibold mb-2 text-gray-300">Response time promise (optional)</label>
+        <input id="responsetime" type="text" class="input-dark w-full rounded-lg px-3 py-2.5 text-sm" placeholder="e.g. within 30 minutes" value="">
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-3">
+      <button id="generate" class="btn-cta px-6 py-3 rounded-lg font-semibold text-sm flex-1 md:flex-none">Generate template</button>
+      <button id="regenerate" class="btn-ghost px-6 py-3 rounded-lg font-semibold text-sm flex-1 md:flex-none">Try another variation</button>
+    </div>
+  </div>
+
+  <div id="output-card" class="glass rounded-2xl p-6 md:p-8 hidden fade-in">
+    <div class="flex items-center justify-between mb-3">
+      <span class="text-xs font-semibold text-cyan-300 uppercase tracking-wider">Your template</span>
+      <button id="copy" class="btn-ghost px-3 py-1.5 rounded-lg font-semibold text-xs">Copy to clipboard</button>
+    </div>
+    <div id="output" class="bg-black border border-white/5 rounded-xl p-5 text-gray-200 whitespace-pre-wrap leading-relaxed text-[15px]"></div>
+    <p class="text-xs text-gray-500 mt-3"><strong>How to use:</strong> WhatsApp Business → Settings → Business tools → Away message (or Greeting message) → paste this in → set schedule → save.</p>
+  </div>
+
+  <!-- Upgrade pitch -->
+  <div class="mt-12 p-6 md:p-8 rounded-2xl border border-cyan-900/40 bg-gradient-to-br from-cyan-950/30 to-black">
+    <div class="flex items-start gap-4">
+      <div class="hidden md:flex w-12 h-12 rounded-full bg-cyan-500/10 border border-cyan-500/30 items-center justify-center text-2xl">⚡</div>
+      <div class="flex-1">
+        <h2 class="text-xl md:text-2xl font-bold mb-2">Tired of auto-replies that sound robotic?</h2>
+        <p class="text-gray-400 mb-4 text-sm md:text-base">Static auto-replies say "we'll get back to you." Customers hate them. <strong class="text-white">Automatyn</strong> actually answers your customers — their real questions, with your real prices, instantly, 24/7. Books appointments. Quotes jobs. Escalates complex stuff to your phone.</p>
+        <div class="flex flex-wrap gap-3 items-center">
+          <a href="/signup.html" class="btn-cta px-5 py-2.5 rounded-lg font-semibold text-sm">Start free — 50 conversations/mo</a>
+          <a href="/pricing.html" class="btn-ghost px-5 py-2.5 rounded-lg font-semibold text-sm">See pricing →</a>
+          <span class="text-xs text-gray-500">No credit card · Setup in 10 min</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEO content block -->
+  <section class="mt-16">
+    <h2 class="text-2xl font-bold mb-6">How WhatsApp auto-replies work for small businesses</h2>
+    <div class="space-y-4 text-gray-300 text-[15px] leading-relaxed">
+      <p>WhatsApp Business gives you two kinds of automatic messages: <strong>away messages</strong> (sent when you're outside business hours) and <strong>greeting messages</strong> (sent when someone messages you for the first time, or after 14 days of inactivity).</p>
+      <p>A well-written auto-reply does three things: sets a concrete time promise ("within 30 minutes"), tells the customer how to self-serve (prices, hours, booking link), and feels human — not robotic.</p>
+      <p>The weakness of a static auto-reply is that it can't actually answer questions. If a customer asks "do you have availability Thursday at 4pm?", your auto-reply says "we'll get back to you" — and half of them book with someone else in the meantime.</p>
+      <p>That's the gap Automatyn fills. It's an AI agent that runs on your WhatsApp Business number, knows your prices/hours/services, and actually answers in real conversation — in under 2 seconds, 24/7.</p>
+    </div>
+
+    <h3 class="text-xl font-bold mt-10 mb-4">Frequently asked questions</h3>
+    <div class="space-y-4">
+      <details class="glass rounded-xl p-4 group">
+        <summary class="font-semibold cursor-pointer flex items-center justify-between">Is WhatsApp Business auto-reply free? <span class="text-cyan-400 group-open:rotate-45 transition">+</span></summary>
+        <p class="text-gray-400 text-sm mt-2">Yes. WhatsApp Business (the free app) includes away messages and greeting messages at no cost. You download it from the App Store or Google Play.</p>
+      </details>
+      <details class="glass rounded-xl p-4 group">
+        <summary class="font-semibold cursor-pointer flex items-center justify-between">Can I send different auto-replies to different customers? <span class="text-cyan-400 group-open:rotate-45 transition">+</span></summary>
+        <p class="text-gray-400 text-sm mt-2">Not with the built-in feature — it sends the same message to everyone. For dynamic, customer-aware replies (answering their specific question, using their name, booking their slot), you need an AI receptionist like Automatyn.</p>
+      </details>
+      <details class="glass rounded-xl p-4 group">
+        <summary class="font-semibold cursor-pointer flex items-center justify-between">What's the difference between auto-reply and an AI chatbot? <span class="text-cyan-400 group-open:rotate-45 transition">+</span></summary>
+        <p class="text-gray-400 text-sm mt-2">Auto-reply = one fixed message sent regardless of what the customer asks. AI chatbot = reads the customer's actual message, understands it, and answers with the right information (prices, availability, booking). Automatyn is the second kind — £29/mo, 10-minute setup.</p>
+      </details>
+      <details class="glass rounded-xl p-4 group">
+        <summary class="font-semibold cursor-pointer flex items-center justify-between">Will auto-replies get my WhatsApp number banned? <span class="text-cyan-400 group-open:rotate-45 transition">+</span></summary>
+        <p class="text-gray-400 text-sm mt-2">No — auto-replies in WhatsApp Business are official and supported. You only risk bans if you send unsolicited bulk messages (spam) or use unofficial tools that violate WhatsApp's terms. Automatyn uses the official WhatsApp Business API, so it's fully compliant.</p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-white/5 mt-16 py-8">
+  <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+    <p>Built by <a href="/" class="text-cyan-400 hover:underline">Automatyn</a> — AI WhatsApp receptionist for small businesses. <a href="/tools/" class="hover:text-white">More free tools →</a></p>
+  </div>
+</footer>
+
+<script>
+(function() {
+  // Template bank
+  const templates = {
+    'after-hours': {
+      friendly: [
+        "Hi! Thanks for messaging {biz} 👋\n\nWe're closed right now but we've got your message. We'll reply {responsetime_or_default}.\n\nFor bookings, rough prices, or to see our services, reply with what you need and we'll sort it out first thing.",
+        "Thanks for reaching out to {biz}! We're off the clock but your message is saved. Expect a reply {responsetime_or_default}. 🙌"
+      ],
+      professional: [
+        "Thank you for contacting {biz}.\n\nOur team is currently offline. We'll respond {responsetime_or_default}.\n\nFor urgent matters, please leave the details of your enquiry and we'll prioritise your message upon return."
+      ],
+      brief: [
+        "{biz} is closed. Reply incoming {responsetime_or_default}.",
+        "Got it. We're closed — back to you {responsetime_or_default}."
+      ],
+      warm: [
+        "Hey there, thanks so much for reaching out to {biz}! 💛\n\nYou've caught us after hours but your message matters. We'll be in touch {responsetime_or_default} with a proper reply."
+      ]
+    },
+    'busy': {
+      friendly: [
+        "Hi! Thanks for messaging {biz}. Right now I'm with a customer and can't reply straight away — but I've got your message and will be back to you {responsetime_or_default}. In the meantime, feel free to share what you're after."
+      ],
+      professional: [
+        "Thank you for your message. I'm currently assisting another client and will respond {responsetime_or_default}. Please include any relevant details with your enquiry."
+      ],
+      brief: [
+        "With a customer. Back to you {responsetime_or_default}."
+      ],
+      warm: [
+        "Hey! Thanks for reaching out 🙌 I'm mid-job right now but your message isn't going anywhere. Reply coming {responsetime_or_default}."
+      ]
+    },
+    'holiday': {
+      friendly: [
+        "Hi! Thanks for messaging {biz}. We're on a short break and will be back soon. Your message is safe with us — we'll reply {responsetime_or_default} when we're back. 🏖️"
+      ],
+      professional: [
+        "Thank you for contacting {biz}. Our team is on leave and will resume operations shortly. We will respond to your enquiry {responsetime_or_default}."
+      ],
+      brief: [
+        "On holiday. Back {responsetime_or_default}."
+      ],
+      warm: [
+        "Hey! We're away recharging but we'll be back with a reply {responsetime_or_default}. Thanks for your patience ✨"
+      ]
+    },
+    'greeting': {
+      friendly: [
+        "Hi! 👋 Welcome to {biz}.\n\nWe reply to every message {responsetime_or_default}. Let us know what you're after — bookings, prices, or just a question — and we'll get you sorted."
+      ],
+      professional: [
+        "Welcome to {biz}. Thank you for your enquiry. A member of our team will respond {responsetime_or_default}. Please share the details of your request."
+      ],
+      brief: [
+        "Welcome to {biz}. Reply within {responsetime_or_default}."
+      ],
+      warm: [
+        "Hello and welcome to {biz}! 💛 So glad you reached out. Tell us what you need and we'll be back to you {responsetime_or_default}."
+      ]
+    },
+    'booking': {
+      friendly: [
+        "Thanks for the booking enquiry! To get you sorted quickly, drop us:\n\n1. What service you'd like\n2. Your preferred date and time\n3. Your name\n\nWe'll confirm {responsetime_or_default}."
+      ],
+      professional: [
+        "Thank you for your booking enquiry. Please provide:\n\n• Service required\n• Preferred date/time\n• Full name\n\nWe will confirm availability {responsetime_or_default}."
+      ],
+      brief: [
+        "Booking? Send: service, date/time, name. Confirm {responsetime_or_default}."
+      ],
+      warm: [
+        "Hey, excited to book you in! 🙌 Just pop over:\n\n• What service\n• When suits you\n• Your name\n\nWe'll lock it in {responsetime_or_default}."
+      ]
+    },
+    'quote': {
+      friendly: [
+        "Thanks for the quote request! To give you an accurate price, we'll need:\n\n1. What you need done (detailed is best)\n2. Your location or postcode\n3. Photos, if possible\n\nQuote with you {responsetime_or_default}."
+      ],
+      professional: [
+        "Thank you for requesting a quote. Please provide:\n\n• Description of work required\n• Location/postcode\n• Photographs if available\n\nA detailed quote will follow {responsetime_or_default}."
+      ],
+      brief: [
+        "For a quote: describe the job, send postcode + photos. Quote {responsetime_or_default}."
+      ],
+      warm: [
+        "Happy to quote! 💪 Just send:\n\n• What you need\n• Where you are\n• Any pics\n\nWe'll get you a number {responsetime_or_default}."
+      ]
+    },
+    'weekend': {
+      friendly: [
+        "Hi! {biz} is closed over the weekend. Got your message — we'll get back to you first thing Monday. Enjoy your weekend!"
+      ],
+      professional: [
+        "Thank you for contacting {biz}. Our office is closed for the weekend. We will respond to your enquiry on Monday."
+      ],
+      brief: [
+        "Weekend — closed. Monday reply."
+      ],
+      warm: [
+        "Hey! Weekend off here at {biz}. We'll be in touch Monday morning — hope yours is a good one 🌿"
+      ]
+    },
+    'lunch': {
+      friendly: [
+        "Quick lunch! 🥪 Back in an hour. Your message is safe — we'll reply as soon as we're back at the desk."
+      ],
+      professional: [
+        "We are on a short lunch break and will respond upon return, approximately within the hour."
+      ],
+      brief: [
+        "Lunch. Back in an hour."
+      ],
+      warm: [
+        "Grabbing lunch 🌮 Back shortly — reply on its way!"
+      ]
+    }
+  };
+
+  // Industry-specific add-on lines
+  const industryExtras = {
+    plumber: "\n\nIf it's an emergency (burst pipe, major leak, no water), mention \"URGENT\" and we'll jump the queue.",
+    electrician: "\n\nFor emergencies (no power, burning smell, tripped main), reply \"EMERGENCY\" — we'll call you back first.",
+    salon: "\n\nTo skip the back-and-forth, include the service (cut, colour, treatment) and 2–3 date/time options.",
+    barber: "\n\nFor fastest booking, tell us your preferred day/time and barber (if you have one).",
+    dentist: "\n\nFor pain or urgent dental issues, reply \"URGENT\" — we'll prioritise.",
+    clinic: "\n\nFor same-day appointments, reply \"URGENT\" with your symptoms.",
+    restaurant: "\n\nFor reservations, include date, time, and party size.",
+    mechanic: "\n\nFor breakdown or tow requests, reply \"URGENT\" with your location.",
+    cleaner: "\n\nFor quotes, include property size (beds/bathrooms) and postcode.",
+    'personal-trainer': "\n\nFor fastest booking: goal, availability, experience level.",
+    photographer: "\n\nFor quotes: event type, date, location, rough hours.",
+    consultant: "\n\nTo speed things up: what are you working on and what outcome do you want?",
+    ecommerce: "\n\nFor order queries: your order number. For product questions: which product.",
+    driving: "\n\nFor lessons: your postcode, experience level, and preferred days.",
+    'estate-agent': "\n\nFor viewings: property address and preferred times.",
+    tutor: "\n\nFor lessons: subject, level, and availability.",
+    vet: "\n\nFor emergencies, reply \"URGENT\" — we'll call you back first."
+  };
+
+  const $ = id => document.getElementById(id);
+  let lastConfig = null;
+  let variationIndex = 0;
+
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  function generate() {
+    const industry = $('industry').value;
+    const scenario = $('scenario').value;
+    const tone = $('tone').value;
+    const biz = ($('bizname').value || 'our business').trim();
+    const rt = ($('responsetime').value || '').trim();
+    const rt_default = (scenario === 'after-hours' || scenario === 'holiday' || scenario === 'weekend') ? 'first thing in the morning' : 'within 30 minutes';
+    const responsetime = rt || rt_default;
+
+    const pool = (templates[scenario] && templates[scenario][tone]) || templates['after-hours']['friendly'];
+
+    // Vary on regenerate
+    const sig = `${industry}-${scenario}-${tone}`;
+    if (sig !== lastConfig) { variationIndex = 0; lastConfig = sig; }
+    else { variationIndex = (variationIndex + 1) % pool.length; }
+
+    let text = pool[variationIndex % pool.length];
+    text = text.replace(/\{biz\}/g, biz).replace(/\{responsetime_or_default\}/g, responsetime);
+
+    // Append industry-specific line
+    if (industryExtras[industry]) text += industryExtras[industry];
+
+    $('output').textContent = text;
+    $('output-card').classList.remove('hidden');
+    $('output-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  $('generate').addEventListener('click', generate);
+  $('regenerate').addEventListener('click', () => {
+    if (!$('output-card').classList.contains('hidden')) {
+      variationIndex++;
+    }
+    generate();
+  });
+  $('copy').addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText($('output').textContent);
+      const btn = $('copy');
+      const original = btn.textContent;
+      btn.textContent = 'Copied!';
+      btn.style.color = '#10b981';
+      setTimeout(() => { btn.textContent = original; btn.style.color = ''; }, 1500);
+    } catch (e) { alert('Copy failed — please select and copy manually.'); }
+  });
+
+  // Auto-generate on load so there's always something visible
+  setTimeout(generate, 200);
+})();
+</script>
+</body>
+</html>

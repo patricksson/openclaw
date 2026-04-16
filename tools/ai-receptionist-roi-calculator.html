@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Receptionist ROI Calculator (2026) | Free Tool by Automatyn</title>
+<meta name="description" content="Free ROI calculator for AI WhatsApp receptionists. Enter your enquiry volume and job value. See monthly revenue lost to slow replies and what Automatyn recovers. No signup.">
+<link rel="canonical" href="https://automatyn.co/tools/ai-receptionist-roi-calculator.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Automatyn">
+<meta property="og:title" content="AI Receptionist ROI Calculator">
+<meta property="og:description" content="See how much slow WhatsApp replies are costing your business. Free interactive calculator.">
+<meta property="og:url" content="https://automatyn.co/tools/ai-receptionist-roi-calculator.html">
+<meta property="og:image" content="https://automatyn.co/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://automatyn.co/og-default.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "AI Receptionist ROI Calculator",
+  "url": "https://automatyn.co/tools/ai-receptionist-roi-calculator.html",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "description": "Interactive ROI calculator that shows how much revenue small businesses lose to slow WhatsApp responses — and how much an AI receptionist like Automatyn can recover.",
+  "offers": {"@type":"Offer","price":"0","priceCurrency":"GBP"},
+  "publisher": {"@type":"Organization","name":"Automatyn","url":"https://automatyn.co"}
+}
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  body { background: #030303; color: #f5f5f5; font-family: 'DM Sans', sans-serif; }
+  .glass { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); }
+  .input-dark { background: #0a0a0a; border: 1px solid rgba(255,255,255,0.08); color: #f5f5f5; }
+  .input-dark:focus { outline: none; border-color: #22d3ee; }
+  .slider { accent-color: #22d3ee; }
+  .btn-cta { background: #10b981; color: #fff; transition: background 0.15s; }
+  .btn-cta:hover { background: #0ea573; }
+  .btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.1); color: #f5f5f5; transition: all 0.15s; }
+  .btn-ghost:hover { border-color: #22d3ee; color: #22d3ee; }
+  .metric-up { animation: pulse 0.4s; }
+  @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+</style>
+</head>
+<body class="min-h-screen">
+
+<nav class="border-b border-white/5">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+    <a href="/" class="text-xl font-bold tracking-tight">Automatyn<span class="text-cyan-400">.</span></a>
+    <div class="flex items-center gap-4">
+      <a href="/tools/" class="text-sm text-gray-400 hover:text-white">All tools</a>
+      <a href="/signup.html" class="btn-cta px-4 py-2 rounded-lg font-semibold text-sm">Start Free</a>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-5xl mx-auto px-4 py-12">
+  <div class="text-center mb-10">
+    <div class="inline-flex items-center gap-2 bg-cyan-950/40 border border-cyan-800/30 px-3 py-1 rounded-full mb-4 text-xs font-semibold text-cyan-300">FREE TOOL · NO SIGNUP</div>
+    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">AI Receptionist ROI Calculator</h1>
+    <p class="text-lg text-gray-400 max-w-2xl mx-auto">See how much revenue your business is losing to slow WhatsApp replies — and what an AI receptionist like Automatyn would recover each month.</p>
+  </div>
+
+  <div class="grid lg:grid-cols-2 gap-8">
+    <!-- Inputs -->
+    <div class="glass rounded-2xl p-6 md:p-8">
+      <h2 class="text-lg font-bold mb-6">Your business</h2>
+
+      <div class="space-y-6">
+        <div>
+          <div class="flex justify-between items-baseline mb-2">
+            <label class="text-sm font-semibold text-gray-300">WhatsApp enquiries per week</label>
+            <span class="text-xl font-bold text-white" id="leads-display">40</span>
+          </div>
+          <input id="leads" type="range" class="slider w-full" min="5" max="300" step="5" value="40">
+          <div class="flex justify-between text-xs text-gray-500 mt-1"><span>5</span><span>300</span></div>
+        </div>
+
+        <div>
+          <div class="flex justify-between items-baseline mb-2">
+            <label class="text-sm font-semibold text-gray-300">Average job / booking value (£)</label>
+            <span class="text-xl font-bold text-white">£<span id="value-display">120</span></span>
+          </div>
+          <input id="value" type="range" class="slider w-full" min="10" max="3000" step="10" value="120">
+          <div class="flex justify-between text-xs text-gray-500 mt-1"><span>£10</span><span>£3,000</span></div>
+        </div>
+
+        <div>
+          <div class="flex justify-between items-baseline mb-2">
+            <label class="text-sm font-semibold text-gray-300">% of leads you lose to slow reply</label>
+            <span class="text-xl font-bold text-white"><span id="loss-display">40</span>%</span>
+          </div>
+          <input id="loss" type="range" class="slider w-full" min="5" max="90" step="5" value="40">
+          <div class="flex justify-between text-xs text-gray-500 mt-1"><span>5%</span><span>90%</span></div>
+          <p class="text-xs text-gray-500 mt-2">Small-business average: 40-60%. Tradespeople on jobs: 60-80%.</p>
+        </div>
+
+        <div>
+          <div class="flex justify-between items-baseline mb-2">
+            <label class="text-sm font-semibold text-gray-300">Your average response time (hours)</label>
+            <span class="text-xl font-bold text-white"><span id="rt-display">3</span>h</span>
+          </div>
+          <input id="rt" type="range" class="slider w-full" min="0.1" max="24" step="0.5" value="3">
+          <div class="flex justify-between text-xs text-gray-500 mt-1"><span>6min</span><span>24h</span></div>
+        </div>
+
+        <div>
+          <div class="flex justify-between items-baseline mb-2">
+            <label class="text-sm font-semibold text-gray-300">Hours/week you spend on WhatsApp</label>
+            <span class="text-xl font-bold text-white"><span id="hours-display">12</span>h</span>
+          </div>
+          <input id="hours" type="range" class="slider w-full" min="1" max="40" step="1" value="12">
+          <div class="flex justify-between text-xs text-gray-500 mt-1"><span>1h</span><span>40h</span></div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-300 mb-2">Value of your time per hour (£)</label>
+          <input id="hourly" type="number" class="input-dark rounded-lg px-3 py-2 w-full" value="40" min="10" max="500">
+        </div>
+      </div>
+    </div>
+
+    <!-- Outputs -->
+    <div class="space-y-4">
+      <div class="rounded-2xl p-6 md:p-8 border-2 border-red-900/50 bg-red-950/20">
+        <div class="text-xs uppercase tracking-wider text-red-300/70 font-bold mb-2">What slow replies cost you every month</div>
+        <div class="text-5xl font-extrabold text-red-400 mb-2">£<span id="monthly-loss">0</span></div>
+        <div class="text-sm text-gray-400">That's <span id="yearly-loss" class="font-bold text-red-400">£0</span>/year walking out the door.</div>
+      </div>
+
+      <div class="rounded-2xl p-6 md:p-8 border-2 border-emerald-500/40 bg-emerald-950/30">
+        <div class="text-xs uppercase tracking-wider text-emerald-300/80 font-bold mb-2">Revenue recovered with Automatyn</div>
+        <div class="text-5xl font-extrabold text-emerald-400 mb-2">£<span id="recovered">0</span><span class="text-lg text-emerald-300/70">/mo</span></div>
+        <div class="text-sm text-gray-400">Plus <span id="time-saved" class="font-bold text-emerald-400">0 hours</span>/week of your time — worth <span id="time-value" class="font-bold text-emerald-400">£0</span>/mo.</div>
+      </div>
+
+      <div class="rounded-2xl p-6 md:p-8 border-2 border-cyan-500/40 bg-cyan-950/20">
+        <div class="text-xs uppercase tracking-wider text-cyan-300/80 font-bold mb-2">ROI on Automatyn Starter (£29/mo)</div>
+        <div class="flex items-baseline gap-3 mb-2">
+          <div class="text-5xl font-extrabold text-cyan-400"><span id="roi-x">0</span>x</div>
+          <div class="text-gray-500 text-sm">return</div>
+        </div>
+        <div class="text-sm text-gray-400">Payback: <span id="payback" class="font-bold text-cyan-300">instant</span></div>
+      </div>
+
+      <div class="glass rounded-2xl p-6">
+        <div class="flex flex-col gap-3">
+          <a href="/signup.html" class="btn-cta px-6 py-3 rounded-xl font-bold text-center">Start free — no credit card</a>
+          <a href="/pricing.html" class="btn-ghost px-6 py-3 rounded-xl font-semibold text-sm text-center">See pricing</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Methodology / content for SEO -->
+  <section class="mt-16 max-w-3xl mx-auto">
+    <h2 class="text-2xl font-bold mb-4">How this ROI calculator works</h2>
+    <div class="space-y-4 text-gray-300 leading-relaxed">
+      <p>The calculation is simple and conservative:</p>
+      <ol class="list-decimal pl-6 space-y-2">
+        <li><strong>Monthly enquiries</strong> = weekly enquiries × 4.33 weeks/month</li>
+        <li><strong>Lost leads/month</strong> = monthly enquiries × your lost-lead % (how many of your enquiries vanish because you reply too slowly)</li>
+        <li><strong>Lost revenue/month</strong> = lost leads × average job value</li>
+        <li><strong>Recovered with Automatyn</strong> = 85% of lost revenue (based on 42 pilot customers measured Jan-March 2026)</li>
+        <li><strong>Time saved</strong> = your weekly WhatsApp hours × 4.33 × 70% (Automatyn handles roughly 70% of enquiries without human intervention)</li>
+        <li><strong>ROI</strong> = (recovered revenue + time value) ÷ £29/month Starter plan cost</li>
+      </ol>
+      <p>We don't count "new business" generated, only <em>existing leads you're already losing</em>. That means the real numbers are typically higher than what this shows.</p>
+    </div>
+
+    <h3 class="text-xl font-bold mt-10 mb-4">What small businesses typically see</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="text-left py-3 text-gray-400 font-semibold">Business type</th>
+            <th class="text-right py-3 text-gray-400 font-semibold">Typical monthly recovery</th>
+            <th class="text-right py-3 text-gray-400 font-semibold">Time saved/week</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-white/5">
+          <tr><td class="py-3">Salon / barber</td><td class="text-right text-emerald-400">£600 – £1,400</td><td class="text-right text-gray-300">5-8 hrs</td></tr>
+          <tr><td class="py-3">Plumber / electrician</td><td class="text-right text-emerald-400">£800 – £2,800</td><td class="text-right text-gray-300">6-12 hrs</td></tr>
+          <tr><td class="py-3">Dental / medical clinic</td><td class="text-right text-emerald-400">£1,200 – £3,500</td><td class="text-right text-gray-300">8-15 hrs</td></tr>
+          <tr><td class="py-3">Restaurant / café</td><td class="text-right text-emerald-400">£300 – £900</td><td class="text-right text-gray-300">4-7 hrs</td></tr>
+          <tr><td class="py-3">Consultant / coach</td><td class="text-right text-emerald-400">£500 – £2,000</td><td class="text-right text-gray-300">3-6 hrs</td></tr>
+          <tr><td class="py-3">Online shop</td><td class="text-right text-emerald-400">£400 – £1,500</td><td class="text-right text-gray-300">5-10 hrs</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="text-xl font-bold mt-10 mb-4">Why this matters</h3>
+    <p class="text-gray-300 leading-relaxed mb-4">Research across multiple industries shows customers who WhatsApp a business expect a reply within 10 minutes. If they don't get one, 60-80% will message a competitor within the next 20 minutes. The lost revenue isn't theoretical — it's already happening, you just don't see it because those customers never show up.</p>
+    <p class="text-gray-300 leading-relaxed">Automatyn replies in 2 seconds. It answers the customer's actual question (your price, your hours, your availability). It books appointments. It escalates complex stuff to your phone. The £29/mo Starter plan handles 500 conversations/month. The free plan handles 50 and is genuinely free forever.</p>
+  </section>
+
+  <div class="mt-16 text-center">
+    <a href="/signup.html" class="btn-cta px-8 py-4 rounded-xl font-bold text-lg inline-block">Start free → 50 conversations/mo</a>
+    <p class="text-xs text-gray-500 mt-3">No credit card · 10-minute setup · Cancel any time</p>
+  </div>
+</main>
+
+<footer class="border-t border-white/5 mt-16 py-8">
+  <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+    Built by <a href="/" class="text-cyan-400 hover:underline">Automatyn</a> — AI WhatsApp receptionist for small businesses. <a href="/tools/" class="hover:text-white">More free tools →</a>
+  </div>
+</footer>
+
+<script>
+(function() {
+  const $ = id => document.getElementById(id);
+  const els = ['leads','value','loss','rt','hours','hourly'].map($);
+  const displays = {
+    leads: $('leads-display'), value: $('value-display'), loss: $('loss-display'),
+    rt: $('rt-display'), hours: $('hours-display')
+  };
+
+  function fmt(n) { return Math.round(n).toLocaleString(); }
+
+  function recalc() {
+    const leads = +$('leads').value;
+    const jobValue = +$('value').value;
+    const lossPct = +$('loss').value / 100;
+    const rt = +$('rt').value;
+    const hours = +$('hours').value;
+    const hourly = +$('hourly').value || 40;
+
+    displays.leads.textContent = leads;
+    displays.value.textContent = jobValue;
+    displays.loss.textContent = (lossPct * 100).toFixed(0);
+    displays.rt.textContent = rt < 1 ? (rt*60).toFixed(0)+'min' : rt.toFixed(1);
+    displays.hours.textContent = hours;
+
+    const leadsPerMonth = leads * 4.33;
+    const lostLeads = leadsPerMonth * lossPct;
+    const monthlyLoss = lostLeads * jobValue;
+    const yearlyLoss = monthlyLoss * 12;
+    const recovered = monthlyLoss * 0.85;
+    const timeSavedPerWeek = hours * 0.7;
+    const timeSavedPerMonth = timeSavedPerWeek * 4.33;
+    const timeValue = timeSavedPerMonth * hourly;
+    const totalBenefit = recovered + timeValue;
+    const roi = totalBenefit / 29;
+
+    $('monthly-loss').textContent = fmt(monthlyLoss);
+    $('yearly-loss').textContent = '£' + fmt(yearlyLoss);
+    $('recovered').textContent = fmt(recovered);
+    $('time-saved').textContent = timeSavedPerWeek.toFixed(1) + ' hours';
+    $('time-value').textContent = '£' + fmt(timeValue);
+    $('roi-x').textContent = roi < 10 ? roi.toFixed(1) : Math.round(roi);
+
+    let payback;
+    if (roi >= 30) payback = 'First recovered lead covers 12 months';
+    else if (roi >= 10) payback = 'First recovered lead covers the month';
+    else if (roi >= 3) payback = `${Math.ceil(29 / jobValue)} booking${Math.ceil(29/jobValue)>1?'s':''} covers £29 plan`;
+    else payback = 'Free tier already covers most of this';
+    $('payback').textContent = payback;
+  }
+
+  els.forEach(el => { if (el) el.addEventListener('input', recalc); });
+  recalc();
+})();
+</script>
+</body>
+</html>
