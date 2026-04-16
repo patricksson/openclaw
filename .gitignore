@@ -1,0 +1,8 @@
+.mcp.json
+.env
+.env.local
+saas-api/data/
+saas-api/node_modules/
+node_modules/
+*.log
+.DS_Store
