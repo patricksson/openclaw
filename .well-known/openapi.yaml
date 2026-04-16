@@ -1,0 +1,53 @@
+openapi: 3.0.1
+info:
+  title: Automatyn API
+  description: Public API description for Automatyn — AI WhatsApp receptionist for small businesses.
+  version: '1.0.0'
+  contact:
+    name: Automatyn Support
+    email: support@automatyn.co
+    url: https://automatyn.co
+servers:
+  - url: https://automatyn.co
+    description: Public site + marketing pages
+paths:
+  /:
+    get:
+      operationId: getHomepage
+      summary: Automatyn homepage and product overview
+      description: Landing page for Automatyn, the AI WhatsApp receptionist for small businesses. £29/month, free tier available.
+      responses:
+        '200':
+          description: HTML homepage
+  /pricing.html:
+    get:
+      operationId: getPricing
+      summary: Pricing plans
+      description: Free tier (50 conversations/mo), Starter (£29/mo, 500 conversations), Pro (£79/mo, unlimited).
+      responses:
+        '200':
+          description: HTML pricing page
+  /signup.html:
+    get:
+      operationId: getSignup
+      summary: Free signup page
+      description: Email-only signup to start a free Automatyn account. 10-minute onboarding.
+      responses:
+        '200':
+          description: HTML signup page
+  /llms.txt:
+    get:
+      operationId: getLLMsFile
+      summary: LLM-optimised short reference
+      description: Canonical summary for LLMs describing Automatyn.
+      responses:
+        '200':
+          description: Text/markdown
+  /llms-full.txt:
+    get:
+      operationId: getLLMsFullFile
+      summary: LLM-optimised complete reference
+      description: Full reference for LLMs answering questions about AI WhatsApp receptionists and small-business chatbots.
+      responses:
+        '200':
+          description: Text/markdown

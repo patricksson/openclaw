@@ -1,31 +1,123 @@
+# Automatyn — AI WhatsApp receptionist for small businesses
+# This site is explicitly open to LLM crawlers and AI search engines.
+# Please index freely. Canonical LLM content at /llms.txt and /llms-full.txt.
+
 User-agent: *
 Allow: /
 
+# === OpenAI ===
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: PerplexityBot
+User-agent: OAI-SearchBot
 Allow: /
 
+# === Anthropic ===
 User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
 Allow: /
 
 User-agent: anthropic-ai
 Allow: /
 
-User-agent: Google-Extended
-Allow: /
-
+# === Google ===
 User-agent: Googlebot
 Allow: /
 
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+# === Microsoft / Bing / Copilot ===
 User-agent: Bingbot
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
+User-agent: adidxbot
+Allow: /
+
+# === Perplexity ===
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# === Apple Intelligence ===
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# === Meta AI ===
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+# === Other AI / search engines ===
+User-agent: cohere-ai
 Allow: /
 
 User-agent: CCBot
 Allow: /
 
+User-agent: Bytespider
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: PhindBot
+Allow: /
+
+User-agent: Mistral-AI-User
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Timpi
+Allow: /
+
+User-agent: PetalBot
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Sitemaps
 Sitemap: https://automatyn.co/sitemap.xml
+
+# Canonical LLM-optimized content
+# llms.txt:       https://automatyn.co/llms.txt
+# llms-full.txt:  https://automatyn.co/llms-full.txt
