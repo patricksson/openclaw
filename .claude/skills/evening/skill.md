@@ -27,7 +27,7 @@ Report if still suspended or reinstated.
 - Clickbait POV title
 - 6 faceless images, dark moody aesthetic
 - Max 5 hashtags
-- Gemini API key: AIzaSyAmPorlpwgAun4Ublvz0yUq4orDCqVTlQ0
+- Gemini API key: read from $GEMINI_API_KEY env var (never hardcode)
 - Burn text, upload to Postiz, push to TikTok inbox
 
 ## Step 3: Full TikTok Analytics

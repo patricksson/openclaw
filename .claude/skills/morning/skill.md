@@ -57,7 +57,7 @@ Visit https://ads.tiktok.com/business/creativecenter/inspiration/popular/hashtag
 1. Write a new hook using larry-brain Tier 1 formula
 2. Title must be clickbait POV style: "POV: Your dad finds out", "POV: Your mum checks your bank"
 3. Generate 6 FACELESS images using Gemini API:
-   - Key: AIzaSyAmPorlpwgAun4Ublvz0yUq4orDCqVTlQ0
+   - Key: read from $GEMINI_API_KEY env var (never hardcode)
    - Model: gemini-3-pro-image-preview
    - ALL images must be faceless (shot from behind, hands only, over shoulder, overhead flat lay)
    - Wrap every prompt with: "Shot on iPhone 15 Pro, candid unedited lifestyle photo, dim natural lighting, vertical 9:16 portrait orientation, deep cinematic shadows, moody atmosphere, no text in the image."
@@ -67,7 +67,7 @@ Visit https://ads.tiktok.com/business/creativecenter/inspiration/popular/hashtag
 6. Caption: max 5 hashtags. Include #shadowagency #aiagent #fyp + 2 relevant trending ones
 
 Postiz credentials:
-- Token: 3991893608a82e890e652dc586fbf227e46d37647533419980e05d3681e7fa26
+- Token: read from $POSTIZ_API_KEY env var (never hardcode)
 - TikTok integration: cmmzd0apq03pmp30yh70b3uti
 
 ## Step 5: Check TikTok Stats

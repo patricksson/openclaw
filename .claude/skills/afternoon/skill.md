@@ -43,7 +43,7 @@ Visit https://ads.tiktok.com/business/creativecenter/inspiration/popular/hashtag
 **For each carousel:**
 1. Write hook using larry-brain Tier 1 formula
 2. Generate 6 FACELESS images using Gemini API:
-   - Key: AIzaSyAmPorlpwgAun4Ublvz0yUq4orDCqVTlQ0
+   - Key: read from $GEMINI_API_KEY env var (never hardcode)
    - Model: gemini-3-pro-image-preview
    - ALL faceless (behind, hands, overhead, over shoulder)
    - Dark moody aesthetic matching existing TikTok videos
@@ -52,7 +52,7 @@ Visit https://ads.tiktok.com/business/creativecenter/inspiration/popular/hashtag
 5. Caption: max 5 hashtags. Clickbait POV title.
 
 Postiz credentials:
-- Token: 3991893608a82e890e652dc586fbf227e46d37647533419980e05d3681e7fa26
+- Token: read from $POSTIZ_API_KEY env var (never hardcode)
 - TikTok integration: cmmzd0apq03pmp30yh70b3uti
 
 ## Step 4: Check TikTok Stats
