@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifying your email — Automatyn</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23030303'/><text x='50' y='68' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='65' fill='%2322d3ee'>A</text></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400;500;700;800&display=swap" rel="stylesheet">
+
+    <style>
+      html { -webkit-text-size-adjust:100%; }
+      body { font-family:'DM Sans', sans-serif; background:#030303; color:#f5f5f5; -webkit-font-smoothing:antialiased; min-height:100vh; }
+      .heading { font-family:'Cabinet Grotesk', sans-serif; letter-spacing:-0.04em; }
+
+      .bg-ambient { position:relative; overflow:hidden; min-height:100vh; }
+      .bg-ambient::before { content:""; position:absolute; inset:-40%; background:
+        radial-gradient(700px 500px at 50% 30%, rgba(34,211,238,0.08), transparent 60%),
+        radial-gradient(500px 350px at 20% 80%, rgba(16,185,129,0.05), transparent 60%);
+        pointer-events:none; z-index:0; }
+
+      .glass { background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+        border:1px solid rgba(255,255,255,0.08); border-radius:20px; backdrop-filter: blur(14px);
+        box-shadow: 0 30px 80px rgba(0,0,0,0.6); }
+
+      .cta-primary { background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+        box-shadow: 0 10px 30px rgba(16,185,129,0.25); transition: transform .15s, box-shadow .2s; }
+      .cta-primary:hover { transform: translateY(-1px); box-shadow: 0 14px 36px rgba(16,185,129,0.35); }
+
+      .spin-ring { width:56px; height:56px; border:3px solid rgba(255,255,255,0.1); border-top-color:#22d3ee; border-radius:50%; animation: spin 1s linear infinite; }
+      @keyframes spin { to { transform:rotate(360deg); } }
+
+      .bounce-in { animation: bounceIn .6s cubic-bezier(.34,1.56,.64,1); }
+      @keyframes bounceIn { 0% { transform:scale(0); opacity:0 } 100% { transform:scale(1); opacity:1 } }
+
+      @media (max-width:480px){ .glass { border-radius:16px; } }
+    </style>
+</head>
+<body class="bg-ambient">
+
+<nav class="fixed top-0 w-full bg-black/90 backdrop-blur-md z-50 border-b border-white/5">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="flex justify-between items-center h-16">
+      <a href="/" class="no-underline heading text-2xl font-extrabold">Automatyn<span class="text-cyan-400">.</span></a>
+    </div>
+  </div>
+</nav>
+
+<main class="pt-28 pb-12 px-4 relative z-10 flex justify-center">
+  <div class="w-full max-w-md">
+
+    <!-- Loading state -->
+    <div id="loading-state" class="glass p-8 sm:p-10 text-center">
+      <div class="spin-ring mx-auto mb-6"></div>
+      <h1 class="heading text-2xl sm:text-3xl font-extrabold mb-2">Verifying your email…</h1>
+      <p class="text-gray-400 text-sm">One moment.</p>
+    </div>
+
+    <!-- Success -->
+    <div id="success-state" class="glass p-8 sm:p-10 text-center hidden">
+      <div class="bounce-in w-16 h-16 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mx-auto mb-5">
+        <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+      </div>
+      <h1 class="heading text-3xl font-extrabold mb-2">Email verified</h1>
+      <p class="text-gray-400 text-sm sm:text-base mb-7">Your account is ready. Let's set up your AI receptionist.</p>
+      <a id="continue-btn" href="/onboard.html" class="cta-primary inline-block w-full text-white py-3.5 rounded-xl font-semibold">Continue →</a>
+      <div class="text-xs text-gray-500 mt-3">Taking you there automatically…</div>
+    </div>
+
+    <!-- Error -->
+    <div id="error-state" class="glass p-8 sm:p-10 text-center hidden">
+      <div class="w-16 h-16 rounded-full bg-red-500/15 border border-red-500/30 flex items-center justify-center mx-auto mb-5">
+        <svg class="w-8 h-8 text-red-400" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </div>
+      <h1 class="heading text-2xl sm:text-3xl font-extrabold mb-3">Link invalid or expired</h1>
+      <p id="error-msg" class="text-gray-400 text-sm sm:text-base mb-6">This verification link didn't work. It may have expired or been used already.</p>
+      <div class="space-y-3">
+        <a href="/signup.html" class="cta-primary inline-block w-full text-white py-3 rounded-xl font-semibold">Create a new account</a>
+        <a href="/login.html" class="block w-full text-center py-3 rounded-xl border border-white/10 text-gray-300 hover:bg-white/5 font-semibold">Sign in instead</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+  const API = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:3001'
+    : 'https://api.automatyn.co';
+
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get('token');
+
+  function show(id) {
+    document.getElementById('loading-state').classList.add('hidden');
+    document.getElementById('success-state').classList.add('hidden');
+    document.getElementById('error-state').classList.add('hidden');
+    document.getElementById(id).classList.remove('hidden');
+  }
+
+  async function verify() {
+    if (!token) {
+      document.getElementById('error-msg').textContent = 'Missing verification token.';
+      show('error-state'); return;
+    }
+    try {
+      const res = await fetch(`${API}/api/auth/verify`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token })
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        document.getElementById('error-msg').textContent = data.error || 'Verification failed.';
+        show('error-state'); return;
+      }
+
+      if (data.token) localStorage.setItem('automatyn_jwt', data.token);
+      if (data.agentId) localStorage.setItem('automatyn_agent', data.agentId);
+      if (data.email) localStorage.setItem('automatyn_email', data.email);
+
+      show('success-state');
+
+      // Check if onboarding is complete (agent has businessName) — if yes go to dashboard
+      let nextUrl = '/onboard.html';
+      try {
+        const agentRes = await fetch(`${API}/api/agent/${data.agentId}`, {
+          headers: { 'Authorization': `Bearer ${data.token}` }
+        });
+        if (agentRes.ok) {
+          const agent = await agentRes.json();
+          if (agent.businessName && agent.businessName.trim().length > 0) {
+            nextUrl = '/dashboard.html';
+          }
+        }
+      } catch (e) { /* fall through */ }
+
+      document.getElementById('continue-btn').href = nextUrl;
+      setTimeout(() => { window.location.href = nextUrl; }, 1800);
+    } catch (err) {
+      document.getElementById('error-msg').textContent = 'Network error. Please try again.';
+      show('error-state');
+    }
+  }
+  verify();
+</script>
+</body>
+</html>

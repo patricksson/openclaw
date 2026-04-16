@@ -2,511 +2,948 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23030303'/><text x='50' y='68' text-anchor='middle' font-family='sans-serif' font-weight='800' font-size='65' fill='%2322d3ee'>A</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Automatyn</title>
+    <meta name="robots" content="noindex">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Polar.sh checkout via API -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400;500;700;800&display=swap" rel="stylesheet">
 
     <style>
-        *, body, p, span, li, td, th, input, button, a, label, summary, details, select, textarea, option {
-            font-family: 'DM Sans', sans-serif !important;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Cabinet Grotesk', 'DM Sans', sans-serif !important;
-        }
-
+        * { font-family: 'DM Sans', sans-serif; }
+        h1, h2, h3 { font-family: 'Cabinet Grotesk', 'DM Sans', sans-serif; letter-spacing: -0.02em; }
         :root {
             --accent: #22d3ee;
-            --accent-dim: #0e7490;
-            --accent-glow: rgba(34, 211, 238, 0.2);
-            --cta-green: #10b981;
-            --cta-green-glow: rgba(16, 185, 129, 0.4);
             --bg-dark: #030303;
-            --bg-card: #0a0a0a;
-            --bg-surface: #0f0f0f;
-            --border-subtle: rgba(255, 255, 255, 0.06);
-            --border-hover: rgba(34, 211, 238, 0.25);
-            --text-primary: #f5f5f5;
-            --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
+            --bg-card: #0a0a0c;
+            --bg-elevated: #0f0f12;
+            --cta-green: #10b981;
+            --border: rgba(255,255,255,0.06);
+            --border-hover: rgba(255,255,255,0.12);
         }
+        html, body { background: var(--bg-dark); color: #ffffff; }
 
         body {
-            background: var(--bg-dark);
-            color: var(--text-primary);
+            background:
+                radial-gradient(ellipse 900px 500px at 20% -5%, rgba(34, 211, 238, 0.05), transparent 55%),
+                radial-gradient(ellipse 700px 400px at 95% 100%, rgba(16, 185, 129, 0.04), transparent 60%),
+                #030303;
+            min-height: 100vh;
         }
 
-        /* Grain texture overlay */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 50;
-            opacity: 0.4;
+        /* ============ LAYOUT ============ */
+        .shell {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            min-height: 100vh;
         }
 
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 1rem;
-            padding: 2rem;
-            transition: border-color 0.2s;
+        /* ============ SIDEBAR ============ */
+        .sidebar {
+            background: rgba(10,10,12,0.6);
+            border-right: 1px solid var(--border);
+            padding: 1.5rem 1rem;
+            display: flex;
+            flex-direction: column;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
-        .card:hover {
-            border-color: var(--border-hover);
+        .sidebar-logo {
+            padding: 0.25rem 0.75rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1rem;
         }
-
-        .tab-btn {
-            padding: 0.6rem 1.5rem;
-            border-radius: 9999px;
-            font-weight: 600;
+        .sidebar-logo a {
+            font-family: 'Cabinet Grotesk', sans-serif !important;
+            letter-spacing: -0.04em;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+            flex: 1;
+        }
+        .nav-section {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #52525b;
+            padding: 0.75rem 0.75rem 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .nav-section:first-child { margin-top: 0; }
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0.75rem;
+            border-radius: 0.6rem;
             font-size: 0.9rem;
+            font-weight: 500;
+            color: #a1a1aa;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.18s ease;
+            border: none;
             background: transparent;
-            border: 1px solid var(--border-subtle);
-            color: var(--text-secondary);
+            width: 100%;
+            text-align: left;
+            font-family: 'DM Sans', sans-serif;
         }
-        .tab-btn.active {
-            background: rgba(34, 211, 238, 0.1);
-            border-color: rgba(34, 211, 238, 0.4);
+        .nav-item:hover {
+            background: rgba(255,255,255,0.03);
+            color: #ffffff;
+        }
+        .nav-item.active {
+            background: linear-gradient(180deg, rgba(34, 211, 238, 0.12) 0%, rgba(34, 211, 238, 0.04) 100%);
+            color: var(--accent);
+            box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.2) inset;
+        }
+        .nav-item .icon {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav-badge {
+            margin-left: auto;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.1rem 0.45rem;
+            border-radius: 9999px;
+            background: rgba(34, 211, 238, 0.15);
+            color: var(--accent);
+            letter-spacing: 0.04em;
+        }
+
+        .sidebar-footer {
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+        }
+        .biz-pill {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.6rem 0.75rem;
+            border-radius: 0.6rem;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+        }
+        .biz-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #22d3ee, #10b981);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #030303;
+            flex-shrink: 0;
+        }
+        .biz-info { flex: 1; min-width: 0; }
+        .biz-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #ffffff;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .biz-status {
+            font-size: 0.7rem;
+            color: #71717a;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* ============ MAIN ============ */
+        .main {
+            padding: 2rem 2.5rem 4rem;
+            min-width: 0;
+        }
+        @media (max-width: 900px) {
+            .shell { grid-template-columns: 1fr; }
+            .sidebar {
+                position: sticky;
+                top: 0;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                padding: 0.75rem 1rem;
+                background: rgba(10,10,10,0.95);
+                backdrop-filter: blur(12px);
+                z-index: 40;
+            }
+            .sidebar-nav {
+                flex-direction: row;
+                overflow-x: auto;
+                gap: 0.25rem;
+                padding-bottom: 4px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            .sidebar-nav::-webkit-scrollbar { display: none; }
+            .sidebar-footer { display: none; }
+            .nav-section { display: none; }
+            .nav-item { white-space: nowrap; flex-shrink: 0; padding: 0.55rem 0.9rem; }
+            .nav-item svg { width: 16px; height: 16px; }
+            .main { padding: 1.25rem 1rem 4rem; }
+            .sidebar-logo { border-bottom: none; padding-bottom: 0.5rem; margin-bottom: 0.5rem; }
+        }
+        @media (max-width: 640px) {
+            .page-title { font-size: 1.5rem; }
+            .main { padding: 1rem 0.875rem 4rem; }
+        }
+
+        /* ============ PAGE HEADER ============ */
+        .page-header { margin-bottom: 2rem; }
+        .page-eyebrow {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.4rem;
+        }
+        .page-title {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            font-family: 'Cabinet Grotesk', sans-serif;
+        }
+        .page-subtitle {
+            color: #a1a1aa;
+            font-size: 0.95rem;
+            margin-top: 0.4rem;
+        }
+
+        /* ============ HERO METRIC CARD ============ */
+        .hero-card {
+            background: linear-gradient(180deg, rgba(18,18,20,0.85) 0%, rgba(10,10,12,0.85) 100%);
+            border: 1px solid var(--border);
+            border-radius: 1.25rem;
+            padding: 2rem 2.25rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(34,211,238,0.3), transparent);
+        }
+        .hero-filters {
+            display: inline-flex;
+            gap: 0.25rem;
+            padding: 0.25rem;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+            border-radius: 9999px;
+            margin-bottom: 1.25rem;
+        }
+        .filter-pill {
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #71717a;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .filter-pill.active {
+            background: rgba(34, 211, 238, 0.12);
             color: var(--accent);
         }
-        .tab-btn:hover { border-color: rgba(255,255,255,0.3); }
+        .hero-label {
+            font-size: 0.8rem;
+            color: #a1a1aa;
+            margin-bottom: 0.4rem;
+        }
+        .hero-number {
+            font-size: 3.25rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            font-family: 'Cabinet Grotesk', sans-serif;
+            line-height: 1;
+        }
+        .hero-delta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-left: 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.2rem 0.55rem;
+            border-radius: 9999px;
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            vertical-align: middle;
+        }
 
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        /* Mini chart */
+        .mini-chart {
+            height: 90px;
+            width: 100%;
+            margin-top: 1.5rem;
+            position: relative;
+        }
 
+        /* ============ CARD ============ */
+        .card {
+            background: linear-gradient(180deg, rgba(18,18,20,0.7) 0%, rgba(10,10,12,0.7) 100%);
+            border: 1px solid var(--border);
+            border-radius: 1.25rem;
+            padding: 1.75rem;
+            position: relative;
+            transition: border-color 0.3s ease;
+        }
+        .card:hover { border-color: var(--border-hover); }
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+        .card-subtitle {
+            color: #a1a1aa;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Stat tile */
+        .stat-tile {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+            border-radius: 0.875rem;
+            padding: 1.1rem 1.25rem;
+        }
+        .stat-tile-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #71717a;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        .stat-tile-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            font-family: 'Cabinet Grotesk', sans-serif;
+        }
+
+        /* Form inputs */
         .form-input {
             width: 100%;
-            padding: 0.75rem 1rem;
-            background: rgba(0,0,0,0.5);
-            border: 1px solid var(--border-subtle);
-            border-radius: 0.75rem;
+            padding: 0.8rem 1rem;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+            border-radius: 0.65rem;
             color: #ffffff;
-            font-size: 1rem;
-            transition: border-color 0.2s;
+            font-size: 0.925rem;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.2s ease;
         }
+        .form-input:hover { border-color: var(--border-hover); }
         .form-input:focus {
             outline: none;
             border-color: rgba(34, 211, 238, 0.5);
+            box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.08);
+            background: rgba(0,0,0,0.5);
         }
-        .form-input::placeholder { color: var(--text-muted); }
-        textarea.form-input { min-height: 80px; resize: vertical; }
-        select.form-input { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2371717a' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
-        select.form-input option { background: #0a0a0a; color: #ffffff; }
-
+        .form-input::placeholder { color: #52525b; }
+        textarea.form-input { min-height: 90px; resize: vertical; line-height: 1.6; }
         .form-label {
             display: block;
             font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            color: var(--text-primary);
+            margin-bottom: 0.45rem;
+            font-size: 0.825rem;
+            color: #e4e4e7;
         }
 
+        /* Buttons */
         .cta-button {
-            background: linear-gradient(135deg, #059669 0%, #10b981 50%, #059669 100%);
-            background-size: 200% 200%;
+            background: linear-gradient(180deg, #10b981 0%, #059669 100%);
             color: #ffffff;
-            padding: 0.75rem 2rem;
+            padding: 0.8rem 1.75rem;
             border-radius: 9999px;
             font-weight: 700;
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            border: none;
             cursor: pointer;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 20px var(--cta-green-glow), 0 0 40px rgba(16, 185, 129, 0.1);
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            font-family: 'DM Sans', sans-serif;
+            box-shadow:
+                0 1px 0 rgba(255,255,255,0.15) inset,
+                0 8px 24px -8px rgba(16, 185, 129, 0.45);
         }
         .cta-button:hover {
-            box-shadow: 0 6px 30px rgba(16, 185, 129, 0.6), 0 0 60px rgba(16, 185, 129, 0.2);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
+            box-shadow:
+                0 1px 0 rgba(255,255,255,0.15) inset,
+                0 12px 28px -8px rgba(16, 185, 129, 0.6);
         }
-        .cta-button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-secondary);
-            padding: 0.75rem 2rem;
+        .cta-button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .ghost-button {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            color: #e4e4e7;
+            padding: 0.65rem 1.25rem;
             border-radius: 9999px;
             font-weight: 600;
-            border: 1px solid var(--border-subtle);
+            font-size: 0.85rem;
             cursor: pointer;
-            font-size: 0.95rem;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+            font-family: 'DM Sans', sans-serif;
         }
-        .btn-secondary:hover { border-color: rgba(255,255,255,0.3); color: var(--text-primary); }
+        .ghost-button:hover { border-color: var(--border-hover); background: rgba(255,255,255,0.05); }
 
-        .status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-        .status-dot.connected { background: #10b981; }
-        .status-dot.disconnected { background: #ef4444; }
-        .status-dot.pending { background: #f59e0b; }
+        /* Status dot */
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .status-dot.connected { background: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,0.2); }
+        .status-dot.disconnected { background: #ef4444; box-shadow: 0 0 0 3px rgba(239,68,68,0.2); }
+        .status-dot.pending { background: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.2); animation: dotPulse 2s ease-in-out infinite; }
+        @keyframes dotPulse {
+            0%,100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
 
-        .usage-bar-bg { background: rgba(255,255,255,0.06); border-radius: 9999px; height: 8px; overflow: hidden; }
-        .usage-bar { background: var(--accent); height: 100%; border-radius: 9999px; transition: width 0.3s; }
-        .usage-bar.warning { background: #f59e0b; }
-        .usage-bar.danger { background: #ef4444; }
+        /* Usage bar */
+        .usage-bar-bg {
+            background: rgba(255,255,255,0.05);
+            border-radius: 9999px;
+            height: 8px;
+            overflow: hidden;
+        }
+        .usage-bar {
+            background: linear-gradient(90deg, #22d3ee 0%, #06b6d4 100%);
+            height: 100%;
+            border-radius: 9999px;
+            transition: width 0.6s ease;
+        }
+        .usage-bar.warning { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+        .usage-bar.danger { background: linear-gradient(90deg, #f87171, #ef4444); }
 
+        /* Toast */
         .save-toast {
-            position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
-            background: var(--cta-green); color: white; padding: 0.75rem 2rem;
-            border-radius: 9999px; font-weight: 600; font-size: 0.9rem;
-            opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 100;
-        }
-        .save-toast.visible { opacity: 1; }
-
-        .qr-placeholder {
-            width: 280px; height: 280px; background: rgba(255,255,255,0.03);
-            border: 2px dashed var(--border-subtle); border-radius: 1rem;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto;
-        }
-
-        /* Step indicator */
-        .step-dots { display: flex; gap: 0.75rem; justify-content: center; margin-bottom: 2rem; }
-        .step-dot {
-            width: 10px; height: 10px; border-radius: 50%;
-            background: rgba(255,255,255,0.1); transition: all 0.3s;
-        }
-        .step-dot.active { background: var(--accent); box-shadow: 0 0 12px var(--accent-glow); }
-        .step-dot.completed { background: var(--cta-green); }
-
-        /* Wizard transitions */
-        .wizard-step { display: none; animation: fadeIn 0.3s ease; }
-        .wizard-step.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Review summary */
-        .review-box {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-subtle);
-            border-radius: 0.75rem;
-            padding: 1.25rem;
-        }
-        .review-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-        .review-row:last-child { border-bottom: none; }
-        .review-label { color: var(--text-muted); font-size: 0.85rem; }
-        .review-value { color: var(--text-primary); font-size: 0.85rem; text-align: right; max-width: 60%; word-break: break-word; }
-
-        /* Radial glow behind wizard */
-        .wizard-glow {
-            position: relative;
-        }
-        .wizard-glow::before {
-            content: '';
-            position: absolute;
-            top: -100px; left: 50%; transform: translateX(-50%);
-            width: 600px; height: 400px;
-            background: radial-gradient(ellipse, rgba(34, 211, 238, 0.05) 0%, transparent 70%);
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: linear-gradient(180deg, #10b981, #059669);
+            color: white;
+            padding: 0.8rem 1.75rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            opacity: 0;
+            transition: all 0.3s ease;
             pointer-events: none;
+            box-shadow: 0 14px 40px -10px rgba(16, 185, 129, 0.6);
+            z-index: 70;
+        }
+        .save-toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        /* QR placeholder */
+        .qr-placeholder {
+            width: 260px;
+            height: 260px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+            border: 2px dashed rgba(255,255,255,0.1);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
         }
 
-        @media (max-width: 640px) {
-            .card { padding: 1.25rem; }
-            .cta-button, .btn-secondary { padding: 0.65rem 1.5rem; font-size: 0.9rem; }
+        /* Plan badge */
+        .plan-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            background: rgba(34, 211, 238, 0.1);
+            border: 1px solid rgba(34, 211, 238, 0.25);
+            color: #22d3ee;
         }
+
+        /* Upgrade pills */
+        .upgrade-pill {
+            padding: 0.55rem 1.1rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .upgrade-pill.starter {
+            background: linear-gradient(180deg, #10b981, #059669);
+            color: #fff;
+            box-shadow: 0 8px 20px -6px rgba(16,185,129,0.5);
+        }
+        .upgrade-pill.pro {
+            background: linear-gradient(180deg, #22d3ee, #0891b2);
+            color: #030303;
+            box-shadow: 0 8px 20px -6px rgba(34,211,238,0.5);
+        }
+        .upgrade-pill:hover { transform: translateY(-1px); }
+
+        /* Section / tab content */
+        .section { display: none; animation: sectionFade 0.35s ease; }
+        .section.active { display: block; }
+        @keyframes sectionFade {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.6;
+        }
+
+        /* Deploy status */
+        .deploy-live {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            border-radius: 9999px;
+            color: #10b981;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .deploy-live .status-dot { background: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,0.25), 0 0 12px rgba(16,185,129,0.5); }
     </style>
 </head>
 <body>
-    <!-- Nav -->
-    <nav class="border-b border-zinc-900 px-6 py-5">
-        <div class="max-w-5xl mx-auto flex justify-between items-center">
-            <a href="https://automatyn.co" class="text-2xl font-bold text-white" style="font-family: 'Cabinet Grotesk', sans-serif !important;">Automatyn<span style="color:#22d3ee;">.</span></a>
-            <div class="flex gap-4 items-center text-sm">
-                <span class="text-zinc-500" id="nav-business-name">Loading...</span>
-                <span class="status-dot pending" id="nav-status-dot"></span>
-            </div>
-        </div>
-    </nav>
-
-    <main class="px-6 py-8 max-w-3xl mx-auto">
-        <!-- Auth Error -->
-        <div class="card text-center py-12" id="auth-error" style="display: none;">
-            <h2 class="text-2xl font-bold mb-3">Access denied</h2>
-            <p class="text-zinc-400 mb-6">Your session has expired or the link is invalid.</p>
-            <a href="/saas/signup.html" class="cta-button" style="display: inline-block; text-decoration: none;">Create a New Bot</a>
-        </div>
-
-        <!-- Onboarding Wizard -->
-        <div id="onboarding-wizard" style="display: none;" class="wizard-glow">
-            <div class="text-center mb-2">
-                <h1 class="text-3xl font-bold mb-2">Set up your bot</h1>
-                <p class="text-zinc-400">Tell us about your business so your AI receptionist knows how to help your customers.</p>
+    <div class="shell">
+        <!-- ============ SIDEBAR ============ -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <a href="https://automatyn.co">Automatyn<span style="color:#22d3ee;">.</span></a>
             </div>
 
-            <div class="step-dots" id="step-dots">
-                <div class="step-dot active" data-step="1"></div>
-                <div class="step-dot" data-step="2"></div>
-                <div class="step-dot" data-step="3"></div>
-            </div>
+            <nav class="sidebar-nav" id="sidebar-nav">
+                <div class="nav-section">Workspace</div>
+                <button class="nav-item active" data-section="setup" onclick="showSection('setup', event)">
+                    <span class="icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                    </span>
+                    Setup
+                </button>
+                <button class="nav-item" data-section="leads" onclick="showSection('leads', event)">
+                    <span class="icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    </span>
+                    Leads
+                    <span class="nav-badge">SOON</span>
+                </button>
+                <button class="nav-item" data-section="settings" onclick="showSection('settings', event)">
+                    <span class="icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    </span>
+                    Bot Settings
+                </button>
+                <button class="nav-item" data-section="deploy" onclick="showSection('deploy', event)">
+                    <span class="icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+                    </span>
+                    Deploy
+                </button>
 
-            <div class="card">
-                <!-- Step 1 -->
-                <div class="wizard-step active" id="wizard-step-1">
-                    <h2 class="text-xl font-bold mb-1">About your business</h2>
-                    <p class="text-zinc-400 text-sm mb-6">The basics so your bot can introduce itself properly.</p>
+                <div class="nav-section">Account</div>
+                <button class="nav-item" data-section="usage" onclick="showSection('usage', event)">
+                    <span class="icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    </span>
+                    Usage
+                </button>
+                <button class="nav-item" data-section="billing" onclick="showSection('billing', event)">
+                    <span class="icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                    </span>
+                    Billing
+                </button>
+            </nav>
 
-                    <div class="mb-5">
-                        <label class="form-label" for="w-businessName">Business name <span class="text-red-400">*</span></label>
-                        <input type="text" id="w-businessName" class="form-input" placeholder="e.g. Bella's Hair Studio" required>
-                    </div>
-
-                    <div class="mb-5">
-                        <label class="form-label" for="w-industry">Industry <span class="text-red-400">*</span></label>
-                        <select id="w-industry" class="form-input" required>
-                            <option value="" disabled selected>Select your industry</option>
-                            <option value="Salon/Hair/Beauty">Salon / Hair / Beauty</option>
-                            <option value="Barber">Barber</option>
-                            <option value="Restaurant/Cafe">Restaurant / Cafe</option>
-                            <option value="Plumber">Plumber</option>
-                            <option value="Electrician">Electrician</option>
-                            <option value="Dentist/Dental">Dentist / Dental</option>
-                            <option value="Gym/Fitness">Gym / Fitness</option>
-                            <option value="Yoga/Pilates">Yoga / Pilates</option>
-                            <option value="Vet/Animal Care">Vet / Animal Care</option>
-                            <option value="Dog Groomer/Pet Care">Dog Groomer / Pet Care</option>
-                            <option value="Photographer">Photographer</option>
-                            <option value="Real Estate">Real Estate</option>
-                            <option value="Lawyer/Legal">Lawyer / Legal</option>
-                            <option value="Accountant/Bookkeeper">Accountant / Bookkeeper</option>
-                            <option value="Tutor/Education">Tutor / Education</option>
-                            <option value="Cleaning Service">Cleaning Service</option>
-                            <option value="Landscaper/Gardener">Landscaper / Gardener</option>
-                            <option value="Auto Mechanic">Auto Mechanic</option>
-                            <option value="Tattoo Artist">Tattoo Artist</option>
-                            <option value="Spa/Massage">Spa / Massage</option>
-                            <option value="Bakery">Bakery</option>
-                            <option value="Florist">Florist</option>
-                            <option value="Driving Instructor">Driving Instructor</option>
-                            <option value="Locksmith">Locksmith</option>
-                            <option value="Pest Control">Pest Control</option>
-                            <option value="Moving Company">Moving Company</option>
-                            <option value="Event Planner">Event Planner</option>
-                            <option value="Chiropractor">Chiropractor</option>
-                            <option value="Therapist/Counselor">Therapist / Counselor</option>
-                            <option value="Music Teacher">Music Teacher</option>
-                            <option value="Tailor/Alterations">Tailor / Alterations</option>
-                            <option value="Insurance">Insurance</option>
-                            <option value="Travel Agent">Travel Agent</option>
-                            <option value="IT Support">IT Support</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-
-                    <div class="flex justify-end mt-8">
-                        <button type="button" class="cta-button" onclick="wizardNext(1)">Next</button>
-                    </div>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="wizard-step" id="wizard-step-2">
-                    <h2 class="text-xl font-bold mb-1">Services and hours</h2>
-                    <p class="text-zinc-400 text-sm mb-6">What do you offer and when are you open? Your bot will share this with customers.</p>
-
-                    <div class="mb-5">
-                        <label class="form-label" for="w-services">Services offered <span class="text-red-400">*</span></label>
-                        <textarea id="w-services" class="form-input" placeholder="e.g. Haircuts, blowouts, balayage, keratin treatments, bridal packages" required></textarea>
-                    </div>
-
-                    <div class="mb-5">
-                        <label class="form-label" for="w-prices">Pricing details <span class="text-zinc-500 font-normal">(optional)</span></label>
-                        <textarea id="w-prices" class="form-input" placeholder="e.g. Haircut from $35, Balayage from $150, Bridal package $300"></textarea>
-                    </div>
-
-                    <div class="mb-5">
-                        <label class="form-label" for="w-hours">Business hours <span class="text-red-400">*</span></label>
-                        <textarea id="w-hours" class="form-input" placeholder="e.g. Mon-Fri 9am to 6pm, Sat 10am to 4pm, Closed Sundays" required></textarea>
-                    </div>
-
-                    <div class="flex justify-between mt-8">
-                        <button type="button" class="btn-secondary" onclick="wizardBack(2)">Back</button>
-                        <button type="button" class="cta-button" onclick="wizardNext(2)">Next</button>
-                    </div>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="wizard-step" id="wizard-step-3">
-                    <h2 class="text-xl font-bold mb-1">Final details</h2>
-                    <p class="text-zinc-400 text-sm mb-6">Almost done. Add your location and any policies you want the bot to mention.</p>
-
-                    <div class="mb-5">
-                        <label class="form-label" for="w-location">Location <span class="text-zinc-500 font-normal">(optional)</span></label>
-                        <input type="text" id="w-location" class="form-input" placeholder="e.g. 123 High Street, London SW1A 1AA">
-                    </div>
-
-                    <div class="mb-5">
-                        <label class="form-label" for="w-policies">Policies <span class="text-zinc-500 font-normal">(optional)</span></label>
-                        <textarea id="w-policies" class="form-input" placeholder="e.g. 24 hour cancellation policy, no refunds on colour services"></textarea>
-                    </div>
-
-                    <div class="review-box mt-6 mb-6">
-                        <h3 class="text-sm font-bold mb-3 text-zinc-300">Review your details</h3>
-                        <div id="review-summary"></div>
-                    </div>
-
-                    <div class="flex justify-between mt-8">
-                        <button type="button" class="btn-secondary" onclick="wizardBack(3)">Back</button>
-                        <button type="button" class="cta-button" id="wizard-submit-btn" onclick="wizardSubmit()">Create My Bot</button>
+            <div class="sidebar-footer">
+                <div class="biz-pill">
+                    <div class="biz-avatar" id="biz-avatar">A</div>
+                    <div class="biz-info">
+                        <div class="biz-name" id="nav-business-name">Loading...</div>
+                        <div class="biz-status">
+                            <span class="status-dot pending" id="nav-status-dot"></span>
+                            <span id="nav-status-text">Pending</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </aside>
 
-        <!-- Dashboard Content -->
-        <div id="dashboard-content" style="display: none;">
-            <h1 class="text-2xl font-bold mb-6" id="dashboard-title">Dashboard</h1>
-
-            <!-- Tabs -->
-            <div class="flex gap-3 mb-8 flex-wrap">
-                <button class="tab-btn active" onclick="showTab('setup', this)">Setup</button>
-                <button class="tab-btn" onclick="showTab('settings', this)">Settings</button>
-                <button class="tab-btn" onclick="showTab('usage', this)">Usage</button>
+        <!-- ============ MAIN ============ -->
+        <main class="main">
+            <!-- Auth Error -->
+            <div class="card text-center py-12" id="auth-error" style="display: none; max-width: 500px; margin: 4rem auto;">
+                <div class="text-5xl mb-4">🔒</div>
+                <h2 class="text-2xl font-bold mb-3">Access denied</h2>
+                <p class="text-zinc-400 mb-7">Your session has expired or the link is invalid.</p>
+                <a href="/signup.html" class="cta-button" style="display: inline-block; text-decoration: none;">Create a New Bot</a>
             </div>
 
-            <!-- Setup Tab -->
-            <div class="tab-content active" id="tab-setup">
-                <div class="card">
-                    <h2 class="text-xl font-bold mb-2">Connect WhatsApp</h2>
-                    <p class="text-zinc-400 mb-6">Link your WhatsApp number so your AI receptionist can respond to customers.</p>
+            <!-- Verify email banner (hidden until we know the user is unverified) -->
+            <div id="verify-banner" style="display:none; background: linear-gradient(90deg, rgba(245,158,11,0.08), rgba(245,158,11,0.02)); border:1px solid rgba(245,158,11,0.25); border-radius:12px; padding:12px 16px; margin-bottom:18px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" style="flex-shrink:0;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+                <div style="flex:1; min-width:200px;">
+                    <div style="color:#f59e0b; font-weight:600; font-size:14px;">Verify your email</div>
+                    <div style="color:#a1a1aa; font-size:13px; margin-top:2px;" id="verify-banner-msg">Check your inbox for the verification link to activate your account.</div>
+                </div>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button id="resend-verify-btn" style="background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3); color:#f59e0b; padding:8px 14px; border-radius:8px; font-size:13px; font-weight:600; cursor:pointer;">Resend email</button>
+                    <button id="dismiss-verify-btn" style="background:transparent; border:none; color:#71717a; padding:8px; cursor:pointer; font-size:13px;" aria-label="Dismiss">✕</button>
+                </div>
+            </div>
 
-                    <!-- Pairing method selector -->
-                    <div id="pairing-methods">
-                        <!-- Option 1: Phone number pairing (recommended) -->
-                        <div class="mb-6 p-5 rounded-xl" style="background: var(--bg-surface); border: 1px solid var(--border-subtle);">
-                            <h3 class="text-white font-bold mb-1">Link with phone number</h3>
-                            <p class="text-zinc-500 text-sm mb-4">Enter your WhatsApp number and we'll give you a code to type into WhatsApp.</p>
-                            <div class="flex gap-3">
-                                <input type="tel" id="wa-phone" class="form-input flex-1" placeholder="e.g. 447700900000 (country code + number)">
-                                <button type="button" onclick="startPhonePairing()" class="px-5 py-2 rounded-xl font-semibold text-white text-sm" style="background: var(--cta-green); white-space: nowrap;">Get Code</button>
+            <div id="dashboard-content" style="display: none;">
+
+                <!-- ============ SETUP SECTION ============ -->
+                <section class="section active" id="section-setup">
+                    <div class="page-header">
+                        <div class="page-eyebrow">Home</div>
+                        <div class="flex items-end justify-between flex-wrap gap-3">
+                            <div>
+                                <h1 class="page-title" id="dashboard-title">Dashboard</h1>
+                                <p class="page-subtitle">Connect WhatsApp and your bot goes live.</p>
+                            </div>
+                            <div class="deploy-live" id="header-status" style="display: none;">
+                                <span class="status-dot connected"></span>
+                                <span>Bot live</span>
                             </div>
                         </div>
-
-                        <!-- Pairing code display -->
-                        <div id="pairing-code-display" style="display: none;" class="mb-6 p-6 rounded-xl text-center" style="background: var(--bg-surface); border: 1px solid rgba(16, 185, 129, 0.3);">
-                            <p class="text-zinc-400 text-sm mb-3">Enter this code in WhatsApp:</p>
-                            <div id="pairing-code" class="text-4xl font-bold text-white tracking-[0.3em] mb-4" style="font-family: 'Cabinet Grotesk', monospace !important; letter-spacing: 0.3em;"></div>
-                            <div class="text-sm text-zinc-400 space-y-1">
-                                <p>Open WhatsApp on your phone</p>
-                                <p>Go to <strong class="text-white">Settings > Linked Devices > Link a Device</strong></p>
-                                <p>Tap <strong class="text-white">"Link with phone number instead"</strong></p>
-                                <p>Enter the code above</p>
-                            </div>
-                            <div id="pairing-status" class="mt-4 text-sm text-cyan-400">Waiting for you to enter the code...</div>
-                        </div>
-
-                        <!-- Option 2: QR code -->
-                        <div class="mb-6">
-                            <button type="button" onclick="startQrPairing()" class="text-cyan-400 hover:text-cyan-300 text-sm font-medium">Or connect with QR code instead</button>
-                        </div>
-
-                        <!-- QR code display -->
-                        <div id="qr-display" style="display: none;" class="mb-6 p-6 rounded-xl text-center" style="background: var(--bg-surface); border: 1px solid var(--border-subtle);">
-                            <div id="qr-image"></div>
-                            <p class="text-zinc-400 text-sm mt-3">Scan with WhatsApp > Linked Devices > Link a Device</p>
-                            <div id="qr-status" class="mt-2 text-sm text-cyan-400">Waiting for scan...</div>
-                        </div>
                     </div>
 
-                    <!-- Connected status -->
-                    <div id="connected-status" style="display: none;" class="p-5 rounded-xl" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3);">
-                        <div class="flex items-center gap-3">
-                            <span class="status-dot connected"></span>
-                            <span class="text-green-400 font-bold">WhatsApp Connected</span>
+                    <!-- Hero metric -->
+                    <div class="hero-card">
+                        <div class="hero-filters">
+                            <button class="filter-pill active">This month</button>
+                            <button class="filter-pill">This year</button>
                         </div>
-                        <p class="text-zinc-400 text-sm mt-2">Your AI receptionist is live and responding to messages.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Settings Tab -->
-            <div class="tab-content" id="tab-settings">
-                <div class="card">
-                    <h2 class="text-xl font-bold mb-6">Edit Bot Details</h2>
-                    <p class="text-zinc-400 text-sm mb-6">Changes take effect immediately. Your bot will use the updated information for all new conversations.</p>
-
-                    <form id="settings-form">
-                        <div class="mb-5">
-                            <label class="form-label" for="s-businessName">Business name</label>
-                            <input type="text" id="s-businessName" class="form-input">
-                        </div>
-                        <div class="mb-5">
-                            <label class="form-label" for="s-industry">Industry</label>
-                            <input type="text" id="s-industry" class="form-input" disabled style="opacity: 0.5;">
-                        </div>
-                        <div class="mb-5">
-                            <label class="form-label" for="s-services">Services</label>
-                            <textarea id="s-services" class="form-input"></textarea>
-                        </div>
-                        <div class="mb-5">
-                            <label class="form-label" for="s-prices">Pricing</label>
-                            <textarea id="s-prices" class="form-input"></textarea>
-                        </div>
-                        <div class="mb-5">
-                            <label class="form-label" for="s-hours">Business hours</label>
-                            <textarea id="s-hours" class="form-input"></textarea>
-                        </div>
-                        <div class="mb-5">
-                            <label class="form-label" for="s-location">Location</label>
-                            <input type="text" id="s-location" class="form-input">
-                        </div>
-                        <div class="mb-5">
-                            <label class="form-label" for="s-policies">Policies</label>
-                            <textarea id="s-policies" class="form-input"></textarea>
-                        </div>
-
-                        <button type="submit" class="cta-button" id="save-btn">Save Changes</button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Usage Tab -->
-            <div class="tab-content" id="tab-usage">
-                <div class="card mb-6">
-                    <h2 class="text-xl font-bold mb-4">This Month</h2>
-                    <div class="flex justify-between items-end mb-2">
-                        <span class="text-zinc-400 text-sm">Conversations</span>
-                        <span class="text-sm"><span id="usage-count" class="text-white font-bold">0</span> / <span id="usage-limit" class="text-zinc-400">50</span></span>
-                    </div>
-                    <div class="usage-bar-bg">
-                        <div class="usage-bar" id="usage-bar" style="width: 0%"></div>
-                    </div>
-                    <p class="text-zinc-500 text-xs mt-2">Resets on <span id="usage-reset">the 1st of next month</span></p>
-                </div>
-
-                <div class="card">
-                    <h2 class="text-xl font-bold mb-4">Your Plan</h2>
-                    <div class="flex justify-between items-center flex-wrap gap-4">
+                        <div class="hero-label">Conversations handled</div>
                         <div>
-                            <p class="text-lg font-bold" id="plan-name">Free</p>
-                            <p class="text-zinc-400 text-sm" id="plan-detail">50 conversations/month</p>
+                            <span class="hero-number" id="hero-count">0</span>
+                            <span class="hero-delta" id="hero-delta">
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+                                New
+                            </span>
                         </div>
-                        <div id="upgrade-btn" class="flex gap-2 flex-wrap">
-                            <button onclick="openCheckout('starter')" class="tab-btn" style="background:#10b981;color:#fff;border:none;">Starter $39/mo</button>
-                            <button onclick="openCheckout('pro')" class="tab-btn" style="background:#22d3ee;color:#030303;border:none;">Pro $99/mo</button>
+
+                        <!-- Sparkline chart -->
+                        <svg class="mini-chart" id="hero-sparkline" viewBox="0 0 400 90" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.35"/>
+                                    <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+                                </linearGradient>
+                            </defs>
+                            <path id="spark-area" d="M0,80 L400,80 L400,90 L0,90 Z" fill="url(#sparkFill)"/>
+                            <path id="spark-line" d="M0,80 L400,80" stroke="#22d3ee" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+
+                    <!-- Connect WhatsApp card -->
+                    <div class="card">
+                        <div class="flex items-start justify-between gap-4 mb-6 flex-wrap">
+                            <div>
+                                <h2 class="card-title">Connect WhatsApp</h2>
+                                <p class="card-subtitle mb-0">Scan the QR with your WhatsApp Business app to bring the bot online.</p>
+                            </div>
+                        </div>
+
+                        <div id="qr-container" class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="qr-placeholder" id="qr-placeholder">
+                                <div class="text-center relative z-10">
+                                    <div class="text-4xl mb-3">📱</div>
+                                    <p class="text-zinc-500 text-sm">QR code loading...</p>
+                                </div>
+                            </div>
+
+                            <div id="qr-instructions" class="flex-1 min-w-0">
+                                <p class="text-sm font-bold text-white mb-3">How to connect</p>
+                                <ol class="text-sm text-zinc-400 space-y-2 list-decimal pl-5">
+                                    <li>Open WhatsApp Business on your phone</li>
+                                    <li>Go to <strong class="text-zinc-200">Settings → Linked Devices</strong></li>
+                                    <li>Tap <strong class="text-zinc-200">Link a Device</strong></li>
+                                    <li>Point your phone at the QR code</li>
+                                </ol>
+                                <p class="text-xs text-zinc-500 mt-4">Your bot stays connected even after editing settings. You only need to scan again if you switch phone numbers.</p>
+                            </div>
+                        </div>
+
+                        <div id="connected-status" style="display: none;" class="mt-6 p-5 rounded-xl" >
+                            <div class="flex items-center gap-3" style="background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(16,185,129,0.04)); border: 1px solid rgba(16,185,129,0.25); border-radius: 0.875rem; padding: 1rem 1.25rem;">
+                                <span class="status-dot connected"></span>
+                                <div>
+                                    <div class="text-green-400 font-bold">WhatsApp Connected</div>
+                                    <div class="text-zinc-400 text-sm">Your bot is live and responding to messages.</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </main>
+                </section>
 
-    <div class="save-toast" id="save-toast">Changes saved</div>
+                <!-- ============ LEADS SECTION ============ -->
+                <section class="section" id="section-leads">
+                    <div class="page-header">
+                        <div class="page-eyebrow">Inbox</div>
+                        <h1 class="page-title">Leads</h1>
+                        <p class="page-subtitle">Every customer your bot talked to, in one place.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="empty-state">
+                            <div class="empty-icon">💬</div>
+                            <h3 class="text-xl font-bold mb-2">Leads view is coming soon</h3>
+                            <p class="text-zinc-400 max-w-md mx-auto mb-6">We're rolling out a unified inbox of every customer conversation your bot handles. Phone number, name, last message, and lead status — all searchable.</p>
+                            <div class="inline-flex gap-2 text-xs text-zinc-500 items-center">
+                                <span class="status-dot pending"></span>
+                                In development
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============ SETTINGS SECTION ============ -->
+                <section class="section" id="section-settings">
+                    <div class="page-header">
+                        <div class="page-eyebrow">Configuration</div>
+                        <h1 class="page-title">Bot Settings</h1>
+                        <p class="page-subtitle">Change how your bot answers. Saves apply to every new conversation instantly.</p>
+                    </div>
+
+                    <div class="card">
+                        <form id="settings-form">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="form-label" for="s-businessName">Business name</label>
+                                    <input type="text" id="s-businessName" class="form-input">
+                                </div>
+                                <div>
+                                    <label class="form-label" for="s-industry">Industry</label>
+                                    <input type="text" id="s-industry" class="form-input" disabled style="opacity: 0.5;">
+                                </div>
+                            </div>
+
+                            <div class="mt-5">
+                                <label class="form-label" for="s-services">Services</label>
+                                <textarea id="s-services" class="form-input"></textarea>
+                            </div>
+                            <div class="mt-5">
+                                <label class="form-label" for="s-prices">Pricing</label>
+                                <textarea id="s-prices" class="form-input"></textarea>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
+                                <div>
+                                    <label class="form-label" for="s-hours">Business hours</label>
+                                    <textarea id="s-hours" class="form-input" style="min-height: 90px;"></textarea>
+                                </div>
+                                <div>
+                                    <label class="form-label" for="s-location">Location</label>
+                                    <textarea id="s-location" class="form-input" style="min-height: 90px;"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="mt-5 mb-7">
+                                <label class="form-label" for="s-policies">Policies</label>
+                                <textarea id="s-policies" class="form-input"></textarea>
+                            </div>
+
+                            <div class="flex items-center gap-3">
+                                <button type="submit" class="cta-button" id="save-btn">Save Changes</button>
+                                <span class="text-xs text-zinc-500" id="last-updated-inline"></span>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- ============ DEPLOY SECTION ============ -->
+                <section class="section" id="section-deploy">
+                    <div class="page-header">
+                        <div class="page-eyebrow">Status</div>
+                        <h1 class="page-title">Deploy</h1>
+                        <p class="page-subtitle">Your bot updates automatically when you save settings. No redeploy needed.</p>
+                    </div>
+
+                    <div class="card mb-5">
+                        <div class="flex items-center justify-between flex-wrap gap-4">
+                            <div>
+                                <div class="card-title mb-1">Current status</div>
+                                <p class="text-zinc-400 text-sm mb-0">Your bot is using the latest version of your settings.</p>
+                            </div>
+                            <div class="deploy-live">
+                                <span class="status-dot connected"></span>
+                                <span>Changes are live</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="stat-tile">
+                            <div class="stat-tile-label">Last updated</div>
+                            <div class="stat-tile-value" id="last-updated">Just now</div>
+                        </div>
+                        <div class="stat-tile">
+                            <div class="stat-tile-label">WhatsApp status</div>
+                            <div class="stat-tile-value flex items-center gap-2" id="deploy-wa-status">
+                                <span class="status-dot pending"></span>
+                                <span>Pending</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============ USAGE SECTION ============ -->
+                <section class="section" id="section-usage">
+                    <div class="page-header">
+                        <div class="page-eyebrow">Analytics</div>
+                        <h1 class="page-title">Usage</h1>
+                        <p class="page-subtitle">How close you are to your monthly plan limit.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
+                        <div class="stat-tile">
+                            <div class="stat-tile-label">Conversations</div>
+                            <div class="stat-tile-value"><span id="usage-count">0</span></div>
+                        </div>
+                        <div class="stat-tile">
+                            <div class="stat-tile-label">Plan limit</div>
+                            <div class="stat-tile-value"><span id="usage-limit">50</span></div>
+                        </div>
+                        <div class="stat-tile">
+                            <div class="stat-tile-label">Resets</div>
+                            <div class="stat-tile-value text-lg" id="usage-reset" style="font-size: 1.1rem;">—</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="card-title mb-0">This month's progress</h2>
+                            <span class="plan-badge" id="plan-name">Free</span>
+                        </div>
+                        <div class="usage-bar-bg mb-3">
+                            <div class="usage-bar" id="usage-bar" style="width: 0%"></div>
+                        </div>
+                        <p class="text-zinc-500 text-xs" id="plan-detail">50 conversations/month</p>
+                    </div>
+                </section>
+
+                <!-- ============ BILLING SECTION ============ -->
+                <section class="section" id="section-billing">
+                    <div class="page-header">
+                        <div class="page-eyebrow">Subscription</div>
+                        <h1 class="page-title">Billing</h1>
+                        <p class="page-subtitle">Upgrade for higher limits and priority support.</p>
+                    </div>
+
+                    <div class="card mb-5">
+                        <div class="flex justify-between items-center flex-wrap gap-3">
+                            <div>
+                                <div class="text-xs text-zinc-500 font-bold uppercase tracking-wider mb-1">Current plan</div>
+                                <div class="flex items-center gap-3">
+                                    <span id="plan-name-billing" class="text-2xl font-bold" style="font-family: 'Cabinet Grotesk', sans-serif;">Free</span>
+                                    <span class="plan-badge" id="plan-badge-billing">Active</span>
+                                </div>
+                                <p class="text-zinc-400 text-sm mt-1" id="plan-detail-billing">50 conversations/month</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" id="upgrade-card">
+                        <h2 class="card-title">Upgrade your plan</h2>
+                        <p class="card-subtitle">Pick Starter for busier businesses or Pro for unlimited.</p>
+
+                        <div id="upgrade-btn" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="stat-tile" style="padding: 1.5rem;">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div>
+                                        <div class="text-sm font-bold">Starter</div>
+                                        <div class="text-2xl font-bold mt-1" style="font-family: 'Cabinet Grotesk', sans-serif;">$39<span class="text-sm font-normal text-zinc-500">/mo</span></div>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-zinc-400 mb-4">500 conversations per month. For growing businesses.</p>
+                                <button onclick="openCheckout('starter')" class="upgrade-pill starter w-full">Upgrade to Starter</button>
+                            </div>
+
+                            <div class="stat-tile" style="padding: 1.5rem; border-color: rgba(34,211,238,0.25); background: linear-gradient(180deg, rgba(34,211,238,0.04), rgba(0,0,0,0.3));">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div>
+                                        <div class="text-sm font-bold text-cyan-400">Pro</div>
+                                        <div class="text-2xl font-bold mt-1" style="font-family: 'Cabinet Grotesk', sans-serif;">$99<span class="text-sm font-normal text-zinc-500">/mo</span></div>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-zinc-400 mb-4">Unlimited conversations. Priority support.</p>
+                                <button onclick="openCheckout('pro')" class="upgrade-pill pro w-full">Upgrade to Pro</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <div class="save-toast" id="save-toast">✓ Changes saved</div>
 
     <script>
         const API_URL = 'https://api.automatyn.co';
+        // const API_URL = 'http://localhost:3001';
 
         let token = null;
         let agentId = null;
         let agentData = null;
-        let currentWizardStep = 1;
 
         async function openCheckout(plan) {
             if (!agentData || !token) return;
@@ -531,28 +968,22 @@
             }
         }
 
-        // --- Auth & Init ---
-
         function init() {
             const params = new URLSearchParams(window.location.search);
-            token = params.get('token') || localStorage.getItem('automatyn_token');
+            // Support both new key (automatyn_jwt) and legacy key (automatyn_token)
+            token = params.get('token') || localStorage.getItem('automatyn_jwt') || localStorage.getItem('automatyn_token');
             agentId = params.get('agent') || localStorage.getItem('automatyn_agent');
 
             if (token && agentId) {
-                localStorage.setItem('automatyn_token', token);
+                localStorage.setItem('automatyn_jwt', token);
                 localStorage.setItem('automatyn_agent', agentId);
-
-                // Clean URL (keep agent param only)
-                if (params.has('token')) {
-                    const cleanParams = new URLSearchParams();
-                    cleanParams.set('agent', agentId);
-                    if (params.has('onboarding')) cleanParams.set('onboarding', 'true');
-                    window.history.replaceState({}, '', '/dashboard.html?' + cleanParams.toString());
+                if (params.has('token') || params.has('agent')) {
+                    window.history.replaceState({}, '', '/dashboard.html');
                 }
-
-                loadAgent(params.has('onboarding') && params.get('onboarding') === 'true');
+                loadAgent();
+                checkVerificationStatus();
             } else {
-                showAuthError();
+                window.location.href = '/login.html';
             }
         }
 
@@ -560,7 +991,50 @@
             document.getElementById('auth-error').style.display = 'block';
         }
 
-        async function loadAgent(forceOnboarding) {
+        async function checkVerificationStatus() {
+            try {
+                const res = await fetch(API_URL + '/api/auth/me', {
+                    headers: { 'Authorization': 'Bearer ' + token }
+                });
+                if (!res.ok) return;
+                const me = await res.json();
+                const dismissed = sessionStorage.getItem('automatyn_verify_dismissed') === '1';
+                if (me && !me.verified && !dismissed) {
+                    document.getElementById('verify-banner').style.display = 'flex';
+                    localStorage.setItem('automatyn_email', me.email);
+                }
+            } catch (e) { /* no-op */ }
+        }
+
+        // Dismiss banner
+        document.addEventListener('DOMContentLoaded', () => {
+            const dismissBtn = document.getElementById('dismiss-verify-btn');
+            if (dismissBtn) dismissBtn.addEventListener('click', () => {
+                sessionStorage.setItem('automatyn_verify_dismissed', '1');
+                document.getElementById('verify-banner').style.display = 'none';
+            });
+            const resendBtn = document.getElementById('resend-verify-btn');
+            if (resendBtn) resendBtn.addEventListener('click', async () => {
+                const email = localStorage.getItem('automatyn_email');
+                if (!email) return;
+                resendBtn.disabled = true;
+                resendBtn.textContent = 'Sending…';
+                try {
+                    await fetch(API_URL + '/api/auth/resend-verification', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email })
+                    });
+                    document.getElementById('verify-banner-msg').textContent = 'Verification email re-sent. Check your inbox.';
+                    resendBtn.textContent = 'Sent ✓';
+                } catch (e) {
+                    resendBtn.textContent = 'Try again';
+                    resendBtn.disabled = false;
+                }
+            });
+        });
+
+        async function loadAgent() {
             try {
                 const res = await fetch(API_URL + '/api/agent/' + agentId, {
                     headers: { 'Authorization': 'Bearer ' + token },
@@ -572,151 +1046,25 @@
                 }
 
                 agentData = await res.json();
-
-                // Decide: onboarding or normal dashboard
-                var needsOnboarding = forceOnboarding || !agentData.businessName || agentData.businessName.trim() === '';
-
-                if (needsOnboarding) {
-                    showOnboarding();
-                } else {
-                    showDashboard();
-                }
+                renderDashboard();
+                loadStatus();
             } catch (err) {
                 showAuthError();
             }
         }
 
-        // --- Onboarding Wizard ---
-
-        function showOnboarding() {
-            document.getElementById('onboarding-wizard').style.display = 'block';
-            document.getElementById('nav-business-name').textContent = 'New Bot';
-        }
-
-        function updateStepDots(step) {
-            var dots = document.querySelectorAll('.step-dot');
-            dots.forEach(function(dot) {
-                var dotStep = parseInt(dot.getAttribute('data-step'));
-                dot.className = 'step-dot';
-                if (dotStep < step) dot.classList.add('completed');
-                else if (dotStep === step) dot.classList.add('active');
-            });
-        }
-
-        function showWizardStep(step) {
-            document.querySelectorAll('.wizard-step').forEach(function(s) { s.classList.remove('active'); });
-            document.getElementById('wizard-step-' + step).classList.add('active');
-            currentWizardStep = step;
-            updateStepDots(step);
-        }
-
-        function wizardNext(fromStep) {
-            if (fromStep === 1) {
-                var name = document.getElementById('w-businessName').value.trim();
-                var industry = document.getElementById('w-industry').value;
-                if (!name) { document.getElementById('w-businessName').focus(); return; }
-                if (!industry) { document.getElementById('w-industry').focus(); return; }
-                showWizardStep(2);
-            } else if (fromStep === 2) {
-                var services = document.getElementById('w-services').value.trim();
-                var hours = document.getElementById('w-hours').value.trim();
-                if (!services) { document.getElementById('w-services').focus(); return; }
-                if (!hours) { document.getElementById('w-hours').focus(); return; }
-                buildReviewSummary();
-                showWizardStep(3);
+        function renderDashboard() {
+            // Redirect to onboarding if business details missing
+            if (!agentData.businessName || agentData.businessName.trim() === '') {
+                window.location.href = '/onboard.html';
+                return;
             }
-        }
-
-        function wizardBack(fromStep) {
-            showWizardStep(fromStep - 1);
-        }
-
-        function buildReviewSummary() {
-            var fields = [
-                { label: 'Business name', value: document.getElementById('w-businessName').value.trim() },
-                { label: 'Industry', value: document.getElementById('w-industry').value },
-                { label: 'Services', value: document.getElementById('w-services').value.trim() },
-                { label: 'Pricing', value: document.getElementById('w-prices').value.trim() },
-                { label: 'Hours', value: document.getElementById('w-hours').value.trim() },
-                { label: 'Location', value: document.getElementById('w-location').value.trim() },
-                { label: 'Policies', value: document.getElementById('w-policies').value.trim() },
-            ];
-
-            var html = '';
-            fields.forEach(function(f) {
-                if (!f.value) return;
-                var displayVal = f.value.length > 80 ? f.value.substring(0, 80) + '...' : f.value;
-                html += '<div class="review-row"><span class="review-label">' + escapeHtml(f.label) + '</span><span class="review-value">' + escapeHtml(displayVal) + '</span></div>';
-            });
-            document.getElementById('review-summary').innerHTML = html;
-        }
-
-        function escapeHtml(str) {
-            var div = document.createElement('div');
-            div.textContent = str;
-            return div.innerHTML;
-        }
-
-        async function wizardSubmit() {
-            var btn = document.getElementById('wizard-submit-btn');
-            btn.disabled = true;
-            btn.textContent = 'Creating...';
-
-            var payload = {
-                businessName: document.getElementById('w-businessName').value.trim(),
-                industry: document.getElementById('w-industry').value,
-                services: document.getElementById('w-services').value.trim(),
-                prices: document.getElementById('w-prices').value.trim(),
-                hours: document.getElementById('w-hours').value.trim(),
-                location: document.getElementById('w-location').value.trim(),
-                policies: document.getElementById('w-policies').value.trim(),
-            };
-
-            try {
-                var res = await fetch(API_URL + '/api/agent/' + agentId, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + token,
-                    },
-                    body: JSON.stringify(payload),
-                });
-
-                if (res.ok) {
-                    var data = await res.json();
-                    if (data.agent) agentData = data.agent;
-                    else Object.assign(agentData, payload);
-
-                    // Hide wizard, show dashboard
-                    document.getElementById('onboarding-wizard').style.display = 'none';
-
-                    // Clean onboarding param from URL
-                    window.history.replaceState({}, '', '/dashboard.html?agent=' + agentId);
-
-                    showDashboard();
-
-                    // Success toast
-                    showToast('Your bot is ready!');
-                } else {
-                    alert('Something went wrong. Please try again.');
-                    btn.disabled = false;
-                    btn.textContent = 'Create My Bot';
-                }
-            } catch (err) {
-                alert('Connection error. Please check your internet and try again.');
-                btn.disabled = false;
-                btn.textContent = 'Create My Bot';
-            }
-        }
-
-        // --- Normal Dashboard ---
-
-        function showDashboard() {
             document.getElementById('dashboard-content').style.display = 'block';
-            document.getElementById('dashboard-title').textContent = agentData.businessName + ' Dashboard';
-            document.getElementById('nav-business-name').textContent = agentData.businessName;
+            const name = agentData.businessName || 'Your bot';
+            document.getElementById('dashboard-title').textContent = name;
+            document.getElementById('nav-business-name').textContent = name;
+            document.getElementById('biz-avatar').textContent = (name.charAt(0) || 'A').toUpperCase();
 
-            // Populate settings form
             document.getElementById('s-businessName').value = agentData.businessName || '';
             document.getElementById('s-industry').value = agentData.industry || '';
             document.getElementById('s-services').value = agentData.services || '';
@@ -725,184 +1073,178 @@
             document.getElementById('s-location').value = agentData.location || '';
             document.getElementById('s-policies').value = agentData.policies || '';
 
-            loadStatus();
+            if (agentData.updatedAt) {
+                updateLastUpdated(agentData.updatedAt);
+            }
+        }
+
+        function formatRelativeTime(iso) {
+            if (!iso) return 'Never';
+            const then = new Date(iso);
+            const diff = (Date.now() - then.getTime()) / 1000;
+            if (diff < 60) return 'Just now';
+            if (diff < 3600) return Math.floor(diff / 60) + ' min ago';
+            if (diff < 86400) return Math.floor(diff / 3600) + ' hr ago';
+            return then.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        }
+
+        function updateLastUpdated(iso) {
+            const rel = formatRelativeTime(iso);
+            const el = document.getElementById('last-updated');
+            const inline = document.getElementById('last-updated-inline');
+            if (el) el.textContent = rel;
+            if (inline) inline.textContent = 'Last saved ' + rel.toLowerCase();
+        }
+
+        function drawSparkline(values) {
+            const svg = document.getElementById('hero-sparkline');
+            const line = document.getElementById('spark-line');
+            const area = document.getElementById('spark-area');
+            if (!svg || !line || !area) return;
+
+            if (!values || values.length === 0) {
+                values = [0, 0, 0, 0, 0, 0, 0];
+            }
+            const max = Math.max(...values, 1);
+            const w = 400, h = 90, pad = 4;
+            const step = values.length > 1 ? (w - pad * 2) / (values.length - 1) : 0;
+
+            const points = values.map((v, i) => {
+                const x = pad + i * step;
+                const y = h - pad - ((v / max) * (h - pad * 2));
+                return [x, y];
+            });
+
+            const linePath = points.map((p, i) => (i === 0 ? 'M' : 'L') + p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ');
+            const areaPath = linePath + ' L' + points[points.length - 1][0].toFixed(1) + ',' + h + ' L' + points[0][0].toFixed(1) + ',' + h + ' Z';
+
+            line.setAttribute('d', linePath);
+            area.setAttribute('d', areaPath);
         }
 
         async function loadStatus() {
             try {
-                var res = await fetch(API_URL + '/api/agent/' + agentId + '/status', {
+                const res = await fetch(API_URL + '/api/agent/' + agentId + '/status', {
                     headers: { 'Authorization': 'Bearer ' + token },
                 });
                 if (!res.ok) return;
-                var status = await res.json();
+                const status = await res.json();
 
-                // Update status dot
-                var dot = document.getElementById('nav-status-dot');
+                // Status indicators (sidebar + deploy tab + header badge)
+                const navDot = document.getElementById('nav-status-dot');
+                const navText = document.getElementById('nav-status-text');
+                const headerStatus = document.getElementById('header-status');
+                const deployWa = document.getElementById('deploy-wa-status');
+
                 if (status.connected) {
-                    dot.className = 'status-dot connected';
+                    navDot.className = 'status-dot connected';
+                    navText.textContent = 'Live';
+                    if (headerStatus) headerStatus.style.display = 'inline-flex';
+                    if (deployWa) deployWa.innerHTML = '<span class="status-dot connected"></span><span>Connected</span>';
                     document.getElementById('qr-placeholder').style.display = 'none';
                     document.getElementById('qr-instructions').style.display = 'none';
                     document.getElementById('connected-status').style.display = 'block';
                 } else {
-                    dot.className = 'status-dot pending';
-                    checkWhatsAppStatus();
+                    navDot.className = 'status-dot pending';
+                    navText.textContent = 'Pending';
+                    if (deployWa) deployWa.innerHTML = '<span class="status-dot pending"></span><span>Pending</span>';
+                    loadQR();
                 }
 
-                // Update usage
-                var count = status.conversationCount || 0;
-                var limit = status.conversationLimit || 50;
-                var isUnlimited = limit === -1;
+                // Usage
+                const count = status.conversationCount || 0;
+                const limit = status.conversationLimit || 50;
+                const isUnlimited = limit === -1;
 
                 document.getElementById('usage-count').textContent = count;
-                document.getElementById('usage-limit').textContent = isUnlimited ? '\u221E' : limit;
+                document.getElementById('usage-limit').textContent = isUnlimited ? '∞' : limit;
+                document.getElementById('hero-count').textContent = count;
 
                 if (!isUnlimited) {
-                    var pct = Math.min((count / limit) * 100, 100);
-                    var bar = document.getElementById('usage-bar');
+                    const pct = Math.min((count / limit) * 100, 100);
+                    const bar = document.getElementById('usage-bar');
                     bar.style.width = pct + '%';
                     if (pct > 90) bar.classList.add('danger');
                     else if (pct > 70) bar.classList.add('warning');
                 }
 
                 if (status.resetDate) {
-                    var d = new Date(status.resetDate);
+                    const d = new Date(status.resetDate);
                     document.getElementById('usage-reset').textContent = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
                 }
 
-                // Update plan info
-                var planNames = { free: 'Free', starter: 'Starter', pro: 'Pro' };
-                var planDetails = { free: '50 conversations/month', starter: '500 conversations/month', pro: 'Unlimited conversations' };
-                document.getElementById('plan-name').textContent = planNames[status.plan] || 'Free';
-                document.getElementById('plan-detail').textContent = planDetails[status.plan] || '50 conversations/month';
+                // Plan info (used in usage + billing sections)
+                const planNames = { free: 'Free', starter: 'Starter', pro: 'Pro' };
+                const planDetails = { free: '50 conversations/month', starter: '500 conversations/month', pro: 'Unlimited conversations' };
+                const planLabel = planNames[status.plan] || 'Free';
+                const planDesc = planDetails[status.plan] || '50 conversations/month';
+
+                document.getElementById('plan-name').textContent = planLabel;
+                document.getElementById('plan-detail').textContent = planDesc;
+                const planNameBilling = document.getElementById('plan-name-billing');
+                const planDetailBilling = document.getElementById('plan-detail-billing');
+                if (planNameBilling) planNameBilling.textContent = planLabel;
+                if (planDetailBilling) planDetailBilling.textContent = planDesc;
 
                 if (status.plan === 'pro') {
-                    document.getElementById('upgrade-btn').style.display = 'none';
+                    const upgradeBtn = document.getElementById('upgrade-btn');
+                    if (upgradeBtn) upgradeBtn.style.display = 'none';
                 }
+
+                // Sparkline placeholder - will use real data once backend exposes it
+                drawSparkline(status.history || [count]);
             } catch (err) {
                 console.error('Status load failed:', err);
             }
         }
 
-        var pairingPollTimer = null;
-
-        async function startPhonePairing() {
-            var phone = document.getElementById('wa-phone').value.trim().replace(/[\s\-\+\(\)]/g, '');
-            if (!phone || phone.length < 10) {
-                alert('Please enter a valid phone number with country code (e.g. 447700900000)');
-                return;
-            }
-
+        async function loadQR() {
             try {
-                var res = await fetch(API_URL + '/api/agent/' + agentId + '/whatsapp/pair', {
-                    method: 'POST',
-                    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ phoneNumber: phone }),
-                });
-
-                var data = await res.json();
-                if (!res.ok) {
-                    alert(data.error || 'Failed to start pairing');
-                    return;
-                }
-
-                // Show the pairing code
-                document.getElementById('pairing-code').textContent = data.pairingCode;
-                document.getElementById('pairing-code-display').style.display = 'block';
-                document.getElementById('pairing-code-display').style.background = 'var(--bg-surface)';
-                document.getElementById('pairing-code-display').style.border = '1px solid rgba(16, 185, 129, 0.3)';
-                document.getElementById('qr-display').style.display = 'none';
-
-                // Poll for connection
-                startPairingPoll();
-            } catch (err) {
-                alert('Failed to start pairing: ' + err.message);
-            }
-        }
-
-        async function startQrPairing() {
-            try {
-                document.getElementById('qr-display').style.display = 'block';
-                document.getElementById('qr-display').style.background = 'var(--bg-surface)';
-                document.getElementById('qr-display').style.border = '1px solid var(--border-subtle)';
-                document.getElementById('qr-image').innerHTML = '<p class="text-zinc-500 text-sm">Generating QR code...</p>';
-                document.getElementById('pairing-code-display').style.display = 'none';
-
-                var res = await fetch(API_URL + '/api/agent/' + agentId + '/whatsapp/qr', {
+                const res = await fetch(API_URL + '/api/agent/' + agentId + '/qr', {
                     headers: { 'Authorization': 'Bearer ' + token },
                 });
 
-                var data = await res.json();
-                if (!res.ok) {
-                    document.getElementById('qr-image').innerHTML = '<p class="text-red-400 text-sm">' + escapeHtml(data.error || 'Failed to generate QR') + '</p>';
-                    return;
+                if (res.headers.get('content-type')?.includes('image')) {
+                    const blob = await res.blob();
+                    const url = URL.createObjectURL(blob);
+                    const placeholder = document.getElementById('qr-placeholder');
+                    placeholder.innerHTML = '<img src="' + url + '" alt="WhatsApp QR Code" style="width:240px;height:240px;border-radius:0.5rem;position:relative;z-index:10;">';
+                } else {
+                    const data = await res.json();
+                    const placeholder = document.getElementById('qr-placeholder');
+                    placeholder.innerHTML = '<div class="text-center relative z-10"><div class="text-4xl mb-3">⏳</div><p class="text-zinc-500 text-sm">' + (data.message || 'QR code will appear here shortly.') + '</p></div>';
                 }
-
-                document.getElementById('qr-image').innerHTML = '<img src="' + data.qrDataUrl + '" alt="WhatsApp QR Code" style="width:280px;height:280px;border-radius:0.5rem;margin:0 auto;">';
-
-                // Poll for connection
-                startPairingPoll();
             } catch (err) {
-                document.getElementById('qr-image').innerHTML = '<p class="text-red-400 text-sm">Failed to generate QR code</p>';
+                console.error('QR load failed:', err);
             }
         }
 
-        function startPairingPoll() {
-            if (pairingPollTimer) clearInterval(pairingPollTimer);
-            pairingPollTimer = setInterval(async function() {
-                try {
-                    var res = await fetch(API_URL + '/api/agent/' + agentId + '/whatsapp/status', {
-                        headers: { 'Authorization': 'Bearer ' + token },
-                    });
-                    var data = await res.json();
-                    if (data.connected) {
-                        clearInterval(pairingPollTimer);
-                        document.getElementById('pairing-methods').style.display = 'none';
-                        document.getElementById('connected-status').style.display = 'block';
-                    }
-                } catch (err) {
-                    // ignore, keep polling
-                }
-            }, 3000);
-        }
-
-        async function checkWhatsAppStatus() {
-            try {
-                var res = await fetch(API_URL + '/api/agent/' + agentId + '/whatsapp/status', {
-                    headers: { 'Authorization': 'Bearer ' + token },
-                });
-                var data = await res.json();
-                if (data.connected) {
-                    document.getElementById('pairing-methods').style.display = 'none';
-                    document.getElementById('connected-status').style.display = 'block';
-                }
-            } catch (err) {
-                // not connected, show pairing options (default)
+        function showSection(name, evt) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+            const target = document.getElementById('section-' + name);
+            if (target) target.classList.add('active');
+            if (evt && evt.currentTarget) evt.currentTarget.classList.add('active');
+            else {
+                const btn = document.querySelector('.nav-item[data-section="' + name + '"]');
+                if (btn) btn.classList.add('active');
             }
         }
 
-        function showTab(name, btnEl) {
-            document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
-            document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
-            document.getElementById('tab-' + name).classList.add('active');
-            btnEl.classList.add('active');
+        // Backwards-compat shim in case anything still calls showTab
+        function showTab(name) {
+            const aliases = { setup: 'setup', settings: 'settings', usage: 'usage' };
+            showSection(aliases[name] || name);
         }
 
-        function showToast(message) {
-            var toast = document.getElementById('save-toast');
-            toast.textContent = message;
-            toast.classList.add('visible');
-            setTimeout(function() { toast.classList.remove('visible'); }, 2500);
-        }
-
-        // Settings form
         document.getElementById('settings-form').addEventListener('submit', async function(e) {
             e.preventDefault();
-            var btn = document.getElementById('save-btn');
+            const btn = document.getElementById('save-btn');
             btn.disabled = true;
             btn.textContent = 'Saving...';
 
             try {
-                var res = await fetch(API_URL + '/api/agent/' + agentId, {
+                const res = await fetch(API_URL + '/api/agent/' + agentId, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -919,11 +1261,16 @@
                 });
 
                 if (res.ok) {
-                    showToast('Changes saved');
-                    var data = await res.json();
+                    const toast = document.getElementById('save-toast');
+                    toast.classList.add('visible');
+                    setTimeout(() => toast.classList.remove('visible'), 2000);
+                    const data = await res.json();
                     if (data.agent) agentData = data.agent;
-                    document.getElementById('dashboard-title').textContent = agentData.businessName + ' Dashboard';
-                    document.getElementById('nav-business-name').textContent = agentData.businessName;
+                    const name = agentData.businessName || 'Your bot';
+                    document.getElementById('dashboard-title').textContent = name;
+                    document.getElementById('nav-business-name').textContent = name;
+                    document.getElementById('biz-avatar').textContent = (name.charAt(0) || 'A').toUpperCase();
+                    if (agentData.updatedAt) updateLastUpdated(agentData.updatedAt);
                 }
             } catch (err) {
                 alert('Failed to save. Please try again.');

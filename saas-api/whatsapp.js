@@ -1,10 +1,12 @@
 const { default: makeWASocket, useMultiFileAuthState, fetchLatestBaileysVersion, makeCacheableSignalKeyStore, DisconnectReason } = require('@whiskeysockets/baileys');
+const { execSync } = require('child_process');
 const QRCode = require('qrcode');
 const pino = require('pino');
 const path = require('path');
 const fs = require('fs');
 
 const AGENTS_DIR = path.join(require('os').homedir(), '.openclaw', 'agents');
+const OPENCLAW_CONFIG = path.join(require('os').homedir(), '.openclaw', 'openclaw.json');
 
 // Track active sessions per agent
 const activeSessions = new Map();
@@ -179,6 +181,13 @@ async function checkPairingStatus(agentId) {
       session.connectionPromise,
       new Promise((_, reject) => setTimeout(() => reject(new Error('still_waiting')), 1000)),
     ]);
+
+    // Connected! Disconnect our session so OpenClaw gateway can take over
+    await disconnectSession(agentId);
+
+    // Register WhatsApp channel with OpenClaw gateway
+    registerWhatsAppWithGateway(agentId);
+
     return { connected: true };
   } catch (err) {
     if (err.message === 'still_waiting') {
@@ -218,6 +227,48 @@ function isWhatsAppConnected(agentId) {
     }
   }
   return false;
+}
+
+/**
+ * Register WhatsApp channel with OpenClaw gateway config.
+ * After pairing, we hand off to OpenClaw to handle messages.
+ */
+function registerWhatsAppWithGateway(agentId) {
+  const authDir = getAuthDir(agentId);
+
+  try {
+    // Add whatsapp channel to openclaw.json
+    const config = JSON.parse(fs.readFileSync(OPENCLAW_CONFIG, 'utf-8'));
+
+    if (!config.channels) config.channels = {};
+    if (!config.channels.whatsapp) {
+      config.channels.whatsapp = { enabled: true, accounts: {} };
+    }
+    if (!config.channels.whatsapp.accounts) {
+      config.channels.whatsapp.accounts = {};
+    }
+
+    // Add this agent's WhatsApp account
+    config.channels.whatsapp.accounts[agentId] = {
+      authDir: authDir,
+      dmPolicy: 'open',
+      allowFrom: ['*'],
+      agent: agentId,
+    };
+
+    config.meta.lastTouchedAt = new Date().toISOString();
+    fs.writeFileSync(OPENCLAW_CONFIG, JSON.stringify(config, null, 2));
+
+    // Reload gateway to pick up new channel
+    try {
+      execSync('openclaw gateway reload', { timeout: 10000, stdio: 'pipe' });
+      console.log(`WhatsApp channel registered for agent ${agentId}`);
+    } catch (err) {
+      console.error('Gateway reload failed:', err.message);
+    }
+  } catch (err) {
+    console.error('Failed to register WhatsApp with gateway:', err.message);
+  }
 }
 
 module.exports = {

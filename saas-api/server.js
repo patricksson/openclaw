@@ -4,8 +4,11 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const { provisionAgent, updateAgent, getAgent, DATA_DIR } = require('./provision');
 const { startPairingCode, startQrPairing, checkPairingStatus, isWhatsAppConnected } = require('./whatsapp');
+const authLib = require('./auth');
 const fs = require('fs');
 const path = require('path');
+
+const APP_URL = process.env.APP_URL || 'https://automatyn.co';
 
 const app = express();
 const PORT = process.env.SAAS_API_PORT || 3001;
@@ -77,7 +80,342 @@ function validateSignup(body) {
 }
 
 // ============================================================
-// POST /api/register — Create account (email only, no business details)
+// AUTH ENDPOINTS
+// ============================================================
+
+function issueJwt(user) {
+  return jwt.sign(
+    { agentId: user.agentId, email: user.email, verified: !!user.verified },
+    jwtSecret,
+    { expiresIn: '30d' }
+  );
+}
+
+function genericDelay() {
+  // Add random 100-300ms delay to prevent timing attacks
+  return new Promise((r) => setTimeout(r, 100 + Math.random() * 200));
+}
+
+// POST /api/auth/register — Create account with email + password
+app.post('/api/auth/register', async (req, res) => {
+  const ip = req.ip || req.connection.remoteAddress;
+  const email = (req.body.email || '').trim().toLowerCase();
+  const password = req.body.password || '';
+  const plan = ['free', 'starter', 'pro'].includes(req.body.plan) ? req.body.plan : 'free';
+
+  // Rate limit
+  if (!authLib.rateLimit(`register:ip:${ip}`, 5, 3600000)) {
+    return res.status(429).json({ error: 'Too many attempts from this IP. Try again later.' });
+  }
+  if (!authLib.rateLimit(`register:email:${email}`, 3, 3600000)) {
+    return res.status(429).json({ error: 'Too many attempts for this email. Try again later.' });
+  }
+
+  // Validate
+  if (!authLib.validEmail(email)) {
+    return res.status(400).json({ error: 'Please enter a valid email address.' });
+  }
+  const pwCheck = authLib.validPassword(password);
+  if (!pwCheck.ok) {
+    return res.status(400).json({ error: pwCheck.error });
+  }
+
+  // Breach check (fails-open on network error)
+  const isBreached = await authLib.checkHibp(password);
+  if (isBreached) {
+    return res.status(400).json({
+      error: 'This password has appeared in a known data breach. Please choose a different one.'
+    });
+  }
+
+  // Check existing user
+  const existing = authLib.getUser(email);
+  if (existing) {
+    if (existing.verified) {
+      // Case 1: Verified account exists - reject
+      return res.status(409).json({ error: 'An account already exists with that email. Please sign in.' });
+    }
+    // Unverified - check age
+    const age = Date.now() - new Date(existing.createdAt).getTime();
+    if (age < authLib.UNVERIFIED_OVERWRITE_AFTER_MS) {
+      // Case 2: Unverified + recent - resend verification
+      try {
+        const token = authLib.generateToken();
+        const tokens = authLib.loadVerifyTokens();
+        tokens[token] = { email, expiresAt: Date.now() + authLib.VERIFY_TOKEN_TTL_MS };
+        authLib.saveVerifyTokens(tokens);
+        const verifyUrl = `${APP_URL}/verify.html?token=${token}`;
+        await authLib.sendEmail({
+          to: email,
+          subject: 'Verify your Automatyn email',
+          htmlContent: authLib.verificationEmailHtml(verifyUrl),
+        });
+      } catch (err) {
+        console.error('Resend verification email failed:', err.message);
+      }
+      return res.json({
+        success: true,
+        resent: true,
+        message: "We've re-sent your verification email. Please check your inbox.",
+      });
+    }
+    // Case 3: Unverified + old - overwrite
+  }
+
+  try {
+    const passwordHash = await authLib.hashPassword(password);
+
+    // Create agent shell (empty business details — will be filled during onboarding)
+    const metadata = provisionAgent({
+      email, businessName: '', industry: '', services: '', prices: '',
+      hours: '', location: '', policies: '', plan,
+    });
+
+    const user = {
+      email,
+      passwordHash,
+      verified: false,
+      agentId: metadata.agentId,
+      plan,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+    authLib.setUser(email, user);
+
+    // Generate verification token
+    const token = authLib.generateToken();
+    const tokens = authLib.loadVerifyTokens();
+    tokens[token] = { email, expiresAt: Date.now() + authLib.VERIFY_TOKEN_TTL_MS };
+    authLib.saveVerifyTokens(tokens);
+
+    // Send verification email (non-blocking for UX — but we await to catch errors)
+    const verifyUrl = `${APP_URL}/verify.html?token=${token}`;
+    authLib.sendEmail({
+      to: email,
+      subject: 'Verify your Automatyn email',
+      htmlContent: authLib.verificationEmailHtml(verifyUrl),
+    }).catch((err) => console.error('Verification email send failed:', err.message));
+
+    // Issue JWT immediately — user gets dashboard access right away
+    const jwtToken = issueJwt(user);
+
+    res.json({
+      success: true,
+      agentId: metadata.agentId,
+      token: jwtToken,
+      email,
+      verified: false,
+      plan,
+    });
+  } catch (err) {
+    console.error('Register error:', err);
+    res.status(500).json({ error: 'Failed to create account. Please try again.' });
+  }
+});
+
+// POST /api/auth/login — Email + password login
+app.post('/api/auth/login', async (req, res) => {
+  const ip = req.ip || req.connection.remoteAddress;
+  const email = (req.body.email || '').trim().toLowerCase();
+  const password = req.body.password || '';
+
+  if (!authLib.rateLimit(`login:ip:${ip}`, 10, 3600000)) {
+    return res.status(429).json({ error: 'Too many login attempts. Try again later.' });
+  }
+  if (!authLib.rateLimit(`login:email:${email}`, 5, 3600000)) {
+    return res.status(429).json({ error: 'Too many login attempts for this email. Try again later.' });
+  }
+
+  if (!authLib.validEmail(email) || !password) {
+    // Still do a bcrypt comparison to avoid timing attacks
+    await authLib.verifyPassword('dummy', authLib.DUMMY_HASH);
+    await genericDelay();
+    return res.status(401).json({ error: 'Invalid email or password.' });
+  }
+
+  const user = authLib.getUser(email);
+  const hash = user ? user.passwordHash : authLib.DUMMY_HASH;
+  const ok = await authLib.verifyPassword(password, hash);
+
+  if (!user || !ok) {
+    await genericDelay();
+    return res.status(401).json({ error: 'Invalid email or password.' });
+  }
+
+  const token = issueJwt(user);
+  res.json({
+    success: true,
+    token,
+    agentId: user.agentId,
+    email: user.email,
+    verified: !!user.verified,
+    plan: user.plan || 'free',
+  });
+});
+
+// POST /api/auth/verify — Verify email via magic link token
+app.post('/api/auth/verify', (req, res) => {
+  const token = (req.body.token || '').trim();
+  if (!token) return res.status(400).json({ error: 'Missing verification token.' });
+
+  const tokens = authLib.loadVerifyTokens();
+  const entry = tokens[token];
+  if (!entry) return res.status(400).json({ error: 'Invalid or already-used verification link.' });
+  if (entry.expiresAt < Date.now()) {
+    delete tokens[token];
+    authLib.saveVerifyTokens(tokens);
+    return res.status(400).json({ error: 'This verification link has expired. Please request a new one.' });
+  }
+
+  const user = authLib.getUser(entry.email);
+  if (!user) return res.status(404).json({ error: 'Account not found.' });
+
+  user.verified = true;
+  user.verifiedAt = new Date().toISOString();
+  user.updatedAt = new Date().toISOString();
+  authLib.setUser(entry.email, user);
+
+  delete tokens[token];
+  authLib.saveVerifyTokens(tokens);
+
+  const jwtToken = issueJwt(user);
+  res.json({
+    success: true,
+    token: jwtToken,
+    agentId: user.agentId,
+    email: user.email,
+    verified: true,
+    plan: user.plan || 'free',
+  });
+});
+
+// POST /api/auth/resend-verification — Resend verification email
+app.post('/api/auth/resend-verification', async (req, res) => {
+  const ip = req.ip || req.connection.remoteAddress;
+  const email = (req.body.email || '').trim().toLowerCase();
+
+  if (!authLib.rateLimit(`resend:ip:${ip}`, 5, 3600000)) {
+    return res.status(429).json({ error: 'Too many requests. Try again later.' });
+  }
+  if (!authLib.rateLimit(`resend:email:${email}`, 3, 3600000)) {
+    return res.status(429).json({ error: 'Too many requests for this email. Try again later.' });
+  }
+
+  // Always return 200 to prevent email enumeration
+  const user = authLib.getUser(email);
+  if (user && !user.verified) {
+    try {
+      const token = authLib.generateToken();
+      const tokens = authLib.loadVerifyTokens();
+      tokens[token] = { email, expiresAt: Date.now() + authLib.VERIFY_TOKEN_TTL_MS };
+      authLib.saveVerifyTokens(tokens);
+      const verifyUrl = `${APP_URL}/verify.html?token=${token}`;
+      await authLib.sendEmail({
+        to: email,
+        subject: 'Verify your Automatyn email',
+        htmlContent: authLib.verificationEmailHtml(verifyUrl),
+      });
+    } catch (err) {
+      console.error('Resend verification failed:', err.message);
+    }
+  }
+  res.json({ success: true, message: "If your account exists and isn't verified, we've sent a new link." });
+});
+
+// POST /api/auth/forgot-password — Send reset link
+app.post('/api/auth/forgot-password', async (req, res) => {
+  const ip = req.ip || req.connection.remoteAddress;
+  const email = (req.body.email || '').trim().toLowerCase();
+
+  if (!authLib.rateLimit(`forgot:ip:${ip}`, 5, 3600000)) {
+    return res.status(429).json({ error: 'Too many requests. Try again later.' });
+  }
+  if (!authLib.rateLimit(`forgot:email:${email}`, 3, 3600000)) {
+    return res.status(429).json({ error: 'Too many requests for this email. Try again later.' });
+  }
+
+  // Always respond 200 to prevent enumeration
+  const user = authLib.getUser(email);
+  if (user && authLib.validEmail(email)) {
+    try {
+      const token = authLib.generateToken();
+      const tokens = authLib.loadResetTokens();
+      tokens[token] = { email, expiresAt: Date.now() + authLib.RESET_TOKEN_TTL_MS };
+      authLib.saveResetTokens(tokens);
+      const resetUrl = `${APP_URL}/reset-password.html?token=${token}`;
+      await authLib.sendEmail({
+        to: email,
+        subject: 'Reset your Automatyn password',
+        htmlContent: authLib.resetEmailHtml(resetUrl),
+      });
+    } catch (err) {
+      console.error('Reset email send failed:', err.message);
+    }
+  }
+  await genericDelay();
+  res.json({ success: true, message: 'If your account exists, we have sent a password reset link.' });
+});
+
+// POST /api/auth/reset-password — Complete password reset
+app.post('/api/auth/reset-password', async (req, res) => {
+  const token = (req.body.token || '').trim();
+  const password = req.body.password || '';
+
+  if (!token) return res.status(400).json({ error: 'Missing reset token.' });
+  const pwCheck = authLib.validPassword(password);
+  if (!pwCheck.ok) return res.status(400).json({ error: pwCheck.error });
+
+  const isBreached = await authLib.checkHibp(password);
+  if (isBreached) {
+    return res.status(400).json({
+      error: 'This password has appeared in a known data breach. Please choose a different one.'
+    });
+  }
+
+  const tokens = authLib.loadResetTokens();
+  const entry = tokens[token];
+  if (!entry) return res.status(400).json({ error: 'Invalid or already-used reset link.' });
+  if (entry.expiresAt < Date.now()) {
+    delete tokens[token];
+    authLib.saveResetTokens(tokens);
+    return res.status(400).json({ error: 'This reset link has expired. Please request a new one.' });
+  }
+
+  const user = authLib.getUser(entry.email);
+  if (!user) return res.status(404).json({ error: 'Account not found.' });
+
+  user.passwordHash = await authLib.hashPassword(password);
+  user.updatedAt = new Date().toISOString();
+  authLib.setUser(entry.email, user);
+
+  delete tokens[token];
+  authLib.saveResetTokens(tokens);
+
+  const jwtToken = issueJwt(user);
+  res.json({
+    success: true,
+    token: jwtToken,
+    agentId: user.agentId,
+    email: user.email,
+    verified: !!user.verified,
+    plan: user.plan || 'free',
+  });
+});
+
+// GET /api/auth/me — Get current user info (useful for banner state)
+app.get('/api/auth/me', auth, (req, res) => {
+  const user = authLib.getUser(req.email);
+  if (!user) return res.status(404).json({ error: 'User not found.' });
+  res.json({
+    email: user.email,
+    agentId: user.agentId,
+    verified: !!user.verified,
+    plan: user.plan || 'free',
+  });
+});
+
+// ============================================================
+// POST /api/register — Create account (email only, no business details) [LEGACY]
 // ============================================================
 app.post('/api/register', (req, res) => {
   const ip = req.ip || req.connection.remoteAddress;

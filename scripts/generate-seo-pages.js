@@ -196,7 +196,7 @@ function generateIndustryPage(ind) {
     <!-- Banner -->
     <div class="urgency-banner text-white text-center py-2.5 px-4 text-sm font-medium fixed top-0 w-full z-[60]" style="background: #0f0f0f; border-bottom: 1px solid rgba(34, 211, 238, 0.15);">
         <span class="pulse inline-block w-2 h-2 bg-emerald-400 rounded-full mr-2" style="animation: pulse 2s infinite;" aria-hidden="true"></span>
-        <strong class="text-white">Free AI receptionist for your WhatsApp.</strong> Answers customers 24/7. <a href="/register.html" class="underline font-bold ml-1" style="color: #22d3ee;">Start free &rarr;</a>
+        <strong class="text-white">Free AI receptionist for your WhatsApp.</strong> Answers customers 24/7. <a href="/signup.html" class="underline font-bold ml-1" style="color: #22d3ee;">Start free &rarr;</a>
     </div>
     <style>.pulse { animation: pulse 2s infinite; } @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }</style>
 
@@ -212,10 +212,10 @@ function generateIndustryPage(ind) {
                     <a href="/" class="text-gray-400 hover:text-white transition text-sm font-medium">Home</a>
                     <a href="/blog/" class="text-gray-400 hover:text-white transition text-sm font-medium">Blog</a>
                     <a href="/#pricing" class="text-gray-400 hover:text-white transition text-sm font-medium">Pricing</a>
-                    <a href="/register.html" class="cta-button text-sm" style="padding: 0.6rem 1.2rem;">Start Free</a>
+                    <a href="/signup.html" class="cta-button text-sm" style="padding: 0.6rem 1.2rem;">Start Free</a>
                 </div>
                 <div class="md:hidden flex items-center gap-3">
-                    <a href="/register.html" class="cta-button text-sm" style="padding: 0.5rem 1rem;">Start Free</a>
+                    <a href="/signup.html" class="cta-button text-sm" style="padding: 0.5rem 1rem;">Start Free</a>
                     <button id="mobile-menu-btn" class="text-gray-400 hover:text-white transition" aria-label="Toggle menu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
@@ -302,7 +302,7 @@ function generateIndustryPage(ind) {
         </table>
 
         <div class="inline-cta">
-            <p style="margin:0;">Run a ${ind.service} business? <a href="https://automatyn.co/register.html">Try Automatyn free</a>. Tell it your services, prices, and hours. Your WhatsApp bot is live in under 10 minutes.</p>
+            <p style="margin:0;">Run a ${ind.service} business? <a href="https://automatyn.co/signup.html">Try Automatyn free</a>. Tell it your services, prices, and hours. Your WhatsApp bot is live in under 10 minutes.</p>
         </div>
 
         <h2>How Much Does This Cost?</h2>
@@ -383,7 +383,7 @@ function generateIndustryPage(ind) {
         <p>WhatsApp allows business-specific chatbots (FAQ, booking, customer support). What they restrict is general-purpose AI bots that are not tied to a real business. As a ${ind.slug.replace(/-/g, ' ')} using a bot for your actual ${ind.service} business, you are within their guidelines.</p>
 
         <div class="inline-cta">
-            <p style="margin:0;">Ready to stop missing messages? <a href="https://automatyn.co/register.html">Start with Automatyn's free tier</a>. Your ${ind.service} WhatsApp bot is live in minutes, not weeks.</p>
+            <p style="margin:0;">Ready to stop missing messages? <a href="https://automatyn.co/signup.html">Start with Automatyn's free tier</a>. Your ${ind.service} WhatsApp bot is live in minutes, not weeks.</p>
         </div>
 
         <h2>Related Guides</h2>
@@ -418,7 +418,7 @@ function generateIndustryPage(ind) {
         <div class="flex gap-6 justify-center mt-4">
             <a href="https://automatyn.co" class="hover:text-white">Home</a>
             <a href="https://automatyn.co/blog/" class="hover:text-white">Blog</a>
-            <a href="https://automatyn.co/register.html" class="hover:text-white">Pricing</a>
+            <a href="https://automatyn.co/pricing.html" class="hover:text-white">Pricing</a>
         </div>
     </footer>
     <script>
@@ -536,7 +536,7 @@ function generateCityPage(city) {
     <!-- Banner -->
     <div class="urgency-banner text-white text-center py-2.5 px-4 text-sm font-medium fixed top-0 w-full z-[60]" style="background: #0f0f0f; border-bottom: 1px solid rgba(34, 211, 238, 0.15);">
         <span class="pulse inline-block w-2 h-2 bg-emerald-400 rounded-full mr-2" style="animation: pulse 2s infinite;" aria-hidden="true"></span>
-        <strong class="text-white">Free AI receptionist for your WhatsApp.</strong> Answers customers 24/7. <a href="/register.html" class="underline font-bold ml-1" style="color: #22d3ee;">Start free &rarr;</a>
+        <strong class="text-white">Free AI receptionist for your WhatsApp.</strong> Answers customers 24/7. <a href="/signup.html" class="underline font-bold ml-1" style="color: #22d3ee;">Start free &rarr;</a>
     </div>
     <style>.pulse { animation: pulse 2s infinite; } @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }</style>
 
@@ -552,10 +552,10 @@ function generateCityPage(city) {
                     <a href="/" class="text-gray-400 hover:text-white transition text-sm font-medium">Home</a>
                     <a href="/blog/" class="text-gray-400 hover:text-white transition text-sm font-medium">Blog</a>
                     <a href="/#pricing" class="text-gray-400 hover:text-white transition text-sm font-medium">Pricing</a>
-                    <a href="/register.html" class="cta-button text-sm" style="padding: 0.6rem 1.2rem;">Start Free</a>
+                    <a href="/signup.html" class="cta-button text-sm" style="padding: 0.6rem 1.2rem;">Start Free</a>
                 </div>
                 <div class="md:hidden flex items-center gap-3">
-                    <a href="/register.html" class="cta-button text-sm" style="padding: 0.5rem 1rem;">Start Free</a>
+                    <a href="/signup.html" class="cta-button text-sm" style="padding: 0.5rem 1rem;">Start Free</a>
                     <button id="mobile-menu-btn" class="text-gray-400 hover:text-white transition" aria-label="Toggle menu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
@@ -641,7 +641,7 @@ function generateCityPage(city) {
         <p>If customers message you on WhatsApp, a chatbot can handle most of those conversations automatically.</p>
 
         <div class="inline-cta">
-            <p style="margin:0;">Based in ${city.name}? <a href="https://automatyn.co/register.html">Try Automatyn free</a>. Tell it your business details and have a WhatsApp bot live in under 10 minutes.</p>
+            <p style="margin:0;">Based in ${city.name}? <a href="https://automatyn.co/signup.html">Try Automatyn free</a>. Tell it your business details and have a WhatsApp bot live in under 10 minutes.</p>
         </div>
 
         <h2>How Much Does It Cost?</h2>
@@ -699,7 +699,7 @@ function generateCityPage(city) {
         <p>The customer booked in under a minute. You woke up to a confirmed appointment in your calendar. That is the difference a WhatsApp bot makes.</p>
 
         <div class="inline-cta">
-            <p style="margin:0;">Ready to stop missing ${city.name} customers? <a href="https://automatyn.co/register.html">Start free with Automatyn</a>. No credit card, no contract, no code.</p>
+            <p style="margin:0;">Ready to stop missing ${city.name} customers? <a href="https://automatyn.co/signup.html">Start free with Automatyn</a>. No credit card, no contract, no code.</p>
         </div>
 
         <h2>Common Questions</h2>
@@ -745,7 +745,7 @@ function generateCityPage(city) {
         <div class="flex gap-6 justify-center mt-4">
             <a href="https://automatyn.co" class="hover:text-white">Home</a>
             <a href="https://automatyn.co/blog/" class="hover:text-white">Blog</a>
-            <a href="https://automatyn.co/register.html" class="hover:text-white">Pricing</a>
+            <a href="https://automatyn.co/pricing.html" class="hover:text-white">Pricing</a>
         </div>
     </footer>
     <script>
