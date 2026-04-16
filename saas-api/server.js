@@ -10,12 +10,11 @@ const path = require('path');
 const app = express();
 const PORT = process.env.SAAS_API_PORT || 3001;
 const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(32).toString('hex');
-const WHOP_API_KEY = process.env.WHOP_API_KEY || 'apik_wsrfifT0Ma1WD_C4859825_C_abdc9de469897031f22ef0751ee144249d22ae5c4d93e54f588f092744db6c';
-const WHOP_WEBHOOK_SECRET = process.env.WHOP_WEBHOOK_SECRET || '';
-const WHOP_API_BASE = 'https://api.whop.com/api/v1';
-const WHOP_COMPANY_ID = 'biz_KhL40KgCF0tjVD';
-const WHOP_PLAN_STARTER = 'plan_hXzlKaRMqcs1X';
-const WHOP_PLAN_PRO = 'plan_KITLp6Nad8eJJ';
+const DODO_API_KEY = process.env.DODO_API_KEY || 'r-Ju3Mr3CvAEDi3m.Pr7U62hk87ehGaCzZbqyci9lcTjZ3LYSsawNRasdL7WLr5o7';
+const DODO_WEBHOOK_SECRET = process.env.DODO_WEBHOOK_SECRET || 'whsec_Q14p3fFmE+3qkLCOEdEof2Le/6sEnxKs';
+const DODO_API_BASE = 'https://live.dodopayments.com';
+const DODO_PRODUCT_STARTER = 'pdt_0NcooRMOGyOxO7roCiSmn';
+const DODO_PRODUCT_PRO = 'pdt_0NcooSqClvpfz5UfxgLcS';
 
 // Save JWT_SECRET to a file so it persists across restarts
 const secretPath = path.join(__dirname, '.jwt-secret');
@@ -170,36 +169,36 @@ app.post('/api/signup', (req, res) => {
 });
 
 // ============================================================
-// POST /api/webhook/whop — Whop.com payment webhook
+// POST /api/webhook/dodo — DodoPayments webhook (Standard Webhooks spec)
 // ============================================================
-app.post('/api/webhook/whop', (req, res) => {
-  // Verify Whop webhook signature (Standard Webhooks spec)
-  if (WHOP_WEBHOOK_SECRET) {
+app.post('/api/webhook/dodo', (req, res) => {
+  // Verify signature
+  if (DODO_WEBHOOK_SECRET) {
     const webhookId = req.headers['webhook-id'] || '';
     const webhookTs = req.headers['webhook-timestamp'] || '';
     const webhookSig = req.headers['webhook-signature'] || '';
     const body = req.body.toString();
     const payload = `${webhookId}.${webhookTs}.${body}`;
-    const secretBytes = Buffer.from(WHOP_WEBHOOK_SECRET.replace(/^whsec_/, ''), 'base64');
+    const secretBytes = Buffer.from(DODO_WEBHOOK_SECRET.replace(/^whsec_/, ''), 'base64');
     const expected = 'v1,' + crypto.createHmac('sha256', secretBytes).update(payload).digest('base64');
     const signatures = webhookSig.split(' ');
     if (!signatures.some(s => s === expected)) {
-      console.log('Whop webhook signature mismatch (continuing for now)');
+      console.log('Dodo webhook signature mismatch');
+      return res.status(401).json({ error: 'Invalid signature' });
     }
   }
 
   try {
     const event = JSON.parse(req.body.toString());
-    const eventType = event.type || event.action;
+    const eventType = event.type;
     const data = event.data;
 
-    console.log('Whop webhook:', eventType);
+    console.log('Dodo webhook:', eventType);
 
-    // Extract agent_id from membership/payment metadata
     const agentId = data?.metadata?.agent_id;
 
     if (!agentId) {
-      console.log('Whop webhook: no agent_id in metadata');
+      console.log('Dodo webhook: no agent_id in metadata');
       return res.json({ received: true });
     }
 
@@ -211,17 +210,17 @@ app.post('/api/webhook/whop', (req, res) => {
 
     const metaPath = path.join(DATA_DIR, `${agentId}.json`);
 
-    if (eventType === 'membership.activated' || eventType === 'payment.succeeded') {
-      const planId = data.plan_id || data.plan?.id || '';
-      agent.plan = planId === WHOP_PLAN_PRO ? 'pro' : 'starter';
+    if (eventType === 'subscription.active' || eventType === 'subscription.renewed' || eventType === 'payment.succeeded') {
+      const productId = data.product_id || data.product?.product_id || '';
+      agent.plan = productId === DODO_PRODUCT_PRO ? 'pro' : 'starter';
       agent.status = 'active';
-      agent.whopMembershipId = data.id || data.membership_id;
+      agent.dodoSubscriptionId = data.subscription_id || data.id;
       agent.updatedAt = new Date().toISOString();
       fs.writeFileSync(metaPath, JSON.stringify(agent, null, 2));
       console.log(`Agent ${agentId} upgraded to ${agent.plan}`);
     }
 
-    if (eventType === 'membership.deactivated' || eventType === 'payment.failed') {
+    if (eventType === 'subscription.cancelled' || eventType === 'subscription.expired' || eventType === 'subscription.failed') {
       agent.plan = 'free';
       agent.status = 'canceled';
       agent.updatedAt = new Date().toISOString();
@@ -231,48 +230,65 @@ app.post('/api/webhook/whop', (req, res) => {
 
     res.json({ received: true });
   } catch (err) {
-    console.error('Whop webhook error:', err);
+    console.error('Dodo webhook error:', err);
     res.status(500).json({ error: 'Webhook processing failed' });
   }
 });
 
 // ============================================================
-// POST /api/checkout — Create Whop checkout session
+// POST /api/checkout — Create DodoPayments subscription checkout
 // ============================================================
 app.post('/api/checkout', auth, async (req, res) => {
   const { plan } = req.body;
-  const plans = {
-    starter: WHOP_PLAN_STARTER,
-    pro: WHOP_PLAN_PRO,
+  const productIds = {
+    starter: DODO_PRODUCT_STARTER,
+    pro: DODO_PRODUCT_PRO,
   };
 
-  const planId = plans[plan];
-  if (!planId) {
+  const productId = productIds[plan];
+  if (!productId) {
     return res.status(400).json({ error: 'Invalid plan. Use "starter" or "pro".' });
   }
 
+  const agent = getAgent(req.agentId);
+  if (!agent) {
+    return res.status(404).json({ error: 'Agent not found' });
+  }
+
   try {
-    const response = await fetch(`${WHOP_API_BASE}/checkout_configurations`, {
+    const response = await fetch(`${DODO_API_BASE}/subscriptions`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${WHOP_API_KEY}`,
+        'Authorization': `Bearer ${DODO_API_KEY}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        plan_id: planId,
+        product_id: productId,
+        quantity: 1,
+        payment_link: true,
+        return_url: `https://automatyn.co/dashboard.html?upgraded=${plan}`,
         metadata: { agent_id: req.agentId },
-        redirect_url: `https://automatyn.co/dashboard.html?upgraded=${plan}`,
+        customer: {
+          email: agent.email || req.email,
+          name: agent.businessName || 'Automatyn Customer',
+        },
+        billing: {
+          country: 'US',
+          state: 'CA',
+          city: 'San Francisco',
+          street: '123 Main St',
+          zipcode: '94102',
+        },
       }),
     });
 
-    const checkout = await response.json();
+    const result = await response.json();
     if (!response.ok) {
-      console.error('Whop checkout error:', checkout);
-      // Fallback to direct plan purchase URL (no metadata tracking)
-      return res.json({ checkoutUrl: `https://whop.com/checkout/${planId}` });
+      console.error('Dodo checkout error:', result);
+      return res.status(500).json({ error: 'Failed to create checkout session' });
     }
 
-    res.json({ checkoutUrl: checkout.purchase_url || `https://whop.com/checkout/${planId}` });
+    res.json({ checkoutUrl: result.payment_link });
   } catch (err) {
     console.error('Checkout error:', err);
     res.status(500).json({ error: 'Failed to create checkout session' });
@@ -293,7 +309,7 @@ app.get('/api/agent/:id', auth, (req, res) => {
   }
 
   // Don't leak sensitive fields
-  const { lsSubscriptionId, whopMembershipId, ...safe } = agent;
+  const { lsSubscriptionId, dodoSubscriptionId, ...safe } = agent;
   res.json(safe);
 });
 
@@ -307,7 +323,7 @@ app.put('/api/agent/:id', auth, (req, res) => {
 
   try {
     const updated = updateAgent(req.params.id, req.body);
-    const { lsSubscriptionId, whopMembershipId, ...safe } = updated;
+    const { lsSubscriptionId, dodoSubscriptionId, ...safe } = updated;
     res.json({ success: true, agent: safe });
   } catch (err) {
     if (err.message === 'Agent not found') {
