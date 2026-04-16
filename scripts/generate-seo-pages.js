@@ -121,7 +121,7 @@ function generateIndustryPage(ind) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400;500;700;800&display=swap" rel="stylesheet">
 
     <script type="application/ld+json">
@@ -162,8 +162,8 @@ function generateIndustryPage(ind) {
     </script>
 
     <style>
-        * { font-family: 'DM Sans', sans-serif; }
-        h1, h2, h3, h4 { font-family: 'Cabinet Grotesk', 'DM Sans', sans-serif; color: #ffffff; }
+        *, body, p, span, li, td, th, input, textarea, select, button, a, label, div { font-family: 'DM Sans', sans-serif !important; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Cabinet Grotesk', 'Sora', sans-serif !important; color: #ffffff; }
         :root { --neon-purple: #22d3ee; --bg-dark: #030303; --text-primary: #ffffff; --text-secondary: #a1a1aa; }
         body { background: var(--bg-dark); color: var(--text-primary); }
         .hero-gradient { background: #030303; position: relative; }
@@ -175,7 +175,7 @@ function generateIndustryPage(ind) {
                         radial-gradient(ellipse at bottom right, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
             pointer-events: none;
         }
-        .prose h2 { font-family: 'Cabinet Grotesk', 'DM Sans', sans-serif; font-weight: 700; font-size: 1.85rem; line-height: 1.3; margin-top: 3rem; margin-bottom: 1rem; color: #ffffff; }
+        .prose h2 { font-family: 'Cabinet Grotesk', 'Sora', sans-serif !important; font-weight: 700; font-size: 1.85rem; line-height: 1.3; margin-top: 3rem; margin-bottom: 1rem; color: #ffffff; }
         .prose p { color: #d4d4d8; line-height: 1.75; margin-bottom: 1.25rem; font-size: 1.1rem; }
         .prose ul { color: #d4d4d8; margin-bottom: 1.25rem; padding-left: 1.5rem; }
         .prose ul li { margin-bottom: 0.5rem; line-height: 1.75; }
@@ -200,7 +200,7 @@ function generateIndustryPage(ind) {
                 <a href="https://automatyn.co" class="hover:text-white">Home</a>
                 <a href="https://automatyn.co/blog/" class="hover:text-white">Blog</a>
                 <a href="https://automatyn.co/register.html" class="hover:text-white">Pricing</a>
-                <a href="https://calendly.com/patricksson/30min" class="cta-button text-sm" style="padding: 0.6rem 1.2rem;">Book Free Call</a>
+                <a href="https://automatyn.co/register.html" class="cta-button text-sm" style="padding: 0.6rem 1.2rem;">Start Free</a>
             </div>
         </div>
     </nav>
@@ -427,7 +427,7 @@ function generateCityPage(city) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400;500;700;800&display=swap" rel="stylesheet">
 
     <script type="application/ld+json">
@@ -468,8 +468,8 @@ function generateCityPage(city) {
     </script>
 
     <style>
-        * { font-family: 'DM Sans', sans-serif; }
-        h1, h2, h3, h4 { font-family: 'Cabinet Grotesk', 'DM Sans', sans-serif; color: #ffffff; }
+        *, body, p, span, li, td, th, input, textarea, select, button, a, label, div { font-family: 'DM Sans', sans-serif !important; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Cabinet Grotesk', 'Sora', sans-serif !important; color: #ffffff; }
         :root { --neon-purple: #22d3ee; --bg-dark: #030303; --text-primary: #ffffff; --text-secondary: #a1a1aa; }
         body { background: var(--bg-dark); color: var(--text-primary); }
         .hero-gradient { background: #030303; position: relative; }
@@ -481,7 +481,7 @@ function generateCityPage(city) {
                         radial-gradient(ellipse at bottom right, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
             pointer-events: none;
         }
-        .prose h2 { font-family: 'Cabinet Grotesk', 'DM Sans', sans-serif; font-weight: 700; font-size: 1.85rem; line-height: 1.3; margin-top: 3rem; margin-bottom: 1rem; color: #ffffff; }
+        .prose h2 { font-family: 'Cabinet Grotesk', 'Sora', sans-serif !important; font-weight: 700; font-size: 1.85rem; line-height: 1.3; margin-top: 3rem; margin-bottom: 1rem; color: #ffffff; }
         .prose p { color: #d4d4d8; line-height: 1.75; margin-bottom: 1.25rem; font-size: 1.1rem; }
         .prose ul { color: #d4d4d8; margin-bottom: 1.25rem; padding-left: 1.5rem; }
         .prose ul li { margin-bottom: 0.5rem; line-height: 1.75; }
@@ -506,7 +506,7 @@ function generateCityPage(city) {
                 <a href="https://automatyn.co" class="hover:text-white">Home</a>
                 <a href="https://automatyn.co/blog/" class="hover:text-white">Blog</a>
                 <a href="https://automatyn.co/register.html" class="hover:text-white">Pricing</a>
-                <a href="https://calendly.com/patricksson/30min" class="cta-button text-sm" style="padding: 0.6rem 1.2rem;">Book Free Call</a>
+                <a href="https://automatyn.co/register.html" class="cta-button text-sm" style="padding: 0.6rem 1.2rem;">Start Free</a>
             </div>
         </div>
     </nav>
