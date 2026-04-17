@@ -8,7 +8,9 @@ const authLib = require('./auth');
 const fs = require('fs');
 const path = require('path');
 
+const https = require('https');
 const APP_URL = process.env.APP_URL || 'https://automatyn.co';
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 
 const app = express();
 const PORT = process.env.SAAS_API_PORT || 3001;
@@ -371,6 +373,96 @@ app.post('/api/auth/magic-link/consume', (req, res) => {
     verified: true,
     plan: user.plan || 'free',
     isNewUser: !!entry.isNewUser,
+  });
+});
+
+// POST /api/auth/google — Sign in / sign up with Google ID token
+app.post('/api/auth/google', async (req, res) => {
+  const ip = req.ip || req.connection.remoteAddress;
+  const credential = (req.body.credential || '').trim();
+  const plan = ['free', 'starter', 'pro'].includes(req.body.plan) ? req.body.plan : 'free';
+
+  if (!credential) return res.status(400).json({ error: 'Missing Google credential.' });
+  if (!authLib.rateLimit(`google:ip:${ip}`, 20, 3600000)) {
+    return res.status(429).json({ error: 'Too many requests. Try again later.' });
+  }
+
+  // Verify the ID token with Google
+  let payload;
+  try {
+    const verifyUrl = `https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(credential)}`;
+    payload = await new Promise((resolve, reject) => {
+      https.get(verifyUrl, (resp) => {
+        let data = '';
+        resp.on('data', c => data += c);
+        resp.on('end', () => {
+          try {
+            const parsed = JSON.parse(data);
+            if (parsed.error_description) return reject(new Error(parsed.error_description));
+            resolve(parsed);
+          } catch (e) { reject(e); }
+        });
+      }).on('error', reject);
+    });
+  } catch (err) {
+    console.error('Google token verify failed:', err.message);
+    return res.status(401).json({ error: 'Invalid Google credential. Please try again.' });
+  }
+
+  // Verify audience matches our client ID
+  if (payload.aud !== GOOGLE_CLIENT_ID) {
+    return res.status(401).json({ error: 'Invalid Google credential.' });
+  }
+
+  const email = (payload.email || '').toLowerCase();
+  if (!email || payload.email_verified !== 'true') {
+    return res.status(400).json({ error: 'Google account email not verified.' });
+  }
+
+  let user = authLib.getUser(email);
+  let isNewUser = false;
+
+  if (!user) {
+    isNewUser = true;
+    try {
+      const metadata = provisionAgent({
+        email, businessName: '', industry: '', services: '', prices: '',
+        hours: '', location: '', policies: '', plan,
+      });
+      user = {
+        email,
+        passwordHash: null,
+        verified: true,
+        googleSub: payload.sub,
+        name: payload.name || '',
+        agentId: metadata.agentId,
+        plan,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      authLib.setUser(email, user);
+    } catch (err) {
+      console.error('Google sign-up provision failed:', err);
+      return res.status(500).json({ error: 'Account creation failed. Please try again.' });
+    }
+  } else {
+    // Existing user, update Google info if missing
+    if (!user.googleSub) user.googleSub = payload.sub;
+    if (!user.verified) { user.verified = true; user.verifiedAt = new Date().toISOString(); }
+    user.lastLoginAt = new Date().toISOString();
+    user.updatedAt = new Date().toISOString();
+    authLib.setUser(email, user);
+  }
+
+  const jwtToken = issueJwt(user);
+  res.json({
+    success: true,
+    token: jwtToken,
+    agentId: user.agentId,
+    email: user.email,
+    verified: true,
+    plan: user.plan || 'free',
+    isNewUser,
   });
 });
 
