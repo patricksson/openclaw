@@ -39,8 +39,8 @@
   .input-dark { background: #0a0a0a; border: 1px solid rgba(255,255,255,0.08); color: #f5f5f5; }
   .input-dark:focus { outline: none; border-color: #22d3ee; }
   .slider { accent-color: #22d3ee; }
-  .btn-cta { background: #10b981; color: #fff; transition: background 0.15s; }
-  .btn-cta:hover { background: #0ea573; }
+  .btn-cta { background: linear-gradient(180deg, #85e6b5 0%, #5dd492 100%); color: #0a0a0a; font-weight: 600; transition: all 0.25s ease; box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 4px 16px rgba(117,224,167,0.2); }
+  .btn-cta:hover { background: linear-gradient(180deg, #96ecc2 0%, #6bdca0 100%); transform: translateY(-2px) scale(1.02); box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 8px 24px rgba(117,224,167,0.3); }
   .btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.1); color: #f5f5f5; transition: all 0.15s; }
   .btn-ghost:hover { border-color: #22d3ee; color: #22d3ee; }
   .metric-up { animation: pulse 0.4s; }
@@ -79,7 +79,7 @@
             <label class="text-sm font-semibold text-gray-300">WhatsApp enquiries per week</label>
             <span class="text-xl font-bold text-white" id="leads-display">40</span>
           </div>
-          <input id="leads" type="range" class="slider w-full" min="5" max="300" step="5" value="40">
+          <input id="leads" type="range" class="slider w-full" min="1" max="300" step="1" value="40">
           <div class="flex justify-between text-xs text-gray-500 mt-1"><span>5</span><span>300</span></div>
         </div>
 
@@ -97,7 +97,7 @@
             <label class="text-sm font-semibold text-gray-300">% of leads you lose to slow reply</label>
             <span class="text-xl font-bold text-white"><span id="loss-display">40</span>%</span>
           </div>
-          <input id="loss" type="range" class="slider w-full" min="5" max="90" step="5" value="40">
+          <input id="loss" type="range" class="slider w-full" min="1" max="90" step="1" value="40">
           <div class="flex justify-between text-xs text-gray-500 mt-1"><span>5%</span><span>90%</span></div>
           <p class="text-xs text-gray-500 mt-2">Small-business average: 40-60%. Tradespeople on jobs: 60-80%.</p>
         </div>

@@ -53,13 +53,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root { --bg: #030303; --card: #0a0a0a; --accent: #22d3ee; --cta: #10b981; --border: rgba(255,255,255,0.08); }
+  :root { --bg: #030303; --card: #0a0a0a; --accent: #22d3ee; --border: rgba(255,255,255,0.08); }
   body { background: var(--bg); color: #f5f5f5; font-family: 'DM Sans', sans-serif; }
   .glass { background: rgba(255,255,255,0.02); border: 1px solid var(--border); backdrop-filter: blur(10px); }
   .input-dark { background: #0a0a0a; border: 1px solid var(--border); color: #f5f5f5; transition: border-color 0.15s; }
   .input-dark:focus { outline: none; border-color: var(--accent); }
-  .btn-cta { background: var(--cta); color: #fff; }
-  .btn-cta:hover { background: #0ea573; }
+  .btn-cta { background: linear-gradient(180deg, #85e6b5 0%, #5dd492 100%); color: #0a0a0a; font-weight: 600; transition: all 0.25s ease; box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 4px 16px rgba(117,224,167,0.2); }
+  .btn-cta:hover { background: linear-gradient(180deg, #96ecc2 0%, #6bdca0 100%); transform: translateY(-2px) scale(1.02); box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 8px 24px rgba(117,224,167,0.3); }
   .btn-ghost { background: transparent; border: 1px solid var(--border); color: #f5f5f5; }
   .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
   .fade-in { animation: fade 0.3s ease-out; }
@@ -400,7 +400,7 @@
       const btn = $('copy');
       const original = btn.textContent;
       btn.textContent = 'Copied!';
-      btn.style.color = '#10b981';
+      btn.style.color = '#5dd492';
       setTimeout(() => { btn.textContent = original; btn.style.color = ''; }, 1500);
     } catch (e) { alert('Copy failed — please select and copy manually.'); }
   });
