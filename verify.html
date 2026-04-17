@@ -129,9 +129,9 @@
         show('error-state'); return;
       }
 
-      if (data.token) localStorage.setItem('automatyn_jwt', data.token);
-      if (data.agentId) localStorage.setItem('automatyn_agent', data.agentId);
-      if (data.email) localStorage.setItem('automatyn_email', data.email);
+      if (data.token) localStorage.setItem('jwt', data.token);
+      if (data.agentId) localStorage.setItem('agentId', data.agentId);
+      if (data.email) localStorage.setItem('email', data.email);
 
       show('success-state');
 

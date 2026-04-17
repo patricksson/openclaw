@@ -1198,13 +1198,13 @@
 
         function init() {
             const params = new URLSearchParams(window.location.search);
-            // Support both new key (automatyn_jwt) and legacy key (automatyn_token)
-            token = params.get('token') || localStorage.getItem('automatyn_jwt') || localStorage.getItem('automatyn_token');
-            agentId = params.get('agent') || localStorage.getItem('automatyn_agent');
+            // Read auth from URL params or localStorage
+            token = params.get('token') || localStorage.getItem('jwt') || localStorage.getItem('jwt');
+            agentId = params.get('agent') || localStorage.getItem('agentId');
 
             if (token && agentId) {
-                localStorage.setItem('automatyn_jwt', token);
-                localStorage.setItem('automatyn_agent', agentId);
+                localStorage.setItem('jwt', token);
+                localStorage.setItem('agentId', agentId);
                 if (params.has('token') || params.has('agent')) {
                     window.history.replaceState({}, '', '/dashboard.html');
                 }
@@ -1229,7 +1229,7 @@
                 const dismissed = sessionStorage.getItem('automatyn_verify_dismissed') === '1';
                 if (me && !me.verified && !dismissed) {
                     document.getElementById('verify-banner').style.display = 'flex';
-                    localStorage.setItem('automatyn_email', me.email);
+                    localStorage.setItem('email', me.email);
                 }
             } catch (e) { /* no-op */ }
         }
@@ -1243,7 +1243,7 @@
             });
             const resendBtn = document.getElementById('resend-verify-btn');
             if (resendBtn) resendBtn.addEventListener('click', async () => {
-                const email = localStorage.getItem('automatyn_email');
+                const email = localStorage.getItem('email');
                 if (!email) return;
                 resendBtn.disabled = true;
                 resendBtn.textContent = 'Sending…';
