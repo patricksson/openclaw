@@ -141,6 +141,11 @@
     ? 'http://localhost:3001'
     : 'https://api.automatyn.co';
 
+  // If already logged in, go straight to dashboard
+  if (localStorage.getItem('jwt')) {
+    window.location.href = '/dashboard.html';
+  }
+
   // Google Sign-In callback
   async function handleGoogleSignIn(response) {
     const errBox = document.getElementById('error-box');
