@@ -17,6 +17,8 @@
       html { -webkit-text-size-adjust:100%; }
       body { font-family:'DM Sans', sans-serif; background:#030303; color:#f5f5f5; -webkit-font-smoothing:antialiased; min-height:100vh; }
       .heading { font-family:'Cabinet Grotesk', sans-serif; letter-spacing:-0.04em; }
+      label { font-family:'DM Sans', sans-serif; letter-spacing:0.05em; }
+      .step-heading { font-family:'Cabinet Grotesk', sans-serif; letter-spacing:-0.03em; line-height:1.2; }
 
       .bg-ambient { position:relative; overflow-x:hidden; min-height:100vh; }
       .bg-ambient::before { content:""; position:absolute; inset:-40%; background:
@@ -79,7 +81,7 @@
 
     <!-- Header -->
     <div class="text-center mb-6 sm:mb-8">
-      <h1 class="heading text-3xl sm:text-4xl font-extrabold mb-2">Set up your AI receptionist</h1>
+      <h1 class="step-heading text-3xl sm:text-4xl font-extrabold mb-2">Set up your AI receptionist</h1>
       <p class="text-sm sm:text-base text-gray-400">Takes about 3 minutes. You can edit everything later.</p>
     </div>
 
@@ -97,16 +99,16 @@
 
         <!-- Step 1: Business basics -->
         <div id="step-1" class="step-pane active">
-          <h2 class="heading text-xl sm:text-2xl font-bold mb-5">Tell us about your business</h2>
+          <h2 class="step-heading text-2xl sm:text-3xl font-extrabold mb-6">Tell us about your business</h2>
 
           <div class="space-y-5">
             <div>
-              <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Business name</label>
+              <label class="block text-sm font-medium text-gray-300 mb-2">Business name</label>
               <input class="field" id="businessName" name="businessName" type="text" required placeholder="e.g. Greenwood Plumbing" maxlength="100" />
             </div>
 
             <div>
-              <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Industry</label>
+              <label class="block text-sm font-medium text-gray-300 mb-2">Industry</label>
               <select class="field" id="industry" name="industry" required>
                 <option value="">Choose one…</option>
                 <option>Plumbing & heating</option>
@@ -130,7 +132,7 @@
             </div>
 
             <div>
-              <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Location <span class="text-gray-600 normal-case font-normal">(optional)</span></label>
+              <label class="block text-sm font-medium text-gray-300 mb-2">Location <span class="text-gray-600 normal-case font-normal">(optional)</span></label>
               <input class="field" id="location" name="location" type="text" placeholder="City, country" maxlength="100" />
             </div>
           </div>
@@ -142,22 +144,22 @@
 
         <!-- Step 2: Services + hours -->
         <div id="step-2" class="step-pane">
-          <h2 class="heading text-xl sm:text-2xl font-bold mb-5">What do you offer?</h2>
+          <h2 class="step-heading text-2xl sm:text-3xl font-extrabold mb-6">What do you offer?</h2>
 
           <div class="space-y-5">
             <div>
-              <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Services</label>
+              <label class="block text-sm font-medium text-gray-300 mb-2">Services</label>
               <textarea class="field" id="services" name="services" required placeholder="e.g.&#10;Emergency plumbing&#10;Boiler repair&#10;Bathroom installation" rows="4" maxlength="1000"></textarea>
               <div class="text-xs text-gray-500 mt-1.5">One per line. The AI uses these to answer customer questions.</div>
             </div>
 
             <div>
-              <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Pricing <span class="text-gray-600 normal-case font-normal">(optional)</span></label>
+              <label class="block text-sm font-medium text-gray-300 mb-2">Pricing <span class="text-gray-600 normal-case font-normal">(optional)</span></label>
               <textarea class="field" id="prices" name="prices" placeholder="e.g.&#10;Callout fee: £45&#10;Hourly rate: £60" rows="3" maxlength="500"></textarea>
             </div>
 
             <div>
-              <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Opening hours</label>
+              <label class="block text-sm font-medium text-gray-300 mb-2">Opening hours</label>
               <input class="field" id="hours" name="hours" type="text" required placeholder="e.g. Mon-Fri 9am-5pm, Sat 10am-2pm" maxlength="200" />
             </div>
           </div>
@@ -170,11 +172,11 @@
 
         <!-- Step 3: Policies + review -->
         <div id="step-3" class="step-pane">
-          <h2 class="heading text-xl sm:text-2xl font-bold mb-5">Policies &amp; final touches</h2>
+          <h2 class="step-heading text-2xl sm:text-3xl font-extrabold mb-6">Policies &amp; final touches</h2>
 
           <div class="space-y-5">
             <div>
-              <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wider">Booking &amp; cancellation policy <span class="text-gray-600 normal-case font-normal">(optional)</span></label>
+              <label class="block text-sm font-medium text-gray-300 mb-2">Booking &amp; cancellation policy <span class="text-gray-600 normal-case font-normal">(optional)</span></label>
               <textarea class="field" id="policies" name="policies" placeholder="e.g. 24hr cancellation notice. £20 deposit for first-time clients." rows="3" maxlength="500"></textarea>
             </div>
 
