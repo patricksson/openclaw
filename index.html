@@ -498,9 +498,14 @@
         .quick-reply:hover { background: rgba(168, 85, 247, 0.2); border-color: var(--neon-purple); }
 
         /* Mobile optimizations */
+        html, body { overflow-x: hidden; }
         @media (max-width: 640px) {
             .hero-gradient { padding-top: 28px; }
             section { padding-left: 16px; padding-right: 16px; }
+            #wa-chat { height: 360px !important; }
+        }
+        @media (max-width: 400px) {
+            #wa-chat { height: 320px !important; }
         }
 
         /* Hardware Guide CTA */
@@ -526,7 +531,7 @@
     </div>
 
     <!-- Launch Discount Banner -->
-    <div class="urgency-banner text-white text-center py-2.5 px-4 text-sm font-medium fixed top-0 w-full z-[60]">
+    <div class="urgency-banner text-white text-center py-2.5 px-4 text-xs sm:text-sm font-medium fixed top-0 w-full z-[60]">
         <span class="pulse inline-block w-2 h-2 bg-emerald-400 rounded-full mr-2" aria-hidden="true"></span>
         🤖 <strong class="text-white">Free AI receptionist for your WhatsApp.</strong> Answers customers 24/7. <a href="/signup.html" class="underline font-bold ml-1" style="color: #22d3ee;">Start free →</a>
     </div>
@@ -582,12 +587,12 @@
                     <span class="text-sm font-medium text-cyan-300">OpenClaw — 247K+ GitHub Stars</span>
                 </div>
 
-                <h1 class="hero-enter hero-enter-2 text-4xl md:text-6xl font-extrabold text-white mb-6 leading-[1.08] tracking-tight">
+                <h1 class="hero-enter hero-enter-2 text-3xl sm:text-4xl md:text-6xl font-extrabold text-white mb-6 leading-[1.08] tracking-tight">
                     Stop answering messages.<br>
                     <span class="gradient-text-glow">Your AI agent will.</span>
                 </h1>
 
-                <p class="hero-enter hero-enter-3 text-base md:text-lg text-gray-400 mb-8 leading-relaxed">
+                <p class="hero-enter hero-enter-3 text-sm sm:text-base md:text-lg text-gray-400 mb-8 leading-relaxed">
                     You're spending 15+ hours a week on messages, follow-ups, and scheduling. Your AI receptionist handles all of it on WhatsApp. 24/7. Set up in minutes, not hours.
                 </p>
 
@@ -793,54 +798,54 @@
     <section class="py-14 px-4 bg-black">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Hiring Staff vs. AI Receptionist</h2>
-                <p class="text-xl text-gray-400">See why businesses are switching to AI for customer inquiries</p>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Hiring Staff vs. AI Receptionist</h2>
+                <p class="text-base sm:text-xl text-gray-400">See why businesses are switching to AI for customer inquiries</p>
             </div>
 
             <div class="overflow-x-auto">
-                <table class="w-full bg-black rounded-2xl card-shadow-lg overflow-hidden border border-white/6">
+                <table class="w-full bg-black rounded-2xl card-shadow-lg overflow-hidden border border-white/6 text-sm sm:text-base">
                     <thead>
                         <tr class="bg-cyan-950/30">
-                            <th class="text-left p-4 font-semibold text-gray-300">What You Get</th>
-                            <th class="p-4 font-semibold text-red-400 text-center">Hire a Receptionist</th>
-                            <th class="p-4 font-semibold text-green-400 text-center bg-green-900/20">Automatyn AI</th>
+                            <th class="text-left p-3 sm:p-4 font-semibold text-gray-300">What You Get</th>
+                            <th class="p-3 sm:p-4 font-semibold text-red-400 text-center">Hire a Receptionist</th>
+                            <th class="p-3 sm:p-4 font-semibold text-green-400 text-center bg-green-900/20">Automatyn AI</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-white/5">
                         <tr class="hover:bg-white/3 transition">
-                            <td class="p-4 text-gray-300">Monthly Cost</td>
-                            <td class="p-4 text-center text-red-400">$2,000+/month</td>
-                            <td class="p-4 text-center text-green-400 bg-green-900/20">$0 to start</td>
+                            <td class="p-3 sm:p-4 text-gray-300">Monthly Cost</td>
+                            <td class="p-3 sm:p-4 text-center text-red-400">$2,000+/month</td>
+                            <td class="p-3 sm:p-4 text-center text-green-400 bg-green-900/20">$0 to start</td>
                         </tr>
                         <tr class="hover:bg-white/3 transition">
-                            <td class="p-4 text-gray-300">Availability</td>
-                            <td class="p-4 text-center text-red-400">Business hours only</td>
-                            <td class="p-4 text-center text-green-400 bg-green-900/20">✓ 24/7/365</td>
+                            <td class="p-3 sm:p-4 text-gray-300">Availability</td>
+                            <td class="p-3 sm:p-4 text-center text-red-400">Business hours only</td>
+                            <td class="p-3 sm:p-4 text-center text-green-400 bg-green-900/20">✓ 24/7/365</td>
                         </tr>
                         <tr class="hover:bg-white/3 transition">
-                            <td class="p-4 text-gray-300">Response Time</td>
-                            <td class="p-4 text-center text-red-400">Minutes to hours</td>
-                            <td class="p-4 text-center text-green-400 bg-green-900/20">✓ Instant</td>
+                            <td class="p-3 sm:p-4 text-gray-300">Response Time</td>
+                            <td class="p-3 sm:p-4 text-center text-red-400">Minutes to hours</td>
+                            <td class="p-3 sm:p-4 text-center text-green-400 bg-green-900/20">✓ Instant</td>
                         </tr>
                         <tr class="hover:bg-white/3 transition">
-                            <td class="p-4 text-gray-300">Handles Multiple Chats</td>
-                            <td class="p-4 text-center text-red-400">❌ One at a time</td>
-                            <td class="p-4 text-center text-green-400 bg-green-900/20">✓ Unlimited</td>
+                            <td class="p-3 sm:p-4 text-gray-300">Handles Multiple Chats</td>
+                            <td class="p-3 sm:p-4 text-center text-red-400">❌ One at a time</td>
+                            <td class="p-3 sm:p-4 text-center text-green-400 bg-green-900/20">✓ Unlimited</td>
                         </tr>
                         <tr class="hover:bg-white/3 transition">
-                            <td class="p-4 text-gray-300">Sick Days / Holidays</td>
-                            <td class="p-4 text-center text-red-400">❌ Coverage needed</td>
-                            <td class="p-4 text-center text-green-400 bg-green-900/20">✓ Never misses a day</td>
+                            <td class="p-3 sm:p-4 text-gray-300">Sick Days / Holidays</td>
+                            <td class="p-3 sm:p-4 text-center text-red-400">❌ Coverage needed</td>
+                            <td class="p-3 sm:p-4 text-center text-green-400 bg-green-900/20">✓ Never misses a day</td>
                         </tr>
                         <tr class="hover:bg-white/3 transition">
-                            <td class="p-4 text-gray-300">Setup Time</td>
-                            <td class="p-4 text-center text-red-400">Weeks of training</td>
-                            <td class="p-4 text-center text-green-400 bg-green-900/20">✓ 10 minutes</td>
+                            <td class="p-3 sm:p-4 text-gray-300">Setup Time</td>
+                            <td class="p-3 sm:p-4 text-center text-red-400">Weeks of training</td>
+                            <td class="p-3 sm:p-4 text-center text-green-400 bg-green-900/20">✓ 10 minutes</td>
                         </tr>
                         <tr class="hover:bg-white/3 transition">
-                            <td class="p-4 text-gray-300">Cancel Anytime</td>
-                            <td class="p-4 text-center text-red-400">❌ Notice period</td>
-                            <td class="p-4 text-center text-green-400 bg-green-900/20">✓ No commitment</td>
+                            <td class="p-3 sm:p-4 text-gray-300">Cancel Anytime</td>
+                            <td class="p-3 sm:p-4 text-center text-red-400">❌ Notice period</td>
+                            <td class="p-3 sm:p-4 text-center text-green-400 bg-green-900/20">✓ No commitment</td>
                         </tr>
                     </tbody>
                 </table>
@@ -858,8 +863,8 @@
                 <span class="w-2 h-2 bg-purple-400 rounded-full pulse" aria-hidden="true"></span>
                 <span class="text-sm font-medium text-purple-300">Live Demo</span>
             </div>
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Try It Yourself in 30 Seconds</h2>
-            <p class="text-lg text-gray-400 mb-8">See how an AI receptionist handles real customer inquiries for salons, dental offices, restaurants, and more. Enter your email and we'll send you a link to chat with our demo bot on Telegram.</p>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Try It Yourself in 30 Seconds</h2>
+            <p class="text-base sm:text-lg text-gray-400 mb-8">See how an AI receptionist handles real customer inquiries for salons, dental offices, restaurants, and more. Enter your email and we'll send you a link to chat with our demo bot on Telegram.</p>
 
             <!-- Email gate form -->
             <div id="demo-form-container">
@@ -897,13 +902,13 @@
                     <span class="w-2 h-2 bg-cyan-400 rounded-full pulse" aria-hidden="true"></span>
                     <span class="text-sm font-medium text-cyan-300">Featured Case Study</span>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
                     <span class="gradient-text">@NataliaAI</span> — 7M+ Reach, Zero Manual Input
                 </h2>
-                <p class="text-xl text-gray-400">How one AI influencer scaled to 10+ accounts on autopilot</p>
+                <p class="text-base sm:text-xl text-gray-400">How one AI influencer scaled to 10+ accounts on autopilot</p>
             </div>
 
-            <div class="bg-gradient-to-br from-cyan-950/20 to-cyan-900/10 border border-white/8 rounded-2xl p-8 card-glow">
+            <div class="bg-gradient-to-br from-cyan-950/20 to-cyan-900/10 border border-white/8 rounded-2xl p-5 sm:p-8 card-glow">
                 <div class="grid md:grid-cols-3 gap-8 mb-8">
                     <div class="text-center">
                         <div class="text-4xl font-bold gradient-text mb-2">3×</div>
@@ -952,8 +957,8 @@
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-10">
                 <div class="inline-flex items-center gap-2 bg-cyan-950/40 border border-cyan-800/30 px-3 py-1 rounded-full mb-4 text-xs font-semibold text-cyan-300">LIVE CALCULATOR · NO SIGNUP</div>
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">How much is slow WhatsApp costing you?</h2>
-                <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">Move the sliders. See what you're losing. See what Automatyn saves.</p>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3">How much is slow WhatsApp costing you?</h2>
+                <p class="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">Move the sliders. See what you're losing. See what Automatyn saves.</p>
             </div>
 
             <div class="bg-card rounded-2xl border border-white/8 p-6 md:p-8">
@@ -1066,14 +1071,14 @@
     <section id="pricing" class="py-20 px-4 bg-surface">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Simple, Transparent Pricing</h2>
-                <p class="text-xl text-gray-400">Start free. Upgrade when you need more. Cancel anytime.</p>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Simple, Transparent Pricing</h2>
+                <p class="text-base sm:text-xl text-gray-400">Start free. Upgrade when you need more. Cancel anytime.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-6 items-stretch">
 
                 <!-- Free -->
-                <div class="pricing-card rounded-2xl border border-white/8 bg-white/[0.02] p-8 flex flex-col">
+                <div class="pricing-card rounded-2xl border border-white/8 bg-white/[0.02] p-5 sm:p-8 flex flex-col">
                     <div class="mb-6">
                         <h3 class="text-lg font-semibold text-white mb-2 tracking-tight">Free</h3>
                         <div class="text-4xl font-bold text-white heading">Free</div>
@@ -1092,7 +1097,7 @@
                 </div>
 
                 <!-- Starter (highlighted) -->
-                <div class="pricing-card pricing-card-featured rounded-2xl p-8 relative flex flex-col">
+                <div class="pricing-card pricing-card-featured rounded-2xl p-5 sm:p-8 relative flex flex-col">
                     <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] tracking-widest font-bold uppercase bg-cyan-400 text-black">
                         Most popular
                     </div>
@@ -1118,7 +1123,7 @@
                 </div>
 
                 <!-- Pro -->
-                <div class="pricing-card rounded-2xl border border-white/8 bg-white/[0.02] p-8 flex flex-col">
+                <div class="pricing-card rounded-2xl border border-white/8 bg-white/[0.02] p-5 sm:p-8 flex flex-col">
                     <div class="mb-6">
                         <h3 class="text-lg font-semibold text-white mb-2 tracking-tight">Pro</h3>
                         <div class="flex items-baseline gap-1">
@@ -1161,7 +1166,7 @@
             </div>
 
             <!-- Self-hosted option: Build Your Own + Done-For-You setup -->
-            <div class="mt-12 bg-gradient-to-r from-purple-950/20 to-purple-900/10 rounded-2xl p-8 border border-white/6">
+            <div class="mt-12 bg-gradient-to-r from-purple-950/20 to-purple-900/10 rounded-2xl p-5 sm:p-8 border border-white/6">
                 <div class="flex flex-col md:flex-row md:items-center gap-6">
                     <div class="flex-1">
                         <h3 class="text-xl font-bold text-white mb-2">Build Your Own AI Agent on Your Own Machine</h3>
@@ -1386,12 +1391,12 @@
     <section id="process" class="py-20 px-4 bg-black">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">How It Works</h2>
-                <p class="text-xl text-gray-400">Live in 10 minutes. Three simple steps.</p>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">How It Works</h2>
+                <p class="text-base sm:text-xl text-gray-400">Live in 10 minutes. Three simple steps.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-card rounded-2xl p-8 card-glow relative transition-all duration-300">
+                <div class="bg-card rounded-2xl p-5 sm:p-8 card-glow relative transition-all duration-300">
                     <div class="absolute -top-4 left-8">
                         <div class="w-8 h-8 rounded-full cta-primary flex items-center justify-center text-white font-bold text-sm neon-glow">1</div>
                     </div>
@@ -1405,7 +1410,7 @@
                     </div>
                 </div>
 
-                <div class="bg-card rounded-2xl p-8 card-glow relative transition-all duration-300">
+                <div class="bg-card rounded-2xl p-5 sm:p-8 card-glow relative transition-all duration-300">
                     <div class="absolute -top-4 left-8">
                         <div class="w-8 h-8 rounded-full cta-primary flex items-center justify-center text-white font-bold text-sm neon-glow">2</div>
                     </div>
@@ -1419,7 +1424,7 @@
                     </div>
                 </div>
 
-                <div class="bg-card rounded-2xl p-8 card-glow relative transition-all duration-300">
+                <div class="bg-card rounded-2xl p-5 sm:p-8 card-glow relative transition-all duration-300">
                     <div class="absolute -top-4 left-8">
                         <div class="w-8 h-8 rounded-full cta-primary flex items-center justify-center text-white font-bold text-sm neon-glow">3</div>
                     </div>
@@ -1444,7 +1449,7 @@
     <section id="faq" class="py-20 px-4 bg-black">
         <div class="max-w-3xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Frequently Asked Questions</h2>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Frequently Asked Questions</h2>
             </div>
 
             <div class="space-y-4">
@@ -1510,8 +1515,8 @@
     <!-- CTA Section -->
     <section id="contact" class="py-20 px-4 bg-surface">
         <div class="max-w-3xl mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Stop Missing Messages?</h2>
-            <p class="text-xl text-gray-400 mb-8">Set up your AI receptionist in 10 minutes. Free plan included.</p>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">Ready to Stop Missing Messages?</h2>
+            <p class="text-base sm:text-xl text-gray-400 mb-8">Set up your AI receptionist in 10 minutes. Free plan included.</p>
             <a href="/signup.html" class="inline-flex items-center justify-center gap-2 cta-primary text-white px-8 py-4 rounded-xl font-semibold text-lg hover:opacity-90 transition shadow-lg neon-glow">
                 Start Free
             </a>
@@ -1532,7 +1537,7 @@
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-12">
                 <span class="inline-block px-4 py-1.5 bg-cyan-950/30 text-cyan-400 rounded-full text-sm font-medium mb-4">Latest Insights</span>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4" style="font-family: 'Cabinet Grotesk', sans-serif;">From the Blog</h2>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-4" style="font-family: 'Cabinet Grotesk', sans-serif;">From the Blog</h2>
                 <p class="text-gray-400 max-w-2xl mx-auto">Learn how AI automation can transform your business and create new income streams.</p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="blog-posts">
