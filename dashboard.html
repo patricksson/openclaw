@@ -770,9 +770,11 @@
 
                     <!-- Hero metric -->
                     <div class="hero-card">
-                        <div class="hero-filters">
-                            <button class="filter-pill active">This month</button>
-                            <button class="filter-pill">This year</button>
+                        <div class="hero-filters" id="hero-filters">
+                            <button class="filter-pill" data-range="today" onclick="setHeroFilter('today', this)">Today</button>
+                            <button class="filter-pill" data-range="week" onclick="setHeroFilter('week', this)">This week</button>
+                            <button class="filter-pill active" data-range="month" onclick="setHeroFilter('month', this)">This month</button>
+                            <button class="filter-pill" data-range="year" onclick="setHeroFilter('year', this)">This year</button>
                         </div>
                         <div class="hero-label">Conversations handled</div>
                         <div>
@@ -1762,11 +1764,39 @@
                     if (upgradeBtn) upgradeBtn.style.display = 'none';
                 }
 
-                // Sparkline placeholder - will use real data once backend exposes it
-                drawSparkline(status.history || [count]);
+                // Store range data for filter buttons
+                window._statusData = {
+                    countByRange: status.countByRange || { today: 0, week: 0, month: count, year: count },
+                    history: status.history || [count],
+                    totalCount: count,
+                };
+
+                // Apply current filter (default: month)
+                const activeFilter = document.querySelector('#hero-filters .filter-pill.active');
+                const currentRange = activeFilter ? activeFilter.dataset.range : 'month';
+                applyHeroFilter(currentRange);
             } catch (err) {
                 console.error('Status load failed:', err);
             }
+        }
+
+        function setHeroFilter(range, btn) {
+            document.querySelectorAll('#hero-filters .filter-pill').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            applyHeroFilter(range);
+        }
+
+        function applyHeroFilter(range) {
+            const data = window._statusData;
+            if (!data) return;
+            const count = data.countByRange[range] !== undefined ? data.countByRange[range] : data.totalCount;
+            document.getElementById('hero-count').textContent = count;
+
+            const rangeLabels = { today: 'Today', week: 'This week', month: 'This month', year: 'This year' };
+            const heroLabel = document.querySelector('.hero-label');
+            if (heroLabel) heroLabel.textContent = 'Conversations ' + (rangeLabels[range] || '').toLowerCase();
+
+            drawSparkline(data.history || [count]);
         }
 
         async function loadQR() {

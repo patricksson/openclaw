@@ -935,12 +935,47 @@ app.get('/api/agent/:id/status', auth, (req, res) => {
   }
 
   const limits = { starter: 25, pro: 150, max: -1 };
+
+  // Compute range-filtered counts from leads (each lead = a conversation)
+  const allLeads = loadLeads(req.params.id);
+  const now = new Date();
+  const todayStr = now.toISOString().slice(0, 10);
+
+  // Week start (Monday)
+  const weekStart = new Date(now);
+  weekStart.setDate(now.getDate() - ((now.getDay() + 6) % 7));
+  weekStart.setHours(0, 0, 0, 0);
+
+  // Month start
+  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+
+  // Year start
+  const yearStart = new Date(now.getFullYear(), 0, 1);
+
+  const countByRange = {
+    today: allLeads.filter(l => (l.createdAt || '').slice(0, 10) === todayStr).length,
+    week: allLeads.filter(l => l.createdAt && new Date(l.createdAt) >= weekStart).length,
+    month: allLeads.filter(l => l.createdAt && new Date(l.createdAt) >= monthStart).length,
+    year: allLeads.filter(l => l.createdAt && new Date(l.createdAt) >= yearStart).length,
+  };
+
+  // Build daily history for the last 30 days
+  const history = [];
+  for (let i = 29; i >= 0; i--) {
+    const d = new Date(now);
+    d.setDate(d.getDate() - i);
+    const ds = d.toISOString().slice(0, 10);
+    history.push(allLeads.filter(l => (l.createdAt || '').slice(0, 10) === ds).length);
+  }
+
   res.json({
     connected: agent.whatsappConnected || false,
     plan: agent.plan,
     conversationCount: agent.conversationCount || 0,
     conversationLimit: limits[agent.plan] || 25,
     resetDate: agent.conversationResetDate,
+    countByRange,
+    history,
   });
 });
 
