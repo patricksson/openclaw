@@ -428,18 +428,26 @@
 
         /* CTA buttons — Dodo-style yellow-green, dark text, rounded rect */
         .cta-primary {
-            background: #75E0A7;
+            background: linear-gradient(180deg, #85e6b5 0%, #5dd492 100%);
             color: #0a0a0a !important;
             border: none;
-            border-radius: 8px;
-            transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
+            border-radius: 10px;
+            transition: all 0.25s ease;
             font-weight: 600;
-            box-shadow: 0 4px 20px rgba(117,224,167,0.2);
+            box-shadow:
+                0 1px 0 rgba(255,255,255,0.2) inset,
+                0 0 20px rgba(117,224,167,0.25),
+                0 0 60px rgba(117,224,167,0.08),
+                0 4px 16px rgba(117,224,167,0.2);
         }
         .cta-primary:hover {
-            background: #5dd492;
-            transform: translateY(-1px);
-            box-shadow: 0 8px 30px rgba(117,224,167,0.35);
+            background: linear-gradient(180deg, #96ecc2 0%, #6bdca0 100%);
+            transform: translateY(-2px);
+            box-shadow:
+                0 1px 0 rgba(255,255,255,0.25) inset,
+                0 0 30px rgba(117,224,167,0.4),
+                0 0 80px rgba(117,224,167,0.12),
+                0 8px 24px rgba(117,224,167,0.3);
         }
         @keyframes gradientShift {
             0%, 100% { background-position: 0% 50%; }
@@ -453,6 +461,13 @@
         /* Neon glow animation — cyan */
         .neon-glow { animation: neonPulse 3s ease-in-out infinite; }
         @keyframes neonPulse { 0%, 100% { box-shadow: 0 0 20px rgba(34, 211, 238, 0.15), 0 0 40px rgba(34, 211, 238, 0.05); } 50% { box-shadow: 0 0 30px rgba(34, 211, 238, 0.25), 0 0 60px rgba(34, 211, 238, 0.1); } }
+
+        /* Hero CTA breathing glow */
+        .cta-glow { animation: ctaBreath 3.5s ease-in-out infinite; }
+        @keyframes ctaBreath {
+            0%, 100% { box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 0 20px rgba(117,224,167,0.25), 0 0 60px rgba(117,224,167,0.08), 0 4px 16px rgba(117,224,167,0.2); }
+            50% { box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 0 35px rgba(117,224,167,0.4), 0 0 90px rgba(117,224,167,0.15), 0 4px 24px rgba(117,224,167,0.3); }
+        }
 
         /* Chat bubble animations */
         .chat-bubble { animation: slideIn 0.3s ease-out; }
@@ -599,7 +614,7 @@
                 </p>
 
                 <div class="hero-enter hero-enter-4 max-w-xl mx-auto mb-4 text-center">
-                    <a href="/signup.html" class="cta-primary px-6 py-2.5 text-sm sm:text-base inline-flex items-center gap-1.5">
+                    <a href="/signup.html" class="cta-primary cta-glow px-6 py-2.5 text-sm sm:text-base inline-flex items-center gap-1.5">
                         Start Free →
                     </a>
                     <div class="mt-5 flex items-center justify-center gap-4 text-sm">

@@ -384,22 +384,30 @@
 
         /* Buttons */
         .cta-button {
-            background: #75E0A7;
+            background: linear-gradient(180deg, #85e6b5 0%, #5dd492 100%);
             color: #0a0a0a;
             padding: 0.8rem 1.75rem;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: 700;
             border: none;
             cursor: pointer;
             font-size: 0.9rem;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
             font-family: 'DM Sans', sans-serif;
-            box-shadow: 0 4px 20px rgba(117,224,167,0.2);
+            box-shadow:
+                0 1px 0 rgba(255,255,255,0.2) inset,
+                0 0 20px rgba(117,224,167,0.25),
+                0 0 60px rgba(117,224,167,0.08),
+                0 4px 16px rgba(117,224,167,0.2);
         }
         .cta-button:hover {
-            transform: translateY(-1px);
-            background: #5dd492;
-            box-shadow: 0 8px 30px rgba(117,224,167,0.35);
+            transform: translateY(-2px);
+            background: linear-gradient(180deg, #96ecc2 0%, #6bdca0 100%);
+            box-shadow:
+                0 1px 0 rgba(255,255,255,0.25) inset,
+                0 0 30px rgba(117,224,167,0.4),
+                0 0 80px rgba(117,224,167,0.12),
+                0 8px 24px rgba(117,224,167,0.3);
         }
         .cta-button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
         .ghost-button {
