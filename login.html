@@ -163,7 +163,8 @@
         headers: { 'Authorization': 'Bearer ' + jwt }
       });
       if (res.ok) {
-        window.location.href = '/dashboard.html';
+        const aid = localStorage.getItem('agentId');
+        window.location.href = '/dashboard.html?token=' + encodeURIComponent(jwt) + (aid ? '&agent=' + encodeURIComponent(aid) : '');
       } else {
         // Token expired/invalid, clear it
         localStorage.removeItem('jwt');
@@ -197,7 +198,7 @@
       if (data.isNewUser) {
         window.location.href = '/onboard.html';
       } else {
-        window.location.href = '/dashboard.html';
+        window.location.href = '/dashboard.html?token=' + encodeURIComponent(data.token) + '&agent=' + encodeURIComponent(data.agentId);
       }
     } catch (err) {
       errBox.textContent = 'Network error. Please try again.';
