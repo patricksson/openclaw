@@ -61,7 +61,7 @@
             {"@type": "Question", "name": "Which is better for a small business?", "acceptedAnswer": {"@type": "Answer", "text": "For most small businesses, OpenClaw is the better fit. It costs less long-term (one-time setup vs monthly fees), works with any AI model (not just Claude), and gives you full ownership of your data and configuration. Claude Managed Agents is better for enterprise engineering teams that want to ship agents fast without managing infrastructure."}},
             {"@type": "Question", "name": "Can I switch from one to the other later?", "acceptedAnswer": {"@type": "Answer", "text": "Moving from OpenClaw to Managed Agents is straightforward because OpenClaw's configuration files (personality, rules, memory) are plain text that can be adapted to any platform. Moving from Managed Agents to OpenClaw is harder because Managed Agents stores configuration inside Anthropic's system, making extraction less portable."}},
             {"@type": "Question", "name": "Do I need a developer to use either one?", "acceptedAnswer": {"@type": "Answer", "text": "Both require some technical setup. Managed Agents requires API knowledge and developer tools. OpenClaw requires server access and file editing. Neither is plug-and-play for a non-technical business owner, which is why setup services like Automatyn exist. The difference is that OpenClaw's configuration is human-readable markdown files, while Managed Agents is configured through API calls."}},
-            {"@type": "Question", "name": "How much does each one cost?", "acceptedAnswer": {"@type": "Answer", "text": "Claude Managed Agents charges per API token plus likely infrastructure fees (pricing not fully public as of April 2026, still in beta). OpenClaw is free and open-source. The cost is in the setup work and hosting, which can be as low as $0-30 per month for infrastructure. A professional setup service like Automatyn charges $400-$1,500 one-time for a complete OpenClaw deployment."}}
+            {"@type": "Question", "name": "How much does each one cost?", "acceptedAnswer": {"@type": "Answer", "text": "Claude Managed Agents charges per API token plus likely infrastructure fees (pricing not fully public as of April 2026, still in beta). OpenClaw is free and open-source. The cost is in the setup work and hosting, which can be as low as $0-30 per month for infrastructure. A managed service like Automatyn offers plans from free (25 conversations per month) to $79 per month for unlimited conversations."}}
         ]
     }
     </script>
@@ -271,7 +271,7 @@
 
         <p><strong>3. The configuration is human-readable.</strong> OpenClaw's personality file is a markdown document. You can open it in any text editor and see exactly what your bot is doing. "When a customer asks for a discount, check the margin first. If below cost, say so clearly." That's a real line from a real setup. With Managed Agents, the equivalent configuration is an API payload. Try reading JSON at midnight when your bot is misbehaving.</p>
 
-        <p><strong>4. The cost math is dramatically different.</strong> OpenClaw is free and open-source. Hosting costs $0-30 per month depending on your volume. A professional setup (personality, rules, memory, testing, deployment) costs $400-$1,500 one-time through a service like Automatyn. With Managed Agents, you pay per API token plus infrastructure fees, monthly, forever. Over 12 months the difference can be thousands of dollars.</p>
+        <p><strong>4. The cost math is dramatically different.</strong> OpenClaw is free and open-source. Hosting costs $0-30 per month depending on your volume. A managed service like Automatyn offers a free tier plus paid plans at $29/mo and $79/mo. With Managed Agents, you pay per API token plus infrastructure fees, monthly, forever. Over 12 months the difference can be thousands of dollars.</p>
 
         <p><strong>5. It's stable and open-source.</strong> Managed Agents launched this week as a beta. Betas have bugs, missing features, and breaking changes. OpenClaw is open-source software you can inspect, audit, and fix yourself. No waiting for a vendor to patch something. No surprise deprecation notices.</p>
 
@@ -315,7 +315,7 @@
         <p>Most small business owners fall into the second category. The agent they need is not a complex multi-tool enterprise system. It's a bot that knows their menu, sounds like them, escalates the right things to a human, and runs 24/7 without supervision. That's an OpenClaw job.</p>
 
         <div class="inline-cta">
-            <p style="margin:0;">If you're in the second category, Automatyn sets up OpenClaw for small businesses in 2 hours. One-time cost ($400-$1,500), you own everything, no monthly platform fees. <a href="https://automatyn.co/#contact">Book a free 15-minute call</a> to see what your setup would look like.</p>
+            <p style="margin:0;">If you're in the second category, Automatyn sets up OpenClaw for small businesses in under 10 minutes. Free tier available, paid plans from $29/mo. <a href="https://automatyn.co/#contact">Book a free 15-minute call</a> to see what your setup would look like.</p>
         </div>
 
         <h2>The Configuration Problem Neither Platform Solves for You</h2>
@@ -342,7 +342,7 @@
 
         <p>But the platform choice is only 10% of the outcome. The other 90% is the configuration work. The personality. The rules. The memory. The testing. The part that requires a human who understands your business.</p>
 
-        <p>That's what we do at Automatyn. We set up OpenClaw for small businesses. 2 hours, not 2 months. $400-$1,500 one-time, you own everything. The first thing we write is always the personality file, because that's the part that decides whether the bot actually helps.</p>
+        <p>That's what we do at Automatyn. We set up OpenClaw for small businesses. 10 minutes, not 2 months. Free tier to get started, $29/mo or $79/mo for more volume. The first thing we write is always the personality file, because that's the part that decides whether the bot actually helps.</p>
 
         <div class="text-center my-12">
             <a href="/signup.html" class="cta-button">Start Free →</a>
@@ -363,7 +363,7 @@
         <p>Both require some technical setup. Neither is plug-and-play for a non-technical business owner. The difference is that OpenClaw's configuration is human-readable markdown files, while Managed Agents is configured through API calls. Setup services like Automatyn handle the technical side for small business owners who want OpenClaw without the learning curve.</p>
 
         <h3 class="text-xl font-bold mt-8 mb-2 text-white">How much does each one cost?</h3>
-        <p>Claude Managed Agents charges per API token plus infrastructure fees (pricing not fully public as of April 2026). OpenClaw is free and open-source. The cost is in setup work and hosting ($0-30 per month). A professional setup through Automatyn costs $400-$1,500 one-time.</p>
+        <p>Claude Managed Agents charges per API token plus infrastructure fees (pricing not fully public as of April 2026). OpenClaw is free and open-source. The cost is in setup work and hosting ($0-30 per month). Automatyn offers a free Starter tier, with Pro at $29/mo and Max at $79/mo.</p>
 
         <div class="mt-16 pt-8 border-t border-zinc-800">
             <h3 class="text-2xl font-bold text-white mb-4">Related Reading</h3>

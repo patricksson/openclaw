@@ -28,9 +28,12 @@
         border:1px solid rgba(255,255,255,0.08); border-radius:20px; backdrop-filter: blur(14px);
         box-shadow: 0 30px 80px rgba(0,0,0,0.6); }
 
-      .cta-primary { background: linear-gradient(180deg, #10b981 0%, #059669 100%);
-        box-shadow: 0 10px 30px rgba(16,185,129,0.25); transition: transform .15s, box-shadow .2s; }
-      .cta-primary:hover { transform: translateY(-1px); box-shadow: 0 14px 36px rgba(16,185,129,0.35); }
+      .cta-primary { background: linear-gradient(180deg, #85e6b5 0%, #5dd492 100%);
+        color: #0a0a0a !important; font-weight: 600; border: none; border-radius: 10px;
+        box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 0 20px rgba(117,224,167,0.25), 0 0 60px rgba(117,224,167,0.08), 0 4px 16px rgba(117,224,167,0.2);
+        transition: all .25s ease; }
+      .cta-primary:hover { transform: translateY(-2px); background: linear-gradient(180deg, #96ecc2 0%, #6bdca0 100%);
+        box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 0 30px rgba(117,224,167,0.4), 0 0 80px rgba(117,224,167,0.12), 0 8px 24px rgba(117,224,167,0.3); }
 
       .spin-ring { width:56px; height:56px; border:3px solid rgba(255,255,255,0.1); border-top-color:#22d3ee; border-radius:50%; animation: spin 1s linear infinite; }
       @keyframes spin { to { transform:rotate(360deg); } }
@@ -70,7 +73,7 @@
       </div>
       <h1 class="heading text-3xl font-extrabold mb-2">You're in</h1>
       <p class="text-gray-400 text-sm sm:text-base mb-7">Account ready. Let's set up your AI receptionist.</p>
-      <a id="continue-btn" href="/onboard.html" class="cta-primary inline-block w-full text-white py-3.5 rounded-xl font-semibold">Continue →</a>
+      <a id="continue-btn" href="/onboard.html" class="cta-primary inline-block w-full py-3.5 rounded-xl font-semibold">Continue →</a>
       <div class="text-xs text-gray-500 mt-3">Taking you there automatically…</div>
     </div>
 
@@ -82,7 +85,7 @@
       <h1 class="heading text-2xl sm:text-3xl font-extrabold mb-3">Link invalid or expired</h1>
       <p id="error-msg" class="text-gray-400 text-sm sm:text-base mb-6">This sign-in link didn't work. Links expire in 15 minutes and can only be used once.</p>
       <div class="space-y-3">
-        <a href="/login.html" class="cta-primary inline-block w-full text-white py-3 rounded-xl font-semibold">Request a new link</a>
+        <a href="/login.html" class="cta-primary inline-block w-full py-3 rounded-xl font-semibold">Request a new link</a>
         <a href="/signup.html" class="block w-full text-center py-3 rounded-xl border border-white/10 text-gray-300 hover:bg-white/5 font-semibold">Or create a new account</a>
       </div>
     </div>

@@ -36,8 +36,12 @@
       select.field { appearance:none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23a3a3a3' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>"); background-repeat:no-repeat; background-position: right 14px center; padding-right:38px; }
       select.field option { background:#1a1a1a; color:#f5f5f5; padding:8px 12px; }
 
-      .cta-primary { background: linear-gradient(180deg, #10b981 0%, #059669 100%); box-shadow: 0 10px 30px rgba(16,185,129,0.25); transition: transform .15s, opacity .15s; }
-      .cta-primary:hover:not(:disabled) { transform: translateY(-1px); }
+      .cta-primary { background: linear-gradient(180deg, #85e6b5 0%, #5dd492 100%);
+        color: #0a0a0a !important; font-weight: 600; border: none; border-radius: 10px;
+        box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 0 20px rgba(117,224,167,0.25), 0 0 60px rgba(117,224,167,0.08), 0 4px 16px rgba(117,224,167,0.2);
+        transition: all .25s ease; }
+      .cta-primary:hover:not(:disabled) { transform: translateY(-2px); background: linear-gradient(180deg, #96ecc2 0%, #6bdca0 100%);
+        box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 0 30px rgba(117,224,167,0.4), 0 0 80px rgba(117,224,167,0.12), 0 8px 24px rgba(117,224,167,0.3); }
       .cta-primary:disabled { opacity:.5; cursor:not-allowed; }
       .cta-secondary { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); transition: background .15s; }
       .cta-secondary:hover:not(:disabled) { background:rgba(255,255,255,0.08); }
@@ -132,7 +136,7 @@
           </div>
 
           <div class="flex gap-3 mt-7">
-            <button type="button" class="cta-primary flex-1 text-white py-3 rounded-xl font-semibold" data-next="2">Continue</button>
+            <button type="button" class="cta-primary flex-1 py-3 rounded-xl font-semibold" data-next="2">Continue</button>
           </div>
         </div>
 
@@ -160,7 +164,7 @@
 
           <div class="flex gap-3 mt-7">
             <button type="button" class="cta-secondary flex-1 text-white py-3 rounded-xl font-semibold" data-prev="1">Back</button>
-            <button type="button" class="cta-primary flex-1 text-white py-3 rounded-xl font-semibold" data-next="3">Continue</button>
+            <button type="button" class="cta-primary flex-1 py-3 rounded-xl font-semibold" data-next="3">Continue</button>
           </div>
         </div>
 
@@ -206,7 +210,7 @@
 
           <div class="flex gap-3 mt-7">
             <button type="button" class="cta-secondary flex-1 text-white py-3 rounded-xl font-semibold" data-prev="2">Back</button>
-            <button type="submit" id="submit-btn" class="cta-primary flex-1 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2">
+            <button type="submit" id="submit-btn" class="cta-primary flex-1 py-3 rounded-xl font-semibold flex items-center justify-center gap-2">
               <span id="btn-text">Create my AI receptionist</span>
             </button>
           </div>
@@ -221,8 +225,8 @@
     ? 'http://localhost:3001'
     : 'https://api.automatyn.co';
 
-  const jwt = localStorage.getItem('automatyn_jwt');
-  const agentId = localStorage.getItem('automatyn_agent');
+  const jwt = localStorage.getItem('jwt');
+  const agentId = localStorage.getItem('agentId');
 
   if (!jwt || !agentId) {
     window.location.href = '/login.html';
