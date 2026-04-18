@@ -208,6 +208,35 @@
             background: rgba(16, 185, 129, 0.08) !important;
             border-bottom: 1px solid rgba(16, 185, 129, 0.2);
         }
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #22d3ee 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .grid-bg {
+            background-image: linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        .card-glow {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.1);
+            transition: all 0.3s ease;
+        }
+        .card-glow:hover {
+            border-color: rgba(34, 211, 238, 0.5);
+            box-shadow: 0 0 50px rgba(34, 211, 238, 0.2);
+        }
+        .toc a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+            display: block;
+            padding: 0.4rem 0;
+            font-size: 0.95rem;
+        }
+        .toc a:hover { color: #22d3ee; }
     </style>
 </head>
 <body class="hero-gradient">
@@ -252,15 +281,54 @@
     <div style="height: 100px;"></div>
 
     <!-- Hero -->
-    <header class="px-6 py-16 max-w-4xl mx-auto">
-        <div class="text-zinc-500 text-sm mb-4">April 17, 2026 &middot; Operations &middot; 10 min read</div>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-4" style="font-family: 'Cabinet Grotesk', sans-serif;">After Hours Customer Service for Small Business: 5 Ways to Stop Losing Money Overnight</h1>
-        <p class="text-lg text-zinc-400 leading-relaxed max-w-2xl">A plumber in Houston told us he tracked his missed WhatsApp messages for one month. 41 percent of new customer inquiries came in after 6 PM. He was responding the next morning. By then, most of them had already called someone else.</p>
-        <picture><source srcset="images/after-hours-hero.webp" type="image/webp"><img src="images/after-hours-hero.jpg" alt="Dark phone screen glowing with unread messages on a nightstand, blue ambient lighting" class="rounded-2xl mt-12 w-full"></picture>
+    <header class="hero-gradient grid-bg pt-24 pb-16 sm:pt-32 sm:pb-20">
+        <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6">
+            <nav aria-label="Breadcrumb" class="mb-6">
+                <ol class="flex items-center gap-2 text-sm text-zinc-500">
+                    <li><a href="https://automatyn.co/" class="hover:text-cyan-400 transition-colors">Home</a></li>
+                    <li>/</li>
+                    <li><span class="text-zinc-400">Blog</span></li>
+                    <li>/</li>
+                    <li><span class="text-zinc-400 truncate">After Hours Customer Service</span></li>
+                </ol>
+            </nav>
+
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-medium mb-4" style="background: rgba(34,211,238,0.1); color: #22d3ee; border: 1px solid rgba(34,211,238,0.2);">Revenue Recovery</span>
+
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-4" style="font-family: 'Cabinet Grotesk', sans-serif !important;">
+                After Hours Customer Service: 5 Ways to Stop <span class="gradient-text">Losing Money Overnight</span>
+            </h1>
+
+            <p class="text-lg text-zinc-400 mb-6 leading-relaxed max-w-2xl">
+                A plumber in Houston told us he tracked his missed WhatsApp messages for one month. 41 percent of new customer inquiries came in after 6 PM. He was responding the next morning. By then, most of them had already called someone else.
+            </p>
+
+            <div class="flex items-center gap-4 text-sm text-zinc-500">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm" style="background: linear-gradient(135deg, #059669, #10b981);">A</div>
+                <div>
+                    <p class="text-zinc-300 font-medium">Automatyn Team</p>
+                    <p>April 17, 2026 &middot; 10 min read</p>
+                </div>
+            </div>
+        </div>
     </header>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 -mt-6">
+        <picture><source srcset="images/after-hours-hero.webp" type="image/webp"><img src="images/after-hours-hero.jpg" alt="Phone glowing on dark shop counter at night with WhatsApp messages, illustrating after-hours customer inquiries" class="w-full h-56 sm:h-72 md:h-80 object-cover rounded-xl border border-cyan-500/20" loading="eager"></picture>
+    </div>
 
     <!-- Article body -->
     <article class="prose max-w-3xl mx-auto px-6 pb-16">
+
+        <div class="card-glow rounded-xl p-5 mb-10 toc">
+            <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-3" style="margin-top: 0;">In This Article</h3>
+            <a href="#real-cost">The Real Cost of Not Responding After Hours</a>
+            <a href="#option-5-ai">The 5 After-Hours Options (Voicemail to AI Agent)</a>
+            <a href="#comparison">All 5 Options Compared Side by Side</a>
+            <a href="#setup">Setting Up After Hours AI in Under 15 Minutes</a>
+            <a href="#math">The Math: When After Hours AI Pays for Itself</a>
+            <a href="#faq">Frequently Asked Questions</a>
+        </div>
 
         <p>If you run a service business, you already know the problem. Customers don't message you during business hours. They message you when they need you. A pipe bursts at 10 PM. Someone wants a haircut before work tomorrow and checks your availability at 11 PM. A bride is planning her wedding on a Sunday afternoon and sends three different vendors the same question.</p>
 
@@ -268,7 +336,7 @@
 
         <p>This post covers five real ways to handle after hours customer service as a small business. I'll break down the cost, the effort, and what actually happens to your conversion rate with each option. No theory. Just what works and what doesn't for businesses with one to twenty employees.</p>
 
-        <h2>The Real Cost of Not Responding After Hours</h2>
+        <h2 id="real-cost">The Real Cost of Not Responding After Hours</h2>
 
         <p>Before we get into solutions, let's do some quick math. This is the part most business owners skip because the number is uncomfortable.</p>
 
@@ -342,7 +410,7 @@
             <p style="margin:0;">Already losing customers after hours? <a href="https://automatyn.co/signup.html">Start with a free AI WhatsApp bot</a> that actually answers questions, gives pricing, and books appointments while you sleep. Takes 5 minutes to set up.</p>
         </div>
 
-        <h2>Option 5: AI WhatsApp Bot That Actually Holds Conversations</h2>
+        <h2 id="option-5-ai">Option 5: AI WhatsApp Agent That Actually Holds Conversations</h2>
 
         <p><strong>Cost:</strong> Free to $79 per month</p>
         <p><strong>Setup time:</strong> 5 to 15 minutes</p>
@@ -367,7 +435,7 @@
 
         <p>That conversation happened while the business owner was asleep. The customer got pricing, confirmed the service area, and was offered a specific time slot. Compare that to "Thanks for your message! We'll get back to you during business hours."</p>
 
-        <h2>The Comparison: All 5 After Hours Options Side by Side</h2>
+        <h2 id="comparison">The Comparison: All 5 After Hours Options Side by Side</h2>
 
         <div style="overflow-x: auto;">
         <table class="comparison-table">
@@ -426,7 +494,7 @@
         </table>
         </div>
 
-        <h2>Setting Up After Hours AI in Under 15 Minutes</h2>
+        <h2 id="setup">Setting Up After Hours AI in Under 15 Minutes</h2>
 
         <p>If you've decided that option 5 is the right fit, here's exactly what the setup process looks like with Automatyn. No technical knowledge required.</p>
 
@@ -478,7 +546,7 @@
 
         <p><strong>Professional services (accountants, lawyers, consultants):</strong> Moderate impact. These clients often expect a callback the next business day, so the urgency is lower. Still, a bot that collects case details and schedules a consultation call converts better than an away message.</p>
 
-        <h2>The Math: When After Hours AI Pays for Itself</h2>
+        <h2 id="math">The Math: When After Hours AI Pays for Itself</h2>
 
         <p>Let's make this concrete. Here's the break even calculation for three different business types.</p>
 
