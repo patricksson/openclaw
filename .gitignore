@@ -40,7 +40,8 @@ outreach-scripts.md
 # ==========================================
 node_modules/
 saas-api/node_modules/
-dist/
+dist/*
+!dist/tailwind.css
 build/
 .next/
 out/
