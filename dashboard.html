@@ -926,22 +926,39 @@
 
                         <!-- Phone number method -->
                         <div id="pairing-phone" style="display:none;">
-                            <div class="flex flex-col gap-4" style="max-width:400px;">
-                                <div>
-                                    <label class="form-label" for="pair-phone-input">Your WhatsApp Business phone number</label>
-                                    <input type="tel" id="pair-phone-input" class="form-input" placeholder="e.g. 447700900000" style="font-size:1rem;">
-                                    <p class="text-zinc-500 text-xs mt-1.5">Enter your full number with country code, no spaces or dashes. e.g. 447700900000 for a UK number.</p>
-                                </div>
-                                <button class="cta-button" id="pair-phone-btn" onclick="startPhonePairing()" style="align-self:flex-start;">Get pairing code</button>
-
-                                <div id="pair-code-result" style="display:none;">
-                                    <div style="background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.2);border-radius:0.875rem;padding:1.25rem;text-align:center;">
-                                        <p class="text-zinc-400 text-sm mb-2">Enter this code in WhatsApp:</p>
-                                        <div id="pair-code-value" style="font-family:'Cabinet Grotesk',sans-serif;font-size:2rem;font-weight:800;letter-spacing:0.15em;color:#22d3ee;"></div>
-                                        <p class="text-zinc-500 text-xs mt-3">Go to WhatsApp Business → Settings → Linked Devices → Link a Device → Link with phone number instead.</p>
+                            <div class="flex flex-col sm:flex-row gap-6">
+                                <div class="flex flex-col gap-4" style="max-width:400px;flex:1;">
+                                    <div>
+                                        <label class="form-label" for="pair-phone-input">Your WhatsApp Business phone number</label>
+                                        <input type="tel" id="pair-phone-input" class="form-input" placeholder="e.g. 447700900000" style="font-size:1rem;">
+                                        <p class="text-zinc-500 text-xs mt-1.5">Full number with country code, no spaces or dashes. e.g. 447700900000 for UK.</p>
                                     </div>
+                                    <button class="cta-button" id="pair-phone-btn" onclick="startPhonePairing()" style="align-self:flex-start;">Get pairing code</button>
+
+                                    <div id="pair-code-result" style="display:none;">
+                                        <div style="background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.2);border-radius:0.875rem;padding:1.25rem;text-align:center;">
+                                            <p class="text-zinc-400 text-sm mb-2">Enter this code in WhatsApp:</p>
+                                            <div id="pair-code-value" style="font-family:'Cabinet Grotesk',sans-serif;font-size:2rem;font-weight:800;letter-spacing:0.15em;color:#22d3ee;"></div>
+                                            <p class="text-zinc-500 text-xs mt-3">Open WhatsApp Business → Settings → Linked Devices → Link a Device → tap <strong class="text-zinc-300">Link with phone number instead</strong> → type this code.</p>
+                                        </div>
+                                    </div>
+                                    <div id="pair-phone-error" class="text-red-400 text-sm" style="display:none;"></div>
                                 </div>
-                                <div id="pair-phone-error" class="text-red-400 text-sm" style="display:none;"></div>
+
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-bold text-white mb-3">How pairing codes work</p>
+                                    <ol class="text-sm text-zinc-400 space-y-2 list-decimal pl-5">
+                                        <li>Enter your WhatsApp Business number and tap <strong class="text-zinc-200">Get pairing code</strong></li>
+                                        <li>You will see an 8-digit code on screen</li>
+                                        <li>On your phone, open <strong class="text-zinc-200">WhatsApp Business → Settings → Linked Devices → Link a Device</strong></li>
+                                        <li>Instead of scanning a QR, tap <strong class="text-zinc-200">Link with phone number instead</strong></li>
+                                        <li>Type the 8-digit code from this screen into your phone</li>
+                                    </ol>
+                                    <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:0.75rem;padding:0.75rem 1rem;margin-top:1rem;">
+                                        <p class="text-xs text-zinc-400"><strong class="text-zinc-300">What happens next:</strong> Your WhatsApp pairs with our server as a linked device. Your AI agent goes live instantly and starts responding to incoming messages. Your personal chats stay private and are never accessed.</p>
+                                    </div>
+                                    <p class="text-xs text-zinc-500 mt-3">Use this method if you cannot scan QR codes (e.g. setting up from the same phone, or on a tablet without a camera).</p>
+                                </div>
                             </div>
                         </div>
 
