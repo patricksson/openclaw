@@ -122,7 +122,7 @@
                         <tr>
                             <td class="py-3 px-4 text-gray-400">Maintenance</td>
                             <td class="py-3 px-4 text-center text-emerald-400 font-semibold">We handle it</td>
-                            <td class="py-3 px-4 text-center text-white">You manage (or we do for $150/mo)</td>
+                            <td class="py-3 px-4 text-center text-white">You manage (or we do for <span id="price-support-table">$150</span>/mo)</td>
                         </tr>
                         <tr>
                             <td class="py-3 px-4 text-gray-400">Custom integrations</td>
@@ -152,7 +152,7 @@
                 <div class="card flex flex-col">
                     <h3 class="text-lg font-bold text-white mb-1 heading">Starter</h3>
                     <div class="flex items-baseline gap-1 mb-4">
-                        <span class="text-3xl font-bold text-white heading">$400</span>
+                        <span class="text-3xl font-bold text-white heading" id="price-starter">$400</span>
                         <span class="text-sm text-gray-500">one-time</span>
                     </div>
                     <p class="text-sm text-gray-400 mb-6">Get up and running fast with the essentials.</p>
@@ -162,7 +162,7 @@
                         <li class="flex gap-2"><span class="check">&#10003;</span> Basic security hardening</li>
                         <li class="flex gap-2"><span class="check">&#10003;</span> 14 days of post-setup support</li>
                     </ul>
-                    <a href="mailto:support@automatyn.co?subject=Starter%20Setup%20Inquiry" class="cta-secondary justify-center w-full">Get started</a>
+                    <button onclick="Calendly.initPopupWidget({url:'https://calendly.com/patricksson/30min'}); return false;" class="cta-secondary justify-center w-full">Book a call</button>
                 </div>
 
                 <!-- Pro -->
@@ -172,7 +172,7 @@
                     </div>
                     <h3 class="text-lg font-bold text-white mb-1 heading">Pro</h3>
                     <div class="flex items-baseline gap-1 mb-4">
-                        <span class="text-3xl font-bold text-white heading">$800</span>
+                        <span class="text-3xl font-bold text-white heading" id="price-pro">$800</span>
                         <span class="text-sm text-gray-500">one-time</span>
                     </div>
                     <p class="text-sm text-gray-400 mb-6">Custom agent with multiple channels and advanced config.</p>
@@ -183,14 +183,14 @@
                         <li class="flex gap-2"><span class="check">&#10003;</span> Security hardening and firewall setup</li>
                         <li class="flex gap-2"><span class="check">&#10003;</span> 30 days of post-setup support</li>
                     </ul>
-                    <a href="mailto:support@automatyn.co?subject=Pro%20Setup%20Inquiry" class="cta-primary justify-center w-full">Get started</a>
+                    <button onclick="Calendly.initPopupWidget({url:'https://calendly.com/patricksson/30min'}); return false;" class="cta-primary justify-center w-full">Book a call</button>
                 </div>
 
                 <!-- Business -->
                 <div class="card flex flex-col">
                     <h3 class="text-lg font-bold text-white mb-1 heading">Business</h3>
                     <div class="flex items-baseline gap-1 mb-4">
-                        <span class="text-3xl font-bold text-white heading">$1,500</span>
+                        <span class="text-3xl font-bold text-white heading" id="price-business">$1,500</span>
                         <span class="text-sm text-gray-500">one-time</span>
                     </div>
                     <p class="text-sm text-gray-400 mb-6">Enterprise-grade deployment with full customization.</p>
@@ -202,7 +202,7 @@
                         <li class="flex gap-2"><span class="check">&#10003;</span> 90 days of post-setup support</li>
                         <li class="flex gap-2"><span class="check">&#10003;</span> 30-min onboarding call</li>
                     </ul>
-                    <a href="mailto:support@automatyn.co?subject=Business%20Setup%20Inquiry" class="cta-secondary justify-center w-full">Get started</a>
+                    <button onclick="Calendly.initPopupWidget({url:'https://calendly.com/patricksson/30min'}); return false;" class="cta-secondary justify-center w-full">Book a call</button>
                 </div>
             </div>
 
@@ -210,7 +210,7 @@
             <div class="mt-8 card text-center">
                 <h3 class="text-lg font-bold text-white mb-2 heading">Ongoing Support</h3>
                 <div class="flex items-baseline gap-1 justify-center mb-3">
-                    <span class="text-2xl font-bold text-white heading">$150</span>
+                    <span class="text-2xl font-bold text-white heading" id="price-support">$150</span>
                     <span class="text-sm text-gray-500">/ month</span>
                 </div>
                 <p class="text-gray-400 text-sm max-w-lg mx-auto">Updates, troubleshooting, priority response, and a monthly 30-min remote session. Available as an add-on to any setup tier.</p>
@@ -279,7 +279,7 @@
             <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4 heading">Ready to self-host?</h2>
             <p class="text-gray-400 mb-8">Email us with your setup requirements and we'll get back to you within 24 hours.</p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="mailto:support@automatyn.co?subject=Self-Host%20Setup%20Inquiry" class="cta-primary">Email us →</a>
+                <button onclick="Calendly.initPopupWidget({url:'https://calendly.com/patricksson/30min'}); return false;" class="cta-primary">Book a 15-min call →</button>
                 <a href="/signup.html" class="cta-secondary">Or start with the free SaaS plan</a>
             </div>
             <p class="text-gray-600 text-xs mt-6">Questions? Reach us at support@automatyn.co</p>
@@ -320,6 +320,34 @@
             <p class="text-center text-xs text-gray-700 mt-10">&copy; 2026 Automatyn. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Geo-pricing -->
+    <script>
+    (function() {
+        var prices = {
+            US: { starter: '$400', pro: '$800', business: '$1,500', support: '$150' },
+            GB: { starter: '£350', pro: '£700', business: '£1,300', support: '£130' },
+            EU: { starter: '€400', pro: '€800', business: '€1,500', support: '€150' },
+            AU: { starter: 'A$650', pro: 'A$1,300', business: 'A$2,400', support: 'A$250' },
+            NZ: { starter: 'NZ$700', pro: 'NZ$1,400', business: 'NZ$2,600', support: 'NZ$260' },
+            CA: { starter: 'C$550', pro: 'C$1,100', business: 'C$2,100', support: 'C$200' },
+        };
+        var euCountries = ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE'];
+        fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(3000) })
+            .then(function(r) { return r.json(); })
+            .then(function(d) {
+                var cc = d.country_code;
+                var p = prices[cc] || (euCountries.indexOf(cc) !== -1 ? prices.EU : prices.US);
+                var el;
+                el = document.getElementById('price-starter'); if (el) el.textContent = p.starter;
+                el = document.getElementById('price-pro'); if (el) el.textContent = p.pro;
+                el = document.getElementById('price-business'); if (el) el.textContent = p.business;
+                el = document.getElementById('price-support'); if (el) el.textContent = p.support;
+                el = document.getElementById('price-support-table'); if (el) el.textContent = p.support;
+            })
+            .catch(function() {});
+    })();
+    </script>
 
 </body>
 </html>
