@@ -113,7 +113,7 @@
                         <tr>
                             <td class="py-3 px-4 text-gray-400">Monthly cost</td>
                             <td class="py-3 px-4 text-center text-white">Free / <span id="saas-pro">$29</span> / <span id="saas-max">$79</span></td>
-                            <td class="py-3 px-4 text-center text-white">$0 (your hosting costs only)</td>
+                            <td class="py-3 px-4 text-center text-white"><span id="selfhost-monthly">$0</span> (your hosting costs only)</td>
                         </tr>
                         <tr>
                             <td class="py-3 px-4 text-gray-400">Setup time</td>
@@ -254,7 +254,7 @@
                 </div>
                 <div class="card">
                     <h3 class="text-base font-bold text-white mb-2">No Recurring Platform Fees</h3>
-                    <p class="text-sm text-gray-400">Pay once for setup. The only ongoing cost is your server hosting and AI API usage (typically $5-20/month).</p>
+                    <p class="text-sm text-gray-400">Pay once for setup. The only ongoing cost is your server hosting and AI API usage (typically <span id="selfhost-running">$5-20</span>/month).</p>
                 </div>
                 <div class="card">
                     <h3 class="text-base font-bold text-white mb-2">Full Source Access</h3>
@@ -354,12 +354,12 @@
     <script>
     (function() {
         var prices = {
-            US: { starter: '$399', pro: '$799', business: '$1,499', support: '$149', saasPro: '$29', saasMax: '$79' },
-            GB: { starter: '£399', pro: '£799', business: '£1,499', support: '£149', saasPro: '£29', saasMax: '£69' },
-            EU: { starter: '€399', pro: '€799', business: '€1,499', support: '€149', saasPro: '€29', saasMax: '€79' },
-            AU: { starter: 'A$599', pro: 'A$1,199', business: 'A$2,299', support: 'A$249', saasPro: 'A$49', saasMax: 'A$129' },
-            NZ: { starter: 'NZ$649', pro: 'NZ$1,299', business: 'NZ$2,499', support: 'NZ$259', saasPro: 'NZ$49', saasMax: 'NZ$129' },
-            CA: { starter: 'C$499', pro: 'C$999', business: 'C$1,899', support: 'C$199', saasPro: 'C$39', saasMax: 'C$99' },
+            US: { starter: '$399', pro: '$799', business: '$1,499', support: '$149', saasPro: '$29', saasMax: '$79', zero: '$0', running: '$5-20' },
+            GB: { starter: '£399', pro: '£799', business: '£1,499', support: '£149', saasPro: '£29', saasMax: '£69', zero: '£0', running: '$5-20' },
+            EU: { starter: '€399', pro: '€799', business: '€1,499', support: '€149', saasPro: '€29', saasMax: '€79', zero: '€0', running: '$5-20' },
+            AU: { starter: 'A$599', pro: 'A$1,199', business: 'A$2,299', support: 'A$249', saasPro: 'A$49', saasMax: 'A$129', zero: 'A$0', running: '$5-20' },
+            NZ: { starter: 'NZ$649', pro: 'NZ$1,299', business: 'NZ$2,499', support: 'NZ$259', saasPro: 'NZ$49', saasMax: 'NZ$129', zero: 'NZ$0', running: '$5-20' },
+            CA: { starter: 'C$499', pro: 'C$999', business: 'C$1,899', support: 'C$199', saasPro: 'C$39', saasMax: 'C$99', zero: 'C$0', running: '$5-20' },
         };
         var euCountries = ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE'];
         function apply(cc) {
@@ -372,6 +372,8 @@
             el = document.getElementById('price-support-table'); if (el) el.textContent = p.support;
             el = document.getElementById('saas-pro'); if (el) el.textContent = p.saasPro;
             el = document.getElementById('saas-max'); if (el) el.textContent = p.saasMax;
+            el = document.getElementById('selfhost-monthly'); if (el) el.textContent = p.zero;
+            el = document.getElementById('selfhost-running'); if (el) el.textContent = p.running;
         }
         function langGuess() {
             try {
