@@ -832,8 +832,8 @@
                     <tbody class="divide-y divide-white/5">
                         <tr class="hover:bg-white/3 transition">
                             <td class="p-3 sm:p-4 text-gray-300">Monthly Cost</td>
-                            <td class="p-3 sm:p-4 text-center text-red-400">$2,000+/month</td>
-                            <td class="p-3 sm:p-4 text-center text-green-400 bg-green-900/20">$0 to start</td>
+                            <td class="p-3 sm:p-4 text-center text-red-400"><span id="hire-cost">$2,000+/month</span></td>
+                            <td class="p-3 sm:p-4 text-center text-green-400 bg-green-900/20"><span id="ai-cost">$0 to start</span></td>
                         </tr>
                         <tr class="hover:bg-white/3 transition">
                             <td class="p-3 sm:p-4 text-gray-300">Availability</td>
@@ -1931,12 +1931,12 @@
     <script>
     (function() {
         var prices = {
-            US: { pro: '$29', max: '$79' },
-            GB: { pro: '£29', max: '£69' },
-            EU: { pro: '€29', max: '€79' },
-            AU: { pro: 'A$49', max: 'A$129' },
-            NZ: { pro: 'NZ$49', max: 'NZ$129' },
-            CA: { pro: 'C$39', max: 'C$99' },
+            US: { pro: '$29', max: '$79', hire: '$2,000+/month', ai: '$0 to start' },
+            GB: { pro: '£29', max: '£69', hire: '£2,000+/month', ai: '£0 to start' },
+            EU: { pro: '€29', max: '€79', hire: '€2,000+/month', ai: '€0 to start' },
+            AU: { pro: 'A$49', max: 'A$129', hire: 'A$3,500+/month', ai: 'A$0 to start' },
+            NZ: { pro: 'NZ$49', max: 'NZ$129', hire: 'NZ$3,500+/month', ai: 'NZ$0 to start' },
+            CA: { pro: 'C$39', max: 'C$99', hire: 'C$3,000+/month', ai: 'C$0 to start' },
         };
         var euCountries = ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE'];
         function apply(cc) {
@@ -1944,6 +1944,8 @@
             var el;
             el = document.getElementById('price-pro'); if (el) el.textContent = p.pro;
             el = document.getElementById('price-max'); if (el) el.textContent = p.max;
+            el = document.getElementById('hire-cost'); if (el) el.textContent = p.hire;
+            el = document.getElementById('ai-cost'); if (el) el.textContent = p.ai;
         }
         function langGuess() {
             try {
