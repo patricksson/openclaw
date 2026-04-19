@@ -20,12 +20,51 @@
     <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400;500;700;800&display=swap" rel="stylesheet">
 
     <style>
-        body { font-family: 'Inter', sans-serif; background: #030303; color: #fff; }
+        /* MIDNIGHT OPERATOR THEME — copied from homepage */
+        :root {
+            --accent: #22d3ee;
+            --accent-dim: #0e7490;
+            --accent-glow: rgba(34, 211, 238, 0.2);
+            --bg-dark: #030303;
+            --bg-card: #0a0a0a;
+            --bg-surface: #0f0f0f;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(34, 211, 238, 0.25);
+            --text-primary: #f5f5f5;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-primary); }
         h1, h2, h3 { font-family: 'Sora', sans-serif; letter-spacing: -0.02em; }
-        .bg-card { background: #0a0a0a; }
-        .bg-surface { background: #050505; }
+        .bg-card { background: var(--bg-card); }
+        .bg-surface { background: var(--bg-surface); }
 
-        /* CTA buttons — MATCH HOMEPAGE green gradient */
+        /* gradient-text — WHITE to CYAN, exactly as homepage */
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* hero-gradient — radial mesh like homepage */
+        .hero-gradient { background: var(--bg-dark); position: relative; overflow: hidden; }
+        .hero-gradient::before {
+            content: ''; position: absolute; top: -20%; left: -20%; right: -20%; bottom: -20%;
+            background:
+                radial-gradient(ellipse at 25% 20%, rgba(117,224,167,0.07) 0%, transparent 50%),
+                radial-gradient(ellipse at 75% 30%, rgba(34,211,238,0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(117,224,167,0.04) 0%, transparent 40%);
+            pointer-events: none;
+            animation: meshDrift 12s ease-in-out infinite;
+        }
+        @keyframes meshDrift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(2%, -1%) scale(1.02); }
+            66% { transform: translate(-1%, 1.5%) scale(0.98); }
+        }
+
+        /* CTA buttons — identical to homepage */
         .cta-primary {
             background: linear-gradient(180deg, #85e6b5 0%, #5dd492 100%);
             color: #0a0a0a !important;
@@ -53,12 +92,8 @@
             50% { box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 0 35px rgba(117,224,167,0.4), 0 0 90px rgba(117,224,167,0.15), 0 4px 24px rgba(117,224,167,0.3); }
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #85e6b5 0%, #22d3ee 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
         /* Pricing cards */
         .pricing-card {
@@ -81,26 +116,59 @@
             box-shadow: 0 0 0 1px rgba(117,224,167,0.12), 0 0 60px -10px rgba(117,224,167,0.18), 0 24px 60px -10px rgba(0,0,0,0.4);
         }
 
-        /* WhatsApp-style chat scenario */
-        .chat-msg { opacity: 0; transform: translateY(8px); animation: msgIn 0.35s ease-out forwards; }
-        @keyframes msgIn { to { opacity: 1; transform: translateY(0); } }
-        .typing-dot {
-            display: inline-block; width: 6px; height: 6px; border-radius: 50%;
-            background: #9ca3af; margin: 0 2px; animation: typingBounce 1.2s infinite;
+        /* WhatsApp demo — identical CSS to homepage */
+        .wa-msg {
+            max-width: 85%;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.4;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: waFadeIn 0.3s ease forwards;
         }
-        .typing-dot:nth-child(2) { animation-delay: 0.15s; }
-        .typing-dot:nth-child(3) { animation-delay: 0.3s; }
-        @keyframes typingBounce {
+        .wa-msg-in {
+            background: #1f2c34;
+            color: #e9edef;
+            border-top-left-radius: 0;
+            margin-right: auto;
+        }
+        .wa-msg-out {
+            background: #005c4b;
+            color: #e9edef;
+            border-top-right-radius: 0;
+            margin-left: auto;
+        }
+        .wa-msg .wa-time {
+            font-size: 11px;
+            color: rgba(255,255,255,0.45);
+            text-align: right;
+            margin-top: 4px;
+        }
+        .wa-msg .wa-check { color: #53bdeb; font-size: 11px; }
+        .wa-typing {
+            display: flex; gap: 4px; padding: 12px 16px;
+            background: #1f2c34; border-radius: 8px; border-top-left-radius: 0;
+            max-width: 80px; margin-right: auto;
+        }
+        .wa-typing span {
+            width: 8px; height: 8px; background: #8696a0; border-radius: 50%;
+            animation: waTyping 1.4s infinite;
+        }
+        .wa-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .wa-typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes waTyping {
             0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
             30% { transform: translateY(-4px); opacity: 1; }
         }
-        .chat-container { min-height: 520px; }
+        @keyframes waFadeIn { to { opacity: 1; transform: translateY(0); } }
 
-        .pulse { animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        @media (max-width: 768px) {
+            #wa-chat { height: 420px !important; }
+        }
     </style>
 </head>
-<body class="bg-black">
+<body>
 
     <!-- Minimal Nav -->
     <nav class="sticky top-0 w-full bg-black/90 backdrop-blur-md z-50 border-b border-white/5">
@@ -115,16 +183,16 @@
     </nav>
 
     <!-- Hero -->
-    <section class="pt-20 pb-14 px-4">
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="inline-flex items-center gap-2 bg-emerald-950/40 border border-emerald-800/30 px-3 py-1 rounded-full mb-6 text-xs font-semibold text-emerald-300">
+    <section class="hero-gradient pt-20 pb-14 px-4 relative">
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 bg-cyan-950/40 border border-cyan-800/30 px-4 py-2 rounded-full mb-6 text-xs font-semibold text-cyan-300">
                 <span class="pulse inline-block w-2 h-2 bg-emerald-400 rounded-full" aria-hidden="true"></span>
                 FOR UK PLUMBERS · FREE TIER AVAILABLE
             </div>
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-5 leading-tight">
-                You're losing jobs <span class="gradient-text">because you can't answer WhatsApp fast enough.</span>
+            <h1 class="text-3xl sm:text-4xl md:text-6xl font-extrabold text-white mb-6 leading-[1.08] tracking-tight">
+                You're losing jobs because you can't <span class="gradient-text">answer WhatsApp fast enough.</span>
             </h1>
-            <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-8">
+            <p class="text-sm sm:text-base md:text-lg text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
                 Automatyn is an AI agent that replies to your WhatsApp enquiries in about 2 seconds, qualifies the job, and books the callout. You get a clean summary when you finish the shift.
             </p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
@@ -133,6 +201,99 @@
             </div>
         </div>
     </section>
+
+    <!-- Phone demo — homepage-style -->
+    <section class="py-10 px-4 bg-black relative">
+        <div class="max-w-sm mx-auto relative">
+            <div class="absolute inset-0 bg-gradient-to-b from-cyan-500/10 to-emerald-500/5 rounded-3xl blur-3xl scale-110"></div>
+            <div class="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-cyan-900/20" style="background: #0b141a;">
+                <!-- WhatsApp header -->
+                <div class="flex items-center gap-3 px-4 py-3" style="background: #1f2c34;">
+                    <div class="flex items-center gap-3 flex-1">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-sky-500 to-blue-400 flex items-center justify-center text-white font-bold text-sm">D</div>
+                        <div>
+                            <div class="text-white text-sm font-semibold">Dave Harris Plumbing</div>
+                            <div class="text-green-400 text-xs" id="wa-status">online</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 text-gray-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                    </div>
+                </div>
+                <!-- Chat Area -->
+                <div class="px-3 py-4 space-y-3" id="wa-chat" style="height: 480px; overflow-y: auto; scroll-behavior: smooth; background: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22><rect width=%2260%22 height=%2260%22 fill=%22%23060d11%22/><path d=%22M30 10 L35 15 L30 20 L25 15Z%22 fill=%22%230a1519%22 opacity=%220.5%22/></svg>') repeat;">
+                </div>
+                <!-- Input Bar -->
+                <div class="flex items-center gap-2 px-3 py-2" style="background: #1f2c34;">
+                    <div class="flex-1 rounded-full px-4 py-2 text-sm text-gray-400" style="background: #2a3942;">Type a message...</div>
+                    <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center text-gray-500 text-sm mt-4">Live demo · 7:14 AM · Boiler emergency</p>
+        </div>
+    </section>
+
+    <script>
+    (function() {
+        const chat = document.getElementById('wa-chat');
+        const status = document.getElementById('wa-status');
+        if (!chat) return;
+
+        const conversation = [
+            { type: 'out', text: 'My boiler is making a banging noise and the pressure keeps dropping. Are you available today?', time: '7:14 AM' },
+            { type: 'in', text: 'Sorry to hear that. Sounds like it could be a pressure valve issue or trapped air in the system. A few quick questions:\n\n1. What make and model is your boiler?\n2. What\'s the pressure reading on the gauge?\n3. What\'s your postcode?\n\nDave covers most of South Leeds and can usually get out same day.', time: '7:14 AM' },
+            { type: 'out', text: 'Worcester Bosch, the gauge is in the red below 0.5, and I\'m in LS11', time: '7:15 AM' },
+            { type: 'in', text: 'LS11 is in Dave\'s area. That low pressure with banging sounds like the filling loop or expansion vessel.\n\nDave has a slot this afternoon between 2 and 4 PM. Callout is £65 which includes the first hour of labour. Parts extra if needed.\n\nShall I book that in for you?', time: '7:15 AM' },
+            { type: 'out', text: 'Yes please, 2pm works', time: '7:16 AM' },
+            { type: 'in', text: 'Booked ✅ Dave will be with you between 2 and 4 PM today.\n\n📍 Please confirm your full address and a contact number so Dave can call when he\'s on his way.\n\nIn the meantime, don\'t try to repressurise it yourself if you\'re not sure how. Dave will sort it out.', time: '7:16 AM' }
+        ];
+
+        let i = 0;
+
+        function addMessage(msg) {
+            const div = document.createElement('div');
+            div.className = 'wa-msg ' + (msg.type === 'in' ? 'wa-msg-in' : 'wa-msg-out');
+            div.innerHTML = msg.text.replace(/\n/g, '<br>') + '<div class="wa-time">' + msg.time + (msg.type === 'out' ? ' <span class="wa-check">✓✓</span>' : '') + '</div>';
+            chat.appendChild(div);
+            chat.scrollTop = chat.scrollHeight;
+        }
+        function showTyping() {
+            const div = document.createElement('div');
+            div.className = 'wa-typing';
+            div.id = 'wa-typing-indicator';
+            div.innerHTML = '<span></span><span></span><span></span>';
+            chat.appendChild(div);
+            chat.scrollTop = chat.scrollHeight;
+            status.textContent = 'typing...';
+        }
+        function hideTyping() {
+            const el = document.getElementById('wa-typing-indicator');
+            if (el) el.remove();
+            status.textContent = 'online';
+        }
+        function play() {
+            if (i >= conversation.length) {
+                setTimeout(function() { chat.innerHTML = ''; i = 0; play(); }, 5000);
+                return;
+            }
+            const msg = conversation[i];
+            if (msg.type === 'in') {
+                showTyping();
+                setTimeout(function() { hideTyping(); addMessage(msg); i++; setTimeout(play, 1200); }, 1500 + Math.random() * 1000);
+            } else {
+                addMessage(msg); i++; setTimeout(play, 1800);
+            }
+        }
+
+        const observer = new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting && i === 0) { observer.disconnect(); play(); }
+        }, { threshold: 0.3 });
+        observer.observe(chat);
+    })();
+    </script>
 
     <!-- Pain points -->
     <section class="py-14 px-4 bg-surface border-y border-white/5">
@@ -227,10 +388,7 @@
     </section>
 
     <script>
-    // Local currency for hero region. ROI job-value stays in £ (UK focus of the page);
-    // Pro/Max plan prices and ROI multiplier update based on visitor location.
-    window.ROI = { proPrice: 29, proLabel: '$29', currencySymbol: '£' };
-
+    window.ROI = { proPrice: 29, proLabel: '$29' };
     (function() {
         const leadsEl = document.getElementById('roi-leads');
         const valueEl = document.getElementById('roi-value');
@@ -245,7 +403,7 @@
         if (!leadsEl) return;
 
         const fmt = n => Math.round(n).toLocaleString();
-        window.ROI.update = function update() {
+        window.ROI.update = function() {
             const leadsPerWeek = +leadsEl.value;
             const jobValue = +valueEl.value;
             const lossPct = +lossEl.value / 100;
@@ -275,112 +433,6 @@
         };
         [leadsEl, valueEl, lossEl].forEach(el => el.addEventListener('input', window.ROI.update));
         window.ROI.update();
-    })();
-    </script>
-
-    <!-- Animated Chat Scenario -->
-    <section class="py-14 px-4 bg-surface">
-        <div class="max-w-2xl mx-auto">
-            <div class="text-center mb-8">
-                <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">A typical Tuesday morning</h2>
-                <p class="text-gray-400 text-sm">Watch how Automatyn handles a real enquiry — while you're under someone's sink.</p>
-            </div>
-
-            <!-- WhatsApp-style phone mockup -->
-            <div class="bg-[#0b141a] rounded-2xl border border-white/8 shadow-2xl overflow-hidden">
-                <!-- WhatsApp header -->
-                <div class="bg-[#202c33] px-4 py-3 flex items-center gap-3 border-b border-black/30">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white font-bold">A</div>
-                    <div class="flex-1">
-                        <div class="text-white font-semibold text-sm">Automatyn Plumbing</div>
-                        <div class="text-emerald-400 text-xs" id="chat-status">online</div>
-                    </div>
-                </div>
-                <!-- Chat body -->
-                <div class="p-4 chat-container" id="chat-body" style="background-image: linear-gradient(rgba(11,20,26,0.95), rgba(11,20,26,0.95)), url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%221%22 fill=%22rgba(255,255,255,0.02)%22/></svg>'); display:flex; flex-direction:column; gap:0.5rem;">
-                    <!-- filled by JS -->
-                </div>
-                <div class="bg-[#202c33] px-4 py-2 text-center">
-                    <button id="replay-chat" class="text-emerald-400 text-xs font-semibold hover:text-emerald-300 transition">↻ Replay</button>
-                </div>
-            </div>
-            <p class="text-center text-gray-500 text-xs mt-4">While you're on the current job. No phone-checking. You get a clean summary when you're free.</p>
-        </div>
-    </section>
-
-    <script>
-    (function() {
-        const body = document.getElementById('chat-body');
-        const status = document.getElementById('chat-status');
-        const replay = document.getElementById('replay-chat');
-        if (!body) return;
-
-        const script = [
-            { from: 'them', time: '08:42', text: "Hi, I've got a leak under the kitchen sink. Can someone come today? SE15." },
-            { typing: 1500 },
-            { from: 'us', time: '08:42', text: "Hi, sorry to hear that. I can get Dave out today. Roughly what's leaking — the pipe, the trap, or the tap? And postcode SE15 what?" },
-            { from: 'them', time: '08:43', text: "SE15 4AD. It's the U-bend I think, pretty steady drip." },
-            { typing: 1200 },
-            { from: 'us', time: '08:43', text: "Got it. Dave can be there between 2 and 4pm. Callout is £80 plus parts, most U-bend jobs are done in 30 min. Want me to book it in?" },
-            { from: 'them', time: '08:44', text: "Yes please, book me in." },
-            { typing: 900 },
-            { from: 'us', time: '08:44', text: "Booked ✓ Dave, 2–4pm today, SE15 4AD. He'll text 15 min before arrival. Anything else I can help with?" }
-        ];
-
-        function bubble(m) {
-            const wrap = document.createElement('div');
-            wrap.className = 'chat-msg flex ' + (m.from === 'us' ? 'justify-end' : 'justify-start');
-            const b = document.createElement('div');
-            b.className = 'max-w-[80%] px-3 py-2 text-sm leading-snug rounded-lg ' +
-                (m.from === 'us'
-                    ? 'bg-[#005c4b] text-white rounded-br-sm'
-                    : 'bg-[#202c33] text-gray-100 rounded-bl-sm');
-            b.innerHTML = '<div>' + m.text.replace(/</g,'&lt;') + '</div><div class="text-[10px] text-gray-400 mt-1 text-right">' + m.time + '</div>';
-            wrap.appendChild(b);
-            body.appendChild(wrap);
-            body.parentElement.scrollTop = body.parentElement.scrollHeight;
-        }
-
-        function typing() {
-            const wrap = document.createElement('div');
-            wrap.className = 'chat-msg flex justify-end';
-            wrap.id = 'typing-indicator';
-            wrap.innerHTML = '<div class="bg-[#005c4b] px-3 py-2 rounded-lg rounded-br-sm"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>';
-            body.appendChild(wrap);
-        }
-
-        function removeTyping() {
-            const t = document.getElementById('typing-indicator');
-            if (t) t.remove();
-        }
-
-        async function play() {
-            body.innerHTML = '';
-            status.textContent = 'online';
-            for (const step of script) {
-                if (step.typing) {
-                    status.textContent = 'typing…';
-                    typing();
-                    await new Promise(r => setTimeout(r, step.typing));
-                    removeTyping();
-                    status.textContent = 'online';
-                } else {
-                    bubble(step);
-                    await new Promise(r => setTimeout(r, 650));
-                }
-            }
-        }
-
-        // Play on view
-        let played = false;
-        const io = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-                if (e.isIntersecting && !played) { played = true; play(); }
-            });
-        }, { threshold: 0.4 });
-        io.observe(body);
-
-        replay.addEventListener('click', () => play());
     })();
     </script>
 
@@ -506,22 +558,22 @@
         </div>
     </footer>
 
-    <!-- Geo-pricing: show local currency for UK/EU/AU/NZ/CA visitors -->
+    <!-- Geo-pricing -->
     <script>
     (function() {
         var prices = {
-            US: { pro: '$29', max: '$79', proNum: 29, sym: '$' },
-            GB: { pro: '£29', max: '£69', proNum: 29, sym: '£' },
-            EU: { pro: '€29', max: '€79', proNum: 29, sym: '€' },
-            AU: { pro: 'A$49', max: 'A$129', proNum: 49, sym: 'A$' },
-            NZ: { pro: 'NZ$49', max: 'NZ$129', proNum: 49, sym: 'NZ$' },
-            CA: { pro: 'C$39', max: 'C$99', proNum: 39, sym: 'C$' }
+            US: { pro: '$29', max: '$79', proNum: 29 },
+            GB: { pro: '£29', max: '£69', proNum: 29 },
+            EU: { pro: '€29', max: '€79', proNum: 29 },
+            AU: { pro: 'A$49', max: 'A$129', proNum: 49 },
+            NZ: { pro: 'NZ$49', max: 'NZ$129', proNum: 49 },
+            CA: { pro: 'C$39', max: 'C$99', proNum: 39 }
         };
         var euCountries = ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE'];
         function apply(p) {
             var el = document.getElementById('price-pro'); if (el) el.textContent = p.pro;
             el = document.getElementById('price-max'); if (el) el.textContent = p.max;
-            var roiLabel = document.getElementById('roi-price-label'); if (roiLabel) roiLabel.textContent = p.pro;
+            el = document.getElementById('roi-price-label'); if (el) el.textContent = p.pro;
             document.querySelectorAll('.roi-price-inline').forEach(function(e) { e.textContent = p.pro; });
             if (window.ROI) {
                 window.ROI.proPrice = p.proNum;
