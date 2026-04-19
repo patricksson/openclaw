@@ -26,7 +26,17 @@ curl -s "https://api.fxtwitter.com/patrickssons"
 ```
 If 404, still suspended. Skip X steps. If user data returned, account is back.
 
-**IF X IS BACK:** Use X API v2 for posting. NEVER use Playwright. Set up API credentials if not done.
+**IF X IS BACK:** Run the X posting flow via the Telegram approval gate. See `references/x-posting-flow.md` for full procedure. /afternoon volume: 0-1 original posts + 2-3 reply drafts (skip originals if /morning already posted one). Drafts go to Telegram, Pat taps ✅/❌, only approved drafts hit the X API. NEVER use Playwright.
+
+## Step 2b: Trigger Reddit AI Image Pipeline (n8n)
+
+Fire the `Reddit AI Image Pipeline` workflow via webhook. No API key needed.
+
+```bash
+curl -s -X POST "http://n8n-zwxfn09hqi8751v1plu6rjvt.136.112.252.235.sslip.io/webhook/reddit-image-pipeline"
+```
+
+Expect `{"message":"Workflow was started"}`. Do NOT wait for completion. On error, log and continue.
 
 ## Step 3: Generate TikTok Carousels (2-3 per session)
 

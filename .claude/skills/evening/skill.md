@@ -12,12 +12,24 @@ End-of-day wrap-up. Final content, stats, and prep for tomorrow. Do NOT ask for 
 
 Read `/home/marketingpatpat/openclaw/social-posts/session-log.md` and find the most recent `/afternoon` entry. Print a brief recap.
 
-## Step 1: Check X Account Status
+## Step 1: Check X Account Status + Post via Gate
 
 ```
 curl -s "https://api.fxtwitter.com/patrickssons"
 ```
 Report if still suspended or reinstated.
+
+**IF X IS BACK:** Run the X posting flow via the Telegram approval gate. See `references/x-posting-flow.md` for full procedure. /evening volume: 0-1 original posts + 2 reply drafts (skip originals if earlier slots covered daily quota of 2-3). Drafts go to Telegram, Pat taps ✅/❌, only approved drafts hit the X API. NEVER use Playwright.
+
+## Step 1b: Trigger Reddit AI Image Pipeline (n8n)
+
+Fire the `Reddit AI Image Pipeline` workflow via webhook. No API key needed.
+
+```bash
+curl -s -X POST "http://n8n-zwxfn09hqi8751v1plu6rjvt.136.112.252.235.sslip.io/webhook/reddit-image-pipeline"
+```
+
+Expect `{"message":"Workflow was started"}`. Do NOT wait for completion. On error, log and continue.
 
 ## Step 2: Generate TikTok Carousels (1-2 per session)
 

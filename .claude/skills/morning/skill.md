@@ -39,7 +39,17 @@ If it returns user data, the account is back. If 404, still suspended.
 
 **IF X IS SUSPENDED:** Skip all X-related steps (tweets, replies, viral shot). Focus on TikTok, LinkedIn, Medium, Dev.to, blog.
 
-**IF X IS BACK:** Use the X API v2 for posting (NOT Playwright). NEVER use Playwright to post on X. Set up X API credentials if not done yet.
+**IF X IS BACK:** Run the X posting flow via the Telegram approval gate. See `references/x-posting-flow.md` for full procedure. /morning volume: 1 original post + 3 reply drafts. Drafts go to Telegram, Pat taps ✅/❌, only approved drafts hit the X API. NEVER use Playwright to post on X.
+
+## Step 3b: Trigger Reddit AI Image Pipeline (n8n)
+
+Fire the `Reddit AI Image Pipeline` workflow via webhook. No API key needed.
+
+```bash
+curl -s -X POST "http://n8n-zwxfn09hqi8751v1plu6rjvt.136.112.252.235.sslip.io/webhook/reddit-image-pipeline"
+```
+
+Expect `{"message":"Workflow was started"}`. Do NOT wait for completion (image gen takes minutes). If the response is not 2xx, log and continue.
 
 ## Step 4: Generate TikTok Carousels (2-3 per session)
 
