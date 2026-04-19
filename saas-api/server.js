@@ -2131,6 +2131,27 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
+// Cold outreach unsubscribe — verifies HMAC token, marks lead unsubscribed.
+// Accessible at automatyn.co/u via cloudflare page rule, and directly at /api/unsubscribe.
+const outreachStore = require('./outreach/leads-store');
+const UNSUBSCRIBE_SECRET = process.env.UNSUBSCRIBE_SECRET || 'automatyn-unsub-2026-04-19';
+
+function unsubHandler(req, res) {
+  const email = (req.query.e || '').trim().toLowerCase();
+  const token = (req.query.t || '').trim();
+  if (!email || !token) return res.status(400).send('Missing parameters.');
+  const expected = crypto.createHmac('sha256', UNSUBSCRIBE_SECRET).update(email).digest('hex').slice(0, 16);
+  if (token !== expected) return res.status(403).send('Invalid token.');
+  try {
+    const lead = outreachStore.findByEmail(email);
+    if (lead) outreachStore.update(lead.id, { unsubscribed: true });
+  } catch (e) { log('warn', 'unsub_store_error', { error: e.message }); }
+  res.set('Content-Type', 'text/html').send(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Unsubscribed — Automatyn</title><style>body{font-family:system-ui,sans-serif;max-width:520px;margin:80px auto;padding:0 24px;color:#111}</style><h1>You're unsubscribed.</h1><p>We won't email <strong>${email.replace(/[<>&]/g,'')}</strong> again. Sorry for the noise.</p><p>— Patrick, Automatyn</p>`);
+}
+
+app.get('/api/unsubscribe', unsubHandler);
+app.get('/u', unsubHandler);
+
 // Global error handler — prevents stack traces leaking to clients
 app.use((err, req, res, next) => {
   log('error', 'unhandled_error', { error: err.message, path: req.path });
