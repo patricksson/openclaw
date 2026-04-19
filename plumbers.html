@@ -698,14 +698,21 @@
                 if (window.ROI.update) window.ROI.update();
             }
         }
-        fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(3000) })
-            .then(function(r) { return r.json(); })
-            .then(function(d) {
-                var cc = d.country_code;
-                var p = prices[cc] || (euCountries.indexOf(cc) !== -1 ? prices.EU : prices.US);
-                apply(p);
-            })
-            .catch(function() {});
+        function resolve(cc) {
+            var p = prices[cc] || (euCountries.indexOf(cc) !== -1 ? prices.EU : prices.US);
+            apply(p);
+        }
+        function tryIpapi() {
+            return fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(2500) })
+                .then(function(r) { if (!r.ok) throw new Error('ipapi'); return r.json(); })
+                .then(function(d) { if (!d.country_code) throw new Error('no cc'); resolve(d.country_code); });
+        }
+        function tryIpwho() {
+            return fetch('https://ipwho.is/', { signal: AbortSignal.timeout(2500) })
+                .then(function(r) { if (!r.ok) throw new Error('ipwho'); return r.json(); })
+                .then(function(d) { if (!d.country_code) throw new Error('no cc'); resolve(d.country_code); });
+        }
+        tryIpapi().catch(tryIpwho).catch(function() {});
     })();
     </script>
 
