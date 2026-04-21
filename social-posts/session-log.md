@@ -148,3 +148,14 @@ Open items for next slot:
 - Outreach: 6 E1 already sent this morning — no additional sends needed (cap respected). Pool: 578 leads, 77 with email, 18 personalised. 0 replies/bounces/unsubs.
 - TikTok carousels: skipped this /afternoon (context pressure + image-gen scope). Carry to next session.
 - Signups: 19 total data files, 8 real (2 Starter / 6 Free). No new signups since morning check.
+
+## 2026-04-21 /evening
+
+- X status: active (112 followers, 479 tweets). No new drafts — 3 already pending in Telegram gate from /afternoon.
+- Reddit pipeline: webhook fired OK.
+- Outreach daily stats: E1 today=6 (morning batch), E2/E3=0, replies=0, bounces=0, unsubs=0. Pool 578/77/18.
+- reply-detector skipped (Gmail OAuth env not configured — tracked).
+- Signups today: 1 (test agent biz-test-race, not real). Total 19 files, real=8, plans starter=2 free=17.
+- Cap hits today: Test Agent biz-test-race (expected from race-condition test, safe to ignore).
+- Triggers: Blog Writer enabled. Content Machine trigger still absent from RemoteTrigger list — carry as open item.
+- Tomorrow prep: fresh E1 batch available up to cap=15, personalised pool=18 minus 6 sent = 12 ready. TikTok carousels deferred from today.
