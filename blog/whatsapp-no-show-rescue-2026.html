@@ -104,8 +104,9 @@
         body { font-family: 'DM Sans', sans-serif; background: #030303; color: #e4e4e7; }
         .hero-gradient { background: radial-gradient(ellipse at top, rgba(34, 211, 238, 0.06), transparent 50%), #030303; }
         .gradient-text { background: linear-gradient(135deg, #ffffff 0%, #22d3ee 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .card-glow { background: #030303; border: 1px solid rgba(34, 211, 238, 0.3); box-shadow: 0 0 30px rgba(34, 211, 238, 0.1); }
-        .toc a { color: #a1a1aa; text-decoration: none; display: block; padding: 0.35rem 0; font-size: 0.9375rem; transition: color 0.2s; }
+        .card-glow { background: rgba(255,255,255,0.02); border: 1px solid rgba(34, 211, 238, 0.3); box-shadow: 0 0 30px rgba(34, 211, 238, 0.1); transition: all 0.3s ease; }
+        .card-glow:hover { border-color: rgba(34, 211, 238, 0.5); box-shadow: 0 0 50px rgba(34, 211, 238, 0.2); }
+        .toc a { color: #a1a1aa; text-decoration: none; transition: color 0.2s; display: block; padding: 0.4rem 0; font-size: 0.95rem; }
         .toc a:hover { color: #22d3ee; }
         .prose h2 {
             font-family: 'Cabinet Grotesk', sans-serif !important;
