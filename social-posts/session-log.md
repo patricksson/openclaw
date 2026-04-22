@@ -159,3 +159,15 @@ Open items for next slot:
 - Cap hits today: Test Agent biz-test-race (expected from race-condition test, safe to ignore).
 - Triggers: Blog Writer enabled. Content Machine trigger still absent from RemoteTrigger list — carry as open item.
 - Tomorrow prep: fresh E1 batch available up to cap=15, personalised pool=18 minus 6 sent = 12 ready. TikTok carousels deferred from today.
+
+## 2026-04-22 /morning
+
+- Bot health: gateway + automatyn-api both active.
+- X: active, 112 followers, 483 tweets (+4 from last night — manual posts via intent-URL gate worked).
+- Reddit pipeline: fired OK.
+- Outreach: E1 batch running in background (12 personalised leads, ~10 min with jitter). 4 delivered, 8 in flight at time of log. Pool 578/77/18.
+- Reply detector: still skipped (Gmail OAuth unconfigured — open item).
+- Signups last 14h: 1 test agent only (biz-test-race). Real signups unchanged at 8.
+- Cap hits: test agent only (expected).
+- TikTok carousels + LinkedIn + Dev.to: deferred this /morning session.
+- Triggers: Blog Writer present; Content Machine + Medium Writer still missing from RemoteTrigger list (open item).
