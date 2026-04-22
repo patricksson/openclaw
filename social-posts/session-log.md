@@ -171,3 +171,14 @@ Open items for next slot:
 - Cap hits: test agent only (expected).
 - TikTok carousels + LinkedIn + Dev.to: deferred this /morning session.
 - Triggers: Blog Writer present; Content Machine + Medium Writer still missing from RemoteTrigger list (open item).
+
+## 2026-04-22 /afternoon
+
+- Bot health: gateway + automatyn-api active.
+- X: 486 tweets (+3 from this morning's drafts you posted — intent-URL flow working).
+- Mentions check: @cryptokelly53 replied back 13h ago with warm signal. Pushed reply draft to keep that chain alive.
+- 2 reply drafts in Telegram (warm chains): @cryptokelly53 (170 chars), @MahlumAI (157 chars).
+- Reddit pipeline: fired OK.
+- Outreach: 12/15 E1 sent this morning, personalised pool exhausted (18/18). Need to personalise more leads tonight/tomorrow to keep daily cadence. 1 unsub (first recipient action seen).
+- TikTok + LinkedIn + Dev.to: deferred.
+- Open: reply-detector (Gmail OAuth), Content Machine + Medium Writer triggers missing.
