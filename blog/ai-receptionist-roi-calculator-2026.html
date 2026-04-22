@@ -135,6 +135,13 @@
         }
         .cta-button:hover { background: linear-gradient(180deg, #96ecc2 0%, #6bdca0 100%); transform: translateY(-2px) scale(1.02); box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 8px 24px rgba(117,224,167,0.3); }
     </style>
+<style>
+.toc a, .prose .toc a { color: #a1a1aa !important; text-decoration: none !important; transition: color 0.2s; display: block; padding: 0.4rem 0; font-size: 0.95rem; }
+.toc a:hover, .prose .toc a:hover { color: #22d3ee !important; }
+.toc h3 { font-size: 0.875rem !important; letter-spacing: 0.05em !important; margin: 0 0 0.75rem !important; font-weight: 600 !important; color: #fff; text-transform: uppercase; }
+.card-glow { background: rgba(255,255,255,0.02); border: 1px solid rgba(34, 211, 238, 0.3); box-shadow: 0 0 30px rgba(34, 211, 238, 0.1); transition: all 0.3s ease; border-radius: 0.75rem; }
+.card-glow:hover { border-color: rgba(34, 211, 238, 0.5); box-shadow: 0 0 50px rgba(34, 211, 238, 0.2); }
+</style>
 </head>
 <body class="min-h-screen">
 
@@ -163,6 +170,20 @@
 </nav>
 
 <article class="max-w-3xl mx-auto px-4 pt-28 pb-16">
+  <div class="card-glow rounded-xl p-5 mb-10 toc">
+    <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-3" style="margin-top: 0;">In This Article</h3>
+    <a href="#use-your-own-numbers">Use your own numbers</a>
+    <a href="#your-monthly-loss-calculator">Your monthly loss calculator</a>
+    <a href="#why-the-numbers-look-so-big">Why the numbers look so big</a>
+    <a href="#industry-benchmarks-from-the-pilot">Industry benchmarks (from the pilot)</a>
+    <a href="#is-an-ai-chatbot-actually-worth-it">Is an AI chatbot actually worth it?</a>
+    <a href="#why-85-recovery-not-100">Why 85% recovery, not 100%?</a>
+    <a href="#how-the-ai-actually-recovers-the-lead">How the AI actually recovers the lead</a>
+    <a href="#the-methodology-in-case-you-want-to-check-my-maths">The methodology, in case you want to check my maths</a>
+    <a href="#so-what-do-you-do-with-this">So what do you do with this?</a>
+    <a href="#ready-to-stop-losing-leads">Ready to stop losing leads?</a>
+  </div>
+
 
   <!-- Breadcrumbs -->
   <div class="text-xs text-gray-500 mb-6">
@@ -197,7 +218,7 @@
 
     <p>Businesses that were already "fast at WhatsApp" in their own minds were replying in an average of 4 hours 12 minutes. Harvard Business Review's landmark study found that businesses replying within 5 minutes are <strong>21 times more likely</strong> to qualify a lead than those replying after 30 minutes. By four hours, most prospects have already messaged a competitor.</p>
 
-    <h2>Use your own numbers</h2>
+    <h2 id="use-your-own-numbers">Use your own numbers</h2>
 
     <p>Instead of showing you our pilot averages and asking you to believe them, the calculator below lets you plug in your own situation. Three sliders. Takes 10 seconds.</p>
 
@@ -255,7 +276,7 @@
 
   <div class="prose-custom">
 
-    <h2>Why the numbers look so big</h2>
+    <h2 id="why-the-numbers-look-so-big">Why the numbers look so big</h2>
 
     <p>Most small business owners underestimate their losses because they only count <em>complaints</em> — the person who rang up angry because you didn't reply. You don't count the people who just silently moved on. Those are the majority.</p>
 
@@ -270,7 +291,7 @@
 
     <p>Combine all of that and the typical "slow reply penalty" lands between 30% and 60% of inbound leads. That's what the calculator's loss slider represents.</p>
 
-    <h2>Industry benchmarks (from the pilot)</h2>
+    <h2 id="industry-benchmarks-from-the-pilot">Industry benchmarks (from the pilot)</h2>
 
     <p>If you don't know what to put in the loss slider, here's what we measured across the 42 pilot businesses:</p>
 
@@ -290,7 +311,7 @@
 
     <p>Trade businesses (plumber, electrician, builder) lose the highest percentage because their inquiries are time-sensitive and high-value. If a leaking pipe gets no reply in 30 minutes, the customer calls the next plumber on the list.</p>
 
-    <h2>Is an AI chatbot actually worth it?</h2>
+    <h2 id="is-an-ai-chatbot-actually-worth-it">Is an AI chatbot actually worth it?</h2>
 
     <p>This is the real question behind every ROI calculator, so let's answer it honestly.</p>
 
@@ -305,13 +326,13 @@
 
     <p><strong>It's not worth it if:</strong> you get fewer than 5 WhatsApp inquiries per week, your average job value is under £30, or your close rate is already 90%+ on every inbound (which is nobody we've ever met).</p>
 
-    <h2>Why 85% recovery, not 100%?</h2>
+    <h2 id="why-85-recovery-not-100">Why 85% recovery, not 100%?</h2>
 
     <p>Nobody recovers 100% of lost leads. Some people are going to ghost no matter what. Some messages are spam. Some inquiries are from people who were never going to buy in the first place.</p>
 
     <p>Our pilot measured 85.3% average recovery across the 42 businesses — the calculator rounds to 85% to stay conservative. The AI replies in under 2 seconds, answers their question with your real prices and availability, and in most cases books them there and then. But you won't convert everyone, and any tool that claims 100% is lying.</p>
 
-    <h2>How the AI actually recovers the lead</h2>
+    <h2 id="how-the-ai-actually-recovers-the-lead">How the AI actually recovers the lead</h2>
 
     <p>The mechanism is simple but the execution matters:</p>
 
@@ -325,7 +346,7 @@
 
     <p>The customer experience is indistinguishable from having a human replying — the AI knows your business because you configured it (or we did). That's why recovery rates are so high.</p>
 
-    <h2>The methodology, in case you want to check my maths</h2>
+    <h2 id="the-methodology-in-case-you-want-to-check-my-maths">The methodology, in case you want to check my maths</h2>
 
     <p>The calculator does this, step by step:</p>
 
@@ -339,7 +360,7 @@
 
     <p>No hidden fudge factors. If you disagree with the 85% recovery rate, move the loss slider lower and you'll get a more conservative number.</p>
 
-    <h2>So what do you do with this?</h2>
+    <h2 id="so-what-do-you-do-with-this">So what do you do with this?</h2>
 
     <p>Two options, in plain English:</p>
 
