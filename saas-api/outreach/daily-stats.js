@@ -35,6 +35,11 @@ async function run() {
     `  Replies: ${s.replied_total}`,
     `  Bounces: ${s.bounced_total}`,
     `  Unsubs:  ${s.unsubscribed_total}`,
+    '',
+    'Engagement:',
+    `  E1 opens: ${s.email1_opens}/${s.email1_sent_total} (${s.email1_sent_total ? Math.round(100 * s.email1_opens / s.email1_sent_total) : 0}%)`,
+    `  E2 opens: ${s.email2_opens}/${s.email2_sent_total} (${s.email2_sent_total ? Math.round(100 * s.email2_opens / s.email2_sent_total) : 0}%)`,
+    `  E3 opens: ${s.email3_opens}/${s.email3_sent_total} (${s.email3_sent_total ? Math.round(100 * s.email3_opens / s.email3_sent_total) : 0}%)`,
   ].join('\n');
 
   const tx = nodemailer.createTransport({ service: 'gmail', auth: { user: GMAIL_USER, pass: GMAIL_APP_PASSWORD } });

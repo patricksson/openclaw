@@ -181,6 +181,9 @@ function stats() {
     replied_total: all.filter(l => l.replied).length,
     bounced_total: all.filter(l => l.bounced).length,
     unsubscribed_total: all.filter(l => l.unsubscribed).length,
+    email1_opens: all.filter(l => l.email1_opened_at).length,
+    email2_opens: all.filter(l => l.email2_opened_at).length,
+    email3_opens: all.filter(l => l.email3_opened_at).length,
   };
 }
 

@@ -111,7 +111,9 @@ async function sendOne(transport, lead, step, dryRun) {
     },
   });
   const now = new Date().toISOString();
+  const msgIdKey = step === 1 ? 'email1_message_id' : step === 2 ? 'email2_message_id' : 'email3_message_id';
   const patch = step === 1 ? { email1_sent: now } : step === 2 ? { email2_sent: now } : { email3_sent: now };
+  patch[msgIdKey] = info.messageId || null;
   store.update(lead.id, patch);
   return { ok: true, messageId: info.messageId };
 }
