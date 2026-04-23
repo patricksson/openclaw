@@ -69,3 +69,8 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+
+# Google Search Console OAuth
+saas-api/secrets/
+gsc-*.json
+gsc-token.json

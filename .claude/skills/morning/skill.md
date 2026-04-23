@@ -188,6 +188,14 @@ recent.forEach(a => console.log(' -', a.businessName || a.agentId, '/', a.plan, 
 "
 ```
 
+## Step 8c: SEO — Search Console pull
+
+```bash
+cd /home/marketingpatpat/openclaw/saas-api && node seo/gsc-fetch.js 7
+```
+
+Report totals (impressions, clicks, CTR, avg pos), top 5 queries, top 5 pages. Compare to yesterday's morning log — flag regressions (impressions down >20% or pos drop >3). If any page sits at pos 8-15 with decent impressions (page 2 borderline), flag as quick-win candidate (title/meta tune to push to page 1).
+
 ## Step 9: Report
 
 ```
