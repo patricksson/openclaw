@@ -258,3 +258,20 @@ Open items for next slot:
 - Signups last 24h: 0 new (files in data/biz-*.json unchanged today, 16 total).
 - Triggers: Content Machine still 404 / Medium Writer still absent — carry as open items.
 - Open items carried: Postiz TikTok analytics 500, Content Machine + Medium Writer missing, n8n template (FRiPMJyTHWmxRzL3) in draft — not submitted pending better problem-fit framing.
+
+## 2026-04-24 /evening
+
+- Bot health: openclaw-gateway + automatyn-api active.
+- X: 112f / 500t (+1 since afternoon — 1 morning draft was tapped). No new mentions <6h. Evening drafts skipped (quality mode + no fresh targets, daily Telegram volume already at 2 from afternoon).
+- Reddit pipeline: webhook fired OK.
+- **Outreach FULL DAY 2026-04-24:** E1 sent **30** (daily cap), E2 0 (no Day-3 leads yet), E3 0. Opens **5** of today's batch (16.7%), 0 replies, 0 unsubs, 0 bounces. Reply detector scanned 35 inbox msgs — confirmed zero replies is real.
+- **Outreach LIFETIME:** 82 E1 sent / 16 opens (~19.5%) / 0 replies / 3 unsubs / 0 bounces. Diagnosis stands: **FIX CTA**. First variant-tracked batch (today's 30) will yield first per-pair signal in 14d window.
+- Evening sweep: e1 sender running in background (additional 15 — server day rolled to 2026-04-25 UTC mid-routine, so cap reset; 4 sent so far at log time). E2/E3 queues empty until 2026-04-25 wall-day.
+- Brevo open fetch: 11 events matched to leads (48h window).
+- Signups: 0 today (16 total agents — 14 free, 2 starter).
+- Blog: **DID NOT publish today.** SEO Daily trigger (cron 0 10 * * *) already fired at 10:00 UTC but no blog/ commits exist in today's git log. Silent failure, needs investigation tomorrow.
+- TikTok: 22 videos / ~6148 views / 76 likes (+11 since morning). No carousels generated this slot.
+- LinkedIn / Dev.to / Medium: deferred all day (SEO Daily trigger was supposed to handle distribution; failed).
+- Triggers state: SEO Daily enabled (next 2026-04-25 10:00 UTC), SEO Day-14 enabled (one-shot 2026-05-07), Locations one-shot disabled (already built per Task A check), SEO Audit weekly disabled, Publish-blog one-shot used.
+- Open items: SEO Daily silent failure (no blog out today), Content Machine + Medium Writer triggers absent, Postiz TikTok analytics 500, n8n template (FRiPMJyTHWmxRzL3) in draft pending reframe, X-posting-flow.md updated to intent-URL pattern (commit pending).
+- X 20-replies/day target flagged blocked by recency rule + sustainable supply (~12/day max across 3 slots).
