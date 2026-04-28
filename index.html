@@ -515,7 +515,8 @@
             display: none;
         }
         @media (max-width: 768px) {
-            .mobile-sticky-cta { display: block; }
+            .mobile-sticky-cta { display: block; transform: translateY(110%); transition: transform 0.25s ease; }
+            .mobile-sticky-cta.visible { transform: translateY(0); }
             .chat-widget { bottom: 80px !important; }
         }
 
@@ -606,7 +607,6 @@
                     <a id="nav-cta-desktop" href="/signup.html" class="cta-primary cta-nav px-5 py-2 transition text-sm font-medium">Start Free</a>
                 </div>
                 <div class="md:hidden flex items-center gap-3">
-                    <a id="nav-cta-mobile" href="/signup.html" class="cta-primary cta-nav px-4 py-2 text-sm font-medium">Start Free</a>
                     <button id="mobile-menu-btn" class="text-gray-400 hover:text-white transition" aria-label="Toggle navigation menu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
@@ -1700,6 +1700,20 @@
             update();
             window.addEventListener('resize', update);
             if (window.ResizeObserver) new ResizeObserver(update).observe(banner);
+        })();
+
+        // Mobile sticky CTA: only show after hero scrolls out of view
+        (function() {
+            var sticky = document.querySelector('.mobile-sticky-cta');
+            var hero = document.querySelector('.hero-gradient');
+            if (!sticky || !hero || !('IntersectionObserver' in window)) return;
+            var io = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) {
+                    if (e.isIntersecting) sticky.classList.remove('visible');
+                    else sticky.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            io.observe(hero);
         })();
 
         // Mobile menu toggle
