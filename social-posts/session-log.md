@@ -293,3 +293,23 @@ Open items for next slot:
 - Triggers: 5 total. SEO Daily enabled (next 2026-04-25 10:00 UTC), SEO Day-14 enabled (one-shot 2026-05-07), other 3 disabled/used.
 - LinkedIn / Dev.to / Medium: deferred (SEO Daily handles distribution).
 - Open items: SEO Daily silent failure 2026-04-24 needs investigation, Content Machine + Medium Writer triggers absent, Postiz TikTok analytics 500, X 20-replies/day target blocked by recency+budget, n8n template (FRiPMJyTHWmxRzL3) in draft.
+
+## 2026-04-29 /morning
+
+- **Volume push live (per project_outreach_volume_push.md):** Outreach now 50+/day target.
+- **Outreach E1 sent: 24** (cap raised to 50, pool exhausted at 24 — refill needed before afternoon). E2 9 sent. E3 0 (no day-7 leads yet). Reply detector: 0 new replies, 0 bounces overnight.
+- **Outreach lifetime:** 147 E1 / 25 E2 / 0 E3 / 25 opens (~17%) / 0 replies / 5 unsubs / 0 bounces. Pool 584/161/147.
+- **Variant diagnostic (14d):** S2×C4_link & S1×C4_link both at 11 sends 0% open → FULL RESET (these are the 48 unlabelled pre-variant baseline distorting). C4_link-tracked sends (post 04-23) showed 26% open earlier — keep label-tracked separately.
+- Bot health: openclaw-gateway + automatyn-api active.
+- X status: @patrickssons OK, **120 followers** (-2 from 122). 18 verified followers.
+- X analytics 7d (snapshot 2026-04-28): 9.5K imp ↑284%, engagement 1.8% ↓, 33 profile visits ↑312%, 13 replies ↑225%, 18/120 verified. Trend up → **normal mode**.
+- X drafts: 10 (3 originals + 7 replies, hybrid mix). Scroll-page at https://automatyn.co/x-private/xmQmQLv0YpSd02zlZUTXqw/. Telegram link sent to Pat.
+- Realistic X target supply: ~10-15 valid/slot (saturation by competitor self-promo + spam). Did not reach 50/slot.
+- Reddit pipeline: webhook fired OK ({"message":"Workflow was started"}). Gemini swap to 2.5-flash applied 2026-04-28 evening — 9am scheduled run today should now succeed.
+- TikTok: 22 videos / 6156 views / 76 likes. +2 views since 2026-04-25. Top: dad-dinner 979.
+- LinkedIn / Dev.to / Medium: deferred (SEO Daily handles distribution at 10:07 UTC).
+- SEO 7d: **236 imp / 0 clicks / pos 85** (down from 2.6K 7d on 2026-04-25). Passive-income page decay accelerating; chatbot-cost cluster now dominant but pos 80-100 (page 8-10). No quick-wins at pos 8-15. **SEO deprioritised per yesterday's directive.**
+- Triggers: 5 total. SEO Daily enabled (next 2026-04-29 10:07 UTC). SEO Day-14 enabled (one-shot 2026-05-07). 3 disabled/used. Content Machine + Medium Writer + Blog Writer triggers from skill IDs all 404 (skill IDs stale).
+- Signups last 14h: 0 new (21 total agents).
+- Commits overnight: a7a2eea mobile CTA, bda59c6 + a386e20 geopricing, 636a97e X drafts page.
+- Open items: SEO collapse (impressions down 91%), pool refill before afternoon, X target supply low, Postiz TikTok analytics 500.
