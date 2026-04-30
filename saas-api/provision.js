@@ -197,7 +197,7 @@ function registerAgentInConfig(agentId, businessName, industry, workspaceDir, ag
         name: businessName,
         workspace: workspaceDir,
         agentDir: agentDir,
-        model: 'google/gemini-2.5-flash',
+        model: 'openai/gpt-4o-mini',
         identity: { name: businessName, emoji },
         humanDelay: {
           mode: 'natural',

@@ -148,19 +148,50 @@ Run the reply detector on the last 14 hours and report.
 cd /home/marketingpatpat/openclaw/saas-api && node outreach/reply-detector.js 14
 ```
 
-**Then send today's batch — every routine must send, not just /afternoon.** Load Brevo env from systemd and run E1/E2/E3:
+**Send order matters — E2 is the highest-EV step (Adam converted on E2, 2026-04-29). Always send E2 first, then E1, then E3.**
 
+First, refill E1-ready pool if empty. Check queue depth:
 ```bash
-BREVO_API_KEY=$(sudo systemctl show automatyn-api.service -p Environment --no-pager | tr ' ' '\n' | grep ^BREVO_API_KEY= | cut -d= -f2-) \
-UNSUBSCRIBE_SECRET=$(sudo systemctl show automatyn-api.service -p Environment --no-pager | tr ' ' '\n' | grep ^UNSUBSCRIBE_SECRET= | cut -d= -f2-) \
-OUTREACH_DAILY_CAP=15 \
-node outreach/sender.js e1 15
+cd /home/marketingpatpat/openclaw/saas-api && node -e "const s=require('./outreach/leads-store'); console.log('E1 ready:', s.listReadyForEmail1(Infinity).length, 'E2 ready:', s.listReadyForEmail2(Infinity,3).length, 'E3 ready:', s.listReadyForEmail3(Infinity,5).length)"
+```
+If E1-ready < 50, run `node outreach/ingest.js` to pull fresh leads from Google Places before sending E1.
 
-BREVO_API_KEY=... UNSUBSCRIBE_SECRET=... node outreach/sender.js e2 10
-BREVO_API_KEY=... UNSUBSCRIBE_SECRET=... node outreach/sender.js e3 10
+Then send in priority order, **staggered with sleeps between batches** to avoid spam-flag patterns. Don't blast 100 emails in a 30-second window.
+
+Load Brevo env once:
+```bash
+BREVO_KEY=$(sudo systemctl show automatyn-api.service -p Environment --no-pager | tr ' ' '\n' | grep ^BREVO_API_KEY= | cut -d= -f2-)
+UNSUB_KEY=$(sudo systemctl show automatyn-api.service -p Environment --no-pager | tr ' ' '\n' | grep ^UNSUBSCRIBE_SECRET= | cut -d= -f2-)
 ```
 
-Daily cap is shared across slots via `email1_sent_today`. If morning hits cap=15, afternoon/evening E1 will naturally send 0. E2/E3 are day-based, not cap-based.
+**Staggered send (4 batches across ~90 min):**
+
+```bash
+# Batch 1 (~07:00 UTC): E2 chunk 1 — 15 emails. Highest-EV first.
+BREVO_API_KEY=$BREVO_KEY UNSUBSCRIBE_SECRET=$UNSUB_KEY node outreach/sender.js e2 15
+
+# Wait ~25min before next batch — looks human, gives Brevo time to process.
+sleep 1500
+
+# Batch 2 (~07:25 UTC): E2 chunk 2 — remaining 15.
+BREVO_API_KEY=$BREVO_KEY UNSUBSCRIBE_SECRET=$UNSUB_KEY node outreach/sender.js e2 15
+sleep 1500
+
+# Batch 3 (~07:50 UTC): E1 fresh outreach — 25 (half of daily 50, rest goes afternoon).
+BREVO_API_KEY=$BREVO_KEY UNSUBSCRIBE_SECRET=$UNSUB_KEY OUTREACH_DAILY_CAP=50 node outreach/sender.js e1 25
+sleep 1500
+
+# Batch 4 (~08:15 UTC): E3 breakup — 20.
+BREVO_API_KEY=$BREVO_KEY UNSUBSCRIBE_SECRET=$UNSUB_KEY node outreach/sender.js e3 20
+```
+
+If `/morning` is invoked late, run sleeps shortened or skip — but the 4-batch separation matters more than exact timing. **Never send all 4 batches back-to-back.**
+
+The remaining 25 E1 will go via `/afternoon` (also staggered).
+
+Total morning cap ~85 emails spread over 90 min ≈ ~1 email/min average. That's the human shape. Afternoon/evening should add another 40-60 combined. Domain reputation gate: if Brevo returns any soft-bounce or rate-limit errors, halve the next slot's volume and flag in report.
+
+Daily cap is shared across slots via `email1_sent_today`. If morning hits cap=50, afternoon/evening E1 will naturally send 0. E2/E3 are day-based, not cap-based.
 
 Pull open events from Brevo (last 48h) so open rate is up-to-date:
 

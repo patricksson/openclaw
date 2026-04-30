@@ -40,6 +40,19 @@ node build-page.js
 
 Quality bar held in `draft-from-candidates.js` — only emits replies with a real angle. Don't lower the bar to inflate volume. If `kept` is 0, skip Telegram send and log it.
 
+**Publish to GitHub Pages (mandatory — automatyn.co is GH Pages, link 404s without push):**
+```bash
+SLUG=$(node -e "console.log(require('crypto').randomBytes(16).toString('base64url'))")
+mkdir -p /home/marketingpatpat/openclaw/x-private/$SLUG
+cp /home/marketingpatpat/openclaw/social-posts/x-drafts/index.html /home/marketingpatpat/openclaw/x-private/$SLUG/
+cd /home/marketingpatpat/openclaw
+git add x-private/$SLUG/
+git commit -m "x-drafts: evening drafts $SLUG"
+git push origin main
+echo "Drafts page: https://automatyn.co/x-private/$SLUG/"
+```
+Use that URL in the Telegram gate message. Wait ~30-60s after push for Pages rebuild before sending.
+
 ## Step 1b: Trigger Reddit AI Image Pipeline (n8n)
 
 Fire the `Reddit AI Image Pipeline` workflow via webhook. No API key needed.
