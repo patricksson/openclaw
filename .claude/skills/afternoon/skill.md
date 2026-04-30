@@ -36,17 +36,17 @@ Verify every target's follower count via `curl -s https://api.fxtwitter.com/<han
 
 **Recency check — MANDATORY (feedback_x_reply_recency.md):** Reply target post must be <6h old. Verify via `curl -s https://api.fxtwitter.com/status/<tweet_id>` → check `created_at`, reject older. Use `x.com/search?...&f=live` (Latest) for discovery. Skip author entirely if latest post >6h old. Warm-chain exempt up to 24h. Log rejected-by-age count.
 
-## Step 2aa: Dual-channel X reply pipeline (15 API + 15 scrape = 30/slot)
+## Step 2aa: Dual-channel X reply pipeline
 
-See /morning skill Step 3aa for full procedure. Same flow:
+**Daily aim: 30-50 replies, half API + half scrape. Per-slot: 5-9 API + 5-9 scrape (default 5+5, push to 8+8 on strong days).**
 
 ```bash
 cd /home/marketingpatpat/openclaw/social-posts/x-drafts
-X_BEARER_TOKEN='<see reference_x_api_keys.md>' node scrape-via-api.js 15 24   # API source (~$0.07)
-timeout 700 node scrape-targets.js 24 5                                       # Browser scrape source (free)
+X_BEARER_TOKEN='<see reference_x_api_keys.md>' node scrape-via-api.js 5 24   # API source
+timeout 700 node scrape-targets.js 24 5                                      # Browser scrape source (free)
 ```
 
-Then draft 15 reply-bait replies per source (all questions to author, <200c, no em dashes, no AI buzzwords) and send each as Telegram message to @automatyntweetbot with intent URL button. Verify <6h age + >1k followers per target. If either source returns 0, skip and log.
+Then draft 5-9 reply-bait replies per source (questions to author, <200c, no em dashes, no AI buzzwords) and send each to @automatyntweetbot with intent URL button. Verify <6h age + >1k followers per target. If either source returns 0, skip and log.
 
 ## Step 2b: Trigger Reddit AI Image Pipeline (n8n)
 

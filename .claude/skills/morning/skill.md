@@ -56,25 +56,27 @@ Log the analytics numbers in the session log every routine so we can see trend a
 
 **Recency check — MANDATORY (feedback_x_reply_recency.md):** Every reply target post must be <6h old. Verify via `curl -s https://api.fxtwitter.com/status/<tweet_id>` → check `created_at`, reject if older. For discovery use `https://x.com/search?q=<term>&f=live` (Latest tab). If author's latest post is >6h old, skip the author entirely — do not fall back to older posts. Warm-chain replies (someone engaged @patrickssons) exempt up to 24h. Log rejected-by-age count in session log.
 
-## Step 3aa: Dual-channel X reply pipeline (15 API + 15 scrape = 30/slot)
+## Step 3aa: Dual-channel X reply pipeline
 
-Two sources, both produce intent-URL drafts (no API writes). Target: 30 reply candidates per slot.
+**Daily aim: 30-50 replies. Half via X API, half via scrape.** Across 3 sessions = **5-9 API + 5-9 scrape per slot**. Default to 5+5 (=10/slot, 30/day floor); push to 8+8 if quality candidates available (=48/day).
 
-**Source 1 — X API read (15/slot, ~$0.07):**
+Two sources, both produce intent-URL drafts (no API writes — sidesteps cold-reply 403).
+
+**Source 1 — X API read (5-9/slot):**
 ```bash
 cd /home/marketingpatpat/openclaw/social-posts/x-drafts
-X_BEARER_TOKEN='<see reference_x_api_keys.md>' node scrape-via-api.js 15 24
-# Reads ~$0.005 each. Budget cap: 900 reads/$4.50/month enforced in script.
+X_BEARER_TOKEN='<see reference_x_api_keys.md>' node scrape-via-api.js 5 24
+# Reads ~$0.005 each. 5/slot × 3 = 15/day = $2.25/month. 8/slot = $3.60/month.
 # Output: candidates.json (sorted by engagement)
 ```
 
-**Source 2 — Browser-use scrape (15/slot, free):**
+**Source 2 — Browser-use scrape (5-9/slot, free):**
 ```bash
 timeout 700 node scrape-targets.js 24 5   # CDP 18800, ~35 handles
 ```
 
 **Draft + send to Telegram (both sources):**
-- Read top 15 from each source's candidates.json
+- Read top 5-9 from each source's candidates.json (match the API count for parity)
 - Verify each target's age <6h via fxtwitter (mandatory, feedback_x_reply_recency.md)
 - Verify follower count >1k unless warm chain (feedback_x_analytics_gated_drafts.md)
 - Draft replies that **make the author reply back** — direct questions to author, mild contrarian takes, asks for their data/anecdote. Reply-bait > observation. (Algo: reply-back = 150x impressions per reference_x_algorithm.md)
