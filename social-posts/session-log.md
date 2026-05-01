@@ -361,3 +361,12 @@ Open items for next slot:
 - LinkedIn / Dev.to / Medium: deferred (SEO Daily handles distribution at 10:07 UTC, fired this morning).
 - Signups: **0 new** (22 total, Adam still WA-not-connected, conv=0).
 - Open items: drip system needs to be persistent (RAM-only setTimeouts lose pending nudges on restart), browser scrape error rate still 60-80%, E1 pool needs personalisation pass before next slot can send fresh leads.
+
+### /morning — 2026-05-01 07:30 UTC
+- Health: gateway/x-gate-poller/automatyn-api all active
+- X status: @patrickssons OK (120 followers, 589 tweets)
+- X dual-channel pipeline: 5 API candidates ($0.03) + 12 scrape candidates → 10 reply-bait drafts + 2 originals sent to @automatyntweetbot
+- Reddit AI Image Pipeline: webhook fired (Gemini prompts + Forge images, $0 OpenAI)
+- Outreach: E1=15, E2=2, E3=20 (37 total)
+- Reply detector: SKIPPED (Gmail OAuth invalid_grant — token needs refresh)
+- Lead pool: 188 with_email, 167 e1_sent, 21 remaining (need ingest soon)
