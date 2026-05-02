@@ -1231,7 +1231,7 @@ app.get('/api/agent/:id/status', auth, (req, res) => {
     return res.status(404).json({ error: 'Agent not found' });
   }
 
-  const limits = { starter: 25, pro: 150, max: -1 };
+  const limits = { free: 25, starter: 25, pro: 150, max: -1 };
 
   // Compute range-filtered counts from leads (each lead = a conversation)
   const allLeads = loadLeads(req.params.id);
@@ -1672,6 +1672,33 @@ app.post('/api/agent/:id/leads/ingest', (req, res) => {
   } catch (err) {
     log('error', 'lead_ingest_error', { error: err.message });
     res.status(500).json({ error: 'Failed to save lead.' });
+  }
+});
+
+// PATCH /api/agent/:id/leads/:leadId/notes — Update notes via ingest token (bot use)
+app.patch('/api/agent/:id/leads/:leadId/notes', (req, res) => {
+  try {
+    const agentId = req.params.id;
+    const agent = getAgent(agentId);
+    if (!agent) return res.status(404).json({ error: 'Agent not found' });
+    const ingestToken = req.headers['x-ingest-token'] || '';
+    if (!agent.ingestToken || ingestToken !== agent.ingestToken) {
+      return res.status(401).json({ error: 'Invalid ingest token' });
+    }
+    const leads = loadLeads(agentId);
+    const idx = leads.findIndex(l => l.id === req.params.leadId);
+    if (idx === -1) return res.status(404).json({ error: 'Lead not found' });
+    const { notes, name, phone, email } = req.body;
+    if (typeof notes === 'string') leads[idx].notes = notes.trim();
+    if (typeof name === 'string' && !leads[idx].name) leads[idx].name = name.trim();
+    if (typeof phone === 'string' && !leads[idx].phone) leads[idx].phone = phone.trim();
+    if (typeof email === 'string' && !leads[idx].email) leads[idx].email = email.trim();
+    leads[idx].updatedAt = new Date().toISOString();
+    saveLeads(agentId, leads);
+    res.json({ success: true, lead: leads[idx] });
+  } catch (err) {
+    log('error', 'lead_notes_update_error', { error: err.message });
+    res.status(500).json({ error: 'Failed to update notes.' });
   }
 });
 

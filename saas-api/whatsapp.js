@@ -449,9 +449,13 @@ function setBotActive(agentId, active) {
 
     if (active) {
       config.channels.whatsapp.accounts[agentId] = {
+        enabled: true,
+        name: agentId,
         authDir: authDir,
-        dmPolicy: 'pairing',
-        agent: agentId,
+        dmPolicy: 'open',
+        allowFrom: ['*'],
+        groupPolicy: 'open',
+        debounceMs: 0,
       };
     } else {
       delete config.channels.whatsapp.accounts[agentId];
