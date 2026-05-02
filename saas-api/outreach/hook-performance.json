@@ -1,46 +1,46 @@
 {
-  "updated_at": "2026-04-30T08:02:07.799Z",
+  "updated_at": "2026-05-02T11:30:53.800Z",
   "window_days": 14,
   "totals": {
-    "sends": 167,
-    "opens": 31,
+    "sends": 182,
+    "opens": 34,
     "replies": 0
   },
   "subjects": {
     "S1": {
-      "sends": 40,
-      "opens": 4,
+      "sends": 44,
+      "opens": 6,
       "replies": 0
     },
     "S2": {
-      "sends": 47,
-      "opens": 8,
+      "sends": 54,
+      "opens": 9,
       "replies": 0
     },
     "S3": {
-      "sends": 32,
+      "sends": 36,
       "opens": 6,
       "replies": 0
     }
   },
   "ctas": {
     "C3_qualifier": {
-      "sends": 28,
-      "opens": 3,
+      "sends": 31,
+      "opens": 4,
       "replies": 0
     },
     "C1_binary": {
-      "sends": 29,
-      "opens": 7,
+      "sends": 35,
+      "opens": 9,
       "replies": 0
     },
     "C4_link": {
-      "sends": 37,
+      "sends": 40,
       "opens": 4,
       "replies": 0
     },
     "C2_reverse": {
-      "sends": 25,
+      "sends": 28,
       "opens": 4,
       "replies": 0
     }
@@ -49,28 +49,28 @@
     "S1|C3_qualifier": {
       "subjectId": "S1",
       "ctaId": "C3_qualifier",
-      "sends": 9,
-      "opens": 1,
+      "sends": 10,
+      "opens": 2,
       "replies": 0
     },
     "S1|C1_binary": {
       "subjectId": "S1",
       "ctaId": "C1_binary",
-      "sends": 7,
-      "opens": 2,
+      "sends": 9,
+      "opens": 3,
       "replies": 0
     },
     "S2|C1_binary": {
       "subjectId": "S2",
       "ctaId": "C1_binary",
-      "sends": 14,
-      "opens": 2,
+      "sends": 16,
+      "opens": 3,
       "replies": 0
     },
     "S3|C3_qualifier": {
       "subjectId": "S3",
       "ctaId": "C3_qualifier",
-      "sends": 10,
+      "sends": 11,
       "opens": 0,
       "replies": 0
     },
@@ -84,14 +84,14 @@
     "S2|C4_link": {
       "subjectId": "S2",
       "ctaId": "C4_link",
-      "sends": 15,
+      "sends": 18,
       "opens": 2,
       "replies": 0
     },
     "S1|C2_reverse": {
       "subjectId": "S1",
       "ctaId": "C2_reverse",
-      "sends": 9,
+      "sends": 10,
       "opens": 0,
       "replies": 0
     },
@@ -105,28 +105,28 @@
     "S2|C3_qualifier": {
       "subjectId": "S2",
       "ctaId": "C3_qualifier",
-      "sends": 9,
+      "sends": 10,
       "opens": 2,
       "replies": 0
     },
     "S3|C1_binary": {
       "subjectId": "S3",
       "ctaId": "C1_binary",
-      "sends": 8,
+      "sends": 10,
       "opens": 3,
       "replies": 0
     },
     "S3|C2_reverse": {
       "subjectId": "S3",
       "ctaId": "C2_reverse",
-      "sends": 7,
+      "sends": 8,
       "opens": 2,
       "replies": 0
     },
     "S2|C2_reverse": {
       "subjectId": "S2",
       "ctaId": "C2_reverse",
-      "sends": 9,
+      "sends": 10,
       "opens": 2,
       "replies": 0
     }

@@ -2,6 +2,61 @@
 
 Each command writes its results here after completing. The next command reads the most recent entry as a recap.
 
+### /morning — 2026-05-02 11:40 UTC (FIRST RUN ON HETZNER — migration day)
+
+**Migration context:** New VM `automatyn-prod` on Hetzner cx33 (Falkenstein), created 2026-05-01 22:49 UTC. Previously on GCE. Hetzner snapshot taken, daily backups enabled, delete+rebuild protection on. PM2 saas-api crash loop fixed (was fighting systemd `automatyn-api.service` for port 3001). Several migration-related env/auth issues uncovered — see Failures.
+
+**Bot health:** automatyn-api ✅ active · openclaw-gateway ✅ active · 6 plugins · whatsapp:biz-7dbb13 paired (Pat) ✅ · whatsapp:biz-30adff (Adam @ AB Plumbing) still unpaired ❌ — email already sent, awaiting Adam.
+
+**Triggers:** Skill's 3 trigger IDs (Content Machine / Medium Writer / Blog Writer) all return 404 — superseded by `trig_0181Shnfp8365bssX5RUSykv` "SEO Daily" (cron `0 10 * * *`, ✅ enabled, fired this morning at 10:00 UTC, site last-modified 10:16 UTC). Re-enabled `trig_01WpmgSA1ekBuyC7KS4RudCg` "SEO Audit weekly" (was disabled).
+
+**X status:** @patrickssons reinstated ✅ — 118 followers (-2 vs yesterday's 120, +13 posts to 605). Last 10 posts: 165 impressions, 5 likes, 2 replies. Quality mode warranted.
+
+**X drafts → Telegram:** 4 sent to @automatyntweetbot.
+- 3 originals from morning pool (151c, 129c, 136c)
+- 1 reply to @shawnchauhan1 (Meta capex post, age 0.2h, 145c)
+- API budget: 10/900 reads ($0.05 of $4.50)
+- Browser-use scrape: 35 handles scanned, only 1 candidate kept (@OpenAIDevs age 17.4h — rejected by recency rule, not drafted)
+- **You approved 2 drafts within 30s of receipt** (original 1 posted 11:36, reply to @shawnchauhan1 posted 11:37)
+
+**Reddit n8n:** webhook fired ✅ (`reddit-image-pipeline`)
+
+**Outreach:**
+- Reply detector: SKIPPED — Gmail OAuth `invalid_grant` (refresh token rejected, same as yesterday)
+- Lead pool: 188 with_email · 182 E1 sent · 110 E2 sent (+7 today, batch 1 ongoing) · 88 E3 sent · 7 unsubscribed · **0 replied tracked** (likely false 0 — reply detector dead)
+- Brevo opens fetched: 47 events, 29 matched. E1 opens 33→34, E2 17→23, E3 12→15.
+- **Variant diagnostic: every pair shows 0% reply across 14d, 25 sends.** Most pairs flagged FULL RESET; S1×C1_binary, S2×C2_reverse, S3×C1_binary flagged FIX CTA. Could also be artifact of broken reply detection.
+- E1-ready=6, E2-ready=39, E3-ready=15. Ingest blocked (Google Places API key has IP allowlist, doesn't include Hetzner IPs)
+- **Sends planned (staggered, shortened sleeps because we're 4h late):**
+  - Batch 1: E2 × 15 ✅ in progress (started 11:31)
+  - Batch 2: E2 × 15 (after batch 1)
+  - Batch 3: E1 × 25 — **SKIPPED** (E1 pool only 6, ingest broken)
+  - Batch 4: E3 × 20
+
+**SEO:** GSC fetch FAILED (invalid_grant). Live site checks: blog index 24 posts ✅, sitemap 116 URLs ✅, `/locations/` 404 ❌ (SEO Daily Task A "build 150 location pages" hasn't completed or wasn't synced).
+
+**Signups overnight (last 14h):** 1 — `audittest+x@example.com` (test acct, unverified). No real signups.
+**Cap-hit:** 0 real customers (only test-race from Apr 21).
+
+**Skipped (with reason):**
+- TikTok carousels (Step 4): POSTIZ_API_KEY in `.env` not in systemd, plus high blast radius — defer
+- TikTok stats (Step 5): yt-dlp not installed
+- LinkedIn (Step 6): same env gap
+- Dev.to / Medium (Step 7-8): same blast-radius judgement, also covered by SEO Daily distribution
+- git commit/push (Step 10): `~/openclaw` is **not a git repo** on this VM — site/blog now lives in github.com/automatyn/automatyn.github.io and is updated by SEO Daily directly
+
+### Failures requiring user action (migration aftermath)
+
+1. **Gmail OAuth refresh token (`invalid_grant`)** — used by reply detector + GSC fetch. Both broken. Need re-consent flow on a browser. Files: `saas-api/secrets/{gmail,gsc}-token.json`.
+2. **Google Places API key IP allowlist** — current key blocks Hetzner IPv6 (`2a01:4f8:c014:a280::1`). Update allowlist in GCP console or remove restriction. Without this, `outreach/ingest.js` cannot refill the E1 pool.
+3. **Hetzner API token leaked in chat** — rotate `5v9R...eR6` in Hetzner console.
+4. **Production secrets plaintext in `/etc/systemd/system/automatyn-api.service`** (Brevo/OpenAI/Paddle/Dodo/Gmail/JWT). Move to `EnvironmentFile=/etc/automatyn-api.env` mode 600.
+5. **Repo not local** — `~/openclaw` has no `.git`. Decide whether to clone/symlink the github.com/automatyn/automatyn.github.io repo here for local committing, or leave content management to the SEO Daily cloud trigger.
+6. **POSTIZ_API_KEY** — present in `~/openclaw/.env` but not in systemd env, so systemd-managed services that need Postiz can't see it. Consolidate.
+7. **Adam @ AB Plumbing WhatsApp** — provider never started server-side (`[whatsapp:biz-30adff]` absent from gateway journal). Email sent, awaiting his retry.
+
+---
+
 ### /seo-daily — 2026-05-01 (manual run, scheduled trigger fired but failed silently)
 - 3 new SMB-intent blog posts published, all ~3500-3700 HTML words, full template (breadcrumb, badge, gradient H1, TOC, inline CTAs to /pricing.html, FAQ, JSON-LD Article+Breadcrumb+FAQ).
   - `/blog/missed-call-automation-uk-plumbers-2026.html` — "Missed Call Automation for UK Plumbers: The 2026 Playbook"

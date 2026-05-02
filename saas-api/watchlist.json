@@ -14,13 +14,13 @@
       "last_state": {
         "whatsappConnected": false,
         "conversationCount": 0,
-        "lastHit": 1777497633230,
-        "hits24h": 384,
-        "hitsLastHr": 84,
-        "qrPolls24h": 147
+        "lastHit": 1777720170325,
+        "hits24h": 244,
+        "hitsLastHr": 0,
+        "qrPolls24h": 63
       },
       "notes": "First post-volume-push signup. Free starter tier. Welcome email sent 2026-04-29 21:17 UTC.",
-      "last_changed_at": "2026-04-29T21:21:03.401Z"
+      "last_changed_at": "2026-05-02T11:00:01.356Z"
     }
   ]
 }

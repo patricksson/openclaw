@@ -1,59 +1,46 @@
 {
-  "slot": "evening",
-  "date": "2026-04-30",
+  "slot": "morning",
+  "date": "2026-05-02",
   "drafts": [
     {
       "id": "o1",
       "type": "original",
-      "draft": "The smallest businesses get the worst tools. Enterprise gets a Salesforce admin team. A solo electrician gets a notebook and a missed-call list.",
-      "char_count": 144,
-      "reason": "evening original"
+      "draft": "Most small businesses don't have a marketing problem. They have a follow-up problem. The leads are already there. Nobody chases them on Tuesday at 6pm.",
+      "char_count": 151,
+      "reason": "morning original"
     },
     {
       "id": "o2",
       "type": "original",
-      "draft": "What SMBs want isn't an 'AI agent'. They want a thing that picks up the phone, books the job, and stops bothering them.",
-      "char_count": 119,
-      "reason": "evening original"
+      "draft": "If a customer asks at 9pm and you answer at 9am, the sale is already gone. Speed has quietly become the only differentiator left.",
+      "char_count": 129,
+      "reason": "morning original"
     },
     {
       "id": "o3",
       "type": "original",
-      "draft": "Speed of reply beats quality of reply. A two-line answer in two minutes converts better than a perfect answer at lunch tomorrow.",
-      "char_count": 128,
-      "reason": "evening original"
+      "draft": "Founders spend a year building the perfect onboarding then lose 40% of signups because nobody replies to 'is this legit?' for six hours.",
+      "char_count": 136,
+      "reason": "morning original"
     },
     {
       "id": "r01",
       "type": "reply",
-      "target_handle": "OpenAIDevs",
-      "target_followers": null,
-      "target_age": "4h",
-      "target_url": "https://x.com/OpenAIDevs/status/2049888218464870670",
-      "tweet_id": "2049888218464870670",
-      "target_text": "Students are learning to build with Codex, and building to learn.\n\nHere’s what \n@UCBerkeley\n students built at the Codex Creator Challenge with \n@joinHandshake\n.",
-      "draft": "The interesting unlock isn't writing code faster. It's that the cost of throwing away the first attempt has dropped to almost zero.",
-      "char_count": 131,
-      "reason": "AI-coding angle"
-    },
-    {
-      "id": "r02",
-      "type": "reply",
       "target_handle": "shawnchauhan1",
       "target_followers": null,
-      "target_age": "8h",
-      "target_url": "https://x.com/shawnchauhan1/status/2049828761068269890",
-      "tweet_id": "2049828761068269890",
-      "target_text": "A 7 billion parameter model just beat models many times its size.\n\nNot by being smarter. By learning to manage them.\n\nSakana AI trained a small model specifically to coordinate other LLMs - deciding w",
+      "target_age": "0.2h",
+      "target_url": "https://x.com/shawnchauhan1/status/2050534845928165674",
+      "tweet_id": "2050534845928165674",
+      "target_text": "Meta lost 20 million daily active users last quarter and responded by raising its AI spend.\n\n2026 capital expenditures are now guided at $125 to $145 billion - $10 billion higher than expected.\n\nReali",
       "draft": "The part of these announcements that ages best: not the headline number, but who's now locked into a multi-year roadmap they can't easily change.",
       "char_count": 145,
       "reason": "tech-news angle"
     }
   ],
   "source": {
-    "candidates_scraped_at": "2026-04-30T20:33:21.702Z",
-    "candidates_count": 9,
-    "drafts_emitted": 5,
-    "replies_emitted": 2
+    "candidates_scraped_at": "2026-05-02T11:28:24.683Z",
+    "candidates_count": 5,
+    "drafts_emitted": 4,
+    "replies_emitted": 1
   }
 }
