@@ -12,12 +12,15 @@ Midday content production and monitoring. Do NOT ask for permission. Execute eve
 
 Read `/home/marketingpatpat/openclaw/social-posts/session-log.md` and find the most recent `/morning` entry. Print a brief recap.
 
-## Step 1: Check Content Machine Trigger
+## Step 1: Check SEO Daily Trigger
 
-The Content Machine trigger fires at 14:00 UTC daily. Use RemoteTrigger tool (load via ToolSearch) to check trigger `trig_01VCuzhEoftowx3adqtibsP5`:
+The live daily content trigger is **SEO Daily** `trig_0181Shnfp8365bssX5RUSykv` (cron `0 10 * * *`, fires 10:00 UTC). It replaces the old "Content Machine" trigger which is dead (404).
+
+Use RemoteTrigger tool (load via ToolSearch) to check:
 - Is it still enabled?
-- Did it fire? Check git log for new commits since this morning
-- If it auto-disabled, re-enable it immediately
+- Did it fire today? Trigger's `updated_at` reflects last run.
+- Did it actually produce 3 new blog posts? Check `git log --since="<today> 09:00" --oneline blog/` — if no commits and no new files in `blog/*<today's-date>*.html`, the trigger fired but Task C silently failed (most common cause: Forge image-gen unreachable on Pat's laptop — see project_reddit_pipeline memory).
+- If it auto-disabled, re-enable it immediately.
 
 ## Step 2: Check X Account Status
 
