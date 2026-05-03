@@ -2,6 +2,52 @@
 
 Each command writes its results here after completing. The next command reads the most recent entry as a recap.
 
+### /morning — 2026-05-03 08:30 UTC
+
+**Bot health:** automatyn-api ✅ active · openclaw-gateway ✅ active.
+
+**Triggers (live IDs, skill IDs are 404):**
+- `trig_0181Shnfp8365bssX5RUSykv` SEO Daily ✅ enabled (next run 10:03 UTC today)
+- `trig_01WpmgSA1ekBuyC7KS4RudCg` SEO Audit weekly ✅ enabled (next run Mon 09:03 UTC)
+
+**X status:** @patrickssons ✅ live — 122 followers (+4 vs yesterday's 118), 636 tweets (+31 since yesterday's 605). Account analytics not pulled (Step 3a skipped — browser-use scrape capacity used on candidate refresh instead).
+
+**X drafts → Telegram (3 originals sent to @automatyntweetbot):**
+- o1 (144c) "smallest businesses get the worst tools..." — id mmopiouk7-7a52
+- o2 (119c) "What SMBs want isn't an 'AI agent'..." — id mmopiqljh-8e31
+- o3 (128c) "Speed of reply beats quality of reply..." — id mmopiqojx-9ff7
+- **Reply drafts skipped:** all 3 candidates from the 07:16 candidates.json aged out by send time (levelsio 11.8h, simonw 14.95h, jasonlk 9.3h vs 6h max per recency rule). Fresh browser scrape (`scrape-targets.js 6 5`) timed out at 300s with no candidates emitted — re-run during /afternoon with longer timeout.
+- API budget untouched: 25 reads / 1 write so far this month ($0.01 of $4.50).
+
+**Reddit n8n:** webhook fired ✅ HTTP 200 `{"message":"Workflow was started"}` (after redirect).
+
+**Outreach (highlights):**
+- **Reply detector ✅ working** (Gmail OAuth fixed since yesterday): 7 inbox messages scanned, 0 replies, 0 bounces.
+- Lead pool: 188 with_email · 188 E1 sent · 142 E2 sent (+15 today batch 1) · 103 E3 sent · 7 unsub · 0 replied tracked.
+- Brevo opens fetched: 28 events scanned, 19 matched. Cumulative E1 opens 34, E2 23, E3 15.
+- **Sends (truncated from skill plan, pool starvation):**
+  - Batch 1 (08:24 UTC): E2 × 15 ✅ all sent, 0 fail
+  - Batch 2 (~08:50 UTC): E2 × 4 (only 4 ready, queued in bg with 10min stagger)
+  - Batch 3 (E1 × 25): **SKIPPED** — E1 pool empty, ingest still blocked (Google Places API IP allowlist not updated for Hetzner IPv6 — failure #2 from yesterday)
+  - Batch 4 (E3 × 20): **SKIPPED** — E3 pool empty
+- **Variant diagnostic (14d):** every pair still 0% reply. Most flagged FULL RESET; S1×C3_qualifier and S3×C1_binary flagged FIX CTA (subjects earn 20-30% open). Until reply attribution gains data, treat replies metric as untrustworthy and steer by open rate.
+
+**SEO (GSC 7d):** 171 imp · 1 click · 0.58% CTR · avg pos 54.2. Top page `/blog/passive-income-ai-agents-2026.html` (76 imp, pos 13.8 — quick-win candidate, page-2 borderline). `/pricing.html` 1 click. SEO Daily trigger fires 10:00 UTC and will run quick-win audit if today is Mon/Thu (today is Sun, so audit skipped).
+
+**Signups overnight (last 14h):** 0 real. **Cap-hits:** 0 real customers (only Test-Agent biz-test-race from Apr 21).
+
+**Skipped (with reason):**
+- Step 3a X analytics: browser-use not loaded; deferred to /afternoon.
+- Step 4 TikTok carousels: Postiz subscription paused (per memory) — full step skipped.
+- Step 5 TikTok stats: yt-dlp not installed (same as yesterday).
+- Step 6 LinkedIn: Postiz paused.
+- Step 7 Dev.to / Step 8 Medium: covered by SEO Daily trigger's distribution task at 10:00 UTC.
+- Step 8c regression check vs yesterday's GSC: yesterday's GSC fetch failed (invalid_grant), so no comparison possible. Today is the first clean baseline.
+
+**Open issues unchanged from yesterday:** Google Places API IP allowlist (E1 ingest dead), Hetzner API token rotation, POSTIZ_API_KEY consolidation, Adam @ AB Plumbing WhatsApp pairing, repo `.git` now exists ✅ (was an open issue yesterday — resolved).
+
+---
+
 ### /morning — 2026-05-02 11:40 UTC (FIRST RUN ON HETZNER — migration day)
 
 **Migration context:** New VM `automatyn-prod` on Hetzner cx33 (Falkenstein), created 2026-05-01 22:49 UTC. Previously on GCE. Hetzner snapshot taken, daily backups enabled, delete+rebuild protection on. PM2 saas-api crash loop fixed (was fighting systemd `automatyn-api.service` for port 3001). Several migration-related env/auth issues uncovered — see Failures.
