@@ -506,3 +506,24 @@ Open items for next slot:
   - Drip persistence bug from 04-30 still NOT patched.
   - Reply detector autoresponder false-positive from 04-30 still NOT patched.
   - E1 pool needs ingest + personalisation before next slot can send.
+
+### /evening — 2026-05-03 20:30 UTC
+- Bot health: openclaw-gateway + automatyn-api + x-gate-poller all active.
+- X status: @patrickssons OK, **125 followers / 649 tweets** (+7f, +44t since afternoon — strong lift, drafts from earlier slots tapped well).
+- X dual-channel: API source 5 candidates ($0.18/$4.50 month). Browser scrape **37 candidates kept** (huge improvement from yesterday's 1/35 — Pat refreshed Chrome session). Drafter emitted 10, **filtered to 6 (3 originals + 3 replies <6h)**: levelsio (862k, 1.5h), lennysan (345k, 1.7h), jasonlk (239k, 4.3h). All targets >200k followers.
+- Drafts page: https://automatyn.co/x-private/Dy0-OhRZtsaKP4QzzApxqw/. Telegram msg 154 sent.
+- Reddit pipeline: webhook fired OK ({"message":"Workflow was started"}).
+- **Outreach this slot:** E1 0 (pool drained), E2 sent 2 manually (vpplumb, virtueppm) plus background batch totalling 19 today, E3 9 today via background cadence.
+- **Outreach today total:** E1 **0** / E2 **19** / E3 **9** = **28 emails sent today**.
+- **Outreach lifetime:** 188 E1 / 161 E2 / 112 E3 / 35 E1 opens / 36 E2 opens / 18 E3 opens / 7 unsubs / 0 replies / 0 bounces. Pool 667/188/188.
+- Brevo open fetch: 25 events matched (48h window).
+- Reply detector: 18 inbox msgs scanned, 0 new replies, 0 bounces.
+- **Sunday ingest FAILED**: GOOGLE_PLACES_API_KEY not set in env. Pool not topped up — tomorrow morning will hit empty E1 again. Open item.
+- **Daily-stats email**: GMAIL_APP_PASSWORD not set, printed only (didn't send).
+- TikTok: yt-dlp not installed on this VM. Stats unchanged from afternoon. Carousels SKIPPED (Postiz paused per memory).
+- LinkedIn / Dev.to / Medium: deferred (SEO Daily handles, fires 2026-05-04 10:01 UTC).
+- **Signups: +2 since 2026-05-02 (21 → 23 total: 18 free, 4 starter, 1 pro)**. First pro plan signup. Verify via dashboard tomorrow.
+- Triggers: 3 enabled (SEO Daily next 2026-05-04 10:01, SEO Audit weekly next 2026-05-04 09:03, SEO Day-14 one-shot 2026-05-07). 2 disabled (used).
+- Bot caps hit today: 0 agents.
+- Discovered: systemd `Environment=` is empty for automatyn-api.service because it uses `EnvironmentFile=`. The skill's `systemctl show -p Environment` incantation is broken — must use `sudo cat /etc/automatyn-api.env` instead.
+- Open items carried: GOOGLE_PLACES_API_KEY missing (blocks ingest), GMAIL_APP_PASSWORD missing (blocks daily-stats email), yt-dlp not installed (blocks TikTok stats), Forge unreachable on Pat's laptop (blocks SEO Task C images), drip persistence bug, reply-detector autoresponder false-positive bug.
