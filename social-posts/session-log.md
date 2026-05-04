@@ -552,3 +552,27 @@ Open items for next slot:
 - Env vars status (vs /evening): **GOOGLE_PLACES_API_KEY now set ✓**, **GMAIL_APP_PASSWORD now set ✓** (reply detector worked), **X_BEARER_TOKEN set ✓**, GEMINI_API_KEY set ✓, BREVO_API_KEY set ✓. Postiz key correctly absent (subscription paused).
 - Open items carried: yt-dlp install (TikTok stats), Forge unreachable on Pat's laptop, drip persistence bug (RAM-only setTimeouts), reply-detector autoresponder false-positive bug, double-send concurrency lock for outreach, E1 pool refill (run ingest in /afternoon now that GOOGLE_PLACES_API_KEY is set).
 
+
+### /afternoon — 2026-05-04 17:30 UTC
+- Bot health: openclaw-gateway + automatyn-api + x-gate-poller all active.
+- X status: @patrickssons OK, **125 followers / 656 tweets** (+1f, +5t since /morning).
+- X dual-channel: API source 5 candidates (/bin/bash.25/.50). Browser scrape **44/35 kept** (best yet, scrape window included evening posts). After dedupe + fxtwitter follower checks: **7 unified drafts** (1 original + 6 replies). Targets: hnshah 287k, gregisenberg 638k, GergelyOrosz 332k, shawnchauhan1 32k, swyx 156k, TKopelman 40k. All <6h, ≥1k followers.
+- Drafts page: https://automatyn.co/x-private/Z22Riajgy3GRy9k/. Telegram msg 157 sent.
+- SEO Daily trigger: enabled, fired 10:05 today, but **NO blog commits since 2026-05-01** — Task C silently failed (Forge unreachable on Pat's laptop, known issue). Task A also blocked (locations hub doesn't exist).
+- Reddit pipeline: webhook fired OK ({"message":"Workflow was started"}, HTTP 200).
+- **Outreach this slot — FULL pipeline:**
+  - Ingest: 694 total (+27 new leads from Google Places, GOOGLE_PLACES_API_KEY working).
+  - Enrich: +20 emails (with_email 188 → 208).
+  - Personalise: 20 new sentences saved (rating/review-based, no WebSearch, all <25 words). Mostly Bristol + Nottingham plumbers.
+  - **E1 sent: 20/20, 0 failures.** Daily cap raised to 40 for the slot, 20 remaining for /evening if pool refills.
+  - E2 / E3: skipped this slot (morning sent E3 20).
+- **Outreach today total:** E1 **20** / E2 **15** / E3 **20** = **55 emails sent today**.
+- **Outreach lifetime:** 208 E1 / 176 E2 / 135 E3 / 38 E1 opens (~18%) / 41 E2 opens / 20 E3 opens / 7 unsubs / 0 replies / 0 bounces. Pool 694/208/208.
+- Brevo opens: 44 events, 28 matched (48h window).
+- Reply detector: not run this slot (will run /evening).
+- TikTok stats: yt-dlp not installed on VM (open from /evening 05-03). Carousels SKIPPED (Postiz paused).
+- LinkedIn / Dev.to / Medium: deferred (SEO Daily Task D, fired 10:05 — likely also failed silently if Forge blocks blog generation).
+- **Adam status check:** AB Plumbing & Heating, starter plan, **whatsappConnected=false**, conversationCount=0, hits24h=9 (browsing dashboard intermittently), **qrPolls24h=0** (never reaches WhatsApp QR setup page). 5 days post-signup, no conversion. Likely needs manual nudge.
+- Signups last 14h: **0 new** (23 total).
+- Open items carried: yt-dlp install, Forge unreachable on Pat's laptop (blocks SEO Daily Task C + Reddit images), drip persistence bug, reply-detector autoresponder false-positive bug, double-send concurrency lock for sender.js, Adam stuck pre-WhatsApp connection.
+
