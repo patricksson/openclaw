@@ -117,10 +117,30 @@ function sentTodayCount(step) {
 // Deterministic variant assignment: hash lead id into subject + CTA bucket,
 // independent axes so we get coverage on both. Recorded on the lead for
 // per-variant attribution in daily-report.js.
+//
+// Skips pairs marked dead by monitor.js — re-rolls with a salt until a live
+// pair lands. If all pairs are dead, falls back to first defined pair (so we
+// keep sending even if the monitor went rogue).
+function loadDeadVariants() {
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    return JSON.parse(fs.readFileSync(path.join(__dirname, 'dead-variants.json'), 'utf8'));
+  } catch { return {}; }
+}
+
 function assignE1Variants(leadId) {
-  const h = crypto.createHash('sha1').update(leadId).digest();
-  const subjectId = pickVariantRoundRobin(SUBJECTS_E1, h[0]);
-  const ctaId = pickVariantRoundRobin(CTAS_E1, h[1]);
+  const dead = loadDeadVariants();
+  for (let salt = 0; salt < 16; salt++) {
+    const h = crypto.createHash('sha1').update(leadId + ':' + salt).digest();
+    const subjectId = pickVariantRoundRobin(SUBJECTS_E1, h[0]);
+    const ctaId = pickVariantRoundRobin(CTAS_E1, h[1]);
+    const key = `${subjectId}|${ctaId}`;
+    if (!dead[key]) return { subjectId, ctaId };
+  }
+  // Everything dead — fall back to first defined.
+  const subjectId = Object.keys(SUBJECTS_E1)[0];
+  const ctaId = Object.keys(CTAS_E1)[0];
   return { subjectId, ctaId };
 }
 
@@ -159,6 +179,20 @@ async function sendOne(transport, lead, step, dryRun) {
 }
 
 async function run(step, limit, dryRun) {
+  // monitor.js writes outreach/HALT on bounce/spam alarms. Respect it.
+  if (!dryRun) {
+    try {
+      const fs = require('fs');
+      const path = require('path');
+      const haltPath = path.join(__dirname, 'HALT');
+      if (fs.existsSync(haltPath)) {
+        const reason = fs.readFileSync(haltPath, 'utf8');
+        console.error('SENDS HALTED by monitor.js:\n' + reason);
+        console.error('Remove outreach/HALT to resume.');
+        return;
+      }
+    } catch {}
+  }
   const queue = pickQueue(step);
   let max = limit === Infinity ? queue.length : limit;
 

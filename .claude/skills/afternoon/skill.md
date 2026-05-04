@@ -12,6 +12,8 @@ Midday content production and monitoring. Do NOT ask for permission. Execute eve
 
 Read `/home/marketingpatpat/openclaw/social-posts/session-log.md` and find the most recent `/morning` entry. Print a brief recap.
 
+Also read the last 50 lines of `/home/marketingpatpat/openclaw/saas-api/outreach/monitor.log` — autonomous monitor state since /morning. Note HALT events, killed variants, brevo health. If `outreach/HALT` exists, sender is halted; investigate before sending.
+
 ## Step 1: Check SEO Daily Trigger
 
 The live daily content trigger is **SEO Daily** `trig_0181Shnfp8365bssX5RUSykv` (cron `0 10 * * *`, fires 10:00 UTC). It replaces the old "Content Machine" trigger which is dead (404).

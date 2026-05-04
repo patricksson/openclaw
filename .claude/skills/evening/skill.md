@@ -12,6 +12,8 @@ End-of-day wrap-up. Final content, stats, and prep for tomorrow. Do NOT ask for 
 
 Read `/home/marketingpatpat/openclaw/social-posts/session-log.md` and find the most recent `/afternoon` entry. Print a brief recap.
 
+Also read the last 50 lines of `/home/marketingpatpat/openclaw/saas-api/outreach/monitor.log` — autonomous monitor state since /afternoon. Note HALT events, killed variants, brevo health. If `outreach/HALT` exists, sender is halted; investigate before sending.
+
 ## Step 1: Check X Account Status + Post via Gate
 
 ```

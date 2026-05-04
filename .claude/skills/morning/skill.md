@@ -12,6 +12,10 @@ Run the full daily marketing automation check and content production. Do NOT ask
 
 Read `/home/marketingpatpat/openclaw/social-posts/session-log.md` and find the most recent entry. Print a brief recap.
 
+Also read the **last 50 lines** of `/home/marketingpatpat/openclaw/saas-api/outreach/monitor.log` — that's the autonomous outreach monitor's state log. From it, note: any HALT events, killed variants since last routine, current funnel snapshot, brevo bounce/spam state. The monitor runs every 4h independently and only Telegrams Pat for signups / replies / halts. Everything else (kills, heartbeat) is in the log for you.
+
+If `outreach/HALT` file exists, sender is halted — investigate why before any send step.
+
 ## Step 1: Check All Triggers
 
 Use the RemoteTrigger tool (load via ToolSearch first) to check all triggers:
