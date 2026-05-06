@@ -601,3 +601,25 @@ Open items for next slot:
 - **Adam status:** Still whatsappConnected=false, conversationCount=0. Email last 14h ago ("How businesses like yours use Automatyn"), opened twice. After today's fixes, awaiting Pat to send personal nudge to retry the QR scan.
 - Open items: yt-dlp install, Forge restart on Pat's laptop, drip persistence bug, reply-detector autoresponder false-positive, double-send concurrency lock, sender null-email guard (new today), cron registration for monitor.js (new today).
 
+
+### /morning — 2026-05-06 10:30 UTC
+- Bot health: openclaw-gateway + automatyn-api + x-gate-poller all active.
+- X status: @patrickssons OK, **125 followers / 675 tweets** (+0f, +18t since 2026-05-04 evening — Pat posting heavily over the weekend).
+- X analytics 7d: skipped browser-use this slot (browser scrape took priority); will pull next routine.
+- X dual-channel: API source 4 candidates (70/900 reads, $0.35/$4.50 month). Browser scrape **53 candidates** (35 handles, anti-scrape healthy). After dedupe + recency filter (<6h): API **0 angle-matched replies** (4 fresh but no topic hit); Browser **0 angle-matched replies** (8 fresh, none triggered angle rules — covid/eBay/AI policy posts that didn't match speed/missed-call/follow-up patterns). **Drafts: 3 originals only.** Below 30/day target.
+- Drafts page: https://automatyn.co/x-private/kCeGHzmMYJ_1WkY/. Telegram msg 161 sent.
+- Reddit pipeline: webhook 200 ({"message":"Workflow was started"}). First call 307 redirect (skill missing -L flag).
+- Reply detector 14h: 10 inbox msgs scanned, 0 new replies, 0 bounces.
+- **Outreach this slot:** E1 0 (pool empty before ingest, all 22 new leads from ingest had no findable email after enrich), E2 **6/6 sent** (Bristol plumbers/heating, 0 fail), E3 0 (1 ready but null-email caused fail — known bug from /evening 05-04).
+- **Outreach today total:** E1 **0** / E2 **6** / E3 **0** = **6 emails sent today**. Far below 85/morning target due to supply.
+- **Outreach lifetime:** 208 E1 / **182** E2 / 160 E3 = **550 total** / 43 E1 opens / 41 E2 opens / 26 E3 opens / 7 unsubs / 0 replies / 0 bounces. Pool 769/206/208.
+- Brevo opens 48h: 38 events, 24 matched.
+- Variant diagnostic (14d): Overall **FIX CTA**. Standout: **S3×C1_binary 45.5% open** (11 sends, FIX CTA — best subject by far, swap CTA). S2×C1_binary, S1×C1_binary, S2×C2_reverse, S3×C2_reverse, S3×C1_binary, S1×C3_qualifier, S3×C2_reverse all FIX CTA. C4_link consistently FULL RESET.
+- SEO 7d: **74 imp / 0 clk / pos 23.4** (regression vs 2026-05-04 138 imp / 1 clk / pos 40.9 — fewer imps but better avg pos). Top page `/blog/passive-income-ai-agents-2026.html` 63 imp / pos 14 (still the quick-win candidate, pos 8-15). New page in mix: `/blog/claude-managed-agents-what-it-means-2026.html` at pos 9.0 (1 imp).
+- SEO Daily trigger: scheduled 10:08 UTC, **had not fired by 10:18 when /morning pushed**. Next run 2026-05-07 10:08 per RemoteTrigger get. Possibly fired late or skipped today; verify next routine via git log.
+- Triggers: 3 enabled (SEO Daily next 2026-05-07 10:08, SEO Audit weekly next 2026-05-11 09:02, SEO Day-14 one-shot 2026-05-07 09:06). 2 disabled. Skill's Content Machine / Medium Writer / Blog Writer trigger IDs still 404 (stale).
+- TikTok: yt-dlp install attempted via pip — blocked by PEP 668. Need apt or pipx. Stats unchanged. Carousels SKIPPED (Postiz paused).
+- LinkedIn / Dev.to / Medium: deferred to SEO Daily Task D (last Dev.to was 2026-04-20, 16d ago — way beyond 3d threshold, but Task D handles it).
+- Signups last 14h: **0 new** (23 total). 1 cap hit historical (Test Agent 04-21).
+- Memory: saved `reference_telegram_gate_bot.md` (bot token + chat 5904617085 from x-gate-poller.js).
+- Open items carried: yt-dlp install (try `pipx` or `apt install yt-dlp`), Forge unreachable on Pat's laptop (blocks SEO Daily Task C blogs + Reddit images), drip persistence bug, reply-detector autoresponder false-positive bug, **double-send concurrency lock** for sender.js, **sender null-email guard** (E3 failure today), cron registration for monitor.js, draft-helper recency filter (it doesn't filter <6h before angle-matching, so currently emits stale-target replies — but quality bar held this run via empty result), browser scraper kept 53 candidates with no follower count enrichment (need fxtwitter join in pipeline).
