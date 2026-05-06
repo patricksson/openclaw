@@ -1,0 +1,85 @@
+{
+  "slot": "morning",
+  "date": "2026-05-06",
+  "drafts": [
+    {
+      "id": "o1",
+      "type": "original",
+      "draft": "Most small businesses don't have a marketing problem. They have a follow-up problem. The leads are already there. Nobody chases them on Tuesday at 6pm.",
+      "char_count": 151,
+      "reason": "morning original"
+    },
+    {
+      "id": "o2",
+      "type": "original",
+      "draft": "If a customer asks at 9pm and you answer at 9am, the sale is already gone. Speed has quietly become the only differentiator left.",
+      "char_count": 129,
+      "reason": "morning original"
+    },
+    {
+      "id": "o3",
+      "type": "original",
+      "draft": "Founders spend a year building the perfect onboarding then lose 40% of signups because nobody replies to 'is this legit?' for six hours.",
+      "char_count": 136,
+      "reason": "morning original"
+    },
+    {
+      "id": "r01",
+      "type": "reply",
+      "target_handle": "GergelyOrosz",
+      "target_followers": null,
+      "target_age": "9.6h",
+      "target_url": "https://x.com/GergelyOrosz/status/2051783302965555584",
+      "tweet_id": "2051783302965555584",
+      "target_text": "Copilot is a case study of how to wreck a brand with AI slop\n\nGitHub Copilot was a good product and remained one\n\nEvery other Copilot was rushed, poor quality, and turned the Copilot brand into someth",
+      "draft": "The interesting unlock isn't writing code faster. It's that the cost of throwing away the first attempt has dropped to almost zero.",
+      "char_count": 131,
+      "reason": "AI-coding angle"
+    },
+    {
+      "id": "r02",
+      "type": "reply",
+      "target_handle": "dharmesh",
+      "target_followers": null,
+      "target_age": "16.7h",
+      "target_url": "https://x.com/dharmesh/status/2051678219812675875",
+      "tweet_id": "2051678219812675875",
+      "target_text": "Goosebumps.\n\nThat's what I got when I saw a recent post from Duncan Lennox, HubSpot's CPTO (Chief Product and Technology Officer).  \n\nDon't get me wrong, none of it was a surprise to me. I have the jo",
+      "draft": "The thing nobody can fake: software that respects your time. Most 'feel' debates are downstream of that one decision.",
+      "char_count": 117,
+      "reason": "product-craft angle"
+    },
+    {
+      "id": "r03",
+      "type": "reply",
+      "target_handle": "lennysan",
+      "target_followers": null,
+      "target_age": "14.9h",
+      "target_url": "https://x.com/lennysan/status/2051705781993828530",
+      "tweet_id": "2051705781993828530",
+      "target_text": "\"Why pay $20/month when the free version is already smarter than I am?\"\n\nThat's the paradox \n@GoogleAI\n hit while designing its AI bundle.\n\n\n@vikaskansalHQ\n helped craft Google's AI freemium strategy,",
+      "draft": "The thing nobody can fake: software that respects your time. Most 'feel' debates are downstream of that one decision.",
+      "char_count": 117,
+      "reason": "product-craft angle"
+    },
+    {
+      "id": "r04",
+      "type": "reply",
+      "target_handle": "shawnchauhan1",
+      "target_followers": null,
+      "target_age": "18.6h",
+      "target_url": "https://x.com/shawnchauhan1/status/2051648264068636754",
+      "tweet_id": "2051648264068636754",
+      "target_text": "xAI just shipped voice cloning via API.\n\nOne minute of recorded speech. Verification pipeline. Production-ready voice model in under two minutes.\n\n80+ built-in voices across 28 languages if you skip t",
+      "draft": "The third rewrite is usually where the actual product appears. The first two are learning what the problem actually is.",
+      "char_count": 119,
+      "reason": "builder relate"
+    }
+  ],
+  "source": {
+    "candidates_scraped_at": "2026-05-06T07:42:16.636Z",
+    "candidates_count": 53,
+    "drafts_emitted": 7,
+    "replies_emitted": 4
+  }
+}
